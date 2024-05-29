@@ -70,7 +70,7 @@ anova.dcca <- function(object,
   # object dcca object; permat  a matrix of permutations. 
   # If set overrules permuations.
   if (!inherits(object, "dcca")) {
-    stop("The first argument must be of class 'dccav', ",
+    stop("The first argument must be of class 'dcca', ",
          "the result of the function dc_CA.")
   }
   by <- match.arg(by)
