@@ -10,6 +10,8 @@ Correspondence Analysis (dc-CA)}
 \arguments{
 \item{object}{an object from \code{\link{dc_CA}}.}
 
+\item{...}{unused.}
+
 \item{permutations}{a list of control values for the permutations for 
 species and sites (species first, sites second, for traits and environment) 
 as returned by the function \code{\link[permute]{how}}, or the number of 

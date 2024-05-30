@@ -4,38 +4,41 @@
 \alias{anova.wrda}
 \title{Permutation Test for weighted redundancy analysis}
 \usage{
-\method{anova}{wrda}(object, permutations = 999, by = NULL)
+\method{anova}{wrda}(object, ..., permutations = 999, by = c("omnibus", "axis"))
 }
 \arguments{
 \item{object}{an object from \code{\link{dc_CA}}.}
 
+\item{...}{unused.}
+
 \item{permutations}{a list of control values for the permutations as
-returned by the function \code{\link[permute]{how}}, or
-the number of permutations required (default 999), or
-a permutation matrix where each row gives the permuted indices.}
+returned by the function \code{\link[permute]{how}}, or the number of 
+permutations required (default 999), or a permutation matrix where each row
+gives the permuted indices.}
 
 \item{by}{character \code{"axis"} which sets the test statistic to the
-first eigenvalue of the dc-CA model.
-Default: \code{NULL} which set the test statistic to the inertia named \code{constraintsTE}
-in the inertia element of \code{\link{dc_CA}}). This is
-the environmentally constrained inertia explained by the traits (without trait covariates).
-(which is equal to the trait-constrained inertia
-explained by the environmental predictors (without covariates).)
-The default is quicker computationally as it avoid computation of an svd of permuted data sets.}
+first eigenvalue of the dc-CA model. Default: \code{NULL} which set the test
+statistic to the inertia named \code{constraintsTE} in the inertia element 
+of \code{\link{dc_CA}}). This is the environmentally constrained inertia 
+explained by the traits (without trait covariates). (which is equal to the 
+trait-constrained inertia explained by the environmental predictors 
+(without covariates).) The default is quicker computationally as it avoids
+computation of an svd of permuted data sets.}
 }
 \value{
 A list with two elements with names \code{table} and \code{eigenvalues}.
- The \code{table} is as from \code{\link[vegan]{anova.cca}} and \code{eigenvalues} gives the dc-CA eigenvalues,
+The \code{table} is as from \code{\link[vegan]{anova.cca}} and 
+\code{eigenvalues} gives the dc-CA eigenvalues.
 }
 \description{
-\code{anova.wrda} performs residual predictor permutation (ter Braak 2022), which is robust
-against differences in the weights in weighted reduncancy analysis (ter Braak, 2022).
-The arguments of the function are similar to those of \code{\link[vegan]{anova.cca}},
-but more restricted.
+\code{anova.wrda} performs residual predictor permutation (ter Braak 2022), 
+which is robust against differences in the weights in weighted redundancy 
+analysis (ter Braak, 2022). The arguments of the function are similar to 
+those of \code{\link[vegan]{anova.cca}}, but more restricted.
 }
 \details{
-The algorithm is based on published R-code for
-residual predictor permutation in weighted redundancy analysis (ter Braak, 2022).
+The algorithm is based on published R-code for residual predictor 
+permutation in weighted redundancy analysis (ter Braak, 2022).
 }
 \examples{
 data("dune_trait_env")
@@ -72,8 +75,9 @@ range(object1$site_axes$site_scores$lc_env_scores/ vegan::scores(object2, choice
 
 }
 \references{
+#'
 ter Braak, C.J.F. (2022) Predictor versus response permutation
 for significance testing in weighted regression and redundancy analysis.
 Journal of statistical computation and simulation, 92, 2041-2059.
- https://doi.org/10.1080/00949655.2021.2019256
+\doi{10.1080/00949655.2021.2019256}
 }

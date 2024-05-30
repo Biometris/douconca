@@ -7,7 +7,8 @@
 #' the \emph{P}-values. The function arguments are similar to (but more 
 #' restrictive than) those of \code{\link[vegan]{anova.cca}}.
 #
-#' @param  object an object from \code{\link{dc_CA}}.
+#' @param object an object from \code{\link{dc_CA}}.
+#' @param ... unused.
 #' @param permutations a list of control values for the permutations for 
 #' species and sites (species first, sites second, for traits and environment) 
 #' as returned by the function \code{\link[permute]{how}}, or the number of 
