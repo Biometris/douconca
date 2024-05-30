@@ -31,7 +31,7 @@
 #' The \code{table} is as from \code{\link[vegan]{anova.cca}} and 
 #' \code{eigenvalues} gives the dc-CA eigenvalues.
 #' 
-#' @references#'
+#' @references
 #' ter Braak, C.J.F. (2022) Predictor versus response permutation
 #' for significance testing in weighted regression and redundancy analysis.
 #' Journal of statistical computation and simulation, 92, 2041-2059.
