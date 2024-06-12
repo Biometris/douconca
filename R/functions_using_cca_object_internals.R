@@ -19,7 +19,7 @@ f_inertia <- function(object) {
                      env_explain = env_explain,
                      conditionE = object$RDAonEnv$pCCA$tot.chi,
                      constraintsTE = object$RDAonEnv$CCA$tot.chi))
-  colnames(inertia) <- "weigthed variance"
+  colnames(inertia) <- "weighted variance"
   expla <- c("total inertia", "inertia of the trait condition", 
              "trait-constrained inertia", "environment-constrained inertia",
              "trait-constrained inertia explained by the condition in formulaEnv",

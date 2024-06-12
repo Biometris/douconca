@@ -97,7 +97,7 @@ Microcomputer Power, Ithaca, USA, 536 pp.
 
 Oksanen, J., et al. (2022)
 vegan: Community Ecology Package. R package version 2.6-4.
-\url{http://CRAN.R-project.org/package=vegan}.
+\url{https://CRAN.R-project.org/package=vegan}.
 }
 \seealso{
 \code{\link{plot_dcCA}}, \code{\link{scores.dcca}}, 

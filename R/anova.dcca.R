@@ -110,7 +110,7 @@ anova.dcca <- function(object,
     f_sites <- anova(object$RDAonEnv, by = by1, permutations = permutations[[2]])
     rownames(f_sites) <- paste0("dcCA", seq_len(nrow(f_sites)))
     attr(f_sites, "heading") <- 
-      paste0("Community-level equi-weigthed permutation test using vegan::rda\n",
+      paste0("Community-level equi-weighted permutation test using vegan::rda\n",
              object1, howHead(attr(f_sites, "control")))
     names(f_sites)[2]<- "ChiSquare"
   } else {

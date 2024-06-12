@@ -10,6 +10,7 @@
 #' fitted mean environment, \emph{i.e.} the fitted species niche centroids.
 #'
 #' @param object return value of \code{\link{dc_CA}}.
+#' @param ...  Other arguments passed to the function (currently ignored).
 #' @param type type of prediction, \code{c("env", "traits", "response", 
 #' "reg_env", "reg_trait")} for environmental values, values of traits, 
 #' response (expected abundance), regression coefficients for environmental 
@@ -40,6 +41,7 @@
 #' @example demo/dune_dcCA_predict.R
 #' @export
 predict.dcca <- function(object,
+                         ...,
                          type = c("env", "traits", "response", 
                                   "reg_env", "reg_traits"),
                          rank = "full",

@@ -41,9 +41,9 @@ calculate_b_se_tval <- function(X_or_qr_decomp_of_X,
                                 scale2 = 0, 
                                 name = "SNC", 
                                 fitted_only = FALSE) {
-  # specify  X_or_qr_decomp_of_X is an (yet unweigthed to-be weigthed) matrix or
-  # the qr_decomp of the weigthed X matrix
-  # y is the (yet unweigthed to-be weigthed) response vector or matrix
+  # specify  X_or_qr_decomp_of_X is an (yet unweighted to-be weighted) matrix or
+  # the qr_decomp of the weighted X matrix
+  # y is the (yet unweighted to-be weighted) response vector or matrix
   # wrda TRUE arguments come from function wrda, If from vegan FALSE
   if (is.null(w)) {
     if (is.matrix(X_or_qr_decomp_of_X)) {

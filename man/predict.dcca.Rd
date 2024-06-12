@@ -6,6 +6,7 @@
 \usage{
 \method{predict}{dcca}(
   object,
+  ...,
   type = c("env", "traits", "response", "reg_env", "reg_traits"),
   rank = "full",
   newdata = NULL
@@ -13,6 +14,8 @@
 }
 \arguments{
 \item{object}{return value of \code{\link{dc_CA}}.}
+
+\item{...}{Other arguments passed to the function (currently ignored).}
 
 \item{type}{type of prediction, \code{c("env", "traits", "response", 
 "reg_env", "reg_trait")} for environmental values, values of traits, 

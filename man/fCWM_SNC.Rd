@@ -216,7 +216,7 @@ Journal of Vegetation Science, 23, 805-821.
 ter Braak, CJF, Šmilauer P, and Dray S. 2018. Algorithms and biplots for
 double constrained correspondence analysis.
 Environmental and Ecological Statistics, 25(2), 171-197.
-\doi{10.1007/s10651-017-0395-x} or \url{http://rdcu.be/ETPh}
+\doi{10.1007/s10651-017-0395-x} 
 
 ter Braak C.J.F. and  P. Šmilauer  (2018). Canoco reference manual
 and user's guide: software for ordination (version 5.1x).
@@ -224,7 +224,7 @@ Microcomputer Power, Ithaca, USA, 536 pp.
 
 Oksanen, J., et al. (2022)
 vegan: Community Ecology Package. R package version 2.6-4.
-\url{http://CRAN.R-project.org/package=vegan}.
+\url{https://CRAN.R-project.org/package=vegan}.
 }
 \seealso{
 \code{\link{plot_dcCA}}, \code{\link{scores.dcca}}, 
