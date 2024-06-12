@@ -7,44 +7,50 @@
 wrda(formula, response, data, weights = rep(1, nrow(data)), verbose = TRUE)
 }
 \arguments{
-\item{formula}{one or two-sided formula for the rows (samples) with row predictors in \code{data}.
-The left hand side of the formula is ignored as it is specified in the next argument (\code{response}).
-Specify row covariates (if any ) by adding \code{+ Condition(covariate-formula)}
-to \code{formula} as in \code{\link[vegan]{rda}}. The \code{covariate-formula} should not contain a \code{~} (tilde).}
+\item{formula}{one or two-sided formula for the rows (samples) with row 
+predictors in \code{data}. The left hand side of the formula is ignored as
+it is specified in the next argument (\code{response}). Specify row 
+covariates (if any ) by adding \code{+ Condition(covariate-formula)} to 
+\code{formula} as in \code{\link[vegan]{rda}}. The \code{covariate-formula}
+should not contain a \code{~} (tilde).}
 
-\item{response}{matrix or data frame of the abundance data (dimension \emph{n} x \emph{m}).
-Rownames of \code{response}, if any, are carried through.}
+\item{response}{matrix or data frame of the abundance data (dimension 
+\emph{n} x \emph{m}). Rownames of \code{response}, if any, are carried 
+through.}
 
-\item{data}{matrix or data frame of the row predictors, with rows corresponding to those in \code{response}.
-(dimension \emph{n} x \emph{p}).}
+\item{data}{matrix or data frame of the row predictors, with rows 
+corresponding to those in \code{response}. (dimension \emph{n} x \emph{p}).}
 
-\item{weights}{row weights (a vector). If not specified unit weights are used.}
+\item{weights}{row weights (a vector). If not specified unit weights are 
+used.}
 
 \item{verbose}{logical for printing a simple summary (default: TRUE)}
 }
 \value{
-All scores in the \code{dcca} object
-are in scaling \code{"sites"} (1): the scaling with \emph{Focus on Case distances} .
+All scores in the \code{dcca} object are in scaling \code{"sites"} (1): 
+the scaling with \emph{Focus on Case distances}.
 }
 \description{
 \code{wrda} is formula-based implementation of weighted redundancy analysis.
 }
 \details{
-The algorithm is a modified version of published R-code for weighted redundancy analysis (ter Braak, 2022).
+The algorithm is a modified version of published R-code for weighted 
+redundancy analysis (ter Braak, 2022).
 
-In the current implementation, \code{formula} should
-contain variable names as is, \emph{i.e.} transformations of variables in the formulas gives
-an error ('undefined columns selected') when the \code{\link{scores}} function is applied.
+In the current implementation, \code{formula} should contain variable names
+as is, \emph{i.e.} transformations of variables in the formulas gives
+an error ('undefined columns selected') when the \code{\link{scores}} 
+function is applied.
 
-Compared to  \code{\link[vegan]{rda}}, \code{wrda} does not have residual axes,
-(\emph{i.e.} no SVD or PCA of the residuals)
+Compared to  \code{\link[vegan]{rda}}, \code{wrda} does not have residual 
+axes, (\emph{i.e.} no SVD or PCA of the residuals).
 }
 \examples{
 data("dune_trait_env")
 
 # rownames are carried forward in results
 rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
-response = dune_trait_env$comm[, -1]  # must delete "Sites"
+response <- dune_trait_env$comm[, -1]  # must delete "Sites"
 
 w <- rep(1, 20) 
 w[1:10] <- 8 
@@ -91,8 +97,9 @@ Microcomputer Power, Ithaca, USA, 536 pp.
 
 Oksanen, J., et al. (2022)
 vegan: Community Ecology Package. R package version 2.6-4.
-http://CRAN.R-project.org/package=vegan.
+\url{http://CRAN.R-project.org/package=vegan}.
 }
 \seealso{
-\code{\link{plot_dcCA}}, \code{\link{scores.dcca}}, \code{\link{print.dcca}} and \code{\link{anova.dcca}}
+\code{\link{plot_dcCA}}, \code{\link{scores.dcca}}, 
+\code{\link{print.dcca}} and \code{\link{anova.dcca}}
 }

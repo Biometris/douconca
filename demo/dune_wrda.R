@@ -2,7 +2,7 @@ data("dune_trait_env")
 
 # rownames are carried forward in results
 rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
-response = dune_trait_env$comm[, -1]  # must delete "Sites"
+response <- dune_trait_env$comm[, -1]  # must delete "Sites"
 
 w <- rep(1, 20) 
 w[1:10] <- 8 

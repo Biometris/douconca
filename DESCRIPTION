@@ -23,7 +23,7 @@ Description: Double constrained correspondence analysis (dc-CA) analyzes (multi-
    For details see ter Braak et al. 2018 https://doi.org/10.1007/s10651-017-0395-x.
 URL: https://github.com/CajoterBraak/douconca
 BugReports: https://github.com/CajoterBraak/douconca/issues
-Depends: R (>= 3.5.0), stats
+Depends: R (>= 3.5.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -32,6 +32,8 @@ Imports:
     ggrepel,
     gridExtra, 
     permute,
+    rlang,
+    stats,
     vegan
 RoxygenNote: 7.3.1
 NeedsCompilation: no

@@ -2,7 +2,8 @@
 % Please edit documentation in R/anova_species.R
 \name{anova_species}
 \alias{anova_species}
-\title{Utility function: Species-level Permutation Test in Double Constrained Correspondence Analysis (dc-CA)}
+\title{Utility function: Species-level Permutation Test in Double 
+Constrained Correspondence Analysis (dc-CA)}
 \usage{
 anova_species(object, permutations = 999, by = NULL)
 }
@@ -10,42 +11,44 @@ anova_species(object, permutations = 999, by = NULL)
 \item{object}{an object from \code{\link{dc_CA}}.}
 
 \item{permutations}{a list of control values for the permutations as
-returned by the function \code{\link[permute]{how}}, or
-the number of permutations required (default 999) or
-a permutation matrix where each row gives the permuted indices.}
+returned by the function \code{\link[permute]{how}}, or the number of 
+permutations required (default 999) or a permutation matrix where each row 
+gives the permuted indices.}
 
-\item{by}{character \code{"axis"} which sets the test statistic to the
-first eigenvalue of the dc-CA model.
-Default: \code{NULL} which set the test statistic to the inertia named \code{constraintsTE}
-in the inertia element of \code{\link{dc_CA}}). This is
-the environmentally constrained inertia explained by the traits (without trait covariates).
-(which is equal to the trait-constrained inertia
-explained by the environmental predictors (without covariates).)
-The default is quicker computationally as it avoid computation of an svd of permuted data sets.}
+\item{by}{character \code{"axis"} which sets the test statistic to the first
+eigenvalue of the dc-CA model. Default: \code{NULL} which set the test 
+statistic to the inertia named \code{constraintsTE} in the inertia element
+of \code{\link{dc_CA}}). This is the environmentally constrained inertia
+explained by the traits (without trait covariates). (which is equal to the 
+trait-constrained inertia explained by the environmental predictors 
+(without covariates).) The default is quicker computationally as it avoids 
+computation of an svd of permuted data sets.}
 }
 \value{
 A list with two elements with names \code{table} and \code{eigenvalues}.
- The \code{table} is as from \code{\link[vegan]{anova.cca}} and \code{eigenvalues} gives the dc-CA eigenvalues,
- This output can be used for scripting forward selection of traits,
- similar to the forward selection of environmental
- variables in the demo \code{dune_select.r}.
+The \code{table} is as from \code{\link[vegan]{anova.cca}} and 
+\code{eigenvalues} gives the dc-CA eigenvalues. This output can be used 
+for scripting forward selection of traits, similar to the forward selection
+of environmental variables in the demo \code{dune_select.r}.
 }
 \description{
-\code{anova_species} performs the species-level permutation test of dc-CA which is part of
-\code{\link{anova.dcca}}.
-The test uses residual predictor permutation (ter Braak 2022), which is robust
-against differences in species total abundance in the \code{response} in \code{\link{dc_CA}} (ter Braak & te Beest, 2022)
-The arguments of the function are similar to those of \code{\link[vegan]{anova.cca}},
-but more restrictive.
+\code{anova_species} performs the species-level permutation test of dc-CA 
+which is part of \code{\link{anova.dcca}}.
+The test uses residual predictor permutation (ter Braak 2022), which is 
+robust against differences in species total abundance in the \code{response} 
+in \code{\link{dc_CA}} (ter Braak & te Beest, 2022). The arguments of the
+function are similar to those of \code{\link[vegan]{anova.cca}}, but more 
+restrictive.
 }
 \details{
-In \code{\link{anova_species}}, the first step extracts the species-niche centroids (SNC)
-with respect to all dc-CA ordination axes
-from an existing dc-CA analysis. The second step,
-applies a weighted redundancy analysis of these SNCs with the traits as predictors. The second step is thus
-a species-level analysis, but the final results (eigenvalues/ordination axes) are identical to those of the
-analyses steps in \code{\link{dc_CA}}.The second step uses
-R-code that is analogous to that of \code{\link{anova.wrda}}.
+In \code{\link{anova_species}}, the first step extracts the species-niche 
+centroids (SNC) with respect to all dc-CA ordination axes from an existing 
+dc-CA analysis. The second step, applies a weighted redundancy analysis of 
+these SNCs with the traits as predictors. The second step is thus a 
+species-level analysis, but the final results (eigenvalues/ordination axes) 
+are identical to those of the analyses steps in \code{\link{dc_CA}}.The 
+second step uses R-code that is analogous to that of 
+\code{\link{anova.wrda}}.
 }
 \examples{
 data("dune_trait_env")
@@ -97,10 +100,10 @@ ter Braak, C.J.F. & te Beest, D.E. 2022. Testing environmental effects
 on taxonomic composition with canonical correspondence analysis:
 alternative permutation tests are not equal.
 Environmental and Ecological Statistics. 29 (4), 849-868.
-https://doi.org/10.1007/s10651-022-00545-4
+\doi{10.1007/s10651-022-00545-4}
 
 ter Braak, C.J.F. (2022) Predictor versus response permutation
 for significance testing in weighted regression and redundancy analysis.
 Journal of statistical computation and simulation, 92, 2041-2059.
- https://doi.org/10.1080/00949655.2021.2019256
+\doi{10.1080/00949655.2021.2019256}
 }

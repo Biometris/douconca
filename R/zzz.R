@@ -62,9 +62,3 @@
 #' @seealso \code{\link[vegan]{cca}} and \code{\link[vegan]{rda}}
 #' @name douconca
 NULL
-.onLoad <- function(libname = find.package("douconca"), pkgname = "douconca"){
-  # CRAN Note avoidance
-  if (getRversion() >= "2.15.1")
-    utils::globalVariables(  c(".data"))
-  invisible()
-}

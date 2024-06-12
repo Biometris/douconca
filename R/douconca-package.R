@@ -5,6 +5,7 @@
 #' @name douconca-package
 #' @keywords internal
 #' 
-#' @importFrom stats as.formula
+#' @importFrom stats as.formula contrasts median model.matrix terms
+#' @importFrom rlang .data
 "_PACKAGE"
 NULL

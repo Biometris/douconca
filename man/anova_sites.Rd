@@ -2,38 +2,42 @@
 % Please edit documentation in R/anova_sites.R
 \name{anova_sites}
 \alias{anova_sites}
-\title{Utility function: community-level permutation test in Double Constrained Correspondence Analysis (dc-CA)}
+\title{Utility function: community-level permutation test in Double 
+Constrained Correspondence Analysis (dc-CA)}
 \usage{
 anova_sites(object, permutations = 999, by = NULL)
 }
 \arguments{
 \item{object}{an object from \code{\link{dc_CA}}.}
 
-\item{permutations}{a list of control values for the permutations as
-returned by the function \code{\link[permute]{how}}, or
-the number of permutations required (default 999), or
-a permutation matrix where each row gives the permuted indices.}
+\item{permutations}{a list of control values for the permutations as 
+returned by the function \code{\link[permute]{how}}, or the number of 
+permutations required (default 999), or a permutation matrix where each 
+row gives the permuted indices.}
 
-\item{by}{character \code{"axis"} which sets the test statistic to the
-first eigenvalue of the dc-CA model.
-Default: \code{NULL} which set the test statistic to the inertia named \code{constraintsTE}
-in the inertia element of \code{\link{dc_CA}}). This is
-the environmentally constrained inertia explained by the traits (without trait covariates).
-(which is equal to the trait-constrained inertia
-explained by the environmental predictors (without covariates).)
-The default is quicker computationally as it avoid computation of an svd of permuted data sets.}
+\item{by}{character \code{"axis"} which sets the test statistic to the 
+first eigenvalue of the dc-CA model. Default: \code{NULL} which sets the 
+test statistic to the inertia named \code{constraintsTE} in the inertia 
+element of \code{\link{dc_CA}}). This is the environmentally constrained 
+inertia explained by the traits (without trait covariates). (which is equal
+to the trait-constrained inertia explained by the environmental predictors
+(without covariates).) The default is quicker computationally as it avoids 
+computation of an svd of permuted data sets.}
 }
 \value{
 A list with two elements with names \code{table} and \code{eigenvalues}.
- The \code{table} is as from \code{\link[vegan]{anova.cca}} and \code{eigenvalues} gives the dc-CA eigenvalues,
+The \code{table} is as from \code{\link[vegan]{anova.cca}} and 
+\code{eigenvalues} gives the dc-CA eigenvalues.
 }
 \description{
-\code{anova_sites} performs the community-level permutation test of dc-CA when site weights vary,
-which is part of \code{\link{anova.dcca}}.
-The test uses residual predictor permutation (ter Braak 2022), which is robust
-against differences in sites total abundance in the \code{response} in \code{\link{dc_CA}} (ter Braak & te Beest, 2022)
-The arguments of the function are similar to those of \code{\link[vegan]{anova.cca}}, but more restricted.
-With equal site-totals as in \code{\link{dc_CA}}, \code{anova(object$RDAonEnv)} is much faster.
+\code{anova_sites} performs the community-level permutation test of dc-CA 
+when site weights vary, which is part of \code{\link{anova.dcca}}.
+The test uses residual predictor permutation (ter Braak 2022), which is 
+robust against differences in sites total abundance in the \code{response} 
+in \code{\link{dc_CA}} (ter Braak & te Beest, 2022).
+The arguments of the function are similar to those of 
+\code{\link[vegan]{anova.cca}}, but more restricted. With equal site-totals 
+as in \code{\link{dc_CA}}, \code{anova(object$RDAonEnv)} is much faster.
 }
 \details{
 The algorithm is analogous to that of \code{\link{anova.wrda}}.
@@ -88,10 +92,10 @@ ter Braak, C.J.F. & te Beest, D.E. 2022. Testing environmental effects
 on taxonomic composition with canonical correspondence analysis:
 alternative permutation tests are not equal.
 Environmental and Ecological Statistics. 29 (4), 849-868.
-https://doi.org/10.1007/s10651-022-00545-4
+\doi{10.1007/s10651-022-00545-4}
 
 ter Braak, C.J.F. (2022) Predictor versus response permutation
 for significance testing in weighted regression and redundancy analysis.
 Journal of statistical computation and simulation, 92, 2041-2059.
- https://doi.org/10.1080/00949655.2021.2019256
+\doi{10.1080/00949655.2021.2019256}
 }
