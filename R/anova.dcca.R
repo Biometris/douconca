@@ -82,7 +82,7 @@ anova.dcca <- function(object,
          "and site permutations")
   }
   for (k in 1:2) {
-    if (!(is.numeric(permutations[[k]]) || inherits(permutations[[k]], "how"))) {
+    if (!inherits(permutations[[k]], c("numeric", "how"))) {
       stop("permutations must be an integer or a list of 2 elements ",
            "(numbers or of class how)")
     }
@@ -92,15 +92,15 @@ anova.dcca <- function(object,
   if (!is.null(f_species0$table)){
     tab <- f_species0$table
     heading <- paste0("Species-level permutation test using dc-CA\n",
-                        object1,
-                        "Residualized predictor permutation\n",
-                        howHead(attr(f_species0, "control")))
+                      object1,
+                      "Residualized predictor permutation\n",
+                      howHead(attr(f_species0, "control")))
     
     f_species <- structure(tab, heading = heading, 
                            control = f_species0$table$how,
-                           Random.seed = attr(f_species0$table,"seed"),
-                           control = attr(f_species0$table,"control"),
-                           F.perm = attr(f_species0$table,"F.perm"),
+                           Random.seed = attr(f_species0$table, "seed"),
+                           control = attr(f_species0$table, "control"),
+                           F.perm = attr(f_species0$table, "F.perm"),
                            class = c("anova.cca", "anova", "data.frame"))
   } else {
     f_species <- NULL
@@ -117,9 +117,9 @@ anova.dcca <- function(object,
     f_sites0 <- anova_sites(object, by = by1, permutations = permutations[[2]])
     tab <- f_sites0$table
     heading <- paste0("sites-level permutation test using dc-CA\n",
-                   object1,
-                   "Residualized predictor permutation\n",
-                   howHead(attr(f_sites0, "control")))
+                      object1,
+                      "Residualized predictor permutation\n",
+                      howHead(attr(f_sites0, "control")))
     f_sites <- structure(tab, heading = heading, 
                          control = f_sites0$table$how,
                          Random.seed = attr(f_sites0$table, "seed"),

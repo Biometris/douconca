@@ -56,7 +56,7 @@ plot_dcCA_CWM_SNC <- function(object,
                                     shape = .data[["points"]], 
                                     size = .data[["sizeweight"]])) +
     ggrepel::geom_label_repel(ggplot2::aes(label = .data[["centroidnames"]]),
-                              max.overlaps = 100)+
+                              max.overlaps = 100) +
     ggplot2::geom_point() +
     ggplot2::ylab("") +
     ggplot2::xlab(paste("dc-CA axis", axis)) +

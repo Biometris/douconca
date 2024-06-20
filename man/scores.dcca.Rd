@@ -148,7 +148,7 @@ divide <- FALSE # divide by site.totals if TRUE
 cat("\n\n\n******* divide.by.site.totals ==", divide, "*******\n\n\n")
 
 mod <- dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Manure,
-             formulaTraits = ~. ,
+             formulaTraits = ~.,
              response = dune_trait_env$comm[, -1],  # must delete "Sites"
              dataEnv = dune_trait_env$envir,
              # delete "Species", "Species_abbr" from traits and

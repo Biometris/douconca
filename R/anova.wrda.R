@@ -49,15 +49,16 @@ anova.wrda <- function(object,
   # If set overrules permuations.
   by <- match.arg(by)
   N <- nrow(object$data) 
-  if (is.numeric(permutations)|| inherits(permutations, "how") || 
-      is.matrix(permutations)) {
+  if (inherits(permutations, c("numeric", "how", "matrix"))) {
     if (is.numeric(permutations) && !is.matrix(permutations)) {
       permutations <- permute::how(nperm = permutations[1])
     } else if (is.matrix(permutations) && ncol(permutations) != N) {
-      stop(paste("Error:: each row of permutations should have", N, "elements"))
+      stop("Error:: each row of permutations should have", N, "elements")
     }
-  } else stop("argument permutations should be integer, matrix or ", 
-              "specified by permute::how().")
+  } else {
+    stop("argument permutations should be integer, matrix or ", 
+         "specified by permute::how().")
+  }
   # Perform a weighted RDAR(M^*~E): an RDA of M^* on the environmental variables
   # using row weights R.
   sWn <- sqrt(object$weights$rows)
@@ -73,7 +74,7 @@ anova.wrda <- function(object,
   if (by == "axis") {
     while (out_tes[[1]]$rank > length(out_tes)) {
       Zw <- cbind(Zw, out_tes[[length(out_tes)]]$EigVector1)
-      out_tes[[length(out_tes)+1]] <- 
+      out_tes[[length(out_tes) + 1]] <- 
         randperm_eX0sqrtw(Yw,Xw, Zw, sWn = sWn, 
                           permutations = permutations, by = by, return = "all")
     }

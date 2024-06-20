@@ -53,7 +53,7 @@
 #' @return A data frame if \code{tidy = TRUE}, a matrix if a single item is 
 #' asked for and a named list of matrices if more than one item is asked for. 
 #' The following names can be included: \code{c("sites", "constraints_sites", 
-#' "centroids", "regression", "t_values" ,"correlation","intra_set_correlation",
+#' "centroids", "regression", "t_values","correlation","intra_set_correlation",
 #' "biplot", "species")}. Each matrix has an attribute \code{"meaning"} 
 #' explaining its meaning. With \code{tidy = TRUE}, the resulting data frame 
 #' has attributes \code{"scaling"} and \code{"meaning"}; the latter has

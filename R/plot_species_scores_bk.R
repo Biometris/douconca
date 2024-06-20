@@ -55,7 +55,7 @@ plot_species_scores_bk <- function(species_scores,
   #  name scoresname (default: "RDA1") (species scores from vegan, for example)
   if (!is.null(speciesname) && speciesname %in% names(species_scores)) {
     sppnames <- species_scores[, speciesname]
-  } else if ((is.matrix(species_scores) || is.data.frame(species_scores)) && 
+  } else if (inherits(species_scores, c("matrix", "data.frame")) && 
              !is.null(rownames(species_scores))) {
     sppnames <- rownames(species_scores)
   } else {
@@ -87,13 +87,13 @@ plot_species_scores_bk <- function(species_scores,
     y_interval <- abs(y_interval)
     if (ymax > 0) {
       if (ymax > y_interval)  {
-        br <- seq(from = y_interval, to = ymax , by = y_interval)
+        br <- seq(from = y_interval, to = ymax, by = y_interval)
       } else {
         br <- y_interval
       }
     } else { # ymax <= 0
       if (ymax < -y_interval) {
-        br <- rev(seq(from = -y_interval, to = ymax , by = -y_interval))
+        br <- rev(seq(from = -y_interval, to = ymax, by = -y_interval))
       } else {
         br <- -y_interval
       }
@@ -113,7 +113,7 @@ plot_species_scores_bk <- function(species_scores,
   species.sub$y.label.loc <- seq(from = ymin, to = ymax,
                                  length.out = nrow(species.sub))
   labelline.full <- data.frame(species = rep(rownames(species), each = 2),
-                               x.coor = rep(c(0.00 ,0.02), nrow(species)),
+                               x.coor = rep(c(0.00, 0.02), nrow(species)),
                                y.coor = rep(species$scores, each = 2))
   p <- ggplot2::ggplot(data = species, 
                        ggplot2::aes(y = scores,
@@ -127,7 +127,7 @@ plot_species_scores_bk <- function(species_scores,
                                     y = .data[["y.coor"]],
                                     group = .data[["species"]]), 
                        linewidth = 1.5 * 5 / 14,
-                       colour = "#F51F63")+      
+                       colour = "#F51F63") +      
     ggplot2::scale_x_continuous(expand = c(0, 0)) +
     ggplot2::theme(
       panel.grid.major = ggplot2::element_blank(),
@@ -147,10 +147,10 @@ plot_species_scores_bk <- function(species_scores,
   } else {
     if (verbose) {
       cat( nrow(species.sub)," species with names out of", 
-           nrow(species) , "species\n")
+           nrow(species), "species\n")
     }
     labelline <- data.frame(species = rep(species.sub$species, each = 4),
-                            x.coor = rep(c(0 , 0.04, 0.14, 0.16),
+                            x.coor = rep(c(0, 0.04, 0.14, 0.16),
                                          nrow(species.sub)),
                             y.coor = rep(species.sub$scores, each = 4))
     labelline$y.coor[seq(from = 3, to = nrow(labelline), by = 4)] <-

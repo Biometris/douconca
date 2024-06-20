@@ -62,16 +62,17 @@ anova_sites <- function(object,
     stop("Set argument 'by' to 'axis' or 'NULL'")
   }
   N <- nrow(object$data$dataEnv) 
-  if (is.numeric(permutations) || inherits(permutations, "how") || 
-      is.matrix(permutations)) {
+  if (inherits(permutations, c("numeric", "how", "matrix"))) {
     if (is.numeric(permutations) && !is.matrix(permutations)) {
       permutations <- permute::how(nperm = permutations[1])
     } else if (is.matrix(permutations) && ncol(permutations) != N) {
       stop("Each row of permutations should have", N, "elements")
     }
-  } else stop("Argument permutations should be integer, matrix ", 
-              "or specified by permute::how().")
-  # start of new dc-ca ------------------------------------------------------
+  } else {
+    stop("Argument permutations should be integer, matrix ", 
+         "or specified by permute::how().")
+  }
+  # start of new dc-ca 
   out1 <- object[c("CCAonTraits", "formulaTraits", "data", "weights", "call",
                    "Nobs", "CWMs_orthonormal_traits")]
   n <- out1$Nobs
@@ -83,18 +84,11 @@ anova_sites <- function(object,
     CWMs_orthonormal_traits <- out1$CWMs_orthonormal_traits * sqrt(n / (n - 1))
   }
   if (rownames(CWMs_orthonormal_traits)[1] == "col1") {
-    rownames(CWMs_orthonormal_traits) <- paste0("Sam", seq_len(nrow(out1$data$dataEnv)))
+    rownames(CWMs_orthonormal_traits) <- 
+      paste0("Sam", seq_len(nrow(out1$data$dataEnv)))
   }
   # step 2 Perform a weighted RDAR(M^*~E): an RDA of M^* on the 
   #        environmental variables using row weights R.
-  # # use wrda and anova.wrda here ...???
-  # out <-  wrda(CWMs_orthonormal_traits )
-  # anova(out)
-  # sWn <- sqrt(object$weights$rows)
-  # Yw <-  CWMs_orthonormal_traits*sWn
-  # Xw <- qr.X(get_QR(object$RDAonEnv,model = "CCA"))
-  # qrZ <- get_QR(object$RDAonEnv, model = "pCCA")
-  # if(is.null(qrZ)) Zw <- matrix(sWn) else  Zw<-  cbind(sWn, qr.X(qrZ))
   sWn <- sqrt(object$weights$rows)
   Yw <-  CWMs_orthonormal_traits * sWn
   msqr <- msdvif(object$formulaEnv, object$data$dataEnv, object$weights$rows)
@@ -114,8 +108,9 @@ anova_sites <- function(object,
     }
   }
   # what the env. variables explain of the trait-structured variation
-  ss <- c(sapply(out_tes, function(x)x$ss[1]),
-          out_tes[[length(out_tes)]]$ss[2])
+  ss <- c(sapply(out_tes, function(x) {
+    x$ss[1]
+  }), out_tes[[length(out_tes)]]$ss[2])
   if (by == "axis") {
     df <- c(rep(1, length(ss) - 1), 
             out_tes[[length(out_tes)]]$df[2])
@@ -124,8 +119,8 @@ anova_sites <- function(object,
     df <- out_tes[[length(out_tes)]]$df
     names(df) <- c("dcCA", "Residual")
   }
-  fraqExplained <- c(sapply(out_tes, function(x) x$ss[1]) / 
-                       sum(out_tes[[1]]$ss), NA)
+  fraqExplained <- 
+    c(sapply(out_tes, function(x) x$ss[1]) / sum(out_tes[[1]]$ss), NA)
   F0 <- c(sapply(out_tes, function(x)x$F0[1]), NA)
   F.perm <- out_tes[[1]]$Fval
   R2.perm <- out_tes[[1]]$R2.perm
@@ -137,7 +132,7 @@ anova_sites <- function(object,
   }
   p_val_axes1 <- c(cummax(sapply(out_tes, function(x) x$pval[1])), NA)
   eig <- out_tes[[1]]$eig
-  names(eig)<- paste0("dcCA", seq_along(eig))
+  names(eig) <- paste0("dcCA", seq_along(eig))
   axsig_dcCA_sites <- data.frame(df = df, ChiSquare = ss, R2 = fraqExplained,
                                  F = F0, `Pr(>F)` = p_val_axes1, 
                                  check.names = FALSE)

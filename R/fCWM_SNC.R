@@ -270,7 +270,7 @@ f_canonical_coef_traits2 <- function(out){
   # End appendix 6.2 in ter Braak  et al 2018
   c_traitsN <- B1_traitsN %*% B_star
   colnames(c_traitsN) <- paste0("Regr", seq_len(ncol(c_traitsN)))
-  coef_normed <- cbind(Avg = avg , SDS = sds, VIF = VIF, c_traitsN, tval1 = NA)
+  coef_normed <- cbind(Avg = avg, SDS = sds, VIF = VIF, c_traitsN, tval1 = NA)
   if (is.na(avg[1])) {
     coef_normed[, "SDS"] <- NA
     attr(coef_normed, "warning") <-
@@ -301,7 +301,7 @@ f2_orth <- function(CWM,
   msd <- mean_sd_w(CWM, w = weights.rows)
   CWM <- CWM - rep(1, nrow(CWM)) %*% msd$mean
   CWMs_orthonormal_traits <- 
-    CWM[, rownames(CWM2CWM_ortho) , drop = FALSE] %*% CWM2CWM_ortho
+    CWM[, rownames(CWM2CWM_ortho), drop = FALSE] %*% CWM2CWM_ortho
   rownames(CWMs_orthonormal_traits) <- rownames(CWM)
   return(list(CWMs_orthonormal_traits = CWMs_orthonormal_traits, 
               CWM2CWM_ortho = CWM2CWM_ortho))

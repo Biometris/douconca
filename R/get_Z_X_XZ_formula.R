@@ -35,7 +35,7 @@ get_Z_X_XZ_formula <- function(formula,
   }
   # find all variable names by deleting from tl Condition and all interactions
   # first delete Condition
-  idC <- pmatch("Condition(" , tl)
+  idC <- pmatch("Condition(", tl)
   if (!is.na(idC)) {
     # get formula of the Condition
     condi <- tl[idC]

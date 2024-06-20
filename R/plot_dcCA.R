@@ -212,13 +212,13 @@ plot_dcCA <- function(object,
     gg_object <- gridExtra::grid.arrange(CWM_SNC, plot_traits, plot_env, 
                                          plot_species, layout_matrix = layout, 
                                          widths = widths,
-                                         top = "", left = "", right =  "")
+                                         top = "", left = "", right = "")
   } else {
     layout<- rbind(c(1, 2), c(1, 3))
     gg_object <- gridExtra::grid.arrange(CWM_SNC, plot_traits, plot_env, 
                                          layout_matrix = layout, 
                                          widths = widths,
-                                         top = "", left = "", right =  "")
+                                         top = "", left = "", right = "")
   }
   # plot ------------------------------------------------------
   if (verbose) {

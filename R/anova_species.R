@@ -68,15 +68,16 @@ anova_species <- function(object,
     stop("Set argument 'by' to 'axis' or 'NULL'")
   }
   N <- nrow(object$data$dataTraits) 
-  if (is.numeric(permutations) || inherits(permutations, "how") || 
-      is.matrix(permutations)) {
+  if (inherits(permutations, c("numeric", "how", "matrix"))) {
     if (is.numeric(permutations) && !is.matrix(permutations)) {
       permutations <- permute::how(nperm = permutations[1])
     } else if (is.matrix(permutations) && ncol(permutations) != N) {
       stop("Each row of permutations should have", N, "elements")
     }
-  } else stop("Argument permutations should be integer, matrix ", 
-              "or specified by permute::how().")
+  } else {
+    stop("Argument permutations should be integer, matrix ", 
+         "or specified by permute::how().")
+  }
   if (is.null(object$SNCs_orthonormal_env)) {
     formulaEnv <- change_reponse(object$formulaEnv, "object$data$Y", 
                                  object$data$dataEnv)
@@ -106,7 +107,7 @@ anova_species <- function(object,
                                      permutations = permutations, by = by,
                                      return = "all")
   if (by == "axis") {
-    while (out_tes[[1]]$rank > length(out_tes) ) {
+    while (out_tes[[1]]$rank > length(out_tes)) {
       Zw <- cbind(Zw, out_tes[[length(out_tes)]]$EigVector1)
       out_tes[[length(out_tes) + 1]] <- 
         randperm_eX0sqrtw(Yw, Xw, Zw, sWn = sWn, permutations = permutations,
@@ -134,9 +135,11 @@ anova_species <- function(object,
       R2.perm <- cbind(R2.perm, out_tes[[k]]$R2.perm)
     }
   }
-  p_val_axes1 <- c(cummax(sapply(out_tes, function(x)x$pval[1])), NA)
+  p_val_axes1 <- c(cummax(sapply(out_tes, function(x) {
+    x$pval[1]
+  })), NA)
   eig <- out_tes[[1]]$eig
-  names(eig)<- paste("dcCA", seq_along(eig), sep = "")
+  names(eig) <- paste0("dcCA", seq_along(eig))
   axsig_dcCA_species <- data.frame(df = df, ChiSquare = ss, R2 = fraqExplained,
                                    F = F0, `Pr(>F)` = p_val_axes1, 
                                    check.names = FALSE)
@@ -171,13 +174,12 @@ dummysvd <- function(Y) {
        V = matrix(1, nrow = ncol(Y), ncol = 1))
 }
 
-
 #for permutation.type = X = X1
 #' @noRd
 #' @keywords internal
 randperm_eX0sqrtw <- function(Y,
                               X, 
-                              Z = matrix(1, nrow = nrow(Y), ncol =1), 
+                              Z = matrix(1, nrow = nrow(Y), ncol = 1), 
                               by = NULL,
                               sWn = rep(1, nrow(Y)), 
                               permutations = permute::how(nperm = 999),
@@ -277,29 +279,6 @@ randperm_eX0sqrtw <- function(Y,
   return(res)
 }
 
-# unweighted least-squares (OLS) functions 
-#' @noRd
-#' @keywords internal
-unweighted_lm_pq_fit <- function(Y, 
-                                 X) {
-  # multivariate multiple regression of Y on X
-  # using qr decomposition
-  # value Y_fit
-  Y_fit <- qr.fitted(qr(X), Y)
-  return(Y_fit)
-}
-
-#' @noRd
-#' @keywords internal
-unweighted_lm_Orthnorm_fit <- function(Y, 
-                                       X = numeric(0)) {
-  # multivariate multiple regression of Y on orthonormal X
-  # value Y_residual
-  beta <- t(X) %*% Y
-  Yfit <- X %*% beta
-  return(Yfit)
-}
-
 #' @noRd
 #' @keywords internal
 unweighted_lm_Orthnorm <- function(Y, 
@@ -309,15 +288,6 @@ unweighted_lm_Orthnorm <- function(Y,
   beta <- t(X) %*% Y
   Y <- Y - X %*% beta
   return(Y)
-}
-
-#' @noRd
-#' @keywords internal
-SVD <- function(Y) {
-  svdY <- svd(Y)
-  Ustar <- svdY$u
-  id <- which(svdY$d > 1.e-6)
-  return(Ustar[, id, drop = FALSE])
 }
 
 #' @noRd
@@ -365,9 +335,9 @@ howHead <- function(x,
       nr <- permute::getRow(x, which = "plots")
       nc <- permute::getCol(x, which = "plots")
       header <- paste0(header, sprintf(ngettext(nr, " %d row", " %d rows"),
-                                   nr))
+                                       nr))
       header <- paste0(header, sprintf(ngettext(nc, " %d column",
-                                            " %d columns"), nc))
+                                                " %d columns"), nc))
     }
     header <- paste0(header, "\n")
   }
@@ -386,9 +356,9 @@ howHead <- function(x,
     nr <- permute::getRow(x, which = "within")
     nc <- permute::getCol(x, which = "within")
     header <- paste0(header, sprintf(ngettext(nr, " %d row", " %d rows"),
-                                 nr))
+                                     nr))
     header <- paste0(header, sprintf(ngettext(nc, " %d column",
-                                          " %d columns"), nc))
+                                              " %d columns"), nc))
   }
   paste0(header, "\nNumber of permutations: ", permute::getNperm(x), "\n")
 }

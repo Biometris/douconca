@@ -407,7 +407,7 @@ scores_dcca <- function(x,
         sol$regression_traits <- regr 
       } else {
         sol$regression_traits <- 
-          cbind(species_axes$c_traits_normed[, 1:3, drop = FALSE] , regr)  
+          cbind(species_axes$c_traits_normed[, 1:3, drop = FALSE], regr)  
       }
       attr(sol$regression_traits, which = "meaning") <-
         paste0("mean, sd, VIF, standardized regression coefficients and their ", 

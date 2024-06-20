@@ -250,7 +250,7 @@ dc_CA <- function(formulaEnv = NULL,
       id0 <- which(TotC == 0)
       if (length(id0)) {
         response <- response[, -id0]
-        dataTraits <- dataTraits[-id0 , ]
+        dataTraits <- dataTraits[-id0, ]
       }
     }
     # delete columns with missing data
@@ -359,7 +359,7 @@ dc_CA <- function(formulaEnv = NULL,
   }
   out$inertia <- inertia
   if (inherits(out$RDAonEnv, "rda")) {
-    class(out) <- c("dccav", "dcca" ,"list") 
+    class(out) <- c("dccav", "dcca", "list") 
   } else {
     class(out) <- c("dcca", "list")
   }
