@@ -15,8 +15,8 @@ mod <- dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Condition(Manure),
              verbose = TRUE)
 
 # regression coefficients
-predict(mod, type= "reg_env")
-predict(mod, type= "reg_traits")
+predict(mod, type = "reg_env")
+predict(mod, type = "reg_traits")
 
 # fit the mean traits at each site (20x6),
 # that is CWM at each site, so analyse with CWMSNC version
@@ -49,7 +49,7 @@ mod3 <- dc_CA(formulaEnv = mod$formulaEnv,
               formulaTraits = mod$formulaTraits,
               response = pred,  # must delete "Sites"
               dataEnv = dune_trait_env$envir,
-              dataTraits =dune_trait_env$traits,
+              dataTraits = dune_trait_env$traits,
               divide.by.site.totals = divide,
               verbose = TRUE)
 

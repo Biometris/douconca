@@ -104,7 +104,7 @@ wrda <- function(formula,
   object <- list(call = call, method = "wrda", tot.chi = total_variance,
                  formula = formula, site_axes = site_axes, 
                  species_axes = species_axes, Nobs = Nobs, eigenvalues = eig,
-                 weights = list(rows = Wn, columns= rep(1 / ncol(eY), ncol(eY))),
+                 weights = list(rows = Wn, columns = rep(1 / ncol(eY), ncol(eY))),
                  data = data, eY = eY, pCCA = pCCA, CCA = CCA, 
                  CA = list(tot.chi = ssY_gZ - ssY_XgZ, rank = 0)
   )

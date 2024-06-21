@@ -8,7 +8,7 @@ out1 <- dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Manure,
               dataEnv = dune_trait_env$envir,
               # delete "Species", "Species_abbr" from traits and
               # use all remaining variables due to formulaTraits = ~. (the default)
-              dataTraits =dune_trait_env$traits[, -c(1, 2)],
+              dataTraits = dune_trait_env$traits[, -c(1, 2)],
               verbose = TRUE)
 
 # Manual forward selection of environmental variables
@@ -82,7 +82,7 @@ pvaladj <- p.adjust(fit_measures[, "pval1"], method = p.adjust.method)
 fit_measures <- cbind(fit_measures, pvaladj )
 round(fit_measures, 3) 
 
-# best =Manure ; significant, also after correction for multiple testing (given step1)
+# best = Manure ; significant, also after correction for multiple testing (given step1)
 chosen_env <- "Manure"
 
 # step 3
@@ -97,7 +97,7 @@ rownames(fit_measures) <- considerk
 
 for (k in seq_along(considerk)) {
   formulaE_FS <- 
-    as.formula(paste("~", considerk[k], "+Condition(", 
+    as.formula(paste("~", considerk[k], "+ Condition(", 
                      paste(considered, collapse = "+"), ")"))
   
   out_FS <- dc_CA(formulaE_FS, dc_CA_object = out1, verbose = FALSE)
@@ -113,7 +113,7 @@ for (k in seq_along(considerk)) {
 
 pvaladj <- p.adjust(fit_measures[, "pval1"], method = p.adjust.method)
 fit_measures <- cbind(fit_measures,pvaladj )
-round(fit_measures, 3) # best =Mag; not significant
+round(fit_measures, 3) # best = Mag; not significant
 chosen_env <- "Mag"
 
 fit_measuresL[[chosen_env]] <- fit_measures

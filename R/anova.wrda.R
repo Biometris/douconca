@@ -69,7 +69,7 @@ anova.wrda <- function(object,
   # residual predictor permutation.
   out_tes <- list()
   out_tes[[1]]  <- randperm_eX0sqrtw(Yw,Xw, Zw, sWn = sWn, 
-                                     permutations= permutations, 
+                                     permutations = permutations, 
                                      by = by, return = "all")
   if (by == "axis") {
     while (out_tes[[1]]$rank > length(out_tes)) {

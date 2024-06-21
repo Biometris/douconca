@@ -37,7 +37,7 @@ getPlotdata <- function(object,
                         traitfactor = NULL,
                         newnames = NULL,
                         facet = TRUE,
-                        remove.centroids=FALSE) {
+                        remove.centroids = FALSE) {
   size.centroids = 1
   # getPlotdata function
   if (length(remove.centroids) == 1) {

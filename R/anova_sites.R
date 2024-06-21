@@ -78,7 +78,7 @@ anova_sites <- function(object,
   n <- out1$Nobs
   if (is.null(out1$CWMs_orthonormal_traits)) {
     CWMs_orthonormal_traits <- 
-      scores(object$CCAonTraits, display= "species", scaling = "species", 
+      scores(object$CCAonTraits, display = "species", scaling = "species", 
              choices = 1:Rank_mod(object$CCAonTraits))
   } else {
     CWMs_orthonormal_traits <- out1$CWMs_orthonormal_traits * sqrt(n / (n - 1))

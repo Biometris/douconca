@@ -15,7 +15,7 @@
 #' @param threshold species with criterion (specified by \code{selectname}) 
 #' higher than the \code{threshold} are displayed. Default: 7 (which is the 
 #' threshold F-ratio for testing a single regression coefficient at
-#' \code{p=0.01} with \code{60} df for the error in a multiple regression
+#' \code{p = 0.01} with \code{60} df for the error in a multiple regression
 #' of each single species onto the condition and the ordination axis). If 
 #' \code{selectname} is not in \code{species_scores}, the \code{threshold} is 
 #' divided by \code{14}, so that the default is 0.5.
@@ -34,7 +34,7 @@
 #' @details
 #' The absolute value of the criterion values is taken before selection, so 
 #' that also the species scores of the ordination can serve as a criterion
-#' (e.g. \code{selectname="RDA1"}). The function has been copied from 
+#' (e.g. \code{selectname = "RDA1"}). The function has been copied from 
 #' the \code{PRC} package at https://github.com/CajoterBraak/PRC.
 #'
 #' @return  a ggplot object
@@ -133,11 +133,11 @@ plot_species_scores_bk <- function(species_scores,
       panel.grid.major = ggplot2::element_blank(),
       panel.grid.minor = ggplot2::element_blank(),
       panel.border = ggplot2::element_blank(),
-      axis.line.y = ggplot2::element_line(colour="grey50"),
-      axis.ticks.x= ggplot2::element_blank(),
-      axis.title.y= ggplot2::element_text(),
-      axis.title.x= ggplot2::element_blank(),
-      axis.text.x= ggplot2::element_blank()
+      axis.line.y = ggplot2::element_line(colour = "grey50"),
+      axis.ticks.x = ggplot2::element_blank(),
+      axis.title.y = ggplot2::element_text(),
+      axis.title.x = ggplot2::element_blank(),
+      axis.text.x = ggplot2::element_blank()
     ) +
     ggplot2::scale_y_continuous(expand = c(0, 0), breaks = bk_breaks) +
     ggplot2::ylab(ylab)
@@ -157,13 +157,12 @@ plot_species_scores_bk <- function(species_scores,
       species.sub$y.label.loc
     labelline$y.coor[seq(from = 4, to = nrow(labelline), by = 4)] <-
       species.sub$y.label.loc
-    p <- p +
-      ggplot2::geom_text(data = species.sub,
-                         ggplot2::aes(label = .data[["species"]],
-                                      x = 0.18, 
-                                      y = .data[["y.label.loc"]]),
-                         hjust = 0,
-                         size = 7 * (5 / 14), fontface = "italic") +
+    p <- p + ggplot2::geom_text(data = species.sub,
+                                ggplot2::aes(label = .data[["species"]],
+                                             x = 0.18, 
+                                             y = .data[["y.label.loc"]]),
+                                hjust = 0,
+                                size = 7 * (5 / 14), fontface = "italic") +
       ggplot2::geom_line(data = labelline, 
                          ggplot2::aes(x = .data[["x.coor"]],
                                       y = .data[["y.coor"]],

@@ -176,7 +176,7 @@ statistics of the method. In this case, \code{response} should be a list
 with as first element community weighted means (CWMs) with respect to the 
 traits, and the trait data, and, optionally, further elements, for functions
 related to \code{dc_CA}. The minimum is a 
-\code{list(CWM, weight = list(columns= species_weights))} with CWM a matrix
+\code{list(CWM, weight = list(columns = species_weights))} with CWM a matrix
 or data.frame (or with data.frame in its class vector), but then formulaEnv,
 formulaTraits, dataEnv, dataTraits must be specified in the call to 
 \code{dc_CA}. The function \code{\link{fCWM_SNC}} shows how to set the

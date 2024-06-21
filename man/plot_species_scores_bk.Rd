@@ -28,7 +28,7 @@ species scores from library \code{vegan}}
 \item{threshold}{species with criterion (specified by \code{selectname}) 
 higher than the \code{threshold} are displayed. Default: 7 (which is the 
 threshold F-ratio for testing a single regression coefficient at
-\code{p=0.01} with \code{60} df for the error in a multiple regression
+\code{p = 0.01} with \code{60} df for the error in a multiple regression
 of each single species onto the condition and the ordination axis). If 
 \code{selectname} is not in \code{species_scores}, the \code{threshold} is 
 divided by \code{14}, so that the default is 0.5.}
@@ -62,7 +62,7 @@ scores with selection criterion for which scores to plot with names.
 \details{
 The absolute value of the criterion values is taken before selection, so 
 that also the species scores of the ordination can serve as a criterion
-(e.g. \code{selectname="RDA1"}). The function has been copied from 
+(e.g. \code{selectname = "RDA1"}). The function has been copied from 
 the \code{PRC} package at https://github.com/CajoterBraak/PRC.
 }
 \examples{

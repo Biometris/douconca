@@ -3,11 +3,11 @@ Type: Package
 Title: Double Constrained Correspondence Analysis for Trait-Environment 
     Analysis in Ecology
 Version: 1.1.5
-Authors@R: c(person(given ="Cajo J.F", 
+Authors@R: c(person(given = "Cajo J.F", 
                     family = "ter Braak", 
                     email = "cajo.terbraak@wur.nl",
                     role = "aut", 
-                    comment = c(ORCID="0000-0002-0414-8745")),
+                    comment = c(ORCID = "0000-0002-0414-8745")),
             person(given = "Bart-Jan", 
                    family = "van Rossum", 
                    email = "bart-jan.vanrossum@wur.nl", 

@@ -133,7 +133,7 @@ If you get the error message: 'arg' should be one of "sites", "species",
 of douconca. The work-around is to use douconca::scores() instead of 
 scores() only.
 
-An example of which_cor is: \code{which_cor = list(traits= "SLA", 
+An example of which_cor is: \code{which_cor = list(traits = "SLA", 
 env = c("acidity", "humidity"))}
 }
 \examples{

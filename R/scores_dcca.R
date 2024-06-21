@@ -50,7 +50,7 @@
 #' of douconca. The work-around is to use douconca::scores() instead of 
 #' scores() only.
 #'
-#' An example of which_cor is: \code{which_cor = list(traits= "SLA", 
+#' An example of which_cor is: \code{which_cor = list(traits = "SLA", 
 #' env = c("acidity", "humidity"))}
 #' 
 #' @return A data frame if \code{tidy = TRUE}, a matrix if a single item is 
@@ -534,16 +534,16 @@ scores_dcca <- function(x,
     if (!is.null(sol$biplot) && !is.null(sol$centroids)) {
       dup <- rownames(sol$biplot) %in% rownames(sol$centroids)
       if (any(dup)) {
-        sol$factorbiplot <- sol$biplot[dup, , drop=FALSE]
-        sol$biplot <- sol$biplot[!dup, , drop=FALSE]
+        sol$factorbiplot <- sol$biplot[dup, , drop = FALSE]
+        sol$biplot <- sol$biplot[!dup, , drop = FALSE]
       }
     }
     ## re-group biplot arrays duplicating factor centroids
     if (!is.null(sol$biplot_traits) && !is.null(sol$centroids_traits)) {
       dup <- rownames(sol$biplot_traits) %in% rownames(sol$centroids_traits)
       if (any(dup)) {
-        sol$factorbiplot_traits <- sol$biplot_traits[dup,, drop=FALSE]
-        sol$biplot_traits <- sol$biplot_traits[!dup,, drop=FALSE]
+        sol$factorbiplot_traits <- sol$biplot_traits[dup, , drop = FALSE]
+        sol$biplot_traits <- sol$biplot_traits[!dup, , drop = FALSE]
       }
     }
     group <- sapply(sol, nrow)

@@ -51,7 +51,7 @@
 #' of douconca. The work-around is to use douconca::scores() instead of 
 #' scores() only.
 #'
-#' An example of which_cor is: \code{which_cor = list(traits= "SLA", 
+#' An example of which_cor is: \code{which_cor = list(traits = "SLA", 
 #' env = c("acidity", "humidity"))}
 #' 
 #' @return A data frame if \code{tidy = TRUE}, a matrix if a single item is 

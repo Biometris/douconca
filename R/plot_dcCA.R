@@ -80,7 +80,7 @@ plot_dcCA <- function(object,
                     newnames = newnames, remove.centroids = remove.centroids)
   CWM_SNC <- plot_dcCA_CWM_SNC(object, axis = axis, envfactor = envfactor, 
                                traitfactor = traitfactor, facet = facet,
-                               remove.centroids=remove.centroids, 
+                               remove.centroids = remove.centroids, 
                                with_lines = with_lines, 
                                getPlotdata2plotdCCA = pd)
   trait_env_scores <- pd$trait_env_scores
@@ -89,7 +89,7 @@ plot_dcCA <- function(object,
   stats_scores <- list(traits = gradient_description[1], 
                        env = gradient_description[2])
   stats_scores <- lapply(stats_scores, function(x) {
-    if (x=="regression") x <- "weights"
+    if (x == "regression") x <- "weights"
     return(x)
   })
   ylab_traits <- "composite trait"
@@ -228,7 +228,7 @@ plot_dcCA <- function(object,
     }
   }
   out <- list(plot = gg_object, name.list = pd$newname.list,
-              separateplots = list(CWM_SNC =CWM_SNC, traits = plot_traits, 
+              separateplots = list(CWM_SNC = CWM_SNC, traits = plot_traits, 
                                    env = plot_env, species = plot_species))
   invisible(out)
 }
@@ -264,7 +264,7 @@ fplot_species <- function(pd,
     threshold <- SNC_LC_mat[names(sspecies)[nspecies + 1], "contribution"]
     # ready for plotting
     plot_species <- plot_species_scores_bk(
-      species_scores= SNC_LC_mat,
+      species_scores = SNC_LC_mat,
       ylab = "trait composite",
       threshold = threshold,
       y_lab_interval = 0.5,

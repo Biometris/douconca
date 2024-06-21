@@ -115,7 +115,7 @@ calculate_b_se_tval <- function(X_or_qr_decomp_of_X,
     coef_normed <- cbind(Avg = avg, SDS = sds, VIF = VIF, beta_stan, tval)
     attr(coef_normed, "meaning") <- 
       "mean, sd, VIF, standardized regression coefficients and their t-ratio"
-    out1 <- list(fitted = fitted_values, y = y, coef_normed=coef_normed, 
+    out1 <- list(fitted = fitted_values, y = y, coef_normed = coef_normed, 
                  b_se = b_se,  R2 = 1 - RSS / TSS)
   }
   return(out1)

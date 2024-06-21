@@ -25,8 +25,8 @@ names(CWMSNCa)
 CWMSNCb <- fCWM_SNC(formulaEnv = mod1$formulaEnv,
                     formulaTraits = mod1$formulaTraits,
                     response = dune_trait_env$comm[, -1],  # must delete "Sites"
-                    dataEnv =dune_trait_env$envir,
-                    dataTraits =dune_trait_env$traits,
+                    dataEnv = dune_trait_env$envir,
+                    dataTraits = dune_trait_env$traits,
                     divide.by.site.totals = divide,
                     minimal_output = FALSE,
                     verbose = FALSE)

@@ -56,7 +56,7 @@ msdvif <- function(formula = NULL,
                    weights, 
                    XZ = FALSE, 
                    novif = FALSE, 
-                   contrast= TRUE) {
+                   contrast = TRUE) {
   # calc mean variance and vif from for X given Z or XZ 
   # with qr of X|Z or of centered XZ
   if (is.null(formula)) {
@@ -69,7 +69,7 @@ msdvif <- function(formula = NULL,
     X <- model.matrix(ff$formula_XZ, data = data)[, -1, drop = FALSE]
   } else {
     if (contrast) {
-      X <- model.matrix(ff$formula_X1, data= data)[, -1, drop = FALSE] 
+      X <- model.matrix(ff$formula_X1, data = data)[, -1, drop = FALSE] 
     } else {
       X <- modelmatrixI(ff$formula_X1, data = data, XZ = FALSE)
     }

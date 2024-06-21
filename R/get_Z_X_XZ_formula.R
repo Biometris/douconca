@@ -57,7 +57,7 @@ get_Z_X_XZ_formula <- function(formula,
   fFocalX1 <- as.formula(paste("~1 +", fFocalX))
   focal_nams <- unique(unlist(strsplit(tl, split = ":", fixed = TRUE)))
   Condi_nams <- unique(unlist(strsplit(attr(stats::terms(fC_formula), "term.labels"), 
-                                       split= ":", fixed = TRUE)))
+                                       split = ":", fixed = TRUE)))
   focal_nams <- focal_nams[!focal_nams %in% Condi_nams]
   if (!is.null(data)) {
     fctrs <- names(data)[sapply(data, is.factor)]
