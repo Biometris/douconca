@@ -24,10 +24,10 @@ f_env_axes <- function(out,
   w <- out$weights$rows
   if (inherits(out, "dccav")) {
     myconst <- sqrt(out$Nobs * out$RDAonEnv$tot.chi)
-    CWM <- as.matrix(vegan::scores(out$RDAonEnv, display = "sites", 
-                                   scaling = "sites",
-                                   choices = seq_len(Rank_mod(out$RDAonEnv)), 
-                                   const = myconst))
+    CWM <- as.matrix(scores(out$RDAonEnv, display = "sites", 
+                            scaling = "sites",
+                            choices = seq_len(Rank_mod(out$RDAonEnv)), 
+                            const = myconst))
     dataEnv <- out$data$dataEnv
     formulaEnv <-out$formulaEnv
     out <- out$RDAonEnv

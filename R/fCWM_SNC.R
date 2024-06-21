@@ -251,10 +251,10 @@ f_canonical_coef_traits2 <- function(out){
   if (!is.null(out$CWM2CWM_ortho)) {
     B1_traitsN <- out$CWM2CWM_ortho * sds
   } else {
-    if(inherits(out$CCAonTraits, "cca")) {
-      B1_traitsN <- vegan::scores(out$CCAonTraits, display = "reg", 
-                                  scaling = "species", 
-                                  choices = 1:Rank_mod(out$CCAonTraits))
+    if (inherits(out$CCAonTraits, "cca")) {
+      B1_traitsN <- scores(out$CCAonTraits, display = "reg", 
+                           scaling = "species", 
+                           choices = 1:Rank_mod(out$CCAonTraits))
     } else {
       return(ms$meansdvif)
     }
@@ -263,9 +263,9 @@ f_canonical_coef_traits2 <- function(out){
     B_star <- scores(out$RDAonEnv, display = "species", scaling = "sites", 
                      choices = 1:Rank_mod(out$RDAonEnv))
   } else  {
-    B_star <- vegan::scores(out$RDAonEnv, display = "species", 
-                            scaling = "sites", choices = 1:Rank_mod(out$RDAonEnv), 
-                            const = 1)
+    B_star <- scores(out$RDAonEnv, display = "species", 
+                     scaling = "sites", choices = 1:Rank_mod(out$RDAonEnv), 
+                     const = 1)
   }
   # End appendix 6.2 in ter Braak  et al 2018
   c_traitsN <- B1_traitsN %*% B_star

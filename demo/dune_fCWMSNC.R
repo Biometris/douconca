@@ -48,11 +48,9 @@ cbind(eig_mod1 = mod1$eigenvalues, eig_mod2 = mod2$eigenvalues,
 mod2$eigenvalues / mod1$eigenvalues
 
 type_of_score <- "sites"
-douconca::scores(mod2, display = type_of_score) / 
-  douconca::scores(mod1, display = type_of_score)
+scores(mod2, display = type_of_score) / scores(mod1, display = type_of_score)
 type_of_score <- "species"
-douconca::scores(mod2, display = type_of_score) / 
-  douconca::scores(mod1, display = type_of_score)
+scores(mod2, display = type_of_score) / scores(mod1, display = type_of_score)
 #Note: the axes of mod2 have switched sign compared to mod1
 
 # example of no weights specified;

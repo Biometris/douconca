@@ -78,7 +78,7 @@ mod <- dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Manure,
              dataTraits = dune_trait_env$traits,
              verbose = FALSE)
 
-env_scores <- douconca::scores(mod, display = "tval")
+env_scores <- scores(mod, display = "tval")
 
 plot_species_scores_bk(
   species_scores = env_scores,

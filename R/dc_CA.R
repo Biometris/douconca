@@ -305,8 +305,8 @@ dc_CA <- function(formulaEnv = NULL,
     data <- list(Y = response, dataEnv = dataEnv, dataTraits = dataTraits)
     n <- nrow(data$Y)
     CWMs_orthonormal_traits <- 
-      vegan::scores(step1, display = "species", scaling = "species",
-                    choices = seq_len(Rank_mod(step1))) * sqrt((n - 1) / n)
+      scores(step1, display = "species", scaling = "species",
+             choices = seq_len(Rank_mod(step1))) * sqrt((n - 1) / n)
     if (rownames(CWMs_orthonormal_traits)[1] == "col1") {
       rownames(CWMs_orthonormal_traits) <- paste0("Sam", seq_len((nrow(dataEnv))))
     }

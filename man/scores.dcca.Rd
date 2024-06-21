@@ -166,12 +166,12 @@ anova(mod, by = "axis")
 
 # For more demo on testing, see demo dune_test.r
 
-mod_scores <- douconca::scores(mod, display = "all", scaling = "sym")
+mod_scores <- scores(mod, display = "all", scaling = "sym")
 
-douconca::scores(mod, display = c("cor", "cn", "cor_traits"),
-                 scaling = "sym", which_cor = list("SLA","in model"))
-douconca::scores(mod, display = c("cor", "cn", "cor_traits"),
-                 scaling = "sym", which_cor = list("in model","Manure"))
+scores(mod, display = c("cor", "cn", "cor_traits"),
+       scaling = "sym", which_cor = list("SLA","in model"))
+scores(mod, display = c("cor", "cn", "cor_traits"),
+       scaling = "sym", which_cor = list("in model","Manure"))
 
 cat("\n\n**meaning of each set of scores**\n")
 
@@ -194,7 +194,7 @@ mod_scores$regression_traits
 mod_scores$biplot_traits
 mod_scores$centroids_traits
 
-mod_scores_tidy <- douconca::scores(mod, display = "all", tidy = TRUE)
+mod_scores_tidy <- scores(mod, display = "all", tidy = TRUE)
 print("names of the tidy scores")
 print(names(mod_scores_tidy))
 cat("\nThe levels of the tidy scores\n")
@@ -229,7 +229,7 @@ cat("\ncheck on equality of mod3 (from data) and mod3B (from a dc_CA_object)\n",
     "the expected difference is in the component 'call'\n ")
 print(all.equal(mod3, mod3B)) #  an expected difference, namely in component call
 
-mod_scores <- douconca::scores(mod3, display = "all", scaling = "symmetric")
+mod_scores <- scores(mod3, display = "all", scaling = "symmetric")
 
 cat("head of unconstrained site scores\n")
 print(head(mod_scores$sites))
@@ -252,7 +252,7 @@ mod_scores$regression_traits
 mod_scores$biplot_traits
 mod_scores$centroids_traits
 
-mod_scores <- douconca::scores(mod3, display = "all", tidy = TRUE)
+mod_scores <- scores(mod3, display = "all", tidy = TRUE)
 names(mod_scores)
 levels(mod_scores$score)
 cat("\nthe tidy scores data frame \n")

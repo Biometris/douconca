@@ -62,10 +62,10 @@ f_trait_axes <- function(out,
     step2 <- NULL
     if (!is.null(out$data$Y)) {
       if (inherits(out, "dccav")) {
-        lc_scores  <- vegan::scores(out$RDAonEnv, display = "lc", 
-                                    scaling = "species",
-                                    choices = seq_len(Rank_mod(out$RDAonEnv)), 
-                                    const = sqrt(out$Nobs))
+        lc_scores  <- scores(out$RDAonEnv, display = "lc", 
+                             scaling = "species",
+                             choices = seq_len(Rank_mod(out$RDAonEnv)), 
+                             const = sqrt(out$Nobs))
       } else if (inherits(out, "dcca")) {
         lc_scores <- out$RDAonEnv$site_axes$site_scores$lc_env_scores
       } else {
