@@ -35,16 +35,13 @@ predict_traits <- function(object,
   return(pred)
 }
 
-#' @noRd
-#' @keywords internal
-scale_data <- function(newdata1,
+scale_data <- function(dat0,
                        mean_sd) {
-  # newdata1 and mean_sd should  be matrices
-  ones <- rep(1, nrow(newdata1))
-  Xc <- newdata1 - 
-    ones %*% t(mean_sd[, 1, drop = FALSE][colnames(newdata1), , drop = FALSE])
-  Xc <- Xc / 
-    (ones %*% t(mean_sd[, 2, drop = FALSE][colnames(newdata1), , drop = FALSE]))
+  # dat0 and mean_sd should  be matrices
+  nams <- intersect(colnames(dat0), rownames(mean_sd))
+  ones <- rep(1, nrow(dat0))
+  Xc <- dat0[,nams, drop=FALSE] - ones %*% t(mean_sd[nams, 1, drop = FALSE])
+  Xc <- Xc / (ones %*% t(mean_sd[nams, 2, drop = FALSE]))
   return(Xc)
 }
 
@@ -73,7 +70,7 @@ check_newdata <- function(object,
   if (type == "traits") {
     wmff <- msdvif(object$formulaEnv, object$data$dataEnv, object$weights$rows,
                    XZ = TRUE, novif = TRUE)
-    wm <- wmff$mean
+    wm <- wmff$msd$mean
     ff <- wmff$ff_get
     c_normed <- cbind(Avg = c(wmff$msd$mean), SDS = c(wmff$msd$sd))
     rownames(c_normed) <- colnames(wmff$msd$mean)
@@ -88,13 +85,13 @@ check_newdata <- function(object,
   }
   if (!is.null(newdata)) {
     newdata1 <- newdata
-    nams <- !colnames(wm) %in% names(newdata1)
-    nams <- colnames(wm)[nams]
+    nams <- !ff$all_nams %in% names(newdata1)
+    nams <- ff$all_nams[nams]
     for (n in nams) {
       if (n %in% colnames(wm)) {
         newdata1[[n]] <- wm[1,n] # set to the mean
       } else {
-        newdata1[[n]] <- 0 # for factors
+        newdata1[[n]] <- 0 
       }
     }
   }

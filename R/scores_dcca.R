@@ -284,7 +284,7 @@ scores_dcca <- function(x,
       site_axes$site_scores[[2]][,choices, drop = FALSE] %*% diag_scal_sites
     attr(sol$constraints_sites, which = "meaning") <- 
       f_meaning("constraints", scaling,
-                paste("linear combination of the environmental predictors and",
+                paste("linear combination of the environmental predictors",
                       "and the covariates (making the ordination axes", 
                       "orthogonal to the covariates)"))
   }

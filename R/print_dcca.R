@@ -30,22 +30,22 @@ print_dcca <- function(x,
   }
   choices <- 1:4
   if (inherits(x, "dcca")) {
-    cat("Step 1: the CCA ordination of the transposed matrix with ", 
+    cat("Step 1: the CCA ordination of the transposed matrix with", 
         "trait constraints,\n")
-    cat("        useful in itself and also yielding CWMs of the ", 
+    cat("        useful in itself and also yielding CWMs of the", 
         "orthonormalized traits for step 2.\n")
     print(x$CCAonTraits)
     cat("Step 2: the RDA ordination of CWMs of the orthonormalized traits \n", 
-        "        of step 1 with environmental constraints:\n")
+        "       of step 1 with environmental constraints:\n")
     print(x$RDAonEnv)
     c_t <- x$c_traits_normed[, c(choices, 4 + Rank_mod(x)), drop = FALSE]
   } else {
     print.cca(x)
     c_t <- NULL
   }
-  if (inherits(x, "wrda", which = TRUE) == 1) {
+  if (any(inherits(x, c("dccav", "wrda"), which = TRUE) == 1)) {
     c_e <- x$c_env_normed[, c(choices, 4 + Rank_mod(x)), drop = FALSE]
-    cat("mean, sd, VIF and canonical coefficients with their optimistic [!] ", 
+    cat("mean, sd, VIF and canonical coefficients with their optimistic [!]", 
         "t-values:\n")
     print(round(c_e, 4))
   }

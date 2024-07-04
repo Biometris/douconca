@@ -54,6 +54,10 @@ For \code{type = "response"} and non-null newdata, the species weights of
 the training are used; the site weights are taken equal. Many of the 
 predicted values may be negative, indicating expected absences (0) or small
 expected response values.
+
+Regression coefficients obtained with \code{type = "reg_env"} or  
+\code{type = "reg_traits"} are for standardized traits and environmental 
+variables.
 }
 \examples{
 data("dune_trait_env")

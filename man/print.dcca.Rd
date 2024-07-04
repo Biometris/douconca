@@ -38,7 +38,7 @@ mod <- dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Manure,
              # use all remaining variables due to formulaTraits = ~. (the default)
              dataTraits = dune_trait_env$traits[, -c(1, 2)],
              divide.by.site.totals = divide,
-             verbose = TRUE)
+             verbose = FALSE)
 
 class(mod)
 print(mod)
