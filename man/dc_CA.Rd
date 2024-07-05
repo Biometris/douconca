@@ -152,7 +152,7 @@ for example, the importance of trait interactions in shaping ecological
 communities. The function \code{dc_CA} has an option to divide the abundance
 data of a site by the site total, giving equal site weights. This division 
 has the advantage that the multivariate analysis corresponds with an 
-unweighted (multi-trait) community-level analysis, instead of being weighted.
+unweighted (multi-trait) community-level analysis, instead of being weighted
 (Kleyer et al. 2012).
 }
 \details{

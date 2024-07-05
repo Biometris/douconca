@@ -16,11 +16,12 @@
 #' species-level test first and that for the sites-level second), or
 #' a list of two permutation matrices (again, species first, sites second)
 #' where each row gives the permuted indices.
-#' @param by character \code{"axis"} which performs a series of test, one for
+#' @param by character \code{"axis"} which performs a series of tests, one for
 #' each axis, with the eigenvalue of the axis as test statistic. 
-#' Default: \code{NULL} which set the test statistic to the inertia named 
-#' \code{constraintsTE} in the inertia element of \code{\link{dc_CA}}
-#' (= sum of all double constrained eigenvalues)). 
+#' Default: \code{NULL} which sets the test statistic to the inertia
+#' (sum of all double constrained eigenvalues; named \code{constraintsTE} in 
+#' the inertia element of \code{\link{dc_CA}} (= sum of all double 
+#' constrained eigenvalues)). 
 #' The interpretation of this inertia is, at the species-level, the 
 #' environmentally constrained inertia explained by the traits (without trait
 #' covariates) and, at the community-level, the trait-constrained inertia

@@ -12,7 +12,7 @@
 #' \emph{constrained} site scores) replace the usual (\emph{unconstrained}) 
 #' site scores, and for dc-CA, that the linear combinations of traits (the 
 #' \emph{constrained} species scores) also replace the usual 
-#' (\emph{unconstrained}) species scores.
+#' (\emph{unconstrained}) species scores in the transition formulas.
 #'
 #' @param x object of class \code{"dcca"}, \emph{i.e.} result of
 #' \code{\link{dc_CA}}.
@@ -32,10 +32,10 @@
 #' variables in the model, including collinear variables and levels.
 #' @param scaling numeric (1,2 or 3) or character \code{"sites", "species" or
 #' "symmetric"}. Default: "symmetric". Either site- (1) or species- (2) related
-#' scores are scaled by eigenvalues, and the other set of scores is left 
-#' unscaled, or with 3 both are scaled symmetrically by square root of 
-#' eigenvalues. Negative values are treated as the corresponding positive ones
-#' by \code{abs(scaling)}.
+#' scores are scaled by eigenvalues, and the other set of scores have
+#' unit weighted mean square or with 3 both are scaled symmetrically 
+#' to weighted mean squares equal to the square root of eigenvalues. Negative 
+#' values are treated as the corresponding positive ones by \code{abs(scaling)}.
 #' @param tidy Return scores that are compatible with \code{ggplot2}: all 
 #' scores are in a single data.frame, score type is identified by factor 
 #' variable \code{score}, the names by variable \code{label}, and species 
@@ -45,26 +45,25 @@
 #' 
 #' @details
 #' The function is modeled after \code{\link[vegan]{scores.cca}}.
-#'
-#' If you get the error message: 'arg' should be one of "sites", "species", 
-#' "both", then the vegan scores function has been called, instead of the one 
-#' of douconca. The work-around is to use douconca::scores() instead of 
-#' scores() only.
-#'
-#' An example of which_cor is: \code{which_cor = list(traits = "SLA", 
-#' env = c("acidity", "humidity"))}
 #' 
-#' @return A data frame if \code{tidy = TRUE}, a matrix if a single item is 
-#' asked for and a named list of matrices if more than one item is asked for. 
-#' The following names can be included: \code{c("sites", "constraints_sites",
-#' "centroids", "regression", "t_values", "correlation", 
-#' "intra_set_correlation", "biplot", "species", "constraints_species", 
-#' "regression_traits", "t_values_traits", "correlation_traits",
-#' "intra_set_correlation_traits", "biplot_traits", "centroids_traits")}. Each
-#' matrix has an attribute \code{"meaning"} explaining its meaning. With 
-#' \code{tidy = TRUE}, the resulting data frame has attributes \code{"scaling"} 
-#' and \code{"meaning"}; the latter has two columns: (1) name of score type 
-#' and (2) its meaning, usage and interpretation.
+#' The t-ratios are taken from a multiple regression of the unconstrained
+#' species (or site) scores on to the traits (or environmental variables).
+#'
+#' An example of \code{which_cor} is: \code{which_cor = list(traits = "SLA", 
+#' env = c("acidity", "humidity"))}.
+#' 
+#' @return A data frame if \code{tidy = TRUE}. Otherwise, a matrix if a single
+#' item is asked for and a named list of matrices if more than one item is 
+#' asked for. The following names can be included: 
+#' \code{c("sites", "constraints_sites", "centroids", "regression", "t_values",
+#' "correlation", "intra_set_correlation", "biplot", "species", 
+#' "constraints_species", "regression_traits", "t_values_traits", 
+#' "correlation_traits", "intra_set_correlation_traits", "biplot_traits", 
+#' "centroids_traits")}. Each matrix has an attribute \code{"meaning"} 
+#' explaining its meaning. With  \code{tidy = TRUE}, the resulting data frame 
+#' has attributes \code{"scaling"} and \code{"meaning"}; the latter has two 
+#' columns: (1) name of score type and (2) its meaning, usage and 
+#' interpretation.
 #'
 #' An example of the meaning of scores in scaling \code{"symmetric"} with 
 #' \code{display ="all"}:
