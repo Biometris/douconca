@@ -1,4 +1,4 @@
-dune_dcCA	  Demo of double constrained correspondence analyis using the dune meadow data
+dune_dcCA	  Demo of double constrained correspondence analysis using the dune meadow data
 dune_plot_dcCA	  Demo of plotting a single dc-CA axis
 dune_plot_dcCA2	  Demo of plotting a single dc-CA axis (long version)
 plot_CWM_SNC      Demo of plotting CWMs and SNCs of a dc-CA axis against the axis

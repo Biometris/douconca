@@ -30,7 +30,7 @@
 #' The second step is thus a community-level analysis.
 #'
 #' If \code{divide.by.site.totals = FALSE}, the second step uses 
-#' \code{\link{wrda}} and performs a weighted redundancy analyis of the CWMs 
+#' \code{\link{wrda}} and performs a weighted redundancy analysis of the CWMs 
 #' on to the environmental variables.
 #'
 #' Division of the abundance data by the site totals has the advantage that 

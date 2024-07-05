@@ -2,7 +2,7 @@
 #' double constrained correspondence analysis
 #'
 #' @description
-#' Double constained correspondence analysis (dc-CA) can be calculated directly 
+#' Double constrained correspondence analysis (dc-CA) can be calculated directly 
 #' from community weighted means (CWMs), with the trait data from which the 
 #' CWMs are calculated, and the environmental data and weights for species 
 #' and sites (the abundance totals for species and sites). Statistical testing

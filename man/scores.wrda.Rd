@@ -98,11 +98,6 @@ predictors.
 \details{
 The function is modeled after \code{\link[vegan]{scores.cca}}.
 
-If you get the error message: 'arg' should be one of "sites", "species", 
-"both", then the vegan scores function has been called, instead of the one 
-of douconca. The work-around is to use douconca::scores() instead of 
-scores() only.
-
 An example of which_cor is: \code{which_cor = c("acidity", "humidity")}
 }
 \examples{

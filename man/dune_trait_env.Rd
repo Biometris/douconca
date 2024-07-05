@@ -69,7 +69,7 @@ sample (relevé)
 The management types are standard farming (SF), biological farming (BF),
 hobby farming (HF), nature conservation management (NM). The coordinates are
 Rijksdriehoekscoordinaten in meters.
-https://nl.wikipedia.org/wiki/Rijksdriehoekscoordinaten
+\url{https://nl.wikipedia.org/wiki/Rijksdriehoekscoordinaten}
 }
 \references{
 Batterink, M. & Wijffels, G. (1983) Een vergelijkend vegetatiekundig 

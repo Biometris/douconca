@@ -18,8 +18,8 @@ plot_species_scores_bk(
 }
 \arguments{
 \item{species_scores}{a species-by-scores matrix, a data frame with 
-rownames (species names) or a tibble with variable with name
-\code{speciesname} containing species names and a column or variabe with 
+row names (species names) or a tibble with variable with name
+\code{speciesname} containing species names and a column or variable with 
 name \code{scoresname} containing the scores (default: \code{"RDA1"}), e.g.
 species scores from library \code{vegan}.}
 
@@ -37,7 +37,7 @@ divided by \code{14}, so that the default is 0.5.}
 is always included; default: 0.5.}
 
 \item{speciesname}{name of the variable containing the species names 
-(default \code{NULL} uses rownames).}
+(default \code{NULL} uses row names).}
 
 \item{scoresname}{name of the column or variable containing the species 
 scores to be plotted (default \code{"RDA1"}).}
@@ -63,7 +63,7 @@ scores with selection criterion for which scores to plot with names.
 The absolute value of the criterion values is taken before selection, so 
 that also the species scores of the ordination can serve as a criterion
 (e.g. \code{selectname = "RDA1"}). The function has been copied from 
-the \code{PRC} package at https://github.com/CajoterBraak/PRC.
+the \code{PRC} package at \url{https://github.com/CajoterBraak/PRC}.
 
 The function is used in \code{\link{plot_dcCA}}.
 }

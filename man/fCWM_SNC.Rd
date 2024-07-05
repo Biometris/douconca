@@ -39,7 +39,7 @@ a \code{~} (tilde). Default: \code{NULL} for \code{~.}, i.e. all variables
 in \code{dataEnv} are predictor variables.}
 
 \item{formulaTraits}{formula or one-sided formula for the columns (species) 
-with colum predictors in \code{dataTraits}. When two-sided, the left hand 
+with column predictors in \code{dataTraits}. When two-sided, the left hand 
 side of the formula is not used. Specify column covariates (if any ) by 
 adding \code{+ Condition(covariate-formula)} to \code{formulaTraits} as 
 in \code{\link[vegan]{cca}}. The \code{covariate-formula} should not contain 
@@ -68,7 +68,7 @@ mainly technical or recomputed when the return value is used as
 \code{response} in a call to \code{\link{dc_CA}}.
 }
 \description{
-Double constained correspondence analysis (dc-CA) can be calculated directly 
+Double constrained correspondence analysis (dc-CA) can be calculated directly 
 from community weighted means (CWMs), with the trait data from which the 
 CWMs are calculated, and the environmental data and weights for species 
 and sites (the abundance totals for species and sites). Statistical testing

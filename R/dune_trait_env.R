@@ -65,7 +65,7 @@
 #' The management types are standard farming (SF), biological farming (BF),
 #' hobby farming (HF), nature conservation management (NM). The coordinates are
 #' Rijksdriehoekscoordinaten in meters.
-#' https://nl.wikipedia.org/wiki/Rijksdriehoekscoordinaten
+#' \url{https://nl.wikipedia.org/wiki/Rijksdriehoekscoordinaten}
 #' 
 #' @name dune_trait_env
 #' @docType data

@@ -25,7 +25,7 @@ a \code{~} (tilde). Default: \code{NULL} for \code{~.}, i.e. all variables
 in \code{dataEnv} are predictor variables.}
 
 \item{formulaTraits}{formula or one-sided formula for the columns (species) 
-with colum predictors in \code{dataTraits}. When two-sided, the left hand 
+with column predictors in \code{dataTraits}. When two-sided, the left hand 
 side of the formula is not used. Specify column covariates (if any ) by 
 adding \code{+ Condition(covariate-formula)} to \code{formulaTraits} as 
 in \code{\link[vegan]{cca}}. The \code{covariate-formula} should not contain 
@@ -115,7 +115,7 @@ environmental variables (composite gradients), and their optimistic t-ratio.
   \item \code{species_scores}: a list with names 
   \code{c("species_scores_unconstrained", "lc_traits_scores")} with the
   matrix with species niche centroids along the dc-CA axes (composite 
-  gradients) andthe matrix with linear combinations of traits.
+  gradients) and the matrix with linear combinations of traits.
   \item \code{correlation}: a matrix with inter-set correlations of the 
   traits with their SNCs.
   \item \code{b_se}: a matrix with (unstandardized) regression coefficients 
@@ -192,7 +192,7 @@ weights, if not set in \code{response$weights} can be set by a variable
 respectively, but formulas should then not be \code{~.}.
 
 The statistics and scores in the example \code{dune_dcCA.r}, have been 
-checked against the results in Canoco 5.15 (ter Braak & Smilauer, 2018).
+checked against the results in Canoco 5.15 (ter Braak & Šmilauer, 2018).
 
 In the current implementation, \code{formulaEnv} and \code{formulaTraits} 
 should contain variable names as is, \emph{i.e.} transformations of 
