@@ -1,3 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 unused
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
