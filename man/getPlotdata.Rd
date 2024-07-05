@@ -12,7 +12,7 @@ getPlotdata(
   traitfactor = NULL,
   newnames = NULL,
   facet = TRUE,
-  remove.centroids = FALSE
+  remove_centroids = FALSE
 )
 }
 \arguments{
@@ -41,7 +41,7 @@ result of \code{\link{scores.dcca}} with \code{tidy = TRUE}.}
 separate panels. If \code{FALSE}, this parameter changes the position of 
 the environmental centroid names (from left to right).}
 
-\item{remove.centroids}{logical to remove any centroids from the plot data 
+\item{remove_centroids}{logical to remove any centroids from the plot data 
 (default \code{FALSE}). Can be a two-vector, \emph{e.g.} 
 \code{c(TRUE, FALSE)} to remove only the environmental centroids.}
 }

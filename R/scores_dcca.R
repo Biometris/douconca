@@ -19,8 +19,8 @@
 #' axes.
 #' @param display a character vector, one or more of \code{c("all", "species",
 #' "sites", "sp", "wa", "lc", "bp", "cor", "ic", "reg", "tval", "cn", 
-#' "lc_traits", "reg_traits","tval_traits", "cor_traits", "ic_traits", 
-#' "bp_traits","cn_traits")}. The most items are as in 
+#' "lc_traits", "reg_traits", "tval_traits", "cor_traits", "ic_traits", 
+#' "bp_traits", "cn_traits")}. The most items are as in 
 #' \code{\link[vegan]{scores.cca}}, except \code{"cor"} and \code{"ic"}, for
 #' inter-set and intra-set correlations, respectively, and \code{"tval"} for
 #' the (over-optimistic) t-values of the regression coefficients. The remaining
@@ -215,7 +215,7 @@ scores_dcca <- function(x,
     }
   } else {
     stop("The first argument must be of class 'dcca' or 'wrda', the result ", 
-         "of the function dc_CA or wrda.")
+         "of the function dc_CA or wrda.\n")
   }
   ## set "all" for tidy scores
   if ("sites" %in% display) {
@@ -257,9 +257,9 @@ scores_dcca <- function(x,
     }
   } else if (is.numeric(scaling)) {
     num_scaling <- abs(scaling)
-    scaling <- c("sites","species","symmetric")[num_scaling]
+    scaling <- c("sites", "species", "symmetric")[num_scaling]
   } else {
-    stop("scaling type not recognized")
+    stop("scaling type not recognized.\n")
   }
   slam <- sqrt(x$eigenvalues[choices])
   scal <- list(rep(1, length(slam)), slam, sqrt(slam))[[abs(num_scaling)]]

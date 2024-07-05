@@ -11,9 +11,9 @@ Rank_mod <- function(object,
   } else if (inherits(object, "cca") && !partial) {
     rr <- length(vegan::eigenvals(object, model = "constrained"))
   } else if (inherits(object, "cca") && partial) {
-    stop ("rank of pCCA model not implemented")
+    stop("rank of pCCA model not implemented.\n")
   } else {
-    stop("object in Rank_mod must be of class cca or dccav")
+    stop("object in Rank_mod must be of class cca or dccav.\n")
   }
   return(rr)
 }

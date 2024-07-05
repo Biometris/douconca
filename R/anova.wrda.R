@@ -51,11 +51,11 @@ anova.wrda <- function(object,
     if (is.numeric(permutations) && !is.matrix(permutations)) {
       permutations <- permute::how(nperm = permutations[1])
     } else if (is.matrix(permutations) && ncol(permutations) != N) {
-      stop("Error:: each row of permutations should have", N, "elements")
+      stop("each row of permutations should have", N, "elements.\n")
     }
   } else {
     stop("argument permutations should be integer, matrix or ", 
-         "specified by permute::how().")
+         "specified by permute::how().\n")
   }
   # Perform a weighted RDAR(M^*~E): an RDA of M^* on the environmental variables
   # using row weights R.
@@ -84,7 +84,7 @@ anova.wrda <- function(object,
     names(df) <- c(paste0("dcCA", seq_along(out_tes)), "Residual")
   } else {
     df <- out_tes[[length(out_tes)]]$df
-    names(df) <- c("dcCA","Residual")
+    names(df) <- c("dcCA", "Residual")
   }
   fraqExplained <- c(sapply(out_tes, function(x)x$ss[1]) / sum(out_tes[[1]]$ss), NA)
   F0 <- c(sapply(out_tes, function(x)x$F0[1]), NA)
@@ -106,7 +106,7 @@ anova.wrda <- function(object,
   heading <- paste0("Permutation test for weighted reduncancy analysis\n",
                     object1,
                     "Residualized predictor permutation\n",
-                    howHead(attr(out_tes[[1]],"control") ))
+                    howHead(attr(out_tes[[1]], "control") ))
   f_sites <- structure(axsig_dcCA_sites, heading = heading, 
                        control = attr(out_tes[[1]], "control"),
                        Random.seed = attr(out_tes[[1]], "seed"),

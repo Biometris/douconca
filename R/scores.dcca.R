@@ -20,8 +20,8 @@
 #' axes.
 #' @param display a character vector, one or more of \code{c("all", "species",
 #' "sites", "sp", "wa", "lc", "bp", "cor", "ic", "reg", "tval", "cn", 
-#' "lc_traits", "reg_traits","tval_traits", "cor_traits", "ic_traits", 
-#' "bp_traits","cn_traits")}. The most items are as in 
+#' "lc_traits", "reg_traits", "tval_traits", "cor_traits", "ic_traits", 
+#' "bp_traits", "cn_traits")}. The most items are as in 
 #' \code{\link[vegan]{scores.cca}}, except \code{"cor"} and \code{"ic"}, for
 #' inter-set and intra-set correlations, respectively, and \code{"tval"} for
 #' the (over-optimistic) t-values of the regression coefficients. The remaining

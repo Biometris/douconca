@@ -37,14 +37,14 @@ plot_dcCA_CWM_SNC <- function(object,
                               traitfactor = NULL,
                               facet = TRUE,
                               newnames = NULL,
-                              remove.centroids = FALSE,
+                              remove_centroids = FALSE,
                               with_lines = TRUE,
                               getPlotdata2plotdCCA = NULL) {
   if (is.null(getPlotdata2plotdCCA)) {
     scorepair<- getPlotdata(object, axis = axis, envfactor = envfactor, 
                             traitfactor = traitfactor, newnames = newnames,
                             facet = facet, 
-                            remove.centroids = remove.centroids)$CWM_SNC
+                            remove_centroids = remove_centroids)$CWM_SNC
   } else {
     scorepair = getPlotdata2plotdCCA$CWM_SNC
   }
@@ -64,7 +64,7 @@ plot_dcCA_CWM_SNC <- function(object,
     ggplot2::xlab(paste("dc-CA axis", axis)) +
     ggplot2::scale_size(guide = "none")
   if (facet) {
-    p <- p + ggplot2::facet_grid(type~., switch = "y" ) +
+    p <- p + ggplot2::facet_grid(type ~ ., switch = "y") +
       ggplot2::scale_y_continuous(position = "right") 
   } else {
     p <- p + 
@@ -103,7 +103,7 @@ plot_dcCA_CWM_SNC <- function(object,
                                                     position = "bottom", 
                                                     nrow = 2))
   } else if (ltraits == 0 && lenv == 0 && 
-             sum(TraitEnvINcondition) == 0 && sum(remove.centroids) == 0) {
+             sum(TraitEnvINcondition) == 0 && sum(remove_centroids) == 0) {
     p <- p + 
       ggplot2::scale_color_discrete(guide = "none") +
       ggplot2::guides(shape = ggplot2::guide_legend(title = NULL, 

@@ -56,23 +56,23 @@ anova_sites <- function(object,
                         by = NULL){
   if (is.null(object$CWMs_orthonormal_traits)) {
     warning("Site level anova requires abundance data or ", 
-            "community weighted means (CWMs")
+            "community weighted means (CWMs).\n")
     return(list(eigenvalues = object$eigenvalues))
   }
   if (is.null(by)) by <- "omnibus"
-  if (is.na(pmatch(by, c("axis","omnibus")))) {
-    stop("Set argument 'by' to 'axis' or 'NULL'")
+  if (is.na(pmatch(by, c("axis", "omnibus")))) {
+    stop("Set argument 'by' to 'axis' or 'NULL'.\n")
   }
   N <- nrow(object$data$dataEnv) 
   if (inherits(permutations, c("numeric", "how", "matrix"))) {
     if (is.numeric(permutations) && !is.matrix(permutations)) {
       permutations <- permute::how(nperm = permutations[1])
     } else if (is.matrix(permutations) && ncol(permutations) != N) {
-      stop("Each row of permutations should have", N, "elements")
+      stop("Each row of permutations should have", N, "elements.\n")
     }
   } else {
     stop("Argument permutations should be integer, matrix ", 
-         "or specified by permute::how().")
+         "or specified by permute::how().\n")
   }
   # start of new dc-ca 
   out1 <- object[c("CCAonTraits", "formulaTraits", "data", "weights", "call",

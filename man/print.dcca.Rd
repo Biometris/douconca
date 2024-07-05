@@ -38,7 +38,8 @@ mod <- dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Manure,
              # use all remaining variables due to formulaTraits = ~. (the default)
              dataTraits = dune_trait_env$traits[, -c(1, 2)],
              divide.by.site.totals = divide,
-             verbose = FALSE)
+             verbose = FALSE
+             )
 
 print(mod)
 
@@ -51,9 +52,9 @@ anova(mod, by = "axis")
 mod_scores <- scores(mod, display = "all", scaling = "sym")
 
 scores(mod, display = c("cor", "cn", "cor_traits"),
-       scaling = "sym", which_cor = list("SLA","in model"))
+       scaling = "sym", which_cor = list("SLA", "in model"))
 scores(mod, display = c("cor", "cn", "cor_traits"),
-       scaling = "sym", which_cor = list("in model","Manure"))
+       scaling = "sym", which_cor = list("in model", "Manure"))
 
 cat("\n\n**meaning of each set of scores**\n")
 

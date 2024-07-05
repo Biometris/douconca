@@ -61,23 +61,23 @@ anova_species <- function(object,
                           by = NULL ){
   if (is.null(object$SNCs_orthonormal_env) && is.null(object$data$Y)) {
     warning("Species level anova requires abundance data or ", 
-            "species niche optima (SNCs)")
+            "species niche optima (SNCs).\n")
     return(list(eigenvalues = object$eigenvalues))
   }
   if (is.null(by)) by <- "omnibus"
-  if (is.na(pmatch(by, c("axis","omnibus")))) {
-    stop("Set argument 'by' to 'axis' or 'NULL'")
+  if (is.na(pmatch(by, c("axis", "omnibus")))) {
+    stop("Set argument 'by' to 'axis' or 'NULL'.\n")
   }
   N <- nrow(object$data$dataTraits) 
   if (inherits(permutations, c("numeric", "how", "matrix"))) {
     if (is.numeric(permutations) && !is.matrix(permutations)) {
       permutations <- permute::how(nperm = permutations[1])
     } else if (is.matrix(permutations) && ncol(permutations) != N) {
-      stop("Each row of permutations should have", N, "elements")
+      stop("Each row of permutations should have", N, "elements.\n")
     }
   } else {
     stop("Argument permutations should be integer, matrix ", 
-         "or specified by permute::how().")
+         "or specified by permute::how().\n")
   }
   if (is.null(object$SNCs_orthonormal_env)) {
     formulaEnv <- change_reponse(object$formulaEnv, "object$data$Y", 
@@ -148,7 +148,7 @@ anova_species <- function(object,
   header <- paste0("Species-level permutation test using dc-CA\n",
                    object1,
                    "Residualized predictor permutation\n",
-                   howHead(attr(out_tes[[1]],"control")))
+                   howHead(attr(out_tes[[1]], "control")))
   f_species <- structure(axsig_dcCA_species, heading = header, 
                          control = attr(out_tes[[1]], "control"),
                          Random.seed = attr(out_tes[[1]], "seed"),
@@ -200,7 +200,7 @@ randperm_eX0sqrtw <- function(Y,
   if (is.matrix(permutations)) {
     # matrix: check that it *strictly* integer
     if (!is.integer(permutations) && !all(permutations == round(permutations))) {
-      stop("Permutation matrix must be strictly integers: use round()")
+      stop("Permutation matrix must be strictly integers: use round().\n")
     }
     perm.mat <- permutations
   } else if (inherits(permutations, "how")){

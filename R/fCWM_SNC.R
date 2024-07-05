@@ -96,13 +96,13 @@ fCWM_SNC <- function(response = NULL,
   call <- match.call()
   #  check and amend: make sure there are no empty rows or columns 
   if (any(is.na(response))) {
-    stop("The response should not have missing entries")
+    stop("The response should not have missing entries.\n")
   }
   if (any(response < 0)) {
-    stop("The response should not have negative values")
+    stop("The response should not have negative values.\n")
   }
   if (is.null(dataTraits)) {
-    stop("dataTraits must be specified in dc_CA")
+    stop("dataTraits must be specified in dc_CA.\n")
   }
   if (!is.matrix(response)) {
     response <- as.matrix(response)
@@ -128,7 +128,7 @@ fCWM_SNC <- function(response = NULL,
     id[ii] <- sum(is.na(dataEnv[, ii])) == 0
     if (!id[[ii]]) {
       warning("variable", names(dataEnv)[ii], 
-              "has missing values and is deleted from the environmental data")
+              "has missing values and is deleted from the environmental data.\n")
     }
   }
   dataEnv <- dataEnv[, id]
@@ -137,7 +137,7 @@ fCWM_SNC <- function(response = NULL,
     id[ii] <- sum(is.na(dataTraits[,ii])) == 0
     if (!id[[ii]]) {
       warning("variable", names(dataTraits)[ii], 
-              "has missing values and is deleted from trait data")
+              "has missing values and is deleted from trait data.\n")
     }
   }
   dataTraits <- dataTraits[, id]
@@ -163,12 +163,12 @@ fCWM_SNC <- function(response = NULL,
   if (is.null(formulaTraits)) {
     formulaTraits <- as.formula(paste("~", paste0(names(dataTraits),
                                                   collapse = "+")))
-    warning("formulaTraits set to ~. in fCWMSNC")
+    warning("formulaTraits set to ~. in fCWMSNC.\n")
   }
   if (is.null(formulaEnv)) {
     formulaEnv <- as.formula(paste("~", paste0(names(dataEnv),
                                                collapse = "+")))
-    warning("formulaEnv set to ~. in fCWMSNC")
+    warning("formulaEnv set to ~. in fCWMSNC.\n")
   }
   # CWM and CWM ortho
   # formula = formulaTraits; data = dataTraits; w = weights$columns
@@ -318,7 +318,7 @@ checkCWM2dc_CA <- function(object,
   if (!is.null(formulaTraits)) {
     object$formulaTraits <- formulaTraits
   } else if (is.null(object$formulaTraits)) {
-    warning("formulaTraits set to ~. in checkCWM2dc_CA")
+    warning("formulaTraits set to ~. in checkCWM2dc_CA.\n")
     object$formulaTraits <- ~.
   }
   object$CWM <- as.matrix(object$CWM)
@@ -345,7 +345,7 @@ checkCWM2dc_CA <- function(object,
   }
   if (is.null(dataEnv)) {
     if (is.null(object$data$dataEnv)) {
-      stop("Supply environmental data to the dc_CA function.")
+      stop("Supply environmental data to the dc_CA function.\n")
     }
   } else {
     object$data$dataEnv <- as.data.frame(lapply(dataEnv, function(x){
@@ -357,12 +357,12 @@ checkCWM2dc_CA <- function(object,
     if (!is.null(object$dataTraits)) {
       object$data$dataTraits <- object$dataTraits 
     } else if (is.null(object$data$dataTraits)) {
-      warning("Supply trait data to the dc_CA function.")
+      warning("Supply trait data to the dc_CA function.\n")
     }
   } else { 
     warning("With CWM as first element in response in dc_CA, the trait data",
             "used to obtain the CWMs are best supplied as response$data$dataTraits.",
-            "Use the default dataTraits argument, which is NULL.")
+            "Use the default dataTraits argument, which is NULL.\n")
     object$data$dataTraits <- as.data.frame(lapply(dataTraits, function(x) {
       if (is.character(x)) x <- as.factor(x) else x
       return(x) 
@@ -373,18 +373,18 @@ checkCWM2dc_CA <- function(object,
       is.null(object$weights$rows)) {
     # try dataTraits and dataEnv
     if (!is.null(object$data$dataTraits$weight)) {
-      warning("species weights taken from dataTraits$weight")
+      warning("species weights taken from dataTraits$weight.\n")
       object$weights <- c(list(columns = object$data$dataTraits$weight),
                           object$weights)
     }
     if (!is.null(object$data$dataEnv$weight)) {
-      warning("site weights taken from dataEnv$weight")
+      warning("site weights taken from dataEnv$weight.\n")
       object$weights <- c(object$weights, 
                           list(rows = object$data$dataEnv$weight))
     }
   }
   if (is.null(object$weights)) {
-    warning("no weights supplied with response$CWM; weigths all set to 1")
+    warning("no weights supplied with response$CWM; weigths all set to 1.\n")
     object$weights <- list(rows = rep(1 / object$Nobs, object$Nobs),
                            columns = rep(1 / nrow(object$data$dataTraits),
                                          nrow(object$data$dataTraits)))
@@ -392,12 +392,12 @@ checkCWM2dc_CA <- function(object,
     ll <- length(object$weights)
     if (ll == object$Nobs) {
       warning("no species weights supplied with response$CWM; ",
-              "weigths all set to 1")
+              "weigths all set to 1.\n")
       object$weights <- list(rows = rep(1 / object$Nobs, object$Nobs),
                              columns = object$weights)
     } else if (ll == nrow(object$data$dataTraits)) {
       warning("no site weights supplied with response$CWM; ", 
-              "site weigths all set to 1")
+              "site weigths all set to 1.\n")
       object$weights <- list(rows = object$weights,
                              columns = rep(1 / nrow(object$data$dataTraits),
                                            nrow(object$data$dataTraits)))
@@ -405,12 +405,12 @@ checkCWM2dc_CA <- function(object,
   }
   if (is.null(object$weights$rows)) {
     warning("no site weights supplied with response$CWM; ", 
-            "site weigths all set to 1")
+            "site weigths all set to 1.\n")
     object$weights$rows <- rep(1 / object$Nobs, object$Nobs)
   }
   if (is.null(object$weights$columns)) {
     warning("no species weights supplied with response$CWM; ",
-            "species weigths all set to 1")
+            "species weigths all set to 1.\n")
     object$weights$columns <- rep(1 / nrow(object$data$dataTraits),
                                   nrow(object$data$dataTraits))
   }

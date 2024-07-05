@@ -43,7 +43,7 @@ get_QR <- function(object, model = "CCA"){
   } else if (model == "pCCA") {
     QR <- object$pCCA$QR
   } else {
-    stop("model not supported")
+    stop("model not supported.\n")
   }
   return(QR)
 }

@@ -46,3 +46,7 @@ Imports:
     vegan
 RoxygenNote: 7.3.2
 NeedsCompilation: no
+Suggests: 
+    knitr,
+    rmarkdown, tinytest
+VignetteBuilder: knitr

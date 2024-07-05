@@ -31,7 +31,7 @@ get_Z_X_XZ_formula <- function(formula,
     out <- list(formula_XZ = NULL, formula_X = NULL, formula_Z = NULL)
     names(out) <- c("focal factor", "condition")
     stop("Specify wrda or cca via a formula, so that predictor and covariate ", 
-         "formulas can be found.")
+         "formulas can be found.\n")
   }
   # find all variable names by deleting from tl Condition and all interactions
   # first delete Condition

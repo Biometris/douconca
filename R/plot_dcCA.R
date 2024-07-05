@@ -1,4 +1,5 @@
 #' Plot a single dc-CA axis with CWMs, SNCs, trait and environment scores.
+#' 
 #' @description
 #' \code{plot_dcCA} plots the CWMs and SNCs of a dc-CA axis against this axis,
 #' with optional centroids and colors for groups of sites and/or species if 
@@ -28,8 +29,8 @@
 #' \code{\link{dc_CA}}. Default \code{NULL} for no grouping. NOT yet 
 #' implemented.
 #' @param verbose logical. Default \code{TRUE} for plotting the result.
-#' @param widths relative widths of the CWM-SNC plot, the correlation/weight plot
-#' and the species plot. (see \code{\link[gridExtra]{grid.arrange}}). 
+#' @param widths relative widths of the CWM-SNC plot, the correlation/weight
+#' plot and the species plot. (see \code{\link[gridExtra]{grid.arrange}}). 
 #' Default \code{c(5, 1, 1)}.
 #' 
 #' @details
@@ -58,9 +59,12 @@ plot_dcCA <- function(object,
                       widths = c(5, 1, 1),
                       newnames = NULL, 
                       facet = TRUE, 
-                      remove.centroids = FALSE, 
+                      remove_centroids = FALSE, 
                       with_lines = TRUE, 
                       verbose = TRUE) {
+  if (!inherits(object, "dcca")) {
+    stop("...........")
+  }
   stats_vals = c("regression", "weights", "correlations", "tvalues", 
                  "inter_set_correlation")
   if (length(gradient_description) == 1) {
@@ -78,10 +82,10 @@ plot_dcCA <- function(object,
   }
   pd <- getPlotdata(object, axis = axis, envfactor = envfactor, 
                     traitfactor = traitfactor, facet = facet, 
-                    newnames = newnames, remove.centroids = remove.centroids)
+                    newnames = newnames, remove_centroids = remove_centroids)
   CWM_SNC <- plot_dcCA_CWM_SNC(object, axis = axis, envfactor = envfactor, 
                                traitfactor = traitfactor, facet = facet,
-                               remove.centroids = remove.centroids, 
+                               remove_centroids = remove_centroids, 
                                with_lines = with_lines, 
                                getPlotdata2plotdCCA = pd)
   trait_env_scores <- pd$trait_env_scores
@@ -225,7 +229,7 @@ plot_dcCA <- function(object,
   if (verbose) {
     tt <- try(suppressWarnings(gridExtra::grid.arrange(gg_object)))
     if (inherits(tt, "try-error")) {
-      warning("Enlarge the plot area")
+      warning("Enlarge the plot area.\n")
     }
   }
   out <- list(plot = gg_object, name.list = pd$newname.list,
@@ -252,7 +256,7 @@ fplot_species <- function(pd,
           species_groups <- object$data$dataTraits[[species_groups]] 
         } else {
           warning("species_groups not in names of dataTraits; ", 
-                  "no grouping in the plot")
+                  "no grouping in the plot.\n")
           species_groups <- NULL
         }
       }

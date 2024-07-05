@@ -36,7 +36,7 @@ f_env_axes <- function(out,
     dataEnv <- out$data
     formulaEnv <- out$formula
   } else {
-    stop("input must be a result of dc_CA or wrda")
+    stop("input must be a result of dc_CA or wrda.\n")
   }
   formulaEnv <- change_reponse(formulaEnv, "Y", dataEnv)
   QR <- get_QR(out)

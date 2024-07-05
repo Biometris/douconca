@@ -21,7 +21,7 @@
 #' @param newnames a list  with two elements: names for traits and for 
 #' environmental variables, default \code{NULL} for names derived from the 
 #' result of \code{\link{scores.dcca}} with \code{tidy = TRUE}.
-#' @param remove.centroids logical to remove any centroids from the plot data 
+#' @param remove_centroids logical to remove any centroids from the plot data 
 #' (default \code{FALSE}). Can be a two-vector, \emph{e.g.} 
 #' \code{c(TRUE, FALSE)} to remove only the environmental centroids.
 #' @param facet logical. Default \code{TRUE} for CWMs and SNCs plots in 
@@ -37,11 +37,11 @@ getPlotdata <- function(object,
                         traitfactor = NULL,
                         newnames = NULL,
                         facet = TRUE,
-                        remove.centroids = FALSE) {
-  size.centroids = 1
+                        remove_centroids = FALSE) {
+  size.centroids <- 1
   # getPlotdata function
-  if (length(remove.centroids) == 1) {
-    remove.centroids <- c(remove.centroids, remove.centroids)
+  if (length(remove_centroids) == 1) {
+    remove_centroids <- c(remove_centroids, remove_centroids)
   }
   traitINcondition <- envINcondition <- FALSE
   if (is.null(envfactor)) {
@@ -64,8 +64,8 @@ getPlotdata <- function(object,
       traitINcondition <- TRUE
     }
   }
-  if (is.null(traitfactor)) traitfactor <-NA
-  if (is.null(envfactor)) envfactor <-NA
+  if (is.null(traitfactor)) traitfactor <- NA
+  if (is.null(envfactor)) envfactor <- NA
   # end of set env and traitfactor
   mod_scores <- scores(object, choices = axis, tidy = TRUE, 
                        scaling = "symmetric")
@@ -83,10 +83,10 @@ getPlotdata <- function(object,
   scorepair$score <- factor(scorepair$score)
   names(scorepair)[1] <- "dcCA1"
   # this removes centroids if traitfactor = NA
-  if (remove.centroids[1]) {
+  if (remove_centroids[1]) {
     scorepair <- scorepair[scorepair$score != "centroids_traits", ]
   }
-  if (remove.centroids[2]) {
+  if (remove_centroids[2]) {
     scorepair <-  scorepair[scorepair$score != "centroids", ]
   }
   if (!is.na(envfactor) || is.character(envfactor)) {
@@ -96,7 +96,7 @@ getPlotdata <- function(object,
       envfactor1 <- object$data$dataEnv[[envfactor]]
     } else {
       stop(envfactor, " must be in ", 
-           paste0(names(object$data$dataEnv), collapse = ", "))
+           paste0(names(object$data$dataEnv), collapse = ", "), ".\n")
     }
   } else {
     envfactor1 <- envfactor
@@ -108,13 +108,13 @@ getPlotdata <- function(object,
       traitfactor1 <- object$data$dataTraits[[traitfactor]]
     } else {
       stop(traitfactor, " must be in ", 
-           paste0(names(object$data$dataTraits), collapse = ", "))
+           paste0(names(object$data$dataTraits), collapse = ", "), ".\n")
     }
   } else {
     traitfactor1<- traitfactor
   }
   if (facet) {
-    scorepair$dcCA1[scorepair$score%in% c("centroids","centroids_traits")] <- 
+    scorepair$dcCA1[scorepair$score%in% c("centroids", "centroids_traits")] <- 
       min(scorepair$dcCA1, na.rm = TRUE)
   } else {
     scorepair$dcCA1[scorepair$score == "centroids_traits"] <-
@@ -128,7 +128,7 @@ getPlotdata <- function(object,
     scorepair$score <- factor(scorepair$score, 
                               levels = levels(scorepair$score)[c(3, 4, 1, 2)])
   } else if (nlevels(scorepair$score) > 2) {
-    typenams <- c("site", "taxon","centroid")
+    typenams <- c("site", "taxon", "centroid")
     scorepair$score <- factor(scorepair$score, 
                               levels = levels(scorepair$score)[c(2, 3, 1)])
   } else {
@@ -205,7 +205,7 @@ getPlotdata <- function(object,
                                         envlevels2, traitlevels2))
   scorepair$names  <- rownames(scorepair)
   scorepair$centroidnames <- scorepair$label
-  scorepair$centroidnames[!scorepair$score %in% c("centroids","centroids_traits")] <- ""
+  scorepair$centroidnames[!scorepair$score %in% c("centroids", "centroids_traits")] <- ""
   scorepair$centroidnames[scorepair$score == "centroids_traits"] <-
     newname.list$centroidnames[[1]]
   scorepair$centroidnames[scorepair$score == "centroids"] <-
@@ -239,17 +239,17 @@ setnames <- function(mod_scores,
       if (length(newnames[[2]]) != sum(idTFe)) {
         message("current environmental names are:", 
                 paste0( mod_scores$label[idTFe], collapse = ", "))
-        warning(paste0("newnames[[2]] should have length ", sum(idTFe), 
-                       "; current length is", length(newnames[[2]])))
+        warning("newnames[[2]] should have length ", sum(idTFe), 
+                "; current length is", length(newnames[[2]]), ".\n")
       }
       stop("newnames[[1]] should have length ", sum(idTFt), 
-           "current length is", length(newnames[[1]]))
+           "current length is", length(newnames[[1]]), ".\n")
     }
     if (!length(newnames[[2]]) == sum(idTFe)) {
       message("current environmental names are:", 
               paste0( mod_scores$label[idTFe], collapse = ", "))
-      stop(paste0("newnames[[2]] should have length ", sum(idTFe), 
-                  "; current length is", length(newnames[[2]])))
+      stop("newnames[[2]] should have length ", sum(idTFe), 
+           "; current length is", length(newnames[[2]]), ".\n")
     }
   }
   idTFt <- mod_scores$score == "centroids_traits"

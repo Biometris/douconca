@@ -11,7 +11,7 @@ plot_dcCA_CWM_SNC(
   traitfactor = NULL,
   facet = TRUE,
   newnames = NULL,
-  remove.centroids = FALSE,
+  remove_centroids = FALSE,
   with_lines = TRUE,
   getPlotdata2plotdCCA = NULL
 )
@@ -44,7 +44,7 @@ of sites.}
 environmental variables, default \code{NULL} for names derived from the 
 result of \code{\link{scores.dcca}} with \code{tidy = TRUE}.}
 
-\item{remove.centroids}{logical to remove any centroids from the plot data 
+\item{remove_centroids}{logical to remove any centroids from the plot data 
 (default \code{FALSE}). Can be a two-vector, \emph{e.g.} 
 \code{c(TRUE, FALSE)} to remove only the environmental centroids.}
 

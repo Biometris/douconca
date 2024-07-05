@@ -71,7 +71,7 @@ plot_species_scores_bk <- function(species_scores,
   if (scoresname %in% namcols) {
     scores <- species_scores[,scoresname] 
   } else {
-    stop("no score column found in plot_species_scores")
+    stop("no score column found in plot_species_scores.\n")
   }
   if (selectname %in% namcols) {
     selectcrit <- species_scores[, selectname] 
@@ -145,10 +145,10 @@ plot_species_scores_bk <- function(species_scores,
     ggplot2::ylab(ylab)
   if (nrow(species.sub)==0) {
     warning("After thresholding, no named species left to display in ", 
-            "plot_species_scores_bk (perhaps from plotPRC).")
+            "plot_species_scores_bk (perhaps from plotPRC).\n")
   } else {
     if (verbose) {
-      cat( nrow(species.sub)," species with names out of", 
+      cat( nrow(species.sub), " species with names out of", 
            nrow(species), "species\n")
     }
     labelline <- data.frame(species = rep(species.sub$species, each = 4),

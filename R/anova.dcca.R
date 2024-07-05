@@ -74,19 +74,19 @@ anova.dcca <- function(object,
   # If set overrules permuations.
   if (!inherits(object, "dcca")) {
     stop("The first argument must be of class 'dcca', ",
-         "the result of the function dc_CA.")
+         "the result of the function dc_CA.\n")
   }
   by <- match.arg(by)
   if (length(permutations) == 1) {
     permutations <- rep(list(permutations), 2)
   } else if (!(inherits(permutations, "list"))) {
     stop("permutations must be a list of 2 elements specifying species ", 
-         "and site permutations")
+         "and site permutations.\n")
   }
   for (k in 1:2) {
     if (!inherits(permutations[[k]], c("numeric", "how"))) {
       stop("permutations must be an integer or a list of 2 elements ",
-           "(numbers or of class how)")
+           "(numbers or of class how).\n")
     }
   }
   f_species0 <- anova_species(object, by = by, permutations = permutations[[1]]) 
@@ -141,7 +141,7 @@ anova.dcca <- function(object,
                howHead(attr(f_sites, "control")))
     } else if (all(f_sites$`Pr(>F)` <= f_species$`Pr(>F)`, na.rm = TRUE)) {
       f_max <- f_species
-      attr(f_max,"heading") <- 
+      attr(f_max, "heading") <- 
         paste0("Max test combining the community- and species- level tests \n", 
                object1,
                "\nTaken from the species-level test:\n",

@@ -26,7 +26,7 @@ print_dcca <- function(x,
     x$c_env_normed <- x$site_axes$c_env_normed
   } else {
     stop("The argument must be of class 'dcca' or 'wrda', the result of ", 
-         "the function dc_CA or wrda.")
+         "the function dc_CA or wrda.\n")
   }
   choices <- 1:4
   if (inherits(x, "dcca")) {

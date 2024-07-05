@@ -90,21 +90,6 @@ anova_sites(mod)
 
 mod$eigenvalues / anova_species(mod)$eig[seq_along(mod$eigenvalues)]
 mod$eigenvalues / anova_sites(mod)$eig[seq_along(mod$eigenvalues)]
-
-
-
-
-
-
-
-
-# Benchmark the community-level test
-#microbenchmark::microbenchmark(anova(mod$RDAonEnv, by = "axis"), 
-#                               anova_sites(mod, by ="axis"),
-#                               times = 1)
-#microbenchmark::microbenchmark(anova(mod$RDAonEnv), 
-#                               anova_sites(mod), 
-#                               times = 2)
 }
 \references{
 ter Braak, C.J.F. & te Beest, D.E. 2022. Testing environmental effects

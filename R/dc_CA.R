@@ -220,10 +220,10 @@ dc_CA <- function(formulaEnv = NULL,
   # and have no efffect on the result
   call <- match.call()
   if (!is.null(response)) {
-    if (is.list(response) && inherits(response[[1]], c("matrix","data.frame"))) {
+    if (is.list(response) && inherits(response[[1]], c("matrix", "data.frame"))) {
       # response is a list of CWMs_orthonormal_traits and a weights list
       if (any(is.na(response[[1]]))) {
-        stop("The CWMs should not have missing entries")
+        stop("The CWMs should not have missing entries.\n")
       }
       # create a sufficient dc_CA_object object
       dc_CA_object <- response
@@ -232,13 +232,13 @@ dc_CA <- function(formulaEnv = NULL,
   if (is.null(dc_CA_object)) {
     #  check and amend: make sure there are no empty rows or columns 
     if (any(is.na(response))) {
-      stop("The response should not have missing entries")
+      stop("The response should not have missing entries.\n")
     }
     if (any(response < 0)) {
-      stop("The response should not have negative values")
+      stop("The response should not have negative values.\n")
     }
     if (is.null(dataTraits)) {
-      stop("dataTraits must be specified in dc_CA")
+      stop("dataTraits must be specified in dc_CA.\n")
     }
     if (!is.matrix(response)) {
       response <- as.matrix(response)
@@ -264,7 +264,7 @@ dc_CA <- function(formulaEnv = NULL,
       id[ii] <- sum(is.na(dataEnv[, ii])) == 0
       if (!id[[ii]]) { 
         warning("variable", names(dataEnv)[ii], 
-                "has missing values and is deleted from the environmental data")
+                "has missing values and is deleted from the environmental data.\n")
       }
     }
     dataEnv <- dataEnv[, id]
@@ -273,7 +273,7 @@ dc_CA <- function(formulaEnv = NULL,
       id[ii] <- sum(is.na(dataTraits[,ii])) == 0
       if (!id[[ii]]) {
         warning("variable", names(dataTraits)[ii], 
-                "has missing values and is deleted from trait data")
+                "has missing values and is deleted from trait data.\n")
       }
     }
     dataTraits <- dataTraits[, id]
@@ -297,12 +297,12 @@ dc_CA <- function(formulaEnv = NULL,
     if (is.null(formulaTraits)) {
       formulaTraits <- 
         as.formula(paste("~", paste0(names(dataTraits), collapse = "+")))
-      warning("formulaTraits set to ~. in dc_CA")
+      warning("formulaTraits set to ~. in dc_CA.\n")
     }
     if (is.null(formulaEnv)) {
       formulaEnv <- 
         as.formula(paste("~", paste0(names(dataEnv), collapse = "+")))
-      warning("formulaEnv set to ~. in dc_CA")
+      warning("formulaEnv set to ~. in dc_CA.\n")
     }
     formulaTraits <- change_reponse(formulaTraits, "tY", dataTraits)
     environment(formulaTraits) <- environment()
@@ -328,7 +328,7 @@ dc_CA <- function(formulaEnv = NULL,
     if (!is.null(formulaEnv)) {
       dc_CA_object$formulaEnv <- formulaEnv 
     } else if (is.null(dc_CA_object$formulaEnv)) {
-      warning("formulaEnv set to ~. in dc_CA")
+      warning("formulaEnv set to ~. in dc_CA.\n")
       dc_CA_object$formulaEnv <- ~.
     }
     if (inherits(dc_CA_object, "dcca")) {
@@ -336,11 +336,11 @@ dc_CA <- function(formulaEnv = NULL,
                              "data", "call", "weights", "Nobs",
                              "CWMs_orthonormal_traits")]
     } else if (is.list(response) && 
-               inherits(response[[1]], c("matrix","data.frame"))) {
+               inherits(response[[1]], c("matrix", "data.frame"))) {
       out1 <- checkCWM2dc_CA(dc_CA_object, dataEnv, dataTraits, formulaTraits)
     } else{
       stop("The class of dc_CA_object should be dcca, whereas it is now:",
-           class(dc_CA_object)[1], class(dc_CA_object)[2])
+           class(dc_CA_object)[1], class(dc_CA_object)[2], ".\n")
     }
   }
   formulaEnv <- change_reponse(out1$formulaEnv, "out1$CWMs_orthonormal_traits", 
@@ -359,7 +359,7 @@ dc_CA <- function(formulaEnv = NULL,
   out$c_traits_normed0 <- try(f_canonical_coef_traits2(out))
   inertia <- try(f_inertia(out))
   if (inherits(inertia, "try-error")) {
-    warning("could not obtain inertias") 
+    warning("could not obtain inertias.\n") 
     print(inertia)
   }
   out$inertia <- inertia

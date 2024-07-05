@@ -15,7 +15,7 @@ plot_dcCA(
   widths = c(5, 1, 1),
   newnames = NULL,
   facet = TRUE,
-  remove.centroids = FALSE,
+  remove_centroids = FALSE,
   with_lines = TRUE,
   verbose = TRUE
 )
@@ -55,8 +55,8 @@ plot with at most \code{nspecies} that have the highest contribution.}
 \code{\link{dc_CA}}. Default \code{NULL} for no grouping. NOT yet 
 implemented.}
 
-\item{widths}{relative widths of the CWM-SNC plot, the correlation/weight plot
-and the species plot. (see \code{\link[gridExtra]{grid.arrange}}). 
+\item{widths}{relative widths of the CWM-SNC plot, the correlation/weight
+plot and the species plot. (see \code{\link[gridExtra]{grid.arrange}}). 
 Default \code{c(5, 1, 1)}.}
 
 \item{newnames}{a list  with two elements: names for traits and for 
@@ -69,7 +69,7 @@ names (from left to right for the environmental centroids). If
 \code{facet = FALSE} and \code{with_lines = TRUE}, the line fits ignore 
 groups of species and of sites.}
 
-\item{remove.centroids}{logical to remove any centroids from the plot data 
+\item{remove_centroids}{logical to remove any centroids from the plot data 
 (default \code{FALSE}). Can be a two-vector, \emph{e.g.} 
 \code{c(TRUE, FALSE)} to remove only the environmental centroids.}
 

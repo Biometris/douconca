@@ -8,27 +8,27 @@ change_reponse  <- function(f,
   if (any(ft %in% ".")) {
     # change the dot using  data
     if (is.null(data)) {
-      stop("data should be present if formula contains a period(.).")
+      stop("data should be present if formula contains a period(.).\n")
     }
     if (ft[2] == ".") { 
       ft <- c("~", paste(names(data), collapse = "+")) 
     } else {
-      stop("specify the formulas with explicit remaining predictors")
+      stop("specify the formulas with explicit remaining predictors.\n")
     }
   }
   if (!is.character(response)) { 
-    stop("response must be character")
+    stop("response must be character.\n")
   } else if (length(response) > 1) { 
-    stop("response must be of length one")
+    stop("response must be of length one.\n")
   }
   id <- which(ft %in% "~")
   if (!length(id)) {
-    stop("specify a formula with a '~' ")
+    stop("specify a formula with a '~'.\n")
   } else if (length(ft) > 3) {
-    warning("as.character(formula) has more than three elements, ", 
-            "only its last element is included")
+    warning("as.character(formula) has more than three elements,", 
+            "only its last element is included.\n")
   }
-  ft2 <- paste0(response," ", ft[id], ft[length(ft)], collapse = " ")
+  ft2 <- paste0(response, " ", ft[id], ft[length(ft)], collapse = " ")
   f2 <- as.formula(ft2)
   return(f2)
 }
