@@ -19,7 +19,8 @@
 #' @param by character \code{"axis"} which performs a series of test, one for
 #' each axis, with the eigenvalue of the axis as test statistic. 
 #' Default: \code{NULL} which set the test statistic to the inertia named 
-#' \code{constraintsTE} in the inertia element of \code{\link{dc_CA}}). 
+#' \code{constraintsTE} in the inertia element of \code{\link{dc_CA}}
+#' (= sum of all double constrained eigenvalues)). 
 #' The interpretation of this inertia is, at the species-level, the 
 #' environmentally constrained inertia explained by the traits (without trait
 #' covariates) and, at the community-level, the trait-constrained inertia
