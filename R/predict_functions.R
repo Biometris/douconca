@@ -35,12 +35,14 @@ predict_traits <- function(object,
   return(pred)
 }
 
+#' @noRd
+#' @keywords internal
 scale_data <- function(dat0,
                        mean_sd) {
   # dat0 and mean_sd should  be matrices
   nams <- intersect(colnames(dat0), rownames(mean_sd))
   ones <- rep(1, nrow(dat0))
-  Xc <- dat0[,nams, drop=FALSE] - ones %*% t(mean_sd[nams, 1, drop = FALSE])
+  Xc <- dat0[, nams, drop = FALSE] - ones %*% t(mean_sd[nams, 1, drop = FALSE])
   Xc <- Xc / (ones %*% t(mean_sd[nams, 2, drop = FALSE]))
   return(Xc)
 }

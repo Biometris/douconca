@@ -52,7 +52,7 @@ The \code{traits} are
 
 The data frame \code{envir} contains the environmental variables
 \itemize{
-\item	\code{A1}:    horizon thickness
+\item \code{A1}:    horizon thickness
 \item \code{Moist}:	Moisture content of the soil (a five point scale)
 \item \code{Mag}:    Grassland management type
 \item \code{Use}:	type of use (Agricultural grassland use (1) hay production 

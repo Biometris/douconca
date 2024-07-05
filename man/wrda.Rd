@@ -100,6 +100,6 @@ vegan: Community Ecology Package. R package version 2.6-4.
 \url{https://CRAN.R-project.org/package=vegan}.
 }
 \seealso{
-\code{\link{plot_dcCA}}, \code{\link{scores.dcca}}, 
-\code{\link{print.dcca}} and \code{\link{anova.dcca}}
+\code{\link{scores.wrda}}, \code{\link{anova.wrda}},
+\code{\link{print.wrda}}
 }

@@ -26,7 +26,7 @@ The redundancy analysis is carried out using \code{vegan}
 rows by their total) or, in the general weighted case, using \code{\link{wrda}}.
 Division by the sample total has the advantage that the multivariate analysis 
 corresponds with an unweighted (multi-trait) community-level analysis, instead 
-of being weighted, which may give a puzzling differences between common 
+of being weighted, which may give a puzzling difference between common 
 univariate and this multivariate analysis.
 
 Reference: ter Braak, CJF, Šmilauer P, and Dray S. 2018. Algorithms and biplots 
