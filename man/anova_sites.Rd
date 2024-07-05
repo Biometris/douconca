@@ -17,11 +17,12 @@ row gives the permuted indices.}
 
 \item{by}{character \code{"axis"} which sets the test statistic to the 
 first eigenvalue of the dc-CA model. Default: \code{NULL} which sets the 
-test statistic to the inertia named \code{constraintsTE} in the inertia 
-element of \code{\link{dc_CA}}). This is the environmentally constrained 
-inertia explained by the traits (without trait covariates). (which is equal
-to the trait-constrained inertia explained by the environmental predictors
-(without covariates).) The default is quicker computationally as it avoids 
+test statistic to the inertia (sum of all double constrained eigenvalues; 
+named  \code{constraintsTE} in the inertia element of \code{\link{dc_CA}}). 
+This is the trait constrained inertia explained by the environmental 
+predictors (without covariates), which is equal to the 
+environmentally-constrained inertia explained by the traits (without trait 
+covariates). The default is quicker computationally as it avoids
 computation of an svd of permuted data sets.}
 }
 \value{
@@ -31,16 +32,17 @@ The \code{table} is as from \code{\link[vegan]{anova.cca}} and
 }
 \description{
 \code{anova_sites} performs the community-level permutation test of dc-CA 
-when site weights vary, which is part of \code{\link{anova.dcca}}.
+when site weights vary.
 The test uses residual predictor permutation (ter Braak 2022), which is 
-robust against differences in sites total abundance in the \code{response} 
+robust against differences in site total abundance in the \code{response} 
 in \code{\link{dc_CA}} (ter Braak & te Beest, 2022).
 The arguments of the function are similar to those of 
 \code{\link[vegan]{anova.cca}}, but more restricted. With equal site-totals 
 as in \code{\link{dc_CA}}, \code{anova(object$RDAonEnv)} is much faster.
 }
 \details{
-The algorithm is analogous to that of \code{\link{anova.wrda}}.
+The algorithm is analogous to that of \code{\link{anova.wrda}}. The function
+is used in \code{\link{anova.dcca}}.
 }
 \examples{
 data("dune_trait_env")

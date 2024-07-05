@@ -18,7 +18,6 @@ mod <- dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Manure,
              divide.by.site.totals = divide,
              verbose = FALSE)
 
-class(mod)
 print(mod)
 
 set.seed(123)
