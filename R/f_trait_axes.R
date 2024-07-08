@@ -65,7 +65,7 @@ f_trait_axes <- function(out,
       if (inherits(out, "dccav")) {
         lc_scores  <- scores(out$RDAonEnv, display = "lc", 
                              scaling = "species",
-                             choices = seq_len(Rank_mod(out$RDAonEnv)), 
+                             choices = seq_len(rank_mod(out$RDAonEnv)), 
                              const = sqrt(out$Nobs))
       } else if (inherits(out, "dcca")) {
         lc_scores <- out$RDAonEnv$site_axes$site_scores$lc_env_scores
@@ -93,7 +93,7 @@ f_trait_axes <- function(out,
   # check sign of axes when !is.null(out$SNCs_orthonormal_env)
   if (!is.null(out$SNCs_orthonormal_env) && is.null(out$data$Y)) {
     if(!is.null(out$c_traits_normed0)) {
-      rseq <- seq_len(Rank_mod(out))
+      rseq <- seq_len(rank_mod(out))
       ncov <- nrow(c_traits_normed) - nrow(out$c_traits_normed0)
       if (ncov) {
         ratio <- sign(colSums(sign(c_traits_normed[-seq_len(ncov), 

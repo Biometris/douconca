@@ -86,7 +86,7 @@ anova_species <- function(object,
     step1_sp <- vegan::cca(formulaEnv, data = object$data$dataEnv)
     SNCs_orthonormal_env <- scores(step1_sp, display = "species", 
                                    scaling = "species", 
-                                   choices = 1:Rank_mod(step1_sp))
+                                   choices = 1:rank_mod(step1_sp))
     if (rownames(SNCs_orthonormal_env)[1]=="col1") {
       rownames(SNCs_orthonormal_env) <- 
         paste0("Species", seq_len(nrow(object$data$dataTraits)))

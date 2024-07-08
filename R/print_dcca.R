@@ -38,13 +38,13 @@ print_dcca <- function(x,
     cat("Step 2: the RDA ordination of CWMs of the orthonormalized traits \n", 
         "       of step 1 with environmental constraints:\n")
     print(x$RDAonEnv)
-    c_t <- x$c_traits_normed[, c(choices, 4 + Rank_mod(x)), drop = FALSE]
+    c_t <- x$c_traits_normed[, c(choices, 4 + rank_mod(x)), drop = FALSE]
   } else {
     print.cca(x)
     c_t <- NULL
   }
   if (any(inherits(x, c("dccav", "wrda"), which = TRUE) == 1)) {
-    c_e <- x$c_env_normed[, c(choices, 4 + Rank_mod(x)), drop = FALSE]
+    c_e <- x$c_env_normed[, c(choices, 4 + rank_mod(x)), drop = FALSE]
     cat("mean, sd, VIF and canonical coefficients with their optimistic [!]", 
         "t-values:\n")
     print(round(c_e, 4))

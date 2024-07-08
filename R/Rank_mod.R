@@ -3,7 +3,7 @@
 #' 
 #' @noRd
 #' @keywords internal
-Rank_mod <- function(object, 
+rank_mod <- function(object, 
                      partial = FALSE) {
   # returns the rank of a dc-CA model
   if (inherits(object, c("dccav", "dcca", "wrda"))) {
@@ -13,7 +13,7 @@ Rank_mod <- function(object,
   } else if (inherits(object, "cca") && partial) {
     stop("rank of pCCA model not implemented.\n")
   } else {
-    stop("object in Rank_mod must be of class cca or dccav.\n")
+    stop("object in rank_mod must be of class cca or dccav.\n")
   }
   return(rr)
 }

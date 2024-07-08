@@ -26,7 +26,7 @@ f_env_axes <- function(out,
     myconst <- sqrt(out$Nobs * out$RDAonEnv$tot.chi)
     CWM <- as.matrix(scores(out$RDAonEnv, display = "sites", 
                             scaling = "sites",
-                            choices = seq_len(Rank_mod(out$RDAonEnv)), 
+                            choices = seq_len(rank_mod(out$RDAonEnv)), 
                             const = myconst))
     dataEnv <- out$data$dataEnv
     formulaEnv <-out$formulaEnv

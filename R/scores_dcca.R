@@ -302,7 +302,7 @@ scores_dcca <- function(x,
   }
   if ("t_values" %in% take){
     sol$t_values <- 
-      site_axes$c_env_normed[, Rank_mod(x) + choices + 3, drop = FALSE]
+      site_axes$c_env_normed[, rank_mod(x) + choices + 3, drop = FALSE]
     attr(sol$t_values, which = "meaning") <-
       paste("t-values of the coefficients of the regression of the CWMs", 
             "of the trait composite on to the environmental variables")
@@ -415,7 +415,7 @@ scores_dcca <- function(x,
     }
     if ("t_values_traits" %in% take) {
       sol$t_values_traits <- 
-        species_axes$c_traits_normed[, Rank_mod(x) + choices + 3, drop = FALSE]
+        species_axes$c_traits_normed[, rank_mod(x) + choices + 3, drop = FALSE]
       attr(sol$t_values_traits, which = "meaning") <-
         paste("t-values of the coefficients of the regression of the SNCs", 
               "along a dc-CA axis on to the traits")

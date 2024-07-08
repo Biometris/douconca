@@ -255,17 +255,17 @@ f_canonical_coef_traits2 <- function(out){
     if (inherits(out$CCAonTraits, "cca")) {
       B1_traitsN <- scores(out$CCAonTraits, display = "reg", 
                            scaling = "species", 
-                           choices = 1:Rank_mod(out$CCAonTraits))
+                           choices = 1:rank_mod(out$CCAonTraits))
     } else {
       return(ms$meansdvif)
     }
   }
   if (inherits(out$RDAonEnv, "wrda")) {
     B_star <- scores(out$RDAonEnv, display = "species", scaling = "sites", 
-                     choices = 1:Rank_mod(out$RDAonEnv))
+                     choices = 1:rank_mod(out$RDAonEnv))
   } else  {
     B_star <- scores(out$RDAonEnv, display = "species", 
-                     scaling = "sites", choices = 1:Rank_mod(out$RDAonEnv), 
+                     scaling = "sites", choices = 1:rank_mod(out$RDAonEnv), 
                      const = 1)
   }
   # End appendix 6.2 in ter Braak  et al 2018
