@@ -124,21 +124,21 @@ f_trait_axes <- function(out,
   }
   # correlations of the dataTraits with the SNC wrt the axes
   if (which_cor[1] == "in model") {
-    whichc <- get_Z_X_XZ_formula(out$formulaTraits, out$data$dataTraits)$focal_nams
     gg <- get_Z_X_XZ_formula(out$formulaTraits, out$data$dataTraits)
+    whichc <- gg$focal_nams
     traits0 <- model.matrix(gg$formula_X0, data = out$data$dataTraits)
   } else {
     whichc <- which_cor
     traits0 <- model.matrix(~.-1, 
                             data = out$data$dataTraits[, whichc, drop = FALSE])
   }
-  Cor_Trait_SNC <- wcor(traits0, SNC, w = out$weights$columns)
-  colnames(Cor_Trait_SNC) <- paste0("SNC-ax", seq_len(ncol(Cor_Trait_SNC)))
-  attr(Cor_Trait_SNC, which = "meaning") <- 
+  corTraitSNC <- wcor(traits0, SNC, w = out$weights$columns)
+  colnames(corTraitSNC) <- paste0("SNC-ax", seq_len(ncol(corTraitSNC)))
+  attr(corTraitSNC, which = "meaning") <- 
     "inter set correlation, correlation between traits and SNC of axes"
   out2 <- list(species_scores = list(species_scores_unconstrained = res$y,
                                      lc_traits_scores = res$fitted), 
-               correlation = Cor_Trait_SNC, 
+               correlation = corTraitSNC, 
                c_traits_normed = c_traits_normed, 
                b_se = res$b_se, 
                R2_traits = res$R2, 

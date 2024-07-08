@@ -429,9 +429,9 @@ scores_dcca <- function(x,
         if (whichc[1] == "in model") {
           whichc <- get_Z_X_XZ_formula(x$formulaTraits)$focal_nams
         }
-        Cor_Trait_SNC <- f_trait_axes(x, which_cor = whichc)
+        corTraitSNC <- f_trait_axes(x, which_cor = whichc)
         sol$correlation_traits <- 
-          Cor_Trait_SNC$correlation[, choices, drop = FALSE]
+          corTraitSNC$correlation[, choices, drop = FALSE]
       }
       attr(sol$correlation_traits, which = "meaning") <-
         paste("inter set correlation, correlation between traits and the",
@@ -445,8 +445,8 @@ scores_dcca <- function(x,
         if (whichc[1] == "in model") {
           whichc <- get_Z_X_XZ_formula(x$formulaTraits)$focal_nams
         }
-        Cor_Trait_SNC <- f_trait_axes(x, which_cor = whichc)
-        e_rcor <- Cor_Trait_SNC$correlation[, choices, drop = FALSE]
+        corTraitSNC <- f_trait_axes(x, which_cor = whichc)
+        e_rcor <- corTraitSNC$correlation[, choices, drop = FALSE]
       }
       R <- sqrt(species_axes$R2_traits[choices])
       if (length(R) == 1) {

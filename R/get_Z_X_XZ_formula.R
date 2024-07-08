@@ -31,60 +31,42 @@ get_Z_X_XZ_formula <- function(formula,
                                data = NULL) {
   # get formulas and focal and conditioning_factors from a formula
   # with optional data to determine which variables are factors
-  tl <- attr(terms(formula, data = data), "term.labels")
-  if (is.null(tl)) {
-    out <- list(formula_XZ = NULL, formula_X = NULL, formula_Z = NULL)
-    names(out) <- c("focal factor", "condition")
-    stop("Specify wrda or cca via a formula, so that predictor and covariate ", 
-         "formulas can be found.\n")
-  }
-  # find all variable names by deleting from tl Condition and all interactions
-  # first delete Condition
-  idC <- pmatch("Condition(", tl)
-  if (!is.na(idC)) {
-    # get formula of the Condition
-    condi <- tl[idC]
-    fC_wo_tilde <- substr(condi, 11, nchar(condi) - 1)
-    fC_formula <- as.formula(paste("~", fC_wo_tilde))
-  } else { 
-    fC_formula <- ~1
-  }
-  if (!is.na(idC)) {
-    tl <- tl[-idC]
-  }
-  fFocalX <- paste(tl, collapse = "+")
-  if (!is.na(idC)) {
-    fFocalXZ <- as.formula(paste("~", fC_wo_tilde, "+", fFocalX)) 
+  trms <- delete.response(terms(formula, specials = "Condition", 
+                                keep.order = TRUE))
+  trmLabs <- rownames(attr(trms, "factors"))
+  condId <- attr(trms, "specials")$Condition
+  if (!length(condId)) {
+    condTrms <- NULL
+    formula_Z <- ~1
   } else {
-    fFocalXZ <- as.formula(paste("~", fFocalX))
+    condi <- trmLabs[condId]
+    formula_Z <- as.formula(paste("~", substr(condi, 11, nchar(condi) - 1)))
+    condTrms <- attr(terms(formula_Z), "term.labels")
+    trmLabs <- trmLabs[-condId]
   }
-  fFocalX0 <- as.formula(paste("~0 +", fFocalX))
-  fFocalX1 <- as.formula(paste("~1 +", fFocalX))
-  focal_nams <- unique(unlist(strsplit(tl, split = ":", fixed = TRUE)))
-  Condi_nams <- unique(unlist(strsplit(attr(stats::terms(fC_formula), "term.labels"), 
-                                       split = ":", fixed = TRUE)))
-  focal_nams <- focal_nams[!focal_nams %in% Condi_nams]
+  formula_X0 <- reformulate(trmLabs, intercept = FALSE)
+  formula_X1 <- reformulate(trmLabs, intercept = TRUE)
+  formula_XZ <- reformulate(c(condTrms, trmLabs), intercept = TRUE)
+  focal_nams <- all.vars(formula_X0)
+  condi_nams <- all.vars(formula_Z) 
   if (!is.null(data)) {
-    fctrs <- names(data)[sapply(data, is.factor)]
-    focal_factor <- focal_nams[focal_nams %in% fctrs]
-    Condi_factor <- Condi_nams[Condi_nams %in% fctrs]
-    if (length(focal_factor) == 0) {
-      focal_factor <- NULL
-    } 
-    if (length(Condi_factor) == 0) {
-      Condi_factor <- NULL
-    }
+    mff <- model.frame(formula_X0, data = data)
+    trmsf <- attr(mff, "terms")
+    focal_factor <- all.vars(trmsf)[attr(trmsf, "dataClasses") == "factor"]
+    mfc <- model.frame(formula_Z, data = data)
+    trmsc <- attr(mfc, "terms")
+    condi_factor <- all.vars(trmsc)[attr(trmsc, "dataClasses") == "factor"]
   } else {
-    focal_factor <- Condi_factor <- NA
+    focal_factor <- condi_factor <- NA
   }
-  return(list(formula_XZ = fFocalXZ, 
-              formula_X0 = fFocalX0, 
-              formula_Z = fC_formula,
+  return(list(formula_XZ = formula_XZ,
+              formula_X0 = formula_X0,
+              formula_Z = formula_Z,
               focal_nams = focal_nams,
-              Condi_nams = Condi_nams, 
-              formula_X1 = fFocalX1,
+              Condi_nams = condi_nams,
+              formula_X1 = formula_X1,
               focal_factor = focal_factor,
-              Condi_factor = Condi_factor,
-              all_nams = unique(c(focal_nams, Condi_nams))
+              Condi_factor = condi_factor,
+              all_nams = union(focal_nams, condi_nams)
   ))
 }

@@ -64,7 +64,7 @@
 #' @name douconca-package
 #' @keywords internal
 #' 
-#' @importFrom stats as.formula contrasts median model.matrix terms 
+#' @importFrom stats as.formula contrasts delete.response median model.frame model.matrix reformulate terms
 #' @importFrom rlang .data
 "_PACKAGE"
 NULL

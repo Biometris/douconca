@@ -37,7 +37,7 @@ anova(mod, by = "axis")
 
 mod_scores <- scores(mod)
 # correlation of axes with a variable that is not in the model
-scores(mod, display = c("cor"), scaling = "sym", which_cor = list(NULL,"X_lot"))
+scores(mod, display = "cor", scaling = "sym", which_cor = list(NULL, "X_lot"))
 
 cat("head of unconstrained site scores, with meaning\n")
 print(head(mod_scores$sites))

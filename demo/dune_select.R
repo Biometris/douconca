@@ -64,7 +64,7 @@ rownames(fit_measures) <- considerk
 
 for (k in seq_along(considerk)) {
   formulaE_FS <- 
-    as.formula(paste("~", considerk[k], "+Condition(", 
+    as.formula(paste("~", considerk[k], "+ Condition(", 
                      paste(considered, collapse = "+"), ")"))
   
   out_FS <- dc_CA(formulaE_FS, dc_CA_object = out1, verbose = FALSE)

@@ -97,7 +97,7 @@ msdvif <- function(formula = NULL,
   names(meansdvif) <- c("Avg", "SDS", "VIF")
   rr <- list(meansdvif = meansdvif, qrZ = qrZ, qrX = qrX, Zw = Zw, Xw = Xw)
   if (XZ) {
-    names(rr)[c(3,5)] <- c("qrXZ", "XZw")
+    names(rr)[c(3, 5)] <- c("qrXZ", "XZw")
   }
   return(rr)
 }
