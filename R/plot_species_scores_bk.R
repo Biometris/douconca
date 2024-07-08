@@ -37,7 +37,7 @@
 #' (e.g. \code{selectname = "RDA1"}). The function has been copied from 
 #' the \code{PRC} package at \url{https://github.com/CajoterBraak/PRC}.
 #' 
-#' The function is used in \code{\link{plot_dcCA}}.
+#' The function is used in \code{\link{plot.dcca}}.
 #'
 #' @return a ggplot object
 #' 

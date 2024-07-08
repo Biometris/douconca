@@ -3,10 +3,10 @@
 \name{getPlotdata}
 \alias{getPlotdata}
 \title{Utility function: extracting data from a \code{\link{dc_CA}} object for 
-plotting  a single axis by your own code or \code{\link{plot_dcCA}}.}
+plotting  a single axis by your own code or \code{\link{plot.dcca}}.}
 \usage{
 getPlotdata(
-  object,
+  x,
   axis = 1,
   envfactor = NULL,
   traitfactor = NULL,
@@ -16,21 +16,21 @@ getPlotdata(
 )
 }
 \arguments{
-\item{object}{results from \code{\link{dc_CA}} of class \code{dcca}.}
+\item{x}{results from \code{\link{dc_CA}} of class \code{dcca}.}
 
 \item{axis}{the axis number to get (default 1).}
 
 \item{envfactor}{name of row factor to display as color and lines in the CWM
 plot (default \code{NULL}). The default extracts the factor from the 
 environmental model. If set to \code{NA}, no additional coloring and lines
-are displayed in \code{\link{plot_dcCA}}. The parameter sets the 
+are displayed in \code{\link{plot.dcca}}. The parameter sets the 
 \code{groups} variable in the \code{CWM_SNC} data frame of the return 
 value/in the plot.}
 
 \item{traitfactor}{name of column factor to display as color and lines in
 the SNC plot (default \code{NULL}). The default extracts the factor from
 the trait model. If set to \code{NA}, no additional coloring and lines are
-displayed in \code{\link{plot_dcCA}}. The parameter sets the \code{groups} 
+displayed in \code{\link{plot.dcca}}. The parameter sets the \code{groups} 
 variable in the \code{CWM_SNC} data frame of the return value/in the plot.}
 
 \item{newnames}{a list  with two elements: names for traits and for 
@@ -56,9 +56,9 @@ data("dune_trait_env")
 rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
 
 # must delete "Sites" from response matrix or data frame
-Y <- dune_trait_env$comm[,-1] # must delete "Sites"
+Y <- dune_trait_env$comm[, -1] # must delete "Sites"
 
-out <- dc_CA(formulaEnv = ~A1 + Moist + Use + Manure + Mag,
+out <- dc_CA(formulaEnv = ~ A1 + Moist + Use + Manure + Mag,
                    formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
                    response = Y,
                    dataEnv = dune_trait_env$envir,
@@ -69,5 +69,5 @@ names(dat)
 names(dat$CWM_SNC)
 levels(dat$CWM_SNC$groups)
 
-plot_dcCA(out, verbose = FALSE)
+plot(out, verbose = FALSE)
 }

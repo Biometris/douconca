@@ -16,15 +16,15 @@ out <- dc_CA(formulaEnv = ~A1 + Moist + Use + Manure + Condition(Mag),
 plot_dcCA_CWM_SNC(out, facet = FALSE)
 
 CWM_SNC_env_trait_scores <- getPlotdata(out)
-myplot <- plot_dcCA(out)
+myplot <- plot(out)
 # Huge uncertainty band for BF as
 # management is in Condition() and there are one three BF plots,
 # Without these separate lines use:
-# plot_dcCA(out,envfactor = NA)
+# plot(out,envfactor = NA)
 
 names(myplot)
-plot_dcCA(out, gradient_description = c("corre", "tval"), 
-          envfactor = NA, verbose = FALSE )
+plot(out, gradient_description = c("corre", "tval"), 
+     envfactor = NA, verbose = FALSE )
 
 newnames_without_covariates <- 
   list(traits = c("SLA", "Height", "LDMC", "Seedmass", "annual", "perennial"),
@@ -32,8 +32,8 @@ newnames_without_covariates <-
 
 # modifying the plot
 # Assign the plots to symbols and use grid.arrange to produce the plot you like, for example:
-gg <- plot_dcCA(out, gradient_description = c("corre", "weights"), 
-                verbose = FALSE, newnames = newnames_without_covariates)
+gg <- plot(out, gradient_description = c("corre", "weights"), 
+           verbose = FALSE, newnames = newnames_without_covariates)
 
 names(gg)
 

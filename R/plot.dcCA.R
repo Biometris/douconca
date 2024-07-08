@@ -1,12 +1,13 @@
 #' Plot a single dc-CA axis with CWMs, SNCs, trait and environment scores.
 #' 
 #' @description
-#' \code{plot_dcCA} plots the CWMs and SNCs of a dc-CA axis against this axis,
+#' \code{plot.dcca} plots the CWMs and SNCs of a dc-CA axis against this axis,
 #' with optional centroids and colors for groups of sites and/or species if 
 #' available in the data.
 #' 
 #' @inheritParams getPlotdata
 #' 
+#' @param ... unused.
 #' @param gradient_description character or 2-character vector for the trait
 #' and environmental gradient, respectively specifying what to plot in the 
 #' vertical line plots to describe the dc-CA axis (trait and environmental 
@@ -35,7 +36,7 @@
 #' 
 #' @details
 #' If you want to set new names, look at the names with all arguments default, 
-#' i.e. \code{myplot <- plot_dcCA(object)}, and then consult 
+#' i.e. \code{myplot <- plot(x)}, and then consult 
 #' \code{myplot$name.list$newnames} for the order of the names of traits and
 #' environmental variables. Note that covariates should not be in the list of
 #' names. Contribution (in the definition of species selection in 
@@ -43,13 +44,14 @@
 #' the (possibly, closed) data multiplied by the square of the score on 
 #' the axis.
 #'
-#' If the \code{plot_dcCA} returns the error \code{"Error in grid.Call"}, 
+#' If the \code{plot.dcca} returns the error \code{"Error in grid.Call"}, 
 #' enlarge the plotting area or use \code{verbose = FALSE} and assign the 
 #' result.
 #'
 #' @example demo/dune_plot_dcCA.R
 #' @export
-plot_dcCA <- function(object, 
+plot.dcca <- function(x, 
+                      ...,
                       axis = 1,
                       gradient_description = "correlation",
                       envfactor = NULL, 
@@ -62,8 +64,8 @@ plot_dcCA <- function(object,
                       remove_centroids = FALSE, 
                       with_lines = TRUE, 
                       verbose = TRUE) {
-  if (!inherits(object, "dcca")) {
-    stop("...........")
+  if (!inherits(x, "dcca")) {
+    stop("x should be of class dcca.\n")
   }
   stats_vals = c("regression", "weights", "correlations", "tvalues", 
                  "inter_set_correlation")
@@ -80,10 +82,10 @@ plot_dcCA <- function(object,
   if (nspecies == 0) {
     widths <- c(widths[1], sum(widths[-1]))
   }
-  pd <- getPlotdata(object, axis = axis, envfactor = envfactor, 
+  pd <- getPlotdata(x, axis = axis, envfactor = envfactor, 
                     traitfactor = traitfactor, facet = facet, 
                     newnames = newnames, remove_centroids = remove_centroids)
-  CWM_SNC <- plot_dcCA_CWM_SNC(object, axis = axis, envfactor = envfactor, 
+  CWM_SNC <- plot_dcCA_CWM_SNC(x, axis = axis, envfactor = envfactor, 
                                traitfactor = traitfactor, facet = facet,
                                remove_centroids = remove_centroids, 
                                with_lines = with_lines, 
@@ -209,7 +211,7 @@ plot_dcCA <- function(object,
   ) + 
     ggplot2::ggtitle(env_title)
   # species vertical plot
-  plot_species <- fplot_species(pd,object, nspecies = nspecies, 
+  plot_species <- fplot_species(pd, x, nspecies = nspecies, 
                                 species_groups = species_groups)
   # plot arrange
   if (nspecies) {
@@ -241,19 +243,19 @@ plot_dcCA <- function(object,
 #' @noRd
 #' @keywords internal
 fplot_species <- function(pd,
-                          object, 
+                          x, 
                           nspecies = 0, 
                           species_groups = NULL) {
   if (nspecies) {
     composite_trait <- pd$CWM_SNC[pd$CWM_SNC$score == "constraints_species", 1]
-    rel.abundance <- object$weights$columns
-    contribution <- object$weights$columns * composite_trait ^ 2
+    rel.abundance <- x$weights$columns
+    contribution <- x$weights$columns * composite_trait ^ 2
     # just for later add a grouping
     if (!is.null(species_groups)) {
       # if one name in dataTraits take it.
       if (length(species_groups) == 1) {
-        if (species_groups %in% names(object$data$dataTraits)) {
-          species_groups <- object$data$dataTraits[[species_groups]] 
+        if (species_groups %in% names(x$data$dataTraits)) {
+          species_groups <- x$data$dataTraits[[species_groups]] 
         } else {
           warning("species_groups not in names of dataTraits; ", 
                   "no grouping in the plot.\n")
@@ -264,7 +266,7 @@ fplot_species <- function(pd,
     SNC_LC_mat <- cbind(composite_trait, contribution, species_groups)
     colnames(SNC_LC_mat) <- 
       c("composite_trait", "contribution", "species_group")[seq_len(ncol(SNC_LC_mat))]
-    rownames(SNC_LC_mat) <- colnames(object$data$Y)
+    rownames(SNC_LC_mat) <- colnames(x$data$Y)
     sspecies <- sort(SNC_LC_mat[, "contribution"], decreasing = TRUE)
     threshold <- SNC_LC_mat[names(sspecies)[nspecies + 1], "contribution"]
     # ready for plotting

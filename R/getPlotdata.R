@@ -1,22 +1,22 @@
 #' Utility function: extracting data from a \code{\link{dc_CA}} object for 
-#' plotting  a single axis by your own code or \code{\link{plot_dcCA}}.
+#' plotting  a single axis by your own code or \code{\link{plot.dcca}}.
 #' 
 #' @description
 #' \code{getPlotdata} extracts data from a \code{\link{dc_CA}} object for 
 #' plotting the CWMs and SNCs of a single axis.
 #' 
-#' @param object results from \code{\link{dc_CA}} of class \code{dcca}.
+#' @param x results from \code{\link{dc_CA}} of class \code{dcca}.
 #' @param axis the axis number to get (default 1).
 #' @param envfactor name of row factor to display as color and lines in the CWM
 #' plot (default \code{NULL}). The default extracts the factor from the 
 #' environmental model. If set to \code{NA}, no additional coloring and lines
-#' are displayed in \code{\link{plot_dcCA}}. The parameter sets the 
+#' are displayed in \code{\link{plot.dcca}}. The parameter sets the 
 #' \code{groups} variable in the \code{CWM_SNC} data frame of the return 
 #' value/in the plot.
 #' @param traitfactor name of column factor to display as color and lines in
 #' the SNC plot (default \code{NULL}). The default extracts the factor from
 #' the trait model. If set to \code{NA}, no additional coloring and lines are
-#' displayed in \code{\link{plot_dcCA}}. The parameter sets the \code{groups} 
+#' displayed in \code{\link{plot.dcca}}. The parameter sets the \code{groups} 
 #' variable in the \code{CWM_SNC} data frame of the return value/in the plot.
 #' @param newnames a list  with two elements: names for traits and for 
 #' environmental variables, default \code{NULL} for names derived from the 
@@ -31,7 +31,7 @@
 #' @example demo/dune_plot_dcCA.R
 #' 
 #' @export
-getPlotdata <- function(object, 
+getPlotdata <- function(x, 
                         axis = 1,
                         envfactor = NULL,
                         traitfactor = NULL,
@@ -45,7 +45,7 @@ getPlotdata <- function(object,
   }
   traitINcondition <- envINcondition <- FALSE
   if (is.null(envfactor)) {
-    ff <- get_Z_X_XZ_formula(object$formulaEnv, object$data$dataEnv)
+    ff <- get_Z_X_XZ_formula(x$formulaEnv, x$data$dataEnv)
     if (ff$formula_Z == ~1) {
       envfactor <- ff$focal_factor[1] 
       envINcondition <- FALSE 
@@ -55,7 +55,7 @@ getPlotdata <- function(object,
     }
   }
   if (is.null(traitfactor)) {
-    ff <- get_Z_X_XZ_formula(object$formulaTraits, object$data$dataTraits)
+    ff <- get_Z_X_XZ_formula(x$formulaTraits, x$data$dataTraits)
     if (ff$formula_Z == ~1) {
       traitfactor <- ff$focal_factor[1]
       traitINcondition <- FALSE
@@ -67,7 +67,7 @@ getPlotdata <- function(object,
   if (is.null(traitfactor)) traitfactor <- NA
   if (is.null(envfactor)) envfactor <- NA
   # end of set env and traitfactor
-  mod_scores <- scores(object, choices = axis, tidy = TRUE, 
+  mod_scores <- scores(x, choices = axis, tidy = TRUE, 
                        scaling = "symmetric")
   newname.list <- setnames(mod_scores, newnames = newnames)
   idTFc <- mod_scores$score %in% c("constraints_sites", "constraints_species", 
@@ -92,11 +92,11 @@ getPlotdata <- function(object,
   if (!is.na(envfactor) || is.character(envfactor)) {
     if (is.na(envfactor)) { 
       envfactor1 <- envfactor 
-    } else if(envfactor %in% names(object$data$dataEnv) ) {
-      envfactor1 <- object$data$dataEnv[[envfactor]]
+    } else if(envfactor %in% names(x$data$dataEnv) ) {
+      envfactor1 <- x$data$dataEnv[[envfactor]]
     } else {
       stop(envfactor, " must be in ", 
-           paste0(names(object$data$dataEnv), collapse = ", "), ".\n")
+           paste0(names(x$data$dataEnv), collapse = ", "), ".\n")
     }
   } else {
     envfactor1 <- envfactor
@@ -104,11 +104,11 @@ getPlotdata <- function(object,
   if (!is.na(traitfactor) || is.character(traitfactor)) {
     if (is.na(traitfactor)) {
       traitfactor1 <- traitfactor
-    } else if(traitfactor %in% names(object$data$dataTraits)) {
-      traitfactor1 <- object$data$dataTraits[[traitfactor]]
+    } else if(traitfactor %in% names(x$data$dataTraits)) {
+      traitfactor1 <- x$data$dataTraits[[traitfactor]]
     } else {
       stop(traitfactor, " must be in ", 
-           paste0(names(object$data$dataTraits), collapse = ", "), ".\n")
+           paste0(names(x$data$dataTraits), collapse = ", "), ".\n")
     }
   } else {
     traitfactor1<- traitfactor
@@ -178,7 +178,7 @@ getPlotdata <- function(object,
     } else {
       envlevels0 <- scorepair$label[scorepair$score == "centroids"]
     }
-    envfactor1 <- factor(rep("sites", nrow(object$data$dataEnv)))
+    envfactor1 <- factor(rep("sites", nrow(x$data$dataEnv)))
   }
   if (length(traitfactor1) > 1) {
     traitlevels <- traitlevels1 <- levels(traitfactor1)
@@ -196,7 +196,7 @@ getPlotdata <- function(object,
     } else {
       traitlevels0 <- scorepair$label[scorepair$score == "centroids_traits"]
     }
-    traitfactor1 <- factor(rep("species", nrow(object$data$dataTraits)))
+    traitfactor1 <- factor(rep("species", nrow(x$data$dataTraits)))
   }
   scorepair$groups <- factor(c(envlevels1[envfactor1], 
                                envlevels0,traitlevels1[traitfactor1], 

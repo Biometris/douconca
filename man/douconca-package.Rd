@@ -49,7 +49,7 @@ and uses some of the internal structure of the \code{vegan}
 \code{f_inertia} and \code{get_QR} in the source code file 
 \code{functions_using_cca_object_internals.r}.
 
-The main user-functions are \code{\link{dc_CA}}, \code{\link{plot_dcCA}}, 
+The main user-functions are \code{\link{dc_CA}}, \code{\link{plot.dcca}}, 
 \code{\link{scores.dcca}}, \code{\link{print.dcca}} and 
 \code{\link{anova.dcca}}.
 }

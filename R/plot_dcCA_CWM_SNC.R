@@ -26,12 +26,12 @@
 #' \code{"CWM-SNC", "groups", "points", "sizeweight"} for the y-axis, coloring, 
 #' shape and size of items, respectively.
 #' 
-#' The function is used in \code{\link{plot_dcCA}}.
+#' The function is used in \code{\link{plot.dcca}}.
 #' 
 #' @example demo/dune_plot_dcCA.R
 #' 
 #' @export
-plot_dcCA_CWM_SNC <- function(object, 
+plot_dcCA_CWM_SNC <- function(x, 
                               axis = 1,
                               envfactor = NULL,
                               traitfactor = NULL,
@@ -41,12 +41,12 @@ plot_dcCA_CWM_SNC <- function(object,
                               with_lines = TRUE,
                               getPlotdata2plotdCCA = NULL) {
   if (is.null(getPlotdata2plotdCCA)) {
-    scorepair<- getPlotdata(object, axis = axis, envfactor = envfactor, 
+    scorepair<- getPlotdata(x, axis = axis, envfactor = envfactor, 
                             traitfactor = traitfactor, newnames = newnames,
                             facet = facet, 
                             remove_centroids = remove_centroids)$CWM_SNC
   } else {
-    scorepair = getPlotdata2plotdCCA$CWM_SNC
+    scorepair <- getPlotdata2plotdCCA$CWM_SNC
   }
   # plot
   namaxis <- paste0("dcCA", axis)
@@ -89,10 +89,10 @@ plot_dcCA_CWM_SNC <- function(object,
                              na.rm = TRUE, inherit.aes = FALSE)
     }
   }
-  TraitEnvINcondition <- attr(scorepair, "condition")
-  TraitEnvLevels <- attr(scorepair, "levels")
-  ltraits <- length(TraitEnvLevels[[1]])
-  lenv <- length(TraitEnvLevels[[2]])
+  traitEnvINcondition <- attr(scorepair, "condition")
+  traitEnvLevels <- attr(scorepair, "levels")
+  ltraits <- length(traitEnvLevels[[1]])
+  lenv <- length(traitEnvLevels[[2]])
   if (ltraits > 0 && lenv > 0) {
     p <- p +
       ggplot2::guides(col = ggplot2::guide_legend(title = NULL, 
@@ -103,7 +103,7 @@ plot_dcCA_CWM_SNC <- function(object,
                                                     position = "bottom", 
                                                     nrow = 2))
   } else if (ltraits == 0 && lenv == 0 && 
-             sum(TraitEnvINcondition) == 0 && sum(remove_centroids) == 0) {
+             sum(traitEnvINcondition) == 0 && sum(remove_centroids) == 0) {
     p <- p + 
       ggplot2::scale_color_discrete(guide = "none") +
       ggplot2::guides(shape = ggplot2::guide_legend(title = NULL, 
