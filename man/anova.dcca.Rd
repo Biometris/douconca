@@ -66,6 +66,7 @@ data("dune_trait_env")
 
 # rownames are carried forward in results
 rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
+
 mod <- dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure,
              formulaTraits = ~ .,
              response = dune_trait_env$comm[, -1],  # must delete "Sites"
@@ -85,11 +86,7 @@ a_species
 # the Condition of a new mod.
 (eig1_and_pval <- c(eig = a_species$eig[1], pval = a_species$table$`Pr(>F)`[1]))
 a_species$eig
-
 anova_sites(mod)
-
-mod$eigenvalues / anova_species(mod)$eig[seq_along(mod$eigenvalues)]
-mod$eigenvalues / anova_sites(mod)$eig[seq_along(mod$eigenvalues)]
 }
 \references{
 ter Braak, C.J.F. & te Beest, D.E. 2022. Testing environmental effects

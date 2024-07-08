@@ -2,28 +2,33 @@
 #'
 #' @description
 #' \code{get_Z_X_XZ_formula} derives the focal constraining formula and 
-#' (if present) the conditioning formula from a vegan formula.
+#' (if present) the conditioning formula from a vegan formula
+#' \code{~X+Condition(Z)}.
+#'  
+#' @param formula  a vegan formula of the form \code{~X+Condition(Z)} with
+#' \code{X} and \code{Z} formulas (without a tilde). Dimension reduction is 
+#' applied to the effects of \code{X}  given the effects of \code{Z} on the 
+#' response.
 #' 
-#' @param objecta result of \code{\link[vegan]{rda}}, \code{\link[vegan]{cca}} 
-#' specified via a formula (S3 method for class 'formula'), or a result of
-#' \code{\link{doPRC}} or \code{\link{PRC_scores}}.
+#' @param data matrix or data frame of the row predictors. Default \code{NULL},
+#' in which case the result values for elements "focal_factor" "Condi_factor" 
+#' are '\code{NA}.
 #' 
-#' @return A list with element \code{`focal factor`} and \code{condition}
+#' @return A list with elements:
+#' "formula_XZ", "formula_X0", "formula_Z", "focal_nams", "Condi_nams",
+#' "formula_X1", "focal_factor", "Condi_factor", and "all_nams".
 #' 
-#' @example demo/PRC_pyrifos_bk.R
-#' 
-#' @references
-#' ter Braak C.J.F. & Šmilauer P. (2018): Canoco reference manual and user's guide:
-#' software for ordination, version 5.1x. Microcomputer Power, Ithaca, USA, 536 pp.
-#' (\url{http::www.canoco5.com})
-#' 
-#' @seealso \code{\link{doPRC}}, \code{\link{PRC_scores}}
+#' @details
+#' In the current implementation, \code{formula} should contain variable names
+#' as is, \emph{i.e.} transformations of variables in the formulas gives
+#' an error ('undefined columns selected') when the \code{\link{scores}} 
+#' function is applied. Interactions and nesting ("*", ":" and "/" ) are 
+#' allowed.
 #' 
 #' @noRd
 #' @keywords internal
 get_Z_X_XZ_formula <- function(formula, 
-                               data = NULL, 
-                               factors_only = FALSE) {
+                               data = NULL) {
   # get formulas and focal and conditioning_factors from a formula
   # with optional data to determine which variables are factors
   tl <- attr(terms(formula, data = data), "term.labels")
@@ -72,7 +77,6 @@ get_Z_X_XZ_formula <- function(formula,
   } else {
     focal_factor <- Condi_factor <- NA
   }
-  
   return(list(formula_XZ = fFocalXZ, 
               formula_X0 = fFocalX0, 
               formula_Z = fC_formula,

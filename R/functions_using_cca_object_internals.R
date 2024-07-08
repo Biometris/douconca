@@ -39,7 +39,7 @@ get_QR <- function(object, model = "CCA"){
   # gets the qr decompostion of object
   # model = "CCA" or "pCCA"
   if (model == "CCA") {
-    QR<- object$CCA$QR 
+    QR <- object$CCA$QR 
   } else if (model == "pCCA") {
     QR <- object$pCCA$QR
   } else {
