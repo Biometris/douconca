@@ -218,7 +218,7 @@ randperm_eX0sqrtw <- function(Y,
   eXw <- eX/sWn # the X-residuals of the original weighted analysis
   # step 2: ss(X)
   Yfit_X <- qr.fitted(qr(eX), eY)
-  ssX <- sum(Yfit_X ^ 2)
+  ssX0 <- sum(Yfit_X ^ 2)
   svd_Yfit_X <- svd(Yfit_X)
   ssX_eig1 <- svd_Yfit_X$d[1] ^ 2
   EigVector1 <- svd_Yfit_X$u[, 1, drop = FALSE]
@@ -226,7 +226,7 @@ randperm_eX0sqrtw <- function(Y,
   sstot <- sum(eY ^ 2)
   p_eX <- qr(eX)$rank
   df_cor <- (nrow(eY)- qrZ$rank - p_eX) / p_eX  #(N-nz-nx-1)/nx
-  F0 <- ssX / (sstot - ssX) * df_cor
+  F0 <- ssX0 / (sstot - ssX0) * df_cor
   F0_eig1 <- ssX_eig1 / (sstot -  ssX_eig1) * df_cor
   # end preparations and data value
   ssX_perm <- ssX_eig1_perm <- numeric(nrepet)
@@ -251,12 +251,14 @@ randperm_eX0sqrtw <- function(Y,
   }
   if (by == "axis")  {
     ssX_perm <- ssX_eig1_perm
+    ssX0 <- ssX_eig1
     F0 <- F0_eig1
   }
   rss_perm <- sstot - ssX_perm
   Fval <- ssX_perm / rss_perm * df_cor
-  isna.r <- sum(is.na(Fval))
-  pval <- (sum(Fval >= (F0 - EPS), na.rm = TRUE) + 1)  / (nrepet- isna.r  + 1)
+  # ssX_perm is monotonic with Fval, so for numeric stability use:
+  isna.r <- sum(is.na(ssX_perm))
+  pval <- (sum(ssX_perm >= (ssX0 - EPS), na.rm = TRUE) + 1)  / (nrepet- isna.r  + 1)
   attr(pval, "test") <- by
   if (return == "pval") {
     res <- pval
@@ -264,8 +266,8 @@ randperm_eX0sqrtw <- function(Y,
     eig <- svd_Yfit_X$d
     eig <- (eig[eig > EPS]) ^ 2
     res <- list(pval = pval, Fval = Fval, F0 = F0,
-                ss = c(Model = ssX, Residual = sstot - ssX),
-                df = c(Model = p_eX, Residual = nrow(eY) - qrZ$rank - p_eX ),
+                ss = c(Model = ssX0, Residual = sstot - ssX0),
+                df = c(Model = p_eX, Residual = nrow(eY) - qrZ$rank - p_eX),
                 rank = rank, R2.perm = ssX_perm / sstot,
                 eig = eig, EigVector1 = EigVector1)
     if (is.matrix(permutations)) {
@@ -303,10 +305,10 @@ SVDfull <- function(Y) {
   return(list(d = svdY$d[id], u = u, v = v, rank = length(id)))
 }
 
-# end OLS versions -------------------------------------------------
+# end OLS versions 
 
 
-# code adapted from vegan 2.6-4 ---------------------------------------------------
+# code adapted from vegan 2.6-4 
 
 ### Make a compact summary of permutations. This copies Gav Simpson's
 ### permute:::print.how, but only displays non-default choices in how().
