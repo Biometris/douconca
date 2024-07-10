@@ -69,7 +69,7 @@ getPlotdata <- function(x,
   # end of set env and traitfactor
   mod_scores <- scores(x, choices = axis, tidy = TRUE, 
                        scaling = "symmetric")
-  newname.list <- setnames(mod_scores, newnames = newnames)
+  newNameList <- setnames(mod_scores, newnames = newnames)
   idTFc <- mod_scores$score %in% c("constraints_sites", "constraints_species", 
                                    "centroids", "centroids_traits")
   idTFu <- mod_scores$score %in% c("sites", "species", "centroids", 
@@ -207,9 +207,9 @@ getPlotdata <- function(x,
   scorepair$centroidnames <- scorepair$label
   scorepair$centroidnames[!scorepair$score %in% c("centroids", "centroids_traits")] <- ""
   scorepair$centroidnames[scorepair$score == "centroids_traits"] <-
-    newname.list$centroidnames[[1]]
+    newNameList$centroidnames[[1]]
   scorepair$centroidnames[scorepair$score == "centroids"] <-
-    newname.list$centroidnames[[2]]
+    newNameList$centroidnames[[2]]
   names(scorepair)[1] <- paste0("dcCA", axis)
   attr(scorepair, "condition") <- 
     c(traitINcondition = traitINcondition, envINcondition = envINcondition)
@@ -217,7 +217,7 @@ getPlotdata <- function(x,
     list(traitlevels = traitlevels, envlevels = envlevels)
   res <- list(CWM_SNC = scorepair, 
               trait_env_scores = trait_env_scores, 
-              newname.list = newname.list)
+              newNameList = newNameList)
   return(res)
 }
 

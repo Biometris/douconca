@@ -34,7 +34,7 @@ to regress the CWMs of the orthonormalized traits,
 obtained from the first step, on to the environmental predictors. 
 The second step is thus a community-level analysis.
 
-If \code{divide.by.site.totals = FALSE}, the second step uses 
+If \code{divideBySiteTotals = FALSE}, the second step uses 
 \code{\link{wrda}} and performs a weighted redundancy analysis of the CWMs 
 on to the environmental variables.
 

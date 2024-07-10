@@ -11,7 +11,7 @@ fCWM_SNC(
   dataTraits = NULL,
   formulaEnv = NULL,
   formulaTraits = NULL,
-  divide.by.site.totals = TRUE,
+  divideBySiteTotals = TRUE,
   dc_CA_object = NULL,
   minimal_output = TRUE,
   verbose = TRUE
@@ -46,7 +46,7 @@ in \code{\link[vegan]{cca}}. The \code{covariate-formula} should not contain
 a \code{~} (tilde). Default: \code{NULL} for \code{~.}, i.e. all variables 
 in \code{dataTraits} are predictor traits.}
 
-\item{divide.by.site.totals}{logical; default \code{TRUE} for closing the 
+\item{divideBySiteTotals}{logical; default \code{TRUE} for closing the 
 data by dividing the rows in the \code{response} by their total.}
 
 \item{dc_CA_object}{optional object from an earlier run of this function. 

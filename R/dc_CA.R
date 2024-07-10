@@ -34,7 +34,7 @@
 #' @param dataTraits matrix or data frame of the column predictors, with rows 
 #' corresponding to the columns in \code{response}.
 #' (dimension \emph{m} x \emph{q}).
-#' @param divide.by.site.totals logical; default \code{TRUE} for closing the 
+#' @param divideBySiteTotals logical; default \code{TRUE} for closing the 
 #' data by dividing the rows in the \code{response} by their total.
 #' @param dc_CA_object  optional object from an earlier run of this function. 
 #' Useful if the same formula for the columns (\code{formulaTraits}), 
@@ -97,7 +97,7 @@
 #' \code{~.}, it was changed to explicit trait names.}
 #' \item{data}{a list of \code{Y}, \code{dataEnv} and \code{dataTraits}, 
 #' after removing empty rows and columns in \code{response} and after closure if 
-#' \code{divide.by.site.totals = TRUE} and with the corresponding rows in 
+#' \code{divideBySiteTotals = TRUE} and with the corresponding rows in 
 #' \code{dataEnv} and \code{dataTraits} removed.}
 #' \item{weights}{a list of unit-sum weights of row and columns. The names of 
 #' the list are \code{c("row", "columns")}, in that order.}
@@ -206,7 +206,7 @@ dc_CA <- function(formulaEnv = NULL,
                   response = NULL, 
                   dataEnv = NULL,
                   dataTraits = NULL,
-                  divide.by.site.totals = TRUE,
+                  divideBySiteTotals = TRUE,
                   dc_CA_object = NULL, 
                   verbose = TRUE) {
   # response matrix or data frame, dataEnv and dataTraits data frames 
@@ -288,7 +288,7 @@ dc_CA <- function(formulaEnv = NULL,
     rownames(dataEnv) <- rownames(response)
     rownames(dataTraits) <- colnames(response)
     # end of check 
-    if (divide.by.site.totals) {
+    if (divideBySiteTotals) {
       response <- response / (rowSums(response) %*% t(rep(1, ncol(response))))
     }
     TotR <- rowSums(response)

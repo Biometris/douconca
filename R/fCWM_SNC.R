@@ -80,7 +80,7 @@ fCWM_SNC <- function(response = NULL,
                      dataTraits = NULL,
                      formulaEnv = NULL,
                      formulaTraits = NULL,
-                     divide.by.site.totals = TRUE,
+                     divideBySiteTotals = TRUE,
                      dc_CA_object = NULL,
                      minimal_output = TRUE,
                      verbose = TRUE) {
@@ -152,7 +152,7 @@ fCWM_SNC <- function(response = NULL,
   rownames(dataEnv) <- rownames(response)
   rownames(dataTraits) <- colnames(response)
   # end of check
-  if (divide.by.site.totals) {
+  if (divideBySiteTotals) {
     response <- response / (TotR %*% t(rep(1, ncol(response))))
   }
   Y <- as.matrix(response) / sum(response)

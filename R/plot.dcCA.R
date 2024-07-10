@@ -37,7 +37,7 @@
 #' @details
 #' If you want to set new names, look at the names with all arguments default, 
 #' i.e. \code{myplot <- plot(x)}, and then consult 
-#' \code{myplot$name.list$newnames} for the order of the names of traits and
+#' \code{myplot$nameList$newnames} for the order of the names of traits and
 #' environmental variables. Note that covariates should not be in the list of
 #' names. Contribution (in the definition of species selection in 
 #' \code{nspecies}) is defined (as in CA) as the total species abundance in 
@@ -102,19 +102,19 @@ plot.dcca <- function(x,
   ylab_traits <- "composite trait"
   newnames <- "newnames"
   ncovariates <- 0
-  if (stats_scores[[1]][1] == "weights"){
+  if (stats_scores[[1]][1] == "weights") {
     idTF <- pd$trait_env_scores$score == "regression_traits"
-    ncovariates <- sum(idTF) - length(pd$newname.list$weightnames$traits)
+    ncovariates <- sum(idTF) - length(pd$newNameList$weightnames$traits)
     if (ncovariates < 0) {
-      print(pd$newname.list$weightnames$traits)
+      print(pd$newNameList$weightnames$traits)
     }
     trait_title <- "Weight"
     newnames <- "weightnames"
   } else if (stats_scores[[1]][1] == "tvalues") {
     idTF <- pd$trait_env_scores$score == "t_values_traits"
-    ncovariates <- sum(idTF) - length(pd$newname.list$weightnames$traits)
+    ncovariates <- sum(idTF) - length(pd$newNameList$weightnames$traits)
     if (ncovariates < 0) {
-      print(pd$newname.list$weightnames$traits)
+      print(pd$newNameList$weightnames$traits)
     }
     trait_title <- "t-value"
     newnames <- "weightnames"
@@ -130,23 +130,23 @@ plot.dcca <- function(x,
   if (ncovariates > 0) {
     trait_scores <- trait_scores[-seq_len(ncovariates), , drop = FALSE]
   }
-  trait_scores$label <- pd$newname.list[[newnames]]$traits
+  trait_scores$label <- pd$newNameList[[newnames]]$traits
   ylab_env <-  "dc-CA axis"
   newnames <- "newnames"
   ncovariates <- 0
-  if (stats_scores[[2]][1] == "weights"){
+  if (stats_scores[[2]][1] == "weights") {
     idTF <- pd$trait_env_scores$score == "regression"
-    ncovariates <- sum(idTF) - length(pd$newname.list$weightnames$env)
+    ncovariates <- sum(idTF) - length(pd$newNameList$weightnames$env)
     if (ncovariates < 0) {
-      print(pd$newname.list$weightnames$env)
+      print(pd$newNameList$weightnames$env)
     }
     env_title <- "weight"
     newnames <- "weightnames"
-  } else if (stats_scores[[2]][1] == "tvalues"){
-    idTF <-pd$trait_env_scores$score == "t_values"
-    ncovariates <- sum(idTF) - length(pd$newname.list$weightnames$env)
+  } else if (stats_scores[[2]][1] == "tvalues") {
+    idTF <- pd$trait_env_scores$score == "t_values"
+    ncovariates <- sum(idTF) - length(pd$newNameList$weightnames$env)
     if (ncovariates < 0) {
-      print(pd$newname.list$weightnames$traits)
+      print(pd$newNameList$weightnames$traits)
     }
     env_title <- "t-value"
     newnames <- "weightnames"
@@ -163,23 +163,15 @@ plot.dcca <- function(x,
   if (ncovariates > 0) {
     env_scores <- env_scores[-seq_len(ncovariates), , drop = FALSE]
   }
-  env_scores$label <- pd$newname.list[[newnames]]$env
+  env_scores$label <- pd$newNameList[[newnames]]$env
   namaxis <- names(env_scores)[1]
-  if (stats_scores[[1]][1] %in% c("weights", "tvalues")) {
-    trait_title <- paste(trait_title) 
-  } else if (stats_scores[[1]][1] == "correlations") {
-    trait_title <- paste(trait_title) 
-  } else { 
+  if (!stats_scores[[1]][1] %in% c("weights", "tvalues", "correlations")) {
     trait_title <- "correlation"
   }
   if (gradient_description[1] == gradient_description[2]) {
     env_title <- ""
   } else {
-    if (stats_scores[[2]][1] %in% c("weights", "tvalues")) {
-      env_title <- paste(env_title)
-    } else if (stats_scores[[2]][1] == "correlations") {
-      env_title <- paste(env_title) # correlation
-    } else {# interset
+    if (!stats_scores[[2]][1] %in% c("weights", "tvalues", "correlations")) {
       env_title <- "correlation"
     }
   }
@@ -196,8 +188,7 @@ plot.dcca <- function(x,
     speciesname = "label",
     scoresname = namaxis,
     selectname = "Fratio1",
-    verbose = FALSE
-  ) + 
+    verbose = FALSE) + 
     ggplot2::ggtitle(trait_title)
   plot_env <- plot_species_scores_bk(
     species_scores = env_scores,
@@ -207,8 +198,7 @@ plot.dcca <- function(x,
     speciesname = "label",
     scoresname = namaxis,
     selectname = "Fratio1",
-    verbose = FALSE
-  ) + 
+    verbose = FALSE) + 
     ggplot2::ggtitle(env_title)
   # species vertical plot
   plot_species <- fplot_species(pd, x, nspecies = nspecies, 
@@ -216,29 +206,28 @@ plot.dcca <- function(x,
   # plot arrange
   if (nspecies) {
     layout <- rbind(c(1, 2, 4), c(1, 3, 4))
-    gg_object <- gridExtra::grid.arrange(CWM_SNC, plot_traits, plot_env, 
-                                         plot_species, layout_matrix = layout, 
-                                         widths = widths,
-                                         top = "", left = "", right = "")
+    gg_object <- gridExtra::arrangeGrob(CWM_SNC, plot_traits, plot_env, 
+                                        plot_species, layout_matrix = layout, 
+                                        widths = widths)
   } else {
     layout<- rbind(c(1, 2), c(1, 3))
-    gg_object <- gridExtra::grid.arrange(CWM_SNC, plot_traits, plot_env, 
-                                         layout_matrix = layout, 
-                                         widths = widths,
-                                         top = "", left = "", right = "")
+    gg_object <- gridExtra::arrangeGrob(CWM_SNC, plot_traits, plot_env, 
+                                        layout_matrix = layout, 
+                                        widths = widths)
   }
-  # plot ------------------------------------------------------
+  # plot
   if (verbose) {
     tt <- try(suppressWarnings(gridExtra::grid.arrange(gg_object)))
     if (inherits(tt, "try-error")) {
       warning("Enlarge the plot area.\n")
     }
   }
-  out <- list(plot = gg_object, name.list = pd$newname.list,
+  out <- list(plot = gg_object, nameList = pd$newNameList,
               separateplots = list(CWM_SNC = CWM_SNC, traits = plot_traits, 
                                    env = plot_env, species = plot_species))
   invisible(out)
 }
+
 
 #' @noRd
 #' @keywords internal
@@ -248,7 +237,6 @@ fplot_species <- function(pd,
                           species_groups = NULL) {
   if (nspecies) {
     composite_trait <- pd$CWM_SNC[pd$CWM_SNC$score == "constraints_species", 1]
-    rel.abundance <- x$weights$columns
     contribution <- x$weights$columns * composite_trait ^ 2
     # just for later add a grouping
     if (!is.null(species_groups)) {

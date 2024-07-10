@@ -89,7 +89,7 @@ available in the data.
 \details{
 If you want to set new names, look at the names with all arguments default, 
 i.e. \code{myplot <- plot(x)}, and then consult 
-\code{myplot$name.list$newnames} for the order of the names of traits and
+\code{myplot$nameList$newnames} for the order of the names of traits and
 environmental variables. Note that covariates should not be in the list of
 names. Contribution (in the definition of species selection in 
 \code{nspecies}) is defined (as in CA) as the total species abundance in 

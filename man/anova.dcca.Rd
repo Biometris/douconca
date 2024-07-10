@@ -45,7 +45,7 @@ restrictive than) those of \code{\link[vegan]{anova.cca}}.
 }
 \details{
 In the general case of varying site abundance totals 
-(\code{divide.by.site.totals = FALSE}) both the community-level test and the
+(\code{divideBySiteTotals = FALSE}) both the community-level test and the
 species-level test use residualized predictor permutation (ter Braak 2022), 
 so as to ensure that \code{\link{anova.dcca}} is robust against differences
 in species and site total abundance in the \code{response} (ter Braak & te 

@@ -5,3 +5,5 @@ unused
 ^docs$
 ^pkgdown$
 ^README\.Rmd$
+public
+testScripts

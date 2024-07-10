@@ -10,7 +10,7 @@ dc_CA(
   response = NULL,
   dataEnv = NULL,
   dataTraits = NULL,
-  divide.by.site.totals = TRUE,
+  divideBySiteTotals = TRUE,
   dc_CA_object = NULL,
   verbose = TRUE
 )
@@ -44,7 +44,7 @@ corresponding to those in \code{response}. (dimension \emph{n} x \emph{p}).}
 corresponding to the columns in \code{response}.
 (dimension \emph{m} x \emph{q}).}
 
-\item{divide.by.site.totals}{logical; default \code{TRUE} for closing the 
+\item{divideBySiteTotals}{logical; default \code{TRUE} for closing the 
 data by dividing the rows in the \code{response} by their total.}
 
 \item{dc_CA_object}{optional object from an earlier run of this function. 
@@ -65,7 +65,7 @@ A list of \code{class} \code{dcca}; that is a list with elements
 \code{~.}, it was changed to explicit trait names.}
 \item{data}{a list of \code{Y}, \code{dataEnv} and \code{dataTraits}, 
 after removing empty rows and columns in \code{response} and after closure if 
-\code{divide.by.site.totals = TRUE} and with the corresponding rows in 
+\code{divideBySiteTotals = TRUE} and with the corresponding rows in 
 \code{dataEnv} and \code{dataTraits} removed.}
 \item{weights}{a list of unit-sum weights of row and columns. The names of 
 the list are \code{c("row", "columns")}, in that order.}
