@@ -38,8 +38,11 @@ expect_warning(mod_dcca2 <- dc_CA(response = CWMSNC,
                "overfitted model")
 
 expect_equal(mod_dcca2$eigenvalues, mod_dcca$eigenvalues)
-expect_null(mod_dcca2$site_axes$R2_env) # perfect fit
-expect_null(mod_dcca2$species_axes$R2_traits) # perfect fit
+
+mod_dcca2_print <- print(mod_dcca2)
+
+expect_equivalent(mod_dcca2_print$site_axes$R2_env, rep(1, times = 5)) # perfect fit
+expect_equivalent(mod_dcca2_print$species_axes$R2_traits, rep(1, times = 5)) # perfect fit
 
 # some variable may not be present in the newdata
 # delete variable "Moist"
