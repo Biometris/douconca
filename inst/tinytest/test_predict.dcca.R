@@ -39,7 +39,7 @@ expect_warning(mod_dcca2 <- dc_CA(response = CWMSNC,
 
 expect_equal(mod_dcca2$eigenvalues, mod_dcca$eigenvalues)
 
-mod_dcca2_print <- print(mod_dcca2)
+capture.output(mod_dcca2_print <- print(mod_dcca2), file = tempfile())
 
 expect_equivalent(mod_dcca2_print$site_axes$R2_env, rep(1, times = 5)) # perfect fit
 expect_equivalent(mod_dcca2_print$species_axes$R2_traits, rep(1, times = 5)) # perfect fit
