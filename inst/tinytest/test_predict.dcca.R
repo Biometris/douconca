@@ -97,7 +97,7 @@ CWMSNC3$data$Y <- NULL
 expect_warning(mod_dcca3 <- dc_CA(response = CWMSNC3,
                                   divideBySiteTotals = divide,
                                   verbose = FALSE),
-               "overfitted model")
+               "The eigenvalues of the CWM and SNC analyses differ")
 
 # the contribution of Moisture
 expect_equal(mod_dcca$inertia["constraintsTE",1] - 

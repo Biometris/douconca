@@ -9,27 +9,27 @@ dune_trait_env$envir$A11 <- dune_trait_env$envir$A1
 
 # collinear variable
 mod_dcca <- dc_CA(formulaEnv = ~ A1 + A11,
-                  formulaTraits = ~. ,
+                  formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
                   response = dune_trait_env$comm[, -1],  # must delete "Sites"
                   dataEnv = dune_trait_env$envir,
-                  dataTraits = dune_trait_env$traits[, -c(1, 2)],
+                  dataTraits = dune_trait_env$traits,
                   divideBySiteTotals = divide,
                   verbose = FALSE)
 
 # full fit
 mod_dcca1 <- dc_CA(formulaEnv = ~ Sites,
-                   formulaTraits = ~. ,
+                   formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
                    response = dune_trait_env$comm[, -1],  # must delete "Sites"
-                   dataEnv =dune_trait_env$envir,
-                   dataTraits =dune_trait_env$traits[, -c(1, 2)],
+                   dataEnv = dune_trait_env$envir,
+                   dataTraits = dune_trait_env$traits,
                    divideBySiteTotals = divide,
                    verbose = FALSE)
 
 mod_dcca2 <- dc_CA(formulaEnv = ~ Sites + A1,
-                   formulaTraits = ~. ,
+                   formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
                    response = dune_trait_env$comm[, -1],  # must delete "Sites"
-                   dataEnv =dune_trait_env$envir,
-                   dataTraits =dune_trait_env$traits[, -c(1, 2)],
+                   dataEnv = dune_trait_env$envir,
+                   dataTraits = dune_trait_env$traits,
                    divideBySiteTotals = divide, 
                    verbose = FALSE)
 

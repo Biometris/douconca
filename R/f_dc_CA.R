@@ -73,6 +73,9 @@ calculate_b_se_tval <- function(X_or_qr_decomp_of_X,
   if (fitted_only) {
     out1 <- fitted_values
   } else {
+    if (any(is.na(beta_hat))) {
+      warning("collinearity detected in ", name, "-model.\n")
+    }
     # Compute residual sum of squares (RSS)
     RSS <- colSums(residuals ^ 2)
     # Estimate variance of the errors
@@ -80,8 +83,10 @@ calculate_b_se_tval <- function(X_or_qr_decomp_of_X,
     p <- QR$rank
     sigma_hat_sq <- RSS / (n - p - 1 ) 
     # Calculate variance-covariance matrix of the estimated regression coefficients
-    diagXtX_inv <- diag(chol2inv(QR$qr, size = QR$rank))
-    diagXtX_inv <- c(diagXtX_inv, rep(NA, nrow(beta_hat) - length(diagXtX_inv)))
+    XtXinv <- chol2inv(QR$qr)
+    diagXtX_inv <- diag(chol2inv(QR$qr)) 
+    names(diagXtX_inv) <- colnames(QR$qr)
+    diagXtX_inv <- diagXtX_inv[rownames(beta_hat)]
     se <- matrix(nrow = nrow(beta_hat), ncol = length(sigma_hat_sq))
     for (i in seq_along(sigma_hat_sq)) {
       var_covar_matrix <- diagXtX_inv * sigma_hat_sq[i]

@@ -27,9 +27,11 @@ predict_traits <- function(object,
                            rank) {
   # missing factors in newdata1 : no contribution of the missing factors
   reg <- predict_regr_env(object, rank)
+  reg[is.na(reg)] <- 0
   pred_scaled <- fpred_scaled(newdata1, reg)
   gg <- get_Z_X_XZ_formula(object$formulaTraits)
-  traits0 <- model.matrix(gg$formula_X0, data = object$data$dataTraits)
+  traits0 <- modelmatrixI(formula = gg$formula_X1, 
+                          data = object$data$dataTraits, XZ = FALSE)
   msd <- mean_sd_w(traits0, w = object$weights$columns)
   pred <- backscale_data(pred_scaled, msd)
   return(pred)
@@ -110,9 +112,11 @@ predict_env <- function(object,
                         rank) {
   # missing factors in newdata1 : no contribution of the missing factors
   reg <- predict_regr_traits(object, rank)
+  reg[is.na(reg)] <- 0
   pred_scaled <- fpred_scaled(newdata1, reg)
   gg <- get_Z_X_XZ_formula(object$formulaEnv)
-  env0 <- model.matrix(gg$formula_X0, data = object$data$dataEnv)
+  env0 <- modelmatrixI(formula = gg$formula_X1, data = object$data$dataEnv, 
+                       XZ = FALSE)
   msd <- mean_sd_w(env0, w = object$weights$rows)
   pred <- backscale_data(pred_scaled, msd)
   return(pred)

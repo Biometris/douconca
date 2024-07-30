@@ -60,7 +60,6 @@ get_Z_X_XZ_formula <- function(formula,
     focal_factor <- condi_factor <- NA
   }
   return(list(formula_XZ = formula_XZ,
-              formula_X0 = formula_X0,
               formula_Z = formula_Z,
               focal_nams = focal_nams,
               Condi_nams = condi_nams,

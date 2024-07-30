@@ -46,12 +46,12 @@ f_env_axes <- function(out,
     "The t-values are optimistic, i.e. an underestimate of their true absolute value"
   # correlations of the dataEnv with the CWMs wrt the  axes
   if (which_cor[1] == "in model"){
-    fX <- get_Z_X_XZ_formula(formulaEnv, dataEnv)$formula_X0
-    env0 <- model.matrix(fX, data = dataEnv)
+    fX <- get_Z_X_XZ_formula(formulaEnv, dataEnv)$formula_X1
   } else {
     whichc <- which_cor
-    env0 <- model.matrix(~.-1, data = dataEnv[, whichc, drop = FALSE])
+    fX <- as.formula(paste("~", paste0(whichc, collapse = "+")))
   }
+  env0 <- modelmatrixI(formula = fX, data = dataEnv, XZ = FALSE)
   Cor_Env_CWM <- wcor(env0, CWM, w = w)
   colnames(Cor_Env_CWM) <- paste0("CWM-ax", seq_len(ncol(Cor_Env_CWM)))
   attr(Cor_Env_CWM, which = "meaning") <- 
