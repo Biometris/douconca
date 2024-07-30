@@ -69,5 +69,5 @@ names(dat)
 names(dat$CWM_SNC)
 levels(dat$CWM_SNC$groups)
 
-plot(out, verbose = FALSE)
+plot(out)
 }

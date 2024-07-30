@@ -193,11 +193,6 @@ respectively, but formulas should then not be \code{~.}.
 
 The statistics and scores in the example \code{dune_dcCA.r}, have been 
 checked against the results in Canoco 5.15 (ter Braak & Šmilauer, 2018).
-
-In the current implementation, \code{formulaEnv} and \code{formulaTraits} 
-should contain variable names as is, \emph{i.e.} transformations of 
-variables in the formulas gives an error ('undefined columns selected') 
-when the \code{\link{scores}} function is applied.
 }
 \examples{
 data("dune_trait_env")
