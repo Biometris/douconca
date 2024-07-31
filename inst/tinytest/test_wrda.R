@@ -49,7 +49,7 @@ expect_equivalent(mod_wrda_ew$site_axes$site_scores$lc_env_scores,
                          choices = seq_len(ncol(mod_wrda_ew$site_axes$site_scores$lc_env_scores)),
                          display= "lc", scaling = "sites", const = const))
 
-wrda_print <- print(mod_wrda)
+expect_stdout(wrda_print <- print(mod_wrda))
 expect_equal(names(wrda_print), 
              c("call", "method", "tot.chi", "formula", "site_axes", 
                "species_axes", "Nobs", "eigenvalues", "weights", "data", "eY", 

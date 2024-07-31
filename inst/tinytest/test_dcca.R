@@ -65,8 +65,8 @@ expect_equivalent(anova_dcca_sites$table[, 1:4], anova_dcca$sites[, 1:4])
 expect_equivalent(anova_dcca_species$eigenvalues, mod_dcca$eigenvalues)
 expect_equivalent(anova_dcca_sites$eigenvalues, mod_dcca$eigenvalues)
 
-expect_warning(dcca_print <- print(mod_dcca),
-               "collinearity detected")
+expect_stdout(expect_warning(dcca_print <- print(mod_dcca),
+                             "collinearity detected"))
 expect_equal(names(dcca_print), 
              c("CCAonTraits", "formulaTraits", "formulaEnv", "data", "call", 
                "weights", "Nobs", "CWMs_orthonormal_traits", "RDAonEnv", 
