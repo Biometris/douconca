@@ -27,6 +27,7 @@
 #' for the selection of species to be displayed. Default: \code{"Fratio1"}; 
 #' if \code{selectname} is not found in \code{species_scores}, set 
 #' to \code{scoresname}.
+#' @param speciesgroup name of the column or variable containing the ...
 #' @param expand amount of extension of the line plot (default 0.2).
 #' @param verbose logical for printing the number of species with names out of
 #' the total number (default: \code{TRUE}).
@@ -50,7 +51,8 @@ plot_species_scores_bk <- function(species_scores,
                                    y_lab_interval = 0.5,
                                    speciesname = NULL, 
                                    scoresname = "RDA1",
-                                   selectname = "Fratio1", 
+                                   selectname = "Fratio1",
+                                   speciesgroup = "species_group",
                                    expand = 0.2, 
                                    verbose = TRUE) {
   # species_scores is a matrix or dataframe  with rownames and a column with 
@@ -79,8 +81,8 @@ plot_species_scores_bk <- function(species_scores,
     selectcrit <- abs(scores)
     threshold <- threshold / 14
   }
-  if ("species_group" %in% namcols) {
-    species_groups <- factor(species_scores[, "species_group"])
+  if (!is.null(speciesgroup) && speciesgroup %in% namcols) {
+    species_groups <- factor(species_scores[, speciesgroup])
   } else {
     species_groups <- NA
   }

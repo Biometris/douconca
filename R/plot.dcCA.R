@@ -267,6 +267,7 @@ fplot_species <- function(pd,
       speciesname = NULL,
       scoresname = "composite_trait",
       selectname = "contribution",
+      speciesgroup = "species_group",
       verbose = FALSE
     )
   } else {

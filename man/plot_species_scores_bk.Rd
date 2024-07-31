@@ -12,6 +12,7 @@ plot_species_scores_bk(
   speciesname = NULL,
   scoresname = "RDA1",
   selectname = "Fratio1",
+  speciesgroup = "species_group",
   expand = 0.2,
   verbose = TRUE
 )
@@ -46,6 +47,8 @@ scores to be plotted (default \code{"RDA1"}).}
 for the selection of species to be displayed. Default: \code{"Fratio1"}; 
 if \code{selectname} is not found in \code{species_scores}, set 
 to \code{scoresname}.}
+
+\item{speciesgroup}{name of the column or variable containing the ...}
 
 \item{expand}{amount of extension of the line plot (default 0.2).}
 
