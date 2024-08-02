@@ -320,6 +320,7 @@ dc_CA <- function(formulaEnv = NULL,
                  Nobs = n,
                  CWMs_orthonormal_traits = CWMs_orthonormal_traits)
   } else {
+    dc_CA_object$call <- call
     if (!is.null(formulaEnv)) {
       dc_CA_object$formulaEnv <- formulaEnv 
     } else if (is.null(dc_CA_object$formulaEnv)) {

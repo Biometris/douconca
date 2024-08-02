@@ -48,7 +48,7 @@ f_trait_axes <- function(out,
                           data = out$data$dataTraits)[, -1, drop = FALSE]
         lc_trait_scores <- standardize_w(X) %*% regr
       } else  {
-        warning("Trait regression coefficients are not availabe.\n")
+        warning("Trait regression coefficients are not available.\n")
         lc_trait_scores <-NULL
       }
       return(

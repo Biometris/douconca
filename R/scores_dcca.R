@@ -244,6 +244,8 @@ scores_dcca <- function(x,
       }
       if (any(take %in% tabula[9:16])) {
         species_axes <- f_trait_axes(x)
+      } else {
+        species_axes <- list(species_scores = NULL)
       }
     } else {
       species_axes <- x$species_axes
@@ -387,14 +389,15 @@ scores_dcca <- function(x,
     sol$centroids <-  cn
   }
   # Species stats
-  if ("species" %in% take) {
+  if ("species" %in% take && !is.null(species_axes$species_scores[[1]])) {
     sol$species <- 
       species_axes$species_scores[[1]][, choices, drop = FALSE] %*% diag_scal_species
     attr(sol$species, which = "meaning")<-
       f_meaning("species", scaling, 
                 "SNC on the environmental axes (constraints sites)")
   }
-  if (inherits(x, "wrda", which = TRUE) != 1){
+  if (inherits(x, "wrda", which = TRUE) != 1 && 
+      !is.null(species_axes$species_scores[[1]])){
     # dcca
     if ("constraints_species" %in% take) {
       sol$constraints_species <- 
