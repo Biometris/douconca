@@ -88,7 +88,6 @@ available in the Canoco software [@Braak2018canoco], but has less appeal in ecol
 such as CWM-regression and fourth-corner correlation analysis, that have proven to be 
 useful in trait-based ecology. 
 
-
 # Example data and questions
 
 We use the `dune_trait_env` data in the package to illustrate dc-CA. It consists of
@@ -105,6 +104,7 @@ dim(dune_trait_env$envir)
 names(dune_trait_env$traits)
 names(dune_trait_env$envir)
 ```
+
 There are five morphological traits (from the `LEDA` trait database)
 and four ecological traits (Ellenberg indicator values for moisture, 
 acidity, nutrients and light).
@@ -140,6 +140,7 @@ mod <- dc_CA(formulaEnv = ~ A1 + Moist + Use + Manure + Mag,
              dataEnv = dune_trait_env$envir,
              dataTraits = dune_trait_env$traits)
 ```
+
 In `douconca`, dc-CA is calculated in two steps that provide useful information each. 
 Step 1 of the dc-CA algorithm summarizes the canonical correspondence analysis (CCA)
 of the transposed response matrix on to the trait data using 
@@ -156,23 +157,29 @@ Step 2 shows that 65.73% of this variation can be explained by the environmental
 using 
 `formulaEnv = ~ A1 + Moist + Use + Manure + Mag`. The constrained axes of this RDA are
 also the dc-CA eigenvalues:
+
 ```{r}
 mod$eigenvalues
 ```
+
 The first axis explains `r round(100*mod$eigenvalues[1]/ sum(mod$eigenvalues),0)`% 
 of the trait-environment variance and this axis is dominated by moisture and by SLA and Seedmass,
 as judged by the size of their regression coefficient and
 (optimistic) t-value on this axis in the print of the model. The default `plot` shows the intra-set correlations of the
 variables with the axis, but t-values can be visualized with 
-```{r}
-plot(mod,gradient_description = 't')
+
+```{r, fig.width=7}
+plot(mod, gradient_description = "t")
 ```
+
 There are two-ways to statistically test the model: (1) the omnibus test (using all five dimensions)
 is obtained with `anova(mod)`,  giving a P-value of about 0.02 and (2) a test per dc-CA axis, obtained by 
+
 ```{r}
 set.seed(1)
 anova(mod, by = "axis")
 ```
+
 In the test per axis, the first axis has P-values of 0.09 and 0.001
 at the species- and site-level, respectively, so that the P-value of the max test is 0.09. 
 
@@ -199,8 +206,6 @@ Note that 10% of the fitted abundance values is negative in our example.
 Negative values indicate likely absences or low abundance values of species with the
 specified traits and environmental values.
 
-
-
 # Which set of traits is most closely related to abundance and to the environment?
 
 In this section, we pose the question whether the set of morphological (functional)
@@ -215,8 +220,8 @@ mod_e <-  dc_CA(formulaEnv = ~ A1 + Moist + Manure + Use + Mag,
                         dataEnv = dune_trait_env$envir,
                         dataTraits = dune_trait_env$traits)
 ```
-The entry `traits_explain` is `r round(mod_e$inertia["traits_explain","weighted variance" ],3)`, 
-which is the variance in the abundance data that is explained by the traits. 
+
+The entry `traits_explain` is `r round(mod_e$inertia["traits_explain","weighted variance" ],3)`, which is the variance in the abundance data that is explained by the traits. 
 It can directly be compared to the corresponding entry in the previous model, which is
 `r round(mod$inertia["traits_explain","weighted variance" ],3)`. The entry 
 `constraintsTE` is the variance in abundance data that is explained by 
@@ -239,11 +244,7 @@ linear combination of the morphological traits.
 In conclusion, the ecological traits explain more of the abundance data and are closer
 related to the environmental variables. 
 
-
-
-
 # Do the morphological traits contribute after accounting for the ecological traits?
-
 
 Do the morphological traits carry important additional information
 on the species (beyond their ecological traits)
@@ -261,12 +262,14 @@ mod_mGe <-  dc_CA(formulaEnv = ~ A1 + Moist + Manure + Use + Mag,
                  dataTraits = dune_trait_env$traits, verbose = FALSE)
 anova(mod_mGe, by= "axis")$max
 ```
+
 As jugded by the test of significance by axes, the morphological traits
 contribute little.
 
 # One trait: CWM regression without inflated type I error.
 
 ## Introduction
+
 CWM regression is know to suffer from serious type I error inflation.
 in statistical testing [@peres2017linking; @lepvs2023differences]. 
 This section shows how to perform CWM regression of a single trait
@@ -279,7 +282,6 @@ We also show the equivalence of the site-level test with that of a CWM-regressio
 the equivalence of the dc-CA and CWM regression coefficients.
 On the way, we give examples of the `scores` and `fCWM_SNC` functions in the `douconca` package.
 
-
 ## Testing the relationship between LDMC and the environmental variables
 
 ```{r}
@@ -290,6 +292,7 @@ mod_LDMC <- dc_CA(formulaEnv = ~ A1 + Moist + Manure + Use + Mag,
                    dataTraits = dune_trait_env$trait, verbose = FALSE)
 anova(mod_LDMC)
 ```
+
 The P-values of the species-level  and site-level permutation tests are
 0.396 and 0.028, respectively, so that the final P-value is 0.396.
 There is thus no evidence that the trait LDMC is related to the 
@@ -306,6 +309,7 @@ CWMSNC_LDMC <- fCWM_SNC(formulaEnv = ~ A1 + Moist + Manure + Use + Mag,
                       dataEnv = dune_trait_env$envir,
                       dataTraits = dune_trait_env$trait, verbose = FALSE)
 ```
+
 The result, `CWMSNC_LDMC`, is a list containing the CWMs of LDMC, among other items. 
 We combine the (community-weighted) mean LDMC to the environmental data, 
 apply linear regresion and compare the model with the null model using `anova`.
@@ -315,6 +319,7 @@ envCWM <- cbind(dune_trait_env$envir,CWMSNC_LDMC$CWM)
 lmLDMC <- lm(LDMC~A1 + Moist + Manure + Use + Mag, data= envCWM)
 anova(lmLDMC, lm(LDMC~1, data= envCWM))
 ```
+
 resulting in a P-value of 0.0279, which is in agreement with the
 P-value of the site-level permutation test of this model. 
 CWM-regression of LDMC shows evidence for a relationship with the 
@@ -338,33 +343,9 @@ of each environmental variable.
 coefs_LDMC_dcCA <- regr_table[, "dcCA1"]/regr_table[, "SDS"]
 range(coef(lmLDMC)[-1]/coefs_LDMC_dcCA)
 ```
+
 The result shows that the two sets of coefficients are equal
 up to a constant of proportionality, here 154.4359.
 
-
-
-
-
-
-
-
-
-
-
 # References
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
