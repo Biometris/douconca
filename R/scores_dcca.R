@@ -304,9 +304,8 @@ scores_dcca <- function(x,
     } else {
       sol$regression <- cbind(site_axes$c_env_normed[, 1:3, drop = FALSE], regr)
     }
-    attr(sol$regression, which = "meaning")<-
-      paste0("mean, sd, VIF, standardized regression coefficients and their ", 
-             "optimistic t-ratio in scaling '", scaling, "'.")
+    attr(sol$regression, which = "meaning") <-
+      paste0("mean, sd, VIF, standardized regression coefficients.")
   }
   if ("t_values" %in% take){
     sol$t_values <- 
@@ -397,7 +396,7 @@ scores_dcca <- function(x,
                 "SNC on the environmental axes (constraints sites)")
   }
   if (inherits(x, "wrda", which = TRUE) != 1 && 
-      !is.null(species_axes$species_scores[[1]])){
+      !is.null(species_axes$species_scores[[1]])) {
     # dcca
     if ("constraints_species" %in% take) {
       sol$constraints_species <- 
@@ -419,8 +418,7 @@ scores_dcca <- function(x,
           cbind(species_axes$c_traits_normed[, 1:3, drop = FALSE], regr)  
       }
       attr(sol$regression_traits, which = "meaning") <-
-        paste0("mean, sd, VIF, standardized regression coefficients and their ", 
-               "optimistic t-ratio in scaling '", scaling, "'.")
+        paste0("mean, sd, VIF, standardized regression coefficients.")
     }
     if ("t_values_traits" %in% take) {
       sol$t_values_traits <- 

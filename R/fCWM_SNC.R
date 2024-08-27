@@ -431,13 +431,13 @@ checkCWM2dc_CA <- function(object,
   formulaTraits <- change_reponse(object$formulaTraits, "Y", 
                                   object$data$dataTraits)
   # object checked..
-  CWM2ortho <- with(object, f2_orth(CWM,formulaTraits, data$dataTraits, 
+  CWM2ortho <- with(object, f2_orth(CWM, formulaTraits, data$dataTraits, 
                                     weights$columns, weights$rows, 
                                     name = "CWM"))
   object$CWMs_orthonormal_traits <- 
     CWM2ortho$CWMs_orthonormal_traits * sqrt((object$Nobs - 1) / object$Nobs)
   if (!is.null(object$SNC) && !is.null(object$weights$rows)) {
-    SNC2ortho <- with(object, f2_orth(SNC,formulaEnv, data$dataEnv, 
+    SNC2ortho <- with(object, f2_orth(SNC, formulaEnv, data$dataEnv, 
                                       weights$rows, weights$columns, 
                                       name = "SNC"))
     object$SNCs_orthonormal_env <- SNC2ortho$CWMs_orthonormal_traits

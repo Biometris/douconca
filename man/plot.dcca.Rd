@@ -33,10 +33,10 @@ and environmental gradient, respectively specifying what to plot in the
 vertical line plots to describe the dc-CA axis (trait and environmental 
 gradients). Default: \code{correlation} for intra-set correlations of both 
 sets of variables with their dc-CA axis. Other values are: 
-\code{c("regression", "weights", "tvalues", "inter_set_correlation")} for 
-regression weights, t-values and (other) namely inter-set correlation, 
+\code{c("weights", "tvalues", "inter_set_correlation")} for 
+regression weights, t-values and inter-set correlation, 
 being the correlation of the SNCs and CWMs with the traits and environmental
-variables, respectively.}
+variables, respectively. \code{"regression"} is an alias for \code{"weights"}.}
 
 \item{envfactor}{name of row factor to display as color and lines in the CWM
 plot (default \code{NULL}). The default extracts the factor from the 
