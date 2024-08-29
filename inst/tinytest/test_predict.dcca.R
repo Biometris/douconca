@@ -32,10 +32,10 @@ CWMSNC <- list(CWM = predTraits, SNC = predEnv, weights = mod_dcca$weights,
                formulaTraits = mod_dcca$formulaTraits)
 CWMSNC$data$Y <- NULL
 
-expect_warning(mod_dcca2 <- dc_CA(response = CWMSNC,
+expect_message(mod_dcca2 <- dc_CA(response = CWMSNC,
                                   divideBySiteTotals = divide,
                                   verbose = FALSE),
-               "overfitted model")
+               "The model is overfitted with no unconstrained")
 
 expect_equal(mod_dcca2$eigenvalues, mod_dcca$eigenvalues)
 
@@ -94,10 +94,10 @@ CWMSNC3 <- list(CWM = predTraits2[, -1], SNC = predEnv2[, -2],
                 formulaTraits = mod_dcca2$formulaTraits)
 CWMSNC3$data$Y <- NULL
 
-expect_warning(mod_dcca3 <- dc_CA(response = CWMSNC3,
+expect_message(mod_dcca3 <- dc_CA(response = CWMSNC3,
                                   divideBySiteTotals = divide,
                                   verbose = FALSE),
-               "overfitted model")
+               "The model is overfitted with no unconstrained")
 
 # the contribution of Moisture
 expect_equal(mod_dcca$inertia["constraintsTE",1] - 

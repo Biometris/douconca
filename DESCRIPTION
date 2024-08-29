@@ -2,7 +2,8 @@ Package: douconca
 Type: Package
 Title: Double Constrained Correspondence Analysis for Trait-Environment 
     Analysis in Ecology
-Version: 1.1.6
+Version: 1.2.0
+Date: 2024-08-29
 Authors@R: c(person(given = "Cajo J.F", 
                     family = "ter Braak", 
                     email = "cajo.terbraak@wur.nl",
@@ -43,7 +44,7 @@ Imports:
     permute,
     rlang,
     stats,
-    vegan
+    vegan (>= 2.6-8)
 RoxygenNote: 7.3.2
 NeedsCompilation: no
 Suggests: 

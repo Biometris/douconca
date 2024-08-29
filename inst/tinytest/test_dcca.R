@@ -37,14 +37,14 @@ expect_warning(scores(mod_dcca2),"collinearity detected in CWM-model")
 dune_trait_env$traits$Species <- factor(dune_trait_env$traits$Species)
 dune_trait_env$traits$Species_abbr <- factor(dune_trait_env$traits$Species_abbr)
 
-expect_warning(mod_dcca3 <- dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure,
+expect_message(mod_dcca3 <- dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure,
                                   formulaTraits = ~ Species_abbr + SLA,
                                   response = dune_trait_env$comm[, -1],
                                   dataEnv = dune_trait_env$envir,
                                   dataTraits = dune_trait_env$traits,
                                   divideBySiteTotals = divide,
                                   verbose = FALSE),
-               "overfitted model")
+               "Some constraints or conditions were aliased because they were redundant")
 
 expect_warning(scores(mod_dcca3),"collinearity detected in SNC-model")																			
 expect_inherits(mod_dcca, "dcca")
@@ -55,10 +55,12 @@ expect_warning(scores_dcca <- scores(mod_dcca),
 expect_equal_to_reference(scores_dcca, "scores_dcca")
 
 set.seed(37)
-anova_dcca <- anova(mod_dcca)
+expect_message(anova_dcca <- anova(mod_dcca),
+               "Some constraints or conditions were aliased because they were redundant")
 expect_equal_to_reference(anova_dcca, "anova_dcca")
 
-anova_dcca_species <- anova_species(mod_dcca)
+expect_message(anova_dcca_species <- anova_species(mod_dcca),
+               "Some constraints or conditions were aliased because they were redundant")
 expect_equivalent(anova_dcca_species$table[, 1:4], anova_dcca$species[, 1:4])
 
 anova_dcca_sites <- anova_sites(mod_dcca)
