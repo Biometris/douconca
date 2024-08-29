@@ -31,9 +31,7 @@ Description: Double constrained correspondence analysis (dc-CA) analyzes
    uses douconca::wrda but vegan::rda if the site weights are equal. This 
    version has a predict function. For details see ter Braak et al. 2018
    <doi:10.1007/s10651-017-0395-x>.
-URL: https://github.com/CajoterBraak/douconca
-BugReports: https://github.com/CajoterBraak/douconca/issues
-Depends: R (>= 3.5.0)
+Depends: R (>= 3.6.0)
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -48,7 +46,9 @@ Imports:
 RoxygenNote: 7.3.2
 NeedsCompilation: no
 Suggests: 
+    rmarkdown,
     knitr,
-    rmarkdown, 
     tinytest
 VignetteBuilder: knitr
+URL: https://github.com/CajoterBraak/douconca
+BugReports: https://github.com/CajoterBraak/douconca/issues

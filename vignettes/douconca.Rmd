@@ -1,12 +1,13 @@
 ---
 title: "douconca"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette
 bibliography: dcCAbibliography.bib
 link-citations: yes
 vignette: >
   %\VignetteIndexEntry{douconca}
-  %\VignetteEngine{knitr::knitr}
-  \usepackage[utf8]{inputenc}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
