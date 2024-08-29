@@ -48,5 +48,6 @@ RoxygenNote: 7.3.2
 NeedsCompilation: no
 Suggests: 
     knitr,
-    rmarkdown, tinytest
+    rmarkdown, 
+    tinytest
 VignetteBuilder: knitr

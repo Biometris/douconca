@@ -25,7 +25,7 @@ The aim of the `douconca` package is to help ecologists unravel trait-environmen
 relationships from an abundance data table with
 associated multi-trait and multi-environment data tables.
 A popular method to such aim is RLQ [@doledec1996RLQ;@dray2014RLQ],
-which also a three-tables method. RLQ is available in the R-package `ade4` [@dray2007ade4; @thioulouse2018multivariate].
+which also a three-tables method. RLQ is available in the R-package `ade4`[@dray2007ade4; @thioulouse2018multivariate].
 The `douconca` package provides an alternative method, termed 
 double-constrained correspondence analysis (dc-CA), which is a natural 
 extension of the commonly used method of community-weighted means (CWMs) regression
@@ -35,7 +35,8 @@ As dc-CA is based on both regression analysis and ordination
 and of biplots of resulting scores.
 There are a number of recent applications that also contain discussion
 on the value of dc-CA compared to RLQ
-[@peng2021double;@gobbi2022hay;@pinho2021functional].
+[@peng2021double;@gobbi2022hay;@pinho2021functional], summarized in this document on
+[ResearchGate](https://www.researchgate.net/publication/379731819_dc-CA_RLQ).
 
 The `douconca` package has a `formula`-interface to specify the dc-CA model, 
 and `scores`, `anova`, `plot` and `predict` functions, mostly fairly similar to
@@ -69,24 +70,24 @@ Statistical testing is by the max test [@Braak2012max_test],
 evaluated by extensive simulation [@Braak2019MEE].
 This test combines two permutations tests, one
 permuting sites and the other permuting species, the maximum P-value
-of which is the final P-value. The permutations are
-specified via `permute` package [@permute2022] like they are
-in the `vegan` package, which allow for analysis of
+of which is the final P-value. As in the `vegan` package, the permutations are
+specified via the `permute` package [@permute2022], so as to allow for analysis of
 hierarchical and nested data designs [@gobbi2022hay].
 
 In `douconca`, a dc-CA models is specified by two formulas:
 a `formula` for the sites (rows) with environmental predictors and a
 `formula` for the species (columns) with trait predictors, which both 
-may contain factors, quantitative variance and transformations thereof, and interactions,
+may contain factors, quantitative variables and transformations thereof, and interactions,
 like in any (generalized) linear regression model. 
 The formulas specify the constraints applied to
 the site and species scores; without constraints dc-CA is simply
 correspondence analysis.
 
-The double constrained version of principal components analyis also exists and is
+The double constrained version of principal components analysis also exists and is
 available in the Canoco software [@Braak2018canoco], but has less appeal in ecological applications as it lacks ecological realism, ease of interpretation and the link to methods, 
-such as CWM-regression and fourth-corner correlation analysis, that have proven to be 
+such as CWM-regression and fourth-corner correlation analysis, which have proven to be 
 useful in trait-based ecology. 
+
 
 # Example data and questions
 
@@ -104,7 +105,6 @@ dim(dune_trait_env$envir)
 names(dune_trait_env$traits)
 names(dune_trait_env$envir)
 ```
-
 There are five morphological traits (from the `LEDA` trait database)
 and four ecological traits (Ellenberg indicator values for moisture, 
 acidity, nutrients and light).
@@ -124,9 +124,7 @@ which of the trait sets has the larger such variation?
 * Which of the  trait sets (morphological versus ecological) is more closely related to
 the environmental variables?
 
-
-
-# Basic analysis
+## Basic analysis
 
 The next code gives a basic dc-CA analysis. 
 The response matrix or data frame must be numerical, with columns representing the species.
@@ -169,11 +167,13 @@ as judged by the size of their regression coefficient and
 variables with the axis, but t-values can be visualized with 
 
 ```{r, fig.width=7}
-plot(mod, gradient_description = "t")
+plot(mod,gradient_description = "t")
 ```
 
+## Statistical testing
+
 There are two-ways to statistically test the model: (1) the omnibus test (using all five dimensions)
-is obtained with `anova(mod)`,  giving a P-value of about 0.02 and (2) a test per dc-CA axis, obtained by 
+is obtained with `anova(mod)`, giving a P-value of about 0.02 and (2) a test per dc-CA axis, obtained by 
 
 ```{r}
 set.seed(1)
@@ -182,7 +182,6 @@ anova(mod, by = "axis")
 
 In the test per axis, the first axis has P-values of 0.09 and 0.001
 at the species- and site-level, respectively, so that the P-value of the max test is 0.09. 
-
 A little more explanation may be instructive.
 The species-level test consists of testing the 
 (weighted) regression of the species-niche-centroids with respect to
@@ -193,6 +192,8 @@ Both tests are carried out by permutation, the first by permuting species in the
 the second by permuting sites in the environmental data.
 A new dc-CA is carried out for each permuted data set. For a full description see under Details
 in the help system.
+
+## Fitted values and predictions
 
 There are three kinds of fitted values (and of predictions for new data):
 
@@ -212,33 +213,36 @@ In this section, we pose the question whether the set of morphological (function
 traits is more or less related to species abundance and to the environmental
 variables than the set of ecological traits.
 
-
 ``` {r}
 mod_e <-  dc_CA(formulaEnv = ~ A1 + Moist + Manure + Use + Mag,
-                        formulaTraits = ~ F+R+N+L,
-                        response = Y,
-                        dataEnv = dune_trait_env$envir,
-                        dataTraits = dune_trait_env$traits)
+                formulaTraits = ~ F + R+ N + L,
+                response = Y,
+                dataEnv = dune_trait_env$envir,
+                dataTraits = dune_trait_env$traits)
 ```
 
-The entry `traits_explain` is `r round(mod_e$inertia["traits_explain","weighted variance" ],3)`, which is the variance in the abundance data that is explained by the traits. 
+The entry `traits_explain` is `r round(mod_e$inertia["traits_explain", "weighted variance" ], 3)`, 
+which is the variance in the abundance data that is explained by the traits. 
 It can directly be compared to the corresponding entry in the previous model, which is
-`r round(mod$inertia["traits_explain","weighted variance" ],3)`. The entry 
+`r round(mod$inertia["traits_explain", "weighted variance" ], 3)`. The entry 
 `constraintsTE` is the variance in abundance data that is explained by 
-traits and environmental variables jointly. Its value in the second model  
-is higher than that in the first. 
+traits and environmental variables jointly. 
+Its value in the second model is higher than that in the first. 
 On closer examination of the results, the second eigenvalue of the last model is
 even higher than the first one of the first model and, indeed, the first two 
-dc-CA axes are significant:
+dc-CA axes are significant as can be seen from an `anova`:
+
 ```{r}
 anova(mod_e, by = "axis")$max
 ```
 
 The fourth-corner correlation of the best linear combination of the
-ecological traits with the best linear combinination of the environmental variables is 
+ecological traits with the best linear combination of the environmental variables is 
+
 ```{r}
 round(sqrt(mod_e$eigenvalues[1]), 2)
 ```
+
 compared to `r round(sqrt(mod$eigenvalues[1]), 2)` for the best
 linear combination of the morphological traits.
 In conclusion, the ecological traits explain more of the abundance data and are closer
@@ -270,7 +274,7 @@ contribute little.
 
 ## Introduction
 
-CWM regression is know to suffer from serious type I error inflation.
+CWM regression is know to suffer from serious type I error inflation
 in statistical testing [@peres2017linking; @lepvs2023differences]. 
 This section shows how to perform CWM regression of a single trait
 using dc-CA with a `max` test to guard against type I error inflation.
@@ -309,15 +313,14 @@ CWMSNC_LDMC <- fCWM_SNC(formulaEnv = ~ A1 + Moist + Manure + Use + Mag,
                       dataEnv = dune_trait_env$envir,
                       dataTraits = dune_trait_env$trait, verbose = FALSE)
 ```
-
 The result, `CWMSNC_LDMC`, is a list containing the CWMs of LDMC, among other items. 
 We combine the (community-weighted) mean LDMC to the environmental data, 
 apply linear regresion and compare the model with the null model using `anova`.
 
 ```{r}
-envCWM <- cbind(dune_trait_env$envir,CWMSNC_LDMC$CWM)
-lmLDMC <- lm(LDMC~A1 + Moist + Manure + Use + Mag, data= envCWM)
-anova(lmLDMC, lm(LDMC~1, data= envCWM))
+envCWM <- cbind(dune_trait_env$envir, CWMSNC_LDMC$CWM)
+lmLDMC <- lm(LDMC ~ A1 + Moist + Manure + Use + Mag, data = envCWM)
+anova(lmLDMC, lm(LDMC ~ 1, data = envCWM))
 ```
 
 resulting in a P-value of 0.0279, which is in agreement with the
@@ -333,19 +336,18 @@ We now show that the regression coefficients issued by dc-CA with a single trait
 are, up to a scaling constant, identical to those of a linear CWM-regression
 of this trait.
 
-We first extract the regression coeffients from the dc-CA model using the `scores` function.
-The second line calculates the regression coeffients by
-dividing the standardize regression coeffients from `dc_CA` by the standard deviation
+We first extract the regression coefficients from the dc-CA model using the `scores` function.
+The second line calculates the regression coefficients by
+dividing the standardize regression coefficients from `dc_CA` by the standard deviation
 of each environmental variable.
 
 ```{r}
 (regr_table <- scores(mod_LDMC, display = "reg"))
-coefs_LDMC_dcCA <- regr_table[, "dcCA1"]/regr_table[, "SDS"]
-range(coef(lmLDMC)[-1]/coefs_LDMC_dcCA)
+coefs_LDMC_dcCA <- regr_table[, "dcCA1"] / regr_table[, "SDS"]
+range(coef(lmLDMC)[-1] / coefs_LDMC_dcCA)
 ```
 
 The result shows that the two sets of coefficients are equal
 up to a constant of proportionality, here 154.4359.
 
 # References
-

@@ -55,8 +55,8 @@ variable in the \code{CWM_SNC} data frame of the return value/in the plot.}
 plot with at most \code{nspecies} that have the highest contribution.}
 
 \item{species_groups}{name of a variable in \code{dataTraits} of 
-\code{\link{dc_CA}}. Default \code{NULL} for no grouping. NOT yet 
-implemented.}
+\code{\link{dc_CA}}. Default \code{NULL} for no grouping. 
+Species groups are colored differentially.}
 
 \item{widths}{relative widths of the CWM-SNC plot, the correlation/weight
 plot and the species plot. (see \code{\link[gridExtra]{grid.arrange}}). 

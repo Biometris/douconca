@@ -27,7 +27,8 @@
 #' for the selection of species to be displayed. Default: \code{"Fratio1"}; 
 #' if \code{selectname} is not found in \code{species_scores}, set 
 #' to \code{scoresname}.
-#' @param speciesgroup name of the column or variable containing the ...
+#' @param speciesgroup name of the factor, the levels of which
+#' receive different colors in the vertical plot.
 #' @param expand amount of extension of the line plot (default 0.2).
 #' @param verbose logical for printing the number of species with names out of
 #' the total number (default: \code{TRUE}).

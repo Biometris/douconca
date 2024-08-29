@@ -442,8 +442,6 @@ checkCWM2dc_CA <- function(object,
                                       name = "SNC"))
     object$SNCs_orthonormal_env <- SNC2ortho$CWMs_orthonormal_traits
   }
-  object$data$CWM <- object$CWM
-  object$CWM <- NULL
   object$CWM2CWM_ortho <- CWM2ortho$CWM2CWM_ortho
   return(object)
 }
