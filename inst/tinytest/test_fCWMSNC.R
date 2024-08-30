@@ -22,8 +22,8 @@ CWMSNCa <- fCWM_SNC(formulaEnv = dcca_mod$formulaEnv,
 
 expect_inherits(CWMSNCa, "list")
 expect_equal(names(CWMSNCa), 
-             c("CWM", "SNC", "formulaEnv", "formulaTraits", "env_explain", 
-               "weights", "call", "data"))
+             c("CWM", "SNC", "formulaEnv", "formulaTraits", "weights", 
+               "call", "data"))
 
 CWMSNCb <- fCWM_SNC(formulaEnv = dcca_mod$formulaEnv,
                     formulaTraits = dcca_mod$formulaTraits,
@@ -37,9 +37,8 @@ CWMSNCb <- fCWM_SNC(formulaEnv = dcca_mod$formulaEnv,
 expect_inherits(CWMSNCb, "list")
 expect_equal(names(CWMSNCb), 
              c("CWM", "CWMs_orthonormal_traits", "SNC", "SNCs_orthonormal_env", 
-               "Nobs", "traits_explain", "env_explain", "formulaEnv", 
-               "formulaTraits", "trans2ortho", "T_ortho", "weights", "call", 
-               "data"))
+               "Nobs", "traits_explain", "formulaEnv", "formulaTraits", 
+               "trans2ortho", "T_ortho", "weights", "call", "data"))
 
 dcca_mod2 <- dc_CA(formulaEnv = dcca_mod$formulaEnv,
                    response = CWMSNCa,  
