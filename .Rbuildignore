@@ -7,3 +7,4 @@ unused
 ^README\.Rmd$
 public
 testScripts
+^cran-comments\.md$
