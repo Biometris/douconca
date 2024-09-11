@@ -8,3 +8,4 @@ unused
 public
 testScripts
 ^cran-comments\.md$
+^CRAN-SUBMISSION$

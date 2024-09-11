@@ -1,4 +1,16 @@
+## Initial release
+
 Initial CRAN release
+
+Addressed remarks from previous release attempt - mainly return values for 
+all functions
+
+## Test environments
+
+* local Windows 10 install, R 4.4.1
+* winbuilder (develop)
+* Ubuntu (on github actions, devel and release)
+* macOS (on github actions, release)
 
 ## R CMD check results
 

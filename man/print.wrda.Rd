@@ -11,6 +11,9 @@
 
 \item{...}{Other arguments passed to the function (currently ignored).}
 }
+\value{
+No return value, results are printed to console.
+}
 \description{
 Print a summary of a wrda object
 }

@@ -55,6 +55,9 @@ Centroids are not displayed in this case.}
 \item{getPlotdata2plotdCCA}{the results of an \code{\link{getPlotdata}}. 
 Default \code{NULL}.}
 }
+\value{
+a ggplot object
+}
 \description{
 \code{plot_dcCA_CWM_SNC} plots the CWMs and SNCs of a dc-CA axis against 
 this axis, with optional centroids and colors for groups of sites and/or 

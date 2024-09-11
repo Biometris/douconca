@@ -3,7 +3,7 @@
 \name{getPlotdata}
 \alias{getPlotdata}
 \title{Utility function: extracting data from a \code{\link{dc_CA}} object for 
-plotting  a single axis by your own code or \code{\link{plot.dcca}}.}
+plotting a single axis by your own code or \code{\link{plot.dcca}}.}
 \usage{
 getPlotdata(
   x,
@@ -44,6 +44,14 @@ the environmental centroid names (from left to right).}
 \item{remove_centroids}{logical to remove any centroids from the plot data 
 (default \code{FALSE}). Can be a two-vector, \emph{e.g.} 
 \code{c(TRUE, FALSE)} to remove only the environmental centroids.}
+}
+\value{
+A list with three components
+\describe{
+\item{CWM_SNC}{a data.frame containing plot data}
+\item{trait_env_scores}{a vector of scores per trait/environment}
+\item{newNamesList}{a vector of new names to be used in the plot}
+}
 }
 \description{
 \code{getPlotdata} extracts data from a \code{\link{dc_CA}} object for 

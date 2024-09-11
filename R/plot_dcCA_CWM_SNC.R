@@ -28,6 +28,8 @@
 #' 
 #' The function is used in \code{\link{plot.dcca}}.
 #' 
+#' @return a ggplot object
+#' 
 #' @examples 
 #' data("dune_trait_env")
 #' 

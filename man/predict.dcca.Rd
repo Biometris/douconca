@@ -34,6 +34,10 @@ For \code{type = "response"}, newdata is a list of two data frames with
 trait and environmental values in this order, \emph{e.g.} 
 \code{list(traits = dataTraits, env = dataEnv)}.}
 }
+\value{
+a matrix with the predictions. The exact content of the matrix 
+depends on the \code{type} of predictions that are being made.
+}
 \description{
 Prediction of traits from environment, environment from traits and response 
 from trait and environment data.

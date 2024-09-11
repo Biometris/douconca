@@ -81,6 +81,9 @@ groups of points.}
 
 \item{verbose}{logical. Default \code{TRUE} for plotting the result.}
 }
+\value{
+a ggplot object
+}
 \description{
 \code{plot.dcca} plots the CWMs and SNCs of a dc-CA axis against this axis,
 with optional centroids and colors for groups of sites and/or species if 
