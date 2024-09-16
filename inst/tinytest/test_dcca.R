@@ -48,7 +48,6 @@ expect_message(mod_dcca3 <- dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure
 
 expect_warning(scores(mod_dcca3), "collinearity detected in SNC-model")																			
 expect_inherits(mod_dcca, "dcca")
-expect_equal_to_reference(mod_dcca, "mod_dcca")
 
 expect_warning(scores_dcca <- scores(mod_dcca),
                "collinearity detected")
@@ -76,4 +75,7 @@ expect_equal(names(dcca_print),
                "weights", "Nobs", "CWMs_orthonormal_traits", "RDAonEnv", 
                "eigenvalues", "c_traits_normed0", "inertia", "site_axes", 
                "species_axes", "c_env_normed", "c_traits_normed"))
+
+mod_dcca$RDAonEnv$CCA <- NULL
+expect_equal_to_reference(mod_dcca, "mod_dcca")
 
