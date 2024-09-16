@@ -51,6 +51,7 @@
 <div class="page-header"><h1 id="douconca">douconca<a class="anchor" aria-label="anchor" href="#douconca"></a>
 </h1></div>
 <!-- badges: start -->
+
 <!-- badges: end -->
 <p>R library <code>douconca</code> analyzes multi-trait multi-environment ecological data by double constrained correspondence analysis (ter Braak et al. 2018) using <code>vegan</code> and native R code. It has a <code>formula</code> interface for the trait- (column-) and environment- (row-) models, which allows to assess, for example, the importance of trait interactions in shaping ecological communities. Throughout the two step algorithm of ter Braak et al. (2018) is used. This algorithm combines and extends community- (sample-) and species-level analyses, i.e. the usual community weighted means (CWM)-based regression analysis and the species-level analysis of species-niche centroids (SNC)-based regression analysis. The CWM regressions are specified with an environmental formula and the SNC regressions are specified with a trait formula. dcCA finds the environmental and trait gradients that optimize these regressions. The first step uses <a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link uri">cca</a> (Oksanen et al. 2022) to regress the transposed abundance data on to the traits and (weighted) redundancy analysis to regress the community-weighted means (CWMs) of the orthonormalized traits, obtained from the first step, on to the environmental predictors. The sample total of the abundance data are used as weights. The redundancy analysis is carried out using <a href="https://vegandevs.github.io/vegan/reference/rda.html" class="external-link uri">rda</a> if sites have equal weights (after division of the rows by their total) or, in the general weighted case, using <code>wrda</code>. Division by the sample total has the advantage that the multivariate analysis corresponds with an unweighted (multi-trait) community-level analysis, instead of being weighted, which may give a puzzling difference between common univariate and this multivariate analysis.</p>
 <p>Reference: ter Braak, CJF, Šmilauer P, and Dray S. 2018. Algorithms and biplots for double constrained correspondence analysis. Environmental and Ecological Statistics, 25(2), 171-197. <a href="https://doi.org/10.1007/s10651-017-0395-x" class="external-link uri">https://doi.org/10.1007/s10651-017-0395-x</a></p>
@@ -95,7 +96,15 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.r-pkg.org/pkg/douconca" class="external-link"><img src="https://www.r-pkg.org/badges/version/douconca"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/douconca" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/douconca" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://github.com/Biometris/douconca/actions?workflow=R-CMD-check" class="external-link"><img src="https://github.com/Biometris/douconca/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/Biometris/douconca" class="external-link"><img src="https://codecov.io/gh/Biometris/douconca/branch/main/graph/badge.svg" alt="codecov"></a></li>
+</ul>
+</div>
 
   </aside>
 </div>
