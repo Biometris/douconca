@@ -2,7 +2,7 @@ Package: douconca
 Type: Package
 Title: Double Constrained Correspondence Analysis for Trait-Environment 
     Analysis in Ecology
-Version: 1.2.0
+Version: 1.2.1
 Date: 2024-08-29
 Authors@R: c(person(given = "Cajo J.F", 
                     family = "ter Braak", 
@@ -51,5 +51,5 @@ Suggests:
     knitr,
     tinytest
 VignetteBuilder: knitr
-URL: https://github.com/CajoterBraak/douconca
-BugReports: https://github.com/CajoterBraak/douconca/issues
+URL: https://github.com/Biometris/douconca
+BugReports: https://github.com/Biometris/douconca/issues
