@@ -46,7 +46,7 @@ expect_message(mod_dcca3 <- dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure
                                   verbose = FALSE),
                "Some constraints or conditions were aliased because they were redundant")
 
-expect_warning(scores(mod_dcca3),"collinearity detected in SNC-model")																			
+expect_warning(scores(mod_dcca3), "collinearity detected in SNC-model")																			
 expect_inherits(mod_dcca, "dcca")
 expect_equal_to_reference(mod_dcca, "mod_dcca")
 
