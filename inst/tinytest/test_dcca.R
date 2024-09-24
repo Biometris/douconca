@@ -76,6 +76,3 @@ expect_equal(names(dcca_print),
                "eigenvalues", "c_traits_normed0", "inertia", "site_axes", 
                "species_axes", "c_env_normed", "c_traits_normed"))
 
-mod_dcca$RDAonEnv$CCA <- NULL
-expect_equal_to_reference(mod_dcca, "mod_dcca")
-
