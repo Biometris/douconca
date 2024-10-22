@@ -1,0 +1,180 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "douconca",
+  "description": "Double constrained correspondence analysis (dc-CA) analyzes (multi-)trait (multi-)environment ecological data by using the 'vegan' package and native R code. Throughout the two step algorithm of ter Braak et al. (2018) is used. This algorithm combines and extends community- (sample-) and species-level analyses, i.e. the usual community weighted means (CWM)-based regression analysis and the species-level analysis of species-niche centroids (SNC)-based regression analysis. The two steps use canonical correspondence analysis to regress the abundance data on to the traits and (weighted) redundancy analysis to regress the CWM of the orthonormalized traits on to the environmental predictors. The function dc_CA() has an option to divide the abundance data of a site by the site total, giving equal site weights. This division has the advantage that the multivariate analysis corresponds with an unweighted (multi-trait) community-level analysis, instead of being weighted. The first step of the algorithm uses vegan::cca(). The second step uses wrda() but vegan::rda() if the site weights are equal. This version has a predict() function. For details see ter Braak et al. 2018 <doi:10.1007/s10651-017-0395-x>.",
+  "name": "douconca: Double Constrained Correspondence Analysis for Trait-Environment \n    Analysis in Ecology",
+  "codeRepository": "https://github.com/Biometris/douconca",
+  "issueTracker": "https://github.com/Biometris/douconca/issues",
+  "license": "https://spdx.org/licenses/GPL-3.0",
+  "version": "1.2.1",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.4.1 (2024-06-14 ucrt)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Cajo J.F",
+      "familyName": "ter Braak",
+      "email": "cajo.terbraak@wur.nl",
+      "@id": "https://orcid.org/0000-0002-0414-8745"
+    },
+    {
+      "@type": "Person",
+      "givenName": "Bart-Jan",
+      "familyName": "van Rossum",
+      "email": "bart-jan.vanrossum@wur.nl",
+      "@id": "https://orcid.org/0000-0002-8673-2514"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Bart-Jan",
+      "familyName": "van Rossum",
+      "email": "bart-jan.vanrossum@wur.nl",
+      "@id": "https://orcid.org/0000-0002-8673-2514"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "tinytest",
+      "name": "tinytest",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tinytest"
+    }
+  ],
+  "softwareRequirements": {
+    "1": {
+      "@type": "SoftwareApplication",
+      "identifier": "R",
+      "name": "R",
+      "version": ">= 3.6.0"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggplot2",
+      "name": "ggplot2",
+      "version": ">= 3.5.1",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggplot2"
+    },
+    "3": {
+      "@type": "SoftwareApplication",
+      "identifier": "ggrepel",
+      "name": "ggrepel",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggrepel"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "gridExtra",
+      "name": "gridExtra",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=gridExtra"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "permute",
+      "name": "permute",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=permute"
+    },
+    "6": {
+      "@type": "SoftwareApplication",
+      "identifier": "rlang",
+      "name": "rlang",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rlang"
+    },
+    "7": {
+      "@type": "SoftwareApplication",
+      "identifier": "stats",
+      "name": "stats"
+    },
+    "8": {
+      "@type": "SoftwareApplication",
+      "identifier": "vegan",
+      "name": "vegan",
+      "version": ">= 2.6-8",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=vegan"
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "548.041KB",
+  "releaseNotes": "https://github.com/Biometris/douconca/blob/master/NEWS.md",
+  "readme": "https://github.com/Biometris/douconca/blob/main/README.md",
+  "contIntegration": ["https://github.com/Biometris/douconca/actions?workflow=R-CMD-check", "https://app.codecov.io/gh/Biometris/douconca"],
+  "keywords": ["correspondence-analysis", "ecology", "ecology-modeling", "multi-environment", "multi-trait", "r-package"],
+  "relatedLink": "https://CRAN.R-project.org/package=douconca"
+}
