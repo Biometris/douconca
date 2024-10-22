@@ -10,3 +10,4 @@ testScripts
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
 .github
+.zenodo.json

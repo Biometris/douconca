@@ -10,6 +10,7 @@
 downloads](https://cranlogs.r-pkg.org/badges/douconca)](https://www.r-pkg.org/pkg/douconca)
 [![R-CMD-check](https://github.com/Biometris/douconca/workflows/R-CMD-check/badge.svg)](https://github.com/Biometris/douconca/actions?workflow=R-CMD-check)
 [![codecov](https://codecov.io/gh/Biometris/douconca/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Biometris/douconca)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13970152.svg)](https://zenodo.org/badge/DOI/10.5281/zenodo.13970152.svg)
 
 <!-- badges: end -->
 
