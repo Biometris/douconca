@@ -1,3 +1,10 @@
+# douconca 1.2.2
+
+* New coef.dcca() and fitted.dcca() functions with predict.dcca() adapted.
+The function coef() can give fourth-corner correlations and regression 
+coefficients. 
+* Patch release with extended test files and associated small corrections.
+
 # douconca 1.2.1
 
 * Patch release addressing check errors on several CRAN build machines.

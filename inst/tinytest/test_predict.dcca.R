@@ -2,108 +2,160 @@ data("dune_trait_env")
 
 # rownames are carried forward in results
 rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
-divide <- TRUE # divide by site.totals if TRUE
+# use vegan::rda in step 2
+divide <- FALSE # divide by site.totals if TRUE
 
-mod_dcca <- dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Manure,
-                  formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
-                  response = dune_trait_env$comm[, -1],  # must delete "Sites"
-                  dataEnv = dune_trait_env$envir,
-                  dataTraits = dune_trait_env$traits,
+Y <- dune_trait_env$comm[, -1]  # must delete "Sites"
+# delete "Species", "Species_abbr" from traits and
+# use all remaining variables due to formulaTraits = ~. (the default)
+traits <- dune_trait_env$traits
+envir <- dune_trait_env$envir
+
+# test a normal model
+mod1a <- dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure,
+               formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
+               response = Y, 
+               dataEnv = envir,
+               dataTraits = traits,
+               divideBySiteTotals = divide, 
+               verbose = FALSE)
+
+# five types of full rank prediction:
+predDivF1a_reg <- coef(mod1a, type = "env2traits")
+predDivF1a_reg_traits <- coef(mod1a, type = "traits2env")
+predDivF1a_env <- predict(mod1a, type = "env")
+predDivF1a_traits <- predict(mod1a, type = "traits")
+predDivF1a_response <- predict(mod1a, type = "response")
+
+expect_equal_to_reference(predDivF1a_reg, "predDivF1a_reg") 
+expect_equal_to_reference(predDivF1a_reg_traits, "predDivF1a_reg_traits") 
+expect_equal_to_reference(predDivF1a_env, "predDivF1a_env") 
+expect_equal_to_reference(predDivF1a_traits, "predDivF1a_traits") 
+expect_equal_to_reference(predDivF1a_response, "predDivF1a_response") 
+
+# five type of rank 1 predDivFiction
+predDivF1a_reg1 <- coef(mod1a, type = "env2traits", rank = 1)
+predDivF1a_reg_traits1 <- coef(mod1a, type = "traits2env", rank = 1)
+predDivF1a_env1 <- predict(mod1a, type = "env", rank = 1)
+predDivF1a_traits1 <- predict(mod1a, type = "traits", rank = 1)
+predDivF1a_response1 <- predict(mod1a, type = "response", rank = 1)
+
+expect_equal_to_reference(predDivF1a_reg1, "predDivF1a_reg1") 
+expect_equal_to_reference(predDivF1a_reg_traits1, "predDivF1a_reg_traits1") 
+expect_equal_to_reference(predDivF1a_env1, "predDivF1a_env1") 
+expect_equal_to_reference(predDivF1a_traits1, "predDivF1a_traits1") 
+expect_equal_to_reference(predDivF1a_response1, "predDivF1a_response1") 
+
+expect_equal(predict(mod1a, type = "env", rank = 1), 
+             fitted(mod1a, type = "SNC", rank = 1))
+expect_equal(predict(mod1a, type = "traits", rank = 1), 
+             fitted(mod1a, type = "CWM", rank = 1))
+expect_equal(
+  predict(mod1a, type = "response", rank = 1, weights = mod1a$weights) * sum(mod1a$data$Y), 
+  fitted(mod1a, type = "response", rank = 1))
+
+# test factors only
+envir$fUse <- factor(envir$Use)
+traits$fSLA <- cut(traits$SLA, 3)
+mod_fact<- dc_CA(formulaEnv = ~ fUse + Mag,
+                 formulaTraits = ~ fSLA + Lifespan ,
+                 response = Y, 
+                 dataEnv = envir, 
+                 dataTraits = traits,
+                 divideBySiteTotals = divide, 
+                 verbose = FALSE)
+
+expect_equal(colnames(predict(mod_fact, type = "env")), 
+             c("fUse1", "fUse2", "fUse3", "MagSF", "MagBF", "MagHF", "MagNM"))
+
+expect_equal(colnames(predict(mod_fact, type = "traits")),
+             c( "fSLA(5.77,15]", "fSLA(15,24.2]", "fSLA(24.2,33.4]", 
+                "Lifespanannual", "Lifespanperennial"))
+
+traits$lifequant <- 1 * traits$Lifespan %in% "perennial"
+mod_factb<- dc_CA(formulaEnv = ~ fUse + Mag,
+                  formulaTraits = ~ fSLA + lifequant ,
+                  response = Y, 
+                  dataEnv = envir, 
+                  dataTraits = traits,
                   divideBySiteTotals = divide,
                   verbose = FALSE)
 
-predTraits <- predict(mod_dcca, type = "traits")
-expect_equal_to_reference(predTraits, "predict_traits_dcca")
+expect_silent(mod_fact)
+expect_equal(mod_fact$eigenvalues, mod_factb$eigenvalues)
+expect_equivalent(mod_fact$c_traits_normed0, mod_factb$c_traits_normed0)
 
-predEnv <- predict(mod_dcca, type = "env")
-expect_equal_to_reference(predEnv, "predict_env_dcca")
+# test quant variable only, 1 quant trait
 
-predRegTraits <- predict(mod_dcca, type = "reg_traits")
-expect_equal_to_reference(predRegTraits, "predict_regTraits_dcca")
+modq11<- dc_CA(formulaEnv = ~ Manure,
+               formulaTraits = ~ SLA,
+               response = Y, 
+               dataEnv = envir, 
+               dataTraits = traits,
+               divideBySiteTotals = divide,
+               verbose = FALSE)
 
-predRegEnv <- predict(mod_dcca, type = "reg_env")
-expect_equal_to_reference(predRegEnv, "predict_regEnv_dcca")
+modq11_predDivFenv <- predict(modq11, type = "env")
+expect_equal_to_reference(modq11_predDivFenv, "modq11_predDivFenv")
 
-predResponse <- predict(mod_dcca, type = "response")
-expect_equal_to_reference(predResponse, "predict_response_dcca")
+modq11_predDivFtraits <- predict(modq11, type = "traits")
+expect_equal_to_reference(modq11_predDivFtraits, "modq11_predDivFtraits")
 
-CWMSNC <- list(CWM = predTraits, SNC = predEnv, weights = mod_dcca$weights, 
-               data = mod_dcca$data, formulaEnv = mod_dcca$formulaEnv, 
-               formulaTraits = mod_dcca$formulaTraits)
-CWMSNC$data$Y <- NULL
+# check how douconca manages collinear models A
+envir$Sites <- factor(dune_trait_env$envir$Sites)
+mod_dccaFF <- dc_CA(formulaEnv = ~ Sites,
+                    formulaTraits = ~ Species,
+                    response = dune_trait_env$comm[, -1],  # must delete "Sites"
+                    dataEnv = envir,
+                    dataTraits = traits,
+                    divideBySiteTotals = divide,
+                    verbose = FALSE)
 
-expect_message(mod_dcca2 <- dc_CA(response = CWMSNC,
-                                  divideBySiteTotals = divide,
-                                  verbose = FALSE),
-               "The model is overfitted with no unconstrained")
+Yfit <- fitted(mod_dccaFF, type = "response")
+expect_equivalent(Yfit, as.matrix(mod_dccaFF$data$Y))# full rank fit!
 
-expect_equal(mod_dcca2$eigenvalues, mod_dcca$eigenvalues)
+# check how douconca manages collinear models
 
-capture.output(mod_dcca2_print <- print(mod_dcca2), file = tempfile())
+#  A11 collinear variable
+envir$Sites <- factor(dune_trait_env$envir$Sites)
+envir$A11 <- envir$A1
 
-expect_equivalent(mod_dcca2_print$site_axes$R2_env, rep(1, times = 5)) # perfect fit
-expect_equivalent(mod_dcca2_print$species_axes$R2_traits, rep(1, times = 5)) # perfect fit
+mod_DivF_dccaA1 <- dc_CA(formulaEnv = ~ A1 + Manure + Moist,
+                         formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
+                         response = Y, 
+                         dataEnv = envir,
+                         dataTraits = traits,
+                         divideBySiteTotals = divide,
+                         verbose = FALSE)
+expect_stdout(
+  mod_DivF_dccaA11 <- 
+    dc_CA(formulaEnv = ~ A1 + A11 + Manure + Moist,
+          formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
+          response = Y, 
+          dataEnv = envir,
+          dataTraits = traits,
+          divideBySiteTotals = divide,
+          verbose = FALSE))
+expect_equal(predict(mod_DivF_dccaA1, type = "response"),
+             predict(mod_DivF_dccaA11, type = "response"))
 
-# some variable may not be present in the newdata
-# delete variable "Moist"
-expect_silent(predict(mod_dcca, type = "traits", 
-                      newdata = mod_dcca$data$dataEnv[, -3]))
+# SLA11 collinear
+traits$SLA11 <- traits$SLA
+mod_DivF_dccaSLA <- dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure,
+                          formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
+                          response = Y, 
+                          dataEnv = envir, 
+                          dataTraits = traits,
+                          divideBySiteTotals = divide,
+                          verbose = FALSE)
+expect_message(
+  mod_DivF_dccaSLA11 <- dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure,
+                              formulaTraits = ~ SLA + SLA11+ Height + LDMC + Seedmass + Lifespan,
+                              response = Y, 
+                              dataEnv = envir,
+                              dataTraits = traits,
+                              divideBySiteTotals = divide,
+                              verbose = FALSE))
 
-
-predTraitsND <- predict(mod_dcca, type =  "traits", 
-                        newdata = mod_dcca$data$dataTraits)
-expect_equal(predTraitsND[1, rownames(mod_dcca$c_traits_normed)],
-             mod_dcca$c_traits_normed[, "Avg"])
-
-predEnvND <- predict(mod_dcca, type = "env", newdata  = mod_dcca$data$dataEnv)
-expect_equivalent(predEnvND[1, ], c(4.85, 2.9, 0.3, 0.15, 0.25, 0.3, 1.9, 1.75))
-
-
-## Leave out Moisture
-mod_dcca2 <- dc_CA(formulaEnv = ~A1 + Mag + Use + Manure,
-                   formulaTraits = ~ Height + LDMC +Seedmass +Lifespan,
-                   response = dune_trait_env$comm[, -1],  # must delete "Sites"
-                   dataEnv = dune_trait_env$envir,
-                   dataTraits = dune_trait_env$traits,
-                   divideBySiteTotals = divide,
-                   verbose = FALSE)
-
-
-predTraits2 <- predict(mod_dcca, type =  "traits", 
-                       newdata  = mod_dcca$data$dataEnv[,-3]) # wo Moist
-predEnv2 <- predict(mod_dcca, type =  "env", 
-                    newdata  = mod_dcca$data$dataTraits[,-3]) # wo SLA
-expect_equal(colnames(predTraits), 
-             c("SLA", "Height", "LDMC", "Seedmass", 
-               "Lifespanannual", "Lifespanperennial"))
-expect_equal(colnames(predEnv2),
-             c("A1", "Moist", "MagSF", "MagBF", "MagHF", "MagNM", 
-               "Use", "Manure"))
-
-predTraits2b <- predict(mod_dcca, type =  "traits", 
-                        newdata  = mod_dcca$data$dataEnv[, 4, drop = FALSE]) # Mag only
-expect_equal(nrow(unique(predTraits2b)), 4) # the four classes of Mag
-
-predEnv2b <- predict(mod_dcca, type = "env", 
-                     newdata = mod_dcca$data$dataTraits[, 7, drop = FALSE]) # LifeSpan only
-expect_equal(nrow(unique(predEnv2b)), 2)  # the two classes of LifeSpan
-
-CWMSNC3 <- list(CWM = predTraits2[, -1], SNC = predEnv2[, -2], 
-                weights = mod_dcca$weights, data = mod_dcca$data,
-                formulaEnv = mod_dcca2$formulaEnv, 
-                formulaTraits = mod_dcca2$formulaTraits)
-CWMSNC3$data$Y <- NULL
-
-expect_message(mod_dcca3 <- dc_CA(response = CWMSNC3,
-                                  divideBySiteTotals = divide,
-                                  verbose = FALSE),
-               "The model is overfitted with no unconstrained")
-
-# the contribution of Moisture
-expect_equal(mod_dcca$inertia["constraintsTE",1] - 
-               mod_dcca3$inertia["constraintsTE", 1],
-             0.295896752725216)
-
-expect_equal(mod_dcca2$inertia["constraintsTE", 1] - 
-               mod_dcca$inertia["constraintsTE", 1],
-             -0.239836626665131)
+expect_equal(predict(mod_DivF_dccaSLA, type = "response"),
+             predict(mod_DivF_dccaSLA11, type = "response"))

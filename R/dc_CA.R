@@ -65,10 +65,11 @@
 #' statistics of the method. This is useful, when the abundance data are not 
 #' available or could not be made public in a paper attempting reproducible 
 #' research. In this case, \code{response} should be a list
-#' with as first element community weighted means (CWMs) with respect to the 
-#' traits, and the trait data, and, optionally, further elements, for functions
+#' with as first element community weighted means 
+#' (e.g. \code{list(CWM = CWMs)}) with respect to the 
+#' traits, and the trait data, and, optionally, further list elements, for functions
 #' related to \code{dc_CA}. The minimum is a 
-#' \code{list(CWM, weight = list(columns = species_weights))} with CWM a matrix
+#' \code{list(CWM = CWMs, weight = list(columns = species_weights))} with CWM a matrix
 #' or data.frame, but then \code{formulaEnv}, \code{formulaTraits}, 
 #' \code{dataEnv}, \code{dataTraits} must be specified in the call to 
 #' \code{dc_CA}. The function \code{\link{fCWM_SNC}} and its example
@@ -94,8 +95,8 @@
 #' after removing empty rows and columns in \code{response} and after closure if 
 #' \code{divideBySiteTotals = TRUE} and with the corresponding rows in 
 #' \code{dataEnv} and \code{dataTraits} removed.}
-#' \item{weights}{a list of unit-sum weights of row and columns. The names of 
-#' the list are \code{c("row", "columns")}, in that order.}
+#' \item{weights}{a list of unit-sum weights of columns and rows. The names of 
+#' the list are \code{c("columns", "rows")}, in that order.}
 #' \item{Nobs}{number of sites (rows).}
 #' \item{CWMs_orthonormal_traits}{Community weighted means w.r.t. 
 #' orthonormalized traits.}
@@ -232,8 +233,15 @@ dc_CA <- function(formulaEnv = NULL,
     if (any(response < 0)) {
       stop("The response should not have negative values.\n")
     }
+    if (is.null(dataEnv)) {
+      stop("dataEnv must be specified in dc_CA.\n")
+    } else {
+      dataEnv <- as.data.frame(dataEnv)
+    }
     if (is.null(dataTraits)) {
       stop("dataTraits must be specified in dc_CA.\n")
+    } else {
+      dataTraits <- as.data.frame(dataTraits)
     }
     if (!is.matrix(response)) {
       response <- as.matrix(response)
@@ -315,8 +323,8 @@ dc_CA <- function(formulaEnv = NULL,
                  formulaEnv = formulaEnv,
                  data = list(Y = response, dataEnv = dataEnv, dataTraits = dataTraits),
                  call = call,
-                 weights = list(rows = TotR / sum(TotR), 
-                                columns = TotC / sum(TotC)),
+                 weights = list(columns = TotC / sum(TotC),
+                                rows = TotR / sum(TotR)),
                  Nobs = n,
                  CWMs_orthonormal_traits = CWMs_orthonormal_traits)
   } else {
