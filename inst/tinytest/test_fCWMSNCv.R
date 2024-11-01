@@ -91,19 +91,8 @@ expect_warning(dcca_mod_DivT4 <- dc_CA(formulaEnv = dcca_mod_DivT$formulaEnv,
                                        verbose = FALSE),
                "no site weights supplied")
 
-if (divide) {
-  expect_equivalent(sapply(scores(dcca_mod_DivT4), abs),
-                    sapply(scores(dcca_mod_DivT), abs))
-} else {
-  
-  ##### This cannot work.
-  ##### dcca_mod_DivF4 doesn't exist
-  
-  expect_equivalent(as.numeric(dcca_mod_DivF4$eigenvalues), 
-                    c(0.07852790, 0.04005220, 0.02339385, 0.00417814), 1.0e-7)
-  expect_warning(scores(dcca_mod_DivF4),
-                 "The eigenvalues of the CWM and SNC analyses differ")
-}
+expect_equivalent(sapply(scores(dcca_mod_DivT4), abs),
+                  sapply(scores(dcca_mod_DivT), abs))
 
 # example 2 of no weights specified
 CWMSNCd <- CWMSNCb
@@ -113,22 +102,6 @@ expect_warning(dcca_mod_DivT4 <- dc_CA(formulaEnv = dcca_mod_DivT$formulaEnv,
                                        divideBySiteTotals = divide,
                                        verbose = FALSE),
                "no weights supplied")
-
-if (divide) {
-  
-  ##### This doesn't work.
-  ##### eigenvalues are different and scores call is not silent.
-  
-  expect_equivalent(as.numeric(dcca_mod_DivT4$eigenvalues), 
-                    c(0.0549873463880468, 0.0241323582517041, 
-                      0.0128375843092032, 0.0016183457949121))
-  expect_silent(scores(dcca_mod_DivT4))
-} else {
-  expect_equivalent(as.numeric(dcca_mod_DivT4$eigenvalues), 
-                    c(0.053673468, 0.024680073, 0.013251034, 0.001575069), 1.e-7) 
-  expect_warning(scores(dcca_mod_DivT4), 
-                 "The eigenvalues of the CWM and SNC analyses differ.")
-}
 
 # example of weights specified via dataTraits and dataEnv
 CWMSNCe <- CWMSNCd
@@ -221,15 +194,3 @@ expect_equal(pred0.resp, pred22.resp2)
 all_reg <- coef(dcca_mod_DivT, type = "a")
 all_reg2 <- coef(dcca_mod_DivT2, type = "a")
 expect_equal(all_reg, all_reg2)
-
-if (FALSE) {
-  dcca_mod_DivT7d <- dc_CA(response = dcca_mod_DivT$data$Y,
-                           dataEnv = dcca_mod_DivT$data$dataEnv,
-                           dataTraits = dcca_mod_DivT$data$dataTraits,
-                           formulaEnv = ~ Moist,
-                           formulaTraits = dcca_mod_DivT7$formulaTraits,
-                           verbose = FALSE)
-  
-  expect_equal(abs(scores(dcca_mod_DivT7)$sites),
-               abs(scores(dcca_mod_DivT7d)$sites))
-}

@@ -66,13 +66,3 @@ mod_fact2 <- dc_CA(formulaEnv = ~ fUse + Mag,
 
 pp2 <- plot(mod_fact2)
 pp2b <- plot(mod_fact2, envfactor = "Mag", traitfactor = "fSLA")
-
-if (FALSE) {  
-  
-  ##### This takes way to long for CRAN.
-  ##### Also checking a full ggplot object is usually not a very good idea 
-  ##### since the internal ggplot structure changes all the time
-  
-  expect_equivalent_to_reference(pp2, "pp2")
-  expect_equivalent_to_reference(pp2b, "pp2b")
-}

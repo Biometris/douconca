@@ -11,3 +11,4 @@ testScripts
 ^CRAN-SUBMISSION$
 .github
 .zenodo.json
+article

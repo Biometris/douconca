@@ -89,15 +89,10 @@ expect_warning(dcca_mod_DivF4 <- dc_CA(formulaEnv = dcca_mod_DivF$formulaEnv,
                                        verbose = FALSE),
                "no site weights supplied")
 
-if (divide) {
-  expect_equivalent(X = sapply(scores(dcca_mod_DivF4), FUN = abs),
-                    X = sapply(scores(dcca_mod_DivF), FUN = abs))
-} else {
-  expect_equivalent(as.numeric(dcca_mod_DivF4$eigenvalues), 
-                    c(0.07852790, 0.04005220, 0.02339385, 0.00417814), 1.0e-7)
-  expect_warning(scores(dcca_mod_DivF4),
-                 "The eigenvalues of the CWM and SNC analyses differ")
-}
+expect_equivalent(as.numeric(dcca_mod_DivF4$eigenvalues), 
+                  c(0.07852790, 0.04005220, 0.02339385, 0.00417814), 1.0e-7)
+expect_warning(scores(dcca_mod_DivF4),
+               "The eigenvalues of the CWM and SNC analyses differ")
 
 # example 2 of no weights specified
 CWMSNCd <- CWMSNCb
@@ -107,21 +102,10 @@ expect_warning(dcca_mod_DivF4 <- dc_CA(formulaEnv = dcca_mod_DivF$formulaEnv,
                                        verbose = FALSE),
                "no weights supplied")
 
-if (divide) {
-  dcca_mod_DivT4 <- dc_CA(formulaEnv = dcca_mod_DivT$formulaEnv,
-                          response = CWMSNCd, 
-                          verbose = FALSE)
-  
-  expect_equivalent(as.numeric(dcca_mod_DivT4$eigenvalues), 
-                    c(0.0549873463880468, 0.0241323582517041, 
-                      0.0128375843092032, 0.0016183457949121))
-  expect_silent(scores(dcca_mod_DivT4))
-} else {
-  expect_equivalent(as.numeric(dcca_mod_DivF4$eigenvalues), 
-                    c(0.053673468, 0.024680073, 0.013251034, 0.001575069), 1.e-7) 
-  expect_warning(scores(dcca_mod_DivF4), 
-                 "The eigenvalues of the CWM and SNC analyses differ.")
-}
+expect_equivalent(as.numeric(dcca_mod_DivF4$eigenvalues), 
+                  c(0.053673468, 0.024680073, 0.013251034, 0.001575069), 1.e-7) 
+expect_warning(scores(dcca_mod_DivF4), 
+               "The eigenvalues of the CWM and SNC analyses differ.")
 
 # example of weights specified via dataTraits and dataEnv
 CWMSNCe <- CWMSNCd
@@ -216,14 +200,3 @@ all_reg <- coef(dcca_mod_DivF, type = "a")
 all_reg2 <- coef(dcca_mod_DivF2, type = "a")
 expect_equal(all_reg, all_reg2)
 
-if (FALSE) {
-  dcca_mod_DivF7d <- dc_CA(response = dcca_mod_DivF$data$Y,
-                           dataEnv = dcca_mod_DivF$data$dataEnv,
-                           dataTraits = dcca_mod_DivF$data$dataTraits,
-                           formulaEnv = ~ Moist,
-                           formulaTraits = dcca_mod_DivF7$formulaTraits,
-                           verbose = FALSE)
-  
-  expect_equal(abs(scores(dcca_mod_DivF7)$sites),
-               abs(scores(dcca_mod_DivF7d)$sites))
-}
