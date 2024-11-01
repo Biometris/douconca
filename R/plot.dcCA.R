@@ -212,7 +212,7 @@ plot.dcca <- function(x,
     scoresname = namaxis,
     selectname = "Fratio1",
     verbose = FALSE,
-	expand = expand) + 
+    expand = expand) + 
     ggplot2::ggtitle(trait_title)
   plot_env <- plot_species_scores_bk(
     species_scores = env_scores,
@@ -223,7 +223,7 @@ plot.dcca <- function(x,
     scoresname = namaxis,
     selectname = "Fratio1",
     verbose = FALSE,
-	expand = expand) + 
+    expand = expand) + 
     ggplot2::ggtitle(env_title)
   # species vertical plot
   plot_species <- fplot_species(pd, x, nspecies = nspecies, 
