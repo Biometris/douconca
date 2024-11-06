@@ -34,7 +34,8 @@ get_Z_X_XZ_formula <- function(formula,
   trms <- delete.response(terms(formula, specials = "Condition", 
                                 data = data, keep.order = TRUE))
   trmLabs <- colnames(attr(trms, "factors"))
-  condId <- attr(trms, "specials")$Condition
+  condLabs <- rownames(attr(trms, "factors"))[attr(trms, "specials")$Condition]
+  condId <- which(trmLabs %in% condLabs)
   if (!length(condId)) {
     condTrms <- NULL
     formula_Z <- ~1
@@ -46,7 +47,7 @@ get_Z_X_XZ_formula <- function(formula,
   }
   formula_X0 <- reformulate(trmLabs, intercept = FALSE)
   formula_X1 <- reformulate(trmLabs, intercept = TRUE)
-  formula_XZ <- reformulate(c(condTrms, trmLabs), intercept = TRUE)
+  formula_XZ <- reformulate(unique(c(condTrms, trmLabs)), intercept = TRUE)
   focal_nams <- all.vars(formula_X0)
   condi_nams <- all.vars(formula_Z) 
   if (!is.null(data)) {
