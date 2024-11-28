@@ -24,7 +24,7 @@
 #' permutation in weighted redundancy analysis (ter Braak, 2022), but
 #' using QR-decomposition instead of ad-hoc least-squares functions.
 #'
-#' @return
+#' @returns
 #' A list with two elements with names \code{table} and \code{eigenvalues}.
 #' The \code{table} is as from \code{\link[vegan]{anova.cca}} and 
 #' \code{eigenvalues} gives the wrda eigenvalues.

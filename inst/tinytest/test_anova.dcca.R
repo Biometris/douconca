@@ -12,13 +12,14 @@ Y <- dune_trait_env$comm[, -1]  # must delete "Sites"
 traits <- dune_trait_env$traits
 envir <- dune_trait_env$envir
 
-
-
-# test a normal model -----------------------------------------------------
-modDivF1a <- dc_CA(formulaEnv = ~A1+Moist+Mag+Use+Manure,
-                   formulaTraits = ~SLA + Height + LDMC + Seedmass + Lifespan ,
-                   response = Y, dataEnv = envir, dataTraits = traits,
-                   divideBySiteTotals = divide, verbose = FALSE)
+# test a normal model 
+modDivF1a <- dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure,
+                   formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
+                   response = Y, 
+                   dataEnv = envir, 
+                   dataTraits = traits,
+                   divideBySiteTotals = divide,
+                   verbose = FALSE)
 
 set.seed(123)
 modDivF1a_an <- anova(modDivF1a)
@@ -52,17 +53,18 @@ expect_equivalent(anova(modDivFq11, by="axis")$species, modDivFq11_an$species)
 envir$Sites <- factor(dune_trait_env$envir$Sites)
 envir$A11 <- envir$A1
 
-expect_silent(modDivF_dccaA1 <- dc_CA(formulaEnv = ~ A1,
-                                      formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
-                                      response = Y, dataEnv = envir, dataTraits = traits,
-                                      divideBySiteTotals = divide,
-                                      verbose = FALSE))
-expect_stdout( modDivF_dccaA11 <- dc_CA(formulaEnv = ~ A1 + A11,
-                                        formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
-                                        response = Y, dataEnv = envir, dataTraits = traits,
-                                        divideBySiteTotals = divide,
-                                        verbose = FALSE)
-)
+expect_silent(
+  modDivF_dccaA1 <- dc_CA(formulaEnv = ~ A1,
+                          formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
+                          response = Y, dataEnv = envir, dataTraits = traits,
+                          divideBySiteTotals = divide,
+                          verbose = FALSE))
+expect_stdout(
+  modDivF_dccaA11 <- dc_CA(formulaEnv = ~ A1 + A11,
+                           formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
+                           response = Y, dataEnv = envir, dataTraits = traits,
+                           divideBySiteTotals = divide,
+                           verbose = FALSE))
 
 set.seed(237)
 anA1 <- anova(modDivF_dccaA1)
@@ -99,3 +101,4 @@ an_env2 <- anova(wrda(modDivF_dcca_near_singular_species$formulaEnv,
                       data = modDivF_dcca_near_singular_species$data$dataEnv,
                       weights = modDivF_dcca_near_singular_species$weights$rows))
 expect_equivalent(an_env$table, an_env2$table)
+

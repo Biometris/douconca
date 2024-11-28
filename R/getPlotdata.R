@@ -28,7 +28,7 @@
 #' separate panels. If \code{FALSE}, this parameter changes the position of 
 #' the environmental centroid names (from left to right).
 #' 
-#' @return A list with three components
+#' @returns A list with three components
 #' \describe{
 #' \item{CWM_SNC}{a data.frame containing plot data}
 #' \item{trait_env_scores}{a vector of scores per trait/environment}
@@ -71,7 +71,7 @@ getPlotdata <- function(x,
     }
   } else if (!is.na(envfactor)) {
     if (length(ff$focal_factor) + length(ff$Condi_factor) > 1) {
-      remove_centroids[2] <- TRUE																
+      remove_centroids[2] <- TRUE
     }
   }
   ff <- get_Z_X_XZ_formula(x$formulaTraits, x$data$dataTraits)
@@ -88,7 +88,7 @@ getPlotdata <- function(x,
     }
   } else if(!is.na(envfactor)) {
     if (length(ff$focal_factor) + length(ff$Condi_factor) > 1) {
-      remove_centroids[1] <- TRUE																	
+      remove_centroids[1] <- TRUE
     }
   }
   if (is.null(traitfactor)) traitfactor <- NA

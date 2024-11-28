@@ -31,7 +31,7 @@
 #' The algorithm is analogous to that of \code{\link{anova.wrda}}. The function
 #' is used in \code{\link{anova.dcca}}.
 #'
-#' @return
+#' @returns
 #' A list with two elements with names \code{table} and \code{eigenvalues}.
 #' The \code{table} is as from \code{\link[vegan]{anova.cca}} and 
 #' \code{eigenvalues} gives the dc-CA eigenvalues.
@@ -53,7 +53,8 @@
 #' @export
 anova_sites <- function(object, 
                         permutations = 999, 
-                        by = NULL){
+                        by = NULL) {
+  rpp <- TRUE
   if (is.null(object$CWMs_orthonormal_traits)) {
     warning("Site level anova requires abundance data or ", 
             "community weighted means (CWMs).\n")
@@ -96,22 +97,28 @@ anova_sites <- function(object,
   msqr <- msdvif(object$formulaEnv, object$data$dataEnv, object$weights$rows)
   Zw <- msqr$Zw
   Xw <- msqr$Xw
-  dfpartial = msqr$qrZ$rank
-  # residual predictor permutation
+  dfpartial <- msqr$qrZ$rank
+  if (rpp) {
+    randperm <- randperm_eX0sqrtw
+    perm_meth <- "Residualized predictor permutation\n"
+  } else {
+    randperm <- randperm_eY2
+    perm_meth <-  "Residualized response permutation\n"
+  }
   out_tes <- list()
-  out_tes[[1]] <- randperm_eX0sqrtw(Yw, Xw, Zw, sWn = sWn, 
-                                    permutations = permutations, by = by, 
-                                    return = "all")
+  out_tes[[1]] <- randperm(Yw, Xw, Zw, sWn = sWn, 
+                           permutations = permutations, by = by, 
+                           return = "all")
   if (by == "axis") {
     while (out_tes[[1]]$rank > length(out_tes)) {
       Zw <- cbind(Zw, out_tes[[length(out_tes)]]$EigVector1)
       out_tes[[length(out_tes) + 1]] <- 
-        randperm_eX0sqrtw(Yw, Xw, Zw, sWn = sWn, permutations = permutations, 
-                          by = by, return = "all")
+        randperm(Yw, Xw, Zw, sWn = sWn, permutations = permutations, 
+                 by = by, return = "all")
     }
   }
   f_sites <- fanovatable(out_tes, Nobs = N, dfpartial = dfpartial, type = "row", 
-                         calltext = c(object$call))  
+                         calltext = c(object$call), perm_meth = perm_meth)  
   result <- list(table = f_sites, eigenvalues = attr(f_sites, "eig"))
   return(result)
 }

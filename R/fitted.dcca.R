@@ -16,13 +16,12 @@
 #' 
 #' @details
 #'
-#' If \code{type="response"} the row sums of the \code{object$data$Y} are used
-#' to scale the fit to these sums, otherwise the row weights of the analysis are 
-#' used and the overall sum of the fit is 1 (in full rank).
-#' Many of the predicted response values may be negative, 
-#' indicating expected absences (0) or small expected response values.
+#' If \code{type="response"} the rowsums of \code{object$data$Y} are used
+#' to scale the fit to these sums. Many of the predicted response values may 
+#' be negative,  indicating expected absences (0) or small expected response 
+#' values.
 #' 
-#' @return a matrix with fitted value. The exact content of the matrix 
+#' @returns a matrix with fitted value. The exact content of the matrix 
 #' depends on the \code{type} of fits that are asked for.
 #' 
 #'
@@ -41,24 +40,17 @@ fitted.dcca <- function(object,
   if (type == "response") {
     newdata1 <- list(
       # env prediction requires trait data
-      traits = check_newdata(object, newdata, "envFromTraits"), 
+      traits = object$data$dataTraits, 
       # trait prediction requires env data
-      env = check_newdata(object, newdata, "traitsFromEnv") 
+      env = object$data$dataEnv
     )
-  } else if (type %in% c("CWM", "SNC")) {
-    if (type == "CWM") {
-      type1 = "traitsFromEnv" 
-    } else {
-      type1 = "envFromTraits"
-    }
-    newdata1 <- check_newdata(object, newdata = NULL, type1)
   }
   ret <- switch(type,
-                SNC = predict_env(object, newdata1, rank),
-                CWM = predict_traits(object, newdata1, rank),
+                SNC = predict_env(object, object$data$dataTraits, rank),
+                CWM = predict_traits(object, object$data$dataEnv, rank),
                 response = predict_response(object, newdata1, rank, 
                                             object$weights)
-  )
+                )
   if (type == "response") {
     if (is.null(object$data$Y)) {
       totsum <- 1

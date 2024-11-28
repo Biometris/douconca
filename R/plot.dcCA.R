@@ -61,7 +61,7 @@
 #' enlarge the plotting area or use \code{verbose = FALSE} and assign the 
 #' result.
 #' 
-#' @return a ggplot object
+#' @returns a ggplot object
 #'
 #' @example demo/dune_plot_dcCA.R
 #' 

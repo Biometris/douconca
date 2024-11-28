@@ -30,7 +30,7 @@ CWMSNCa <- fCWM_SNC(formulaEnv = dcca_mod_DivF$formulaEnv,
 
 expect_inherits(CWMSNCa, "list")
 expect_equal(names(CWMSNCa), 
-             c("CWM", "SNC", "formulaEnv", "formulaTraits", "weights", 
+             c("CWM", "SNC", "formulaEnv", "formulaTraits", "inertia", "weights", 
                "call", "data"))
 dcca_mod_DivF0 <- dcca_mod_DivF
 dcca_mod_DivF0$data$Y <-NULL
@@ -48,9 +48,9 @@ CWMSNCb <- fCWM_SNC(formulaEnv = dcca_mod_DivF$formulaEnv,
 
 expect_inherits(CWMSNCb, "list")
 expect_equal(names(CWMSNCb), 
-             c("CWM", "CWMs_orthonormal_traits", "SNC", "SNCs_orthonormal_env", 
-               "Nobs", "traits_explain", "formulaEnv", "formulaTraits", 
-               "trans2ortho", "T_ortho", "weights", "call", "data"))
+             c("CWM", "SNC","formulaEnv", "formulaTraits", "inertia",
+               "weights", "call", "data", "CWMs_orthonormal_traits", 
+			   "SNCs_orthonormal_env", "trans2ortho", "T_ortho", "E_ortho"))													
 
 dcca_mod_DivF2 <- dc_CA(formulaEnv = dcca_mod_DivF$formulaEnv,
                         response = CWMSNCa,  
@@ -90,7 +90,7 @@ expect_warning(dcca_mod_DivF4 <- dc_CA(formulaEnv = dcca_mod_DivF$formulaEnv,
                "no site weights supplied")
 
 expect_equivalent(as.numeric(dcca_mod_DivF4$eigenvalues), 
-                  c(0.07852790, 0.04005220, 0.02339385, 0.00417814), 1.0e-7)
+                  c(0.0785279, 0.0400522, 0.02339385, 0.00417814), 1.0e-7)
 expect_warning(scores(dcca_mod_DivF4),
                "The eigenvalues of the CWM and SNC analyses differ")
 
@@ -112,6 +112,7 @@ CWMSNCe <- CWMSNCd
 CWMSNCe$dataTraits <- CWMSNCa$data$dataTraits
 CWMSNCe$dataTraits$weight <- CWMSNCa$weights$columns
 CWMSNCe$data$dataTraits <- NULL
+CWMSNCe$weights <- NULL 
 envir$weight <- CWMSNCa$weights$rows
 
 expect_warning(dcca_mod_DivF5 <- dc_CA(formulaEnv = dcca_mod_DivF$formulaEnv,

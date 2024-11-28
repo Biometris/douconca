@@ -50,7 +50,13 @@ and Ecological Statistics, 25(2), 171-197.
 
 ## Installation
 
-You can install the development version of `douconca` like so:
+You can install the CRAN version of `douconca` by:
+
+``` r
+install.packages("douconca")
+```
+
+You can install the development version of `douconca` by:
 
 ``` r
 install.packages("remotes")

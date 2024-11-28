@@ -7,10 +7,11 @@
 \method{predict}{dcca}(
   object,
   ...,
-  type = c("envFromTraits", "traitsFromEnv", "response"),
+  type = c("envFromTraits", "traitsFromEnv", "response", "SNC", "CWM", "lc", "lc_traits"),
   rank = "full",
   newdata = NULL,
-  weights = NULL
+  weights = NULL,
+  scaling = "symmetric"
 )
 }
 \arguments{
@@ -18,17 +19,20 @@
 
 \item{...}{Other arguments passed to the function (currently ignored).}
 
-\item{type}{type of prediction, \code{c("envFromTraits", "traitsFromEnv", "response")} 
-for environmental values, values of traits, 
-response (expected abundance).}
+\item{type}{type of prediction, \code{c("envFromTraits", "traitsFromEnv",
+"response", "lc", "lc_traits")} for environmental values, values of traits, 
+response (expected abundance) and constrained scores for sites and species. 
+\code{"SNC"} is equivalent with \code{"envFromTraits"}.
+\code{"CWM"} is equivalent with \code{"traitsFromEnv"}.}
 
 \item{rank}{rank (number of axes to use). Default "full" for all axes 
 (no rank-reduction).}
 
 \item{newdata}{Data in which to look for variables with which to predict.
-For \code{type = "envFromTraits" or "traitsFromEnv"},
+For \code{type = "envFromTraits" or "traitsFromEnv"} or 
+\code{type = "lc_traits" or "lc"},
 \code{newdata} is a data frame of trait and environmental values, respectively, 
-which are used for the prediction. 
+which are used for the prediction or the calculation of scores.
 If omitted, fitted values are generated (use \code{\link{fitted.dcca}} instead).
 For \code{type = "response"}, newdata is a list of two data frames with 
 trait and environmental values in this order, \emph{e.g.} 
@@ -41,6 +45,13 @@ Example: weights = list(species = c(100, 1, 1), sites = c(1, 1, 1, 1)), in that
 order, with traits of three new species in newdata[[1]] and 
 environmental values (and levels of factors) of four new sites in newdata[[2]]. 
 Species weights are scaled to a sum of one.}
+
+\item{scaling}{numeric (1,2 or 3) or character \code{"sites", "species" or
+"symmetric"}. Default: "symmetric". Either site- (1) or species- (2) related
+scores are scaled by eigenvalues, and the other set of scores have
+unit weighted mean square or with 3 both are scaled symmetrically 
+to weighted mean squares equal to the square root of eigenvalues. Negative 
+values are treated as the corresponding positive ones by \code{abs(scaling)}.}
 }
 \value{
 a matrix with the predictions. The exact content of the matrix 
@@ -49,23 +60,16 @@ depends on the \code{type} of predictions that are being made.
 \description{
 Prediction of traits from environment, environment from traits and response 
 from trait and environment data.
-
-With \code{type = "traits"} and \code{newdata = NULL}, predict gives the 
-fitted mean traits, \emph{i.e.} the fitted community weighted means.
-With \code{type = "env"} and \code{newdata = NULL}, predict gives the 
-fitted mean environment, \emph{i.e.} the fitted species niche centroids.
 }
 \details{
 Variables that are in the model but not in \code{newdata} are set to their 
 weighted means in the training data. Predictions are thus at the (weighted)
 mean of the quantitative variables not included. Predictions with 
-not-included factors are at the weighted mean (none of the factor effects 
-are included).
+not-included factors are at the reference level (the first level of the 
+factor).
 
-For \code{type = "response"} and non-null \code{newdata}, the species weights 
-of  the training are used; the site weights are taken equal. Many of the 
-predicted values may be negative, indicating expected absences (0) or small
-expected response values.
+For \code{type = "response"}, many of the predicted values may be negative, 
+indicating expected absences (0) or small expected response values.
 
 With \code{type = "traitsFromEnv"} and \code{newdata = NULL}, predict gives 
 the  fitted mean traits, \emph{i.e.} the fitted community weighted means.

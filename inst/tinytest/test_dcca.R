@@ -3,7 +3,7 @@ data("dune_trait_env")
 # rownames are carried forward in results
 rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
 # use vegan::rda in step 2
-divide <- TRUE # divide by site.totals if TRUE
+divide <- FALSE # divide by site.totals if TRUE
 
 Y <- dune_trait_env$comm[, -1]  # must delete "Sites"
 # delete "Species", "Species_abbr" from traits and
@@ -46,6 +46,13 @@ mod_DivFc <- dc_CA(formulaEnv = ~ A1 + Moist + Manure + Use + Condition(Mag),
                    dataTraits = dune_trait_env$traits,
                    divideBySiteTotals = divide,
                    verbose = FALSE)
+
+Y <- mod_DivFc$data$Y
+mod_DivFc_vegan <- vegan::cca(formula = Y ~ A1 + Moist + Manure + Use + Condition(Mag),
+                              data = mod_DivFc$data$dataEnv)
+expect_equal(mod_DivFc$inertia["env_explain", 1],
+             sum(vegan::eigenvals(mod_DivFc_vegan, model = "constrained")))
+
 
 scores_mod_DivFc_abs <- sapply(X = scores(mod_DivFc), FUN = abs)
 expect_equal_to_reference(scores_mod_DivFc_abs, "scores_mod_DivFc_abs")
@@ -104,17 +111,19 @@ mod_DivF_dccaA1 <- dc_CA(formulaEnv = ~ A1 + Manure + Moist,
                          divideBySiteTotals = divide,
                          verbose = FALSE)
 
-expect_stdout(mod_DivF_dccaA11 <- 
-                dc_CA(formulaEnv = ~ A1 + A11+Manure+Moist,
-                      formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
-                      response = Y, 
-                      dataEnv = envir, 
-                      dataTraits = traits,
-                      divideBySiteTotals = divide,
-                      verbose = FALSE))
+expect_stdout(expect_warning(
+  mod_DivF_dccaA11 <- 
+    dc_CA(formulaEnv = ~ A1 + A11+Manure+Moist,
+          formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
+          response = Y, 
+          dataEnv = envir, 
+          dataTraits = traits,
+          divideBySiteTotals = divide,
+          verbose = FALSE), "singular"))
 
 expect_equal(mod_DivF_dccaA1$eigenvalues, mod_DivF_dccaA11$eigenvalues)
-expect_equal(mod_DivF_dccaA1$inertia, mod_DivF_dccaA11$inertia)
+expect_equivalent(mod_DivF_dccaA1$inertia[-3, , drop = FALSE], 
+                  mod_DivF_dccaA11$inertia)
 expect_equal(abs(scores(mod_DivF_dccaA1, display = "tval_traits")), 
              abs(scores(mod_DivF_dccaA11, display = "tval_traits")))
 
@@ -196,26 +205,28 @@ expect_message(dc_CA(formulaEnv = ~ A1 + Manure + Condition(Mag),
 expect_true(all(is.nan(scores(mod_DivF_dcca_near_singular_species, 
                               display = "tval_traits"))))
 
-expect_stdout(mod_DivF_dcca_singular2 <- 
-                dc_CA(formulaEnv = ~ Sites + A1,
-                      formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
-                      response = Y,  # must delete "Sites"
-                      dataEnv = envir,
-                      dataTraits = traits,
-                      divideBySiteTotals = divide, 
-                      verbose = FALSE))
+expect_stdout(expect_warning(
+  mod_DivF_dcca_singular2 <- 
+    dc_CA(formulaEnv = ~ Sites + A1,
+          formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
+          response = Y,  # must delete "Sites"
+          dataEnv = envir,
+          dataTraits = traits,
+          divideBySiteTotals = divide, 
+          verbose = FALSE), "singular"))
 
 expect_warning(scores(mod_DivF_dcca_singular2),
                "Collinearity detected in CWM-model")		
 
-expect_stdout(mod_DivF_dcca_singular3 <- 
-                dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure,
-                      formulaTraits = ~ Species_abbr + SLA,
-                      response = Y,
-                      dataEnv = envir,
-                      dataTraits = traits,
-                      divideBySiteTotals = divide,
-                      verbose = FALSE))
+expect_stdout(expect_message(
+  mod_DivF_dcca_singular3 <- 
+    dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure,
+          formulaTraits = ~ Species_abbr + SLA,
+          response = Y,
+          dataEnv = envir,
+          dataTraits = traits,
+          divideBySiteTotals = divide,
+          verbose = FALSE)))
 
 expect_warning(scores(mod_DivF_dcca_singular3), 
                "Collinearity detected in SNC-model")
@@ -224,8 +235,8 @@ expect_inherits(mod_DivF_dccaA11, "dcca")
 expect_warning(scores_dccaA11 <- scores(mod_DivF_dccaA11),
                "Collinearity detected")
 
-scores_dccaA11_abs <- sapply(X = scores_dccaA11, FUN = abs)
-expect_equal_to_reference(scores_dccaA11_abs, "scores_dcca_abs")
+scores_dccaA11DivF_abs <- sapply(X = scores_dccaA11, FUN = abs)
+expect_equal_to_reference(scores_dccaA11DivF_abs, "scores_dccaA11DivF_abs")
 
 expect_warning(expect_stdout(dcca_print <- print(mod_DivF_dccaA11)),
                "Collinearity detected")
@@ -235,3 +246,54 @@ expect_equal(names(dcca_print),
                "weights", "Nobs", "CWMs_orthonormal_traits", "RDAonEnv", 
                "eigenvalues", "c_traits_normed0", "inertia", "site_axes", 
                "species_axes", "c_env_normed", "c_traits_normed"))
+
+# From dcCA dune
+
+envData <- dune_trait_env$envir
+traitData <- dune_trait_env$traits
+names(envData)[3:4] <- c("Moisture", "Management")
+
+mod_funct_traits <- dc_CA(
+  formulaEnv = ~ Moisture + Management,
+  formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
+  response = Y, 
+  envData, 
+  traitData, 
+  divideBySiteTotals = FALSE, 
+  verbose = FALSE)
+
+mod_ecol_traits <- dc_CA(
+  formulaEnv = ~ Moisture + Management,
+  formulaTraits = ~ F + R + N + L,
+  response = Y, 
+  envData, 
+  traitData,
+  divideBySiteTotals = FALSE,
+  verbose = FALSE)
+
+mod_cca <- vegan::cca(Y ~ Moisture + Management, data = envData)
+mod_CCA <- dc_CA(formulaEnv = ~ Moisture + Management,
+                 formulaTraits = ~ Species,
+                 response = Y, 
+                 envData, 
+                 traitData,
+                 divideBySiteTotals = FALSE, 
+                 verbose = FALSE)
+
+expect_equivalent(mod_CCA$eigenvalues, 
+                  as.numeric(vegan::eigenvals(mod_cca, model = "constrained")), 
+                  tolerance = 1e-6)
+
+set.seed(1457)
+an_ecol <- anova(mod_ecol_traits, by = "axis")
+an_func <- anova(mod_funct_traits, by = "axis")
+an_ecol_max <- an_ecol$maxP
+an_func_max <- an_func$maxP
+
+expect_equivalent(unlist(an_ecol_max[3, , drop =  TRUE]), 
+                  c(1, 0.008964815, 0.948, 0.92, 0.948), 
+                  tolerance = 1.e-7)
+
+expect_equivalent(unlist(an_func_max[2, , drop =  TRUE]), 
+                  c(1, 0.08028837, 0.08730463, 2.84752775, 0.542), 
+                  tolerance = 1.e-7)

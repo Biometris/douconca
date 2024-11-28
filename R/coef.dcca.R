@@ -15,6 +15,9 @@
 #' response, traits and environmental values, respectively.
 #' @param rank rank (number of axes to use). Default "full" for all axes 
 #' (no rank-reduction).
+#' @param normed logical (default \code{TRUE}) giving standardized regression
+#' coefficients and biplot scores. When \code{FALSE}, (regular)
+#' regression coefficients and (unstandardized) biplot scores.
 #' 
 #' @details
 #' 
@@ -27,8 +30,8 @@
 #' at \code{scores(mod, display = c("bp", "bp_traits"))}.
 #' 
 #' 
-#' @return a matrix with coefficients. The exact content of the matrix 
-#' depends on the \code{type} of coefficient that are asked for.
+#' @returns a matrix with coefficients. The exact content of the matrix 
+#' depends on the \code{type} of coefficient that is asked for.
 #' 
 #' Regression coefficients for a response variable 
 #' are usually column-vectors. 
@@ -45,16 +48,17 @@ coef.dcca <- function(object,
                       ...,
                       type = c("fourth_corner", "all_reg", 
                                "env2traits_reg", "traits2env_reg"),
-                      rank = "full") {
+                      rank = "full",
+                      normed = TRUE) {
   type <- match.arg(type)
   if (rank == "full") {
     rank <- length(object$eigenvalues)
   }
   ret <- switch(type,
                 fourth_corner = predict_fc(object, rank),
-                all_reg = predict_regr_all(object, rank),
-                env2traits_reg = predict_regr_env(object, rank),
-                traits2env_reg = predict_regr_traits(object, rank)
+                all_reg = predict_regr_all(object, rank, normed = normed),
+                env2traits_reg = predict_regr_env(object, rank, normed = normed),
+                traits2env_reg = predict_regr_traits(object, rank, normed = normed)
   )
   return(ret)
 }

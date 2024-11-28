@@ -3,7 +3,10 @@
 * New coef.dcca() and fitted.dcca() functions with predict.dcca() adapted.
 The function coef() can give fourth-corner correlations and regression 
 coefficients. 
-* Patch release with extended test files and associated small corrections.
+* Patch release with extended test files and associated small corrections,
+for example, SDS (standard deviation of predictors)
+was in v1.2.1 a constant factor too large with the default of the argument
+divideBySiteTotals (the regression weights and t-values were correct).
 
 # douconca 1.2.1
 
