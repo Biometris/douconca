@@ -33,7 +33,6 @@ Description: Double constrained correspondence analysis (dc-CA) analyzes
    function. For details see ter Braak et al. 2018 
    <doi:10.1007/s10651-017-0395-x>.
 Depends: R (>= 3.6.0)
-DOI: 10.5281/zenodo.13970152
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -52,5 +51,5 @@ Suggests:
     knitr,
     tinytest
 VignetteBuilder: knitr
-URL: https://github.com/Biometris/douconca
+URL: https://zenodo.org/records/13970152, https://github.com/Biometris/douconca
 BugReports: https://github.com/Biometris/douconca/issues
