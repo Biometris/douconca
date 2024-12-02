@@ -8,8 +8,8 @@
 <title>douconca • douconca</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="douconca">
 </head>
 <body>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -195,7 +195,7 @@ first variable (<code>Sites</code>) must therefore be deleted.</p>
 <span><span class="co">#&gt; Step 1: the CCA ordination of the transposed matrix with trait constraints,</span></span>
 <span><span class="co">#&gt;         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span></span>
 <span><span class="co">#&gt; Call: cca(formula = tY ~ SLA + Height + LDMC + Seedmass + Lifespan, data =</span></span>
-<span><span class="co">#&gt; dataTraits)</span></span>
+<span><span class="co">#&gt; out0$data$dataTraits)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; -- Model Summary --</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -243,13 +243,13 @@ first variable (<code>Sites</code>) must therefore be deleted.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; mean, sd, VIF and canonical coefficients with their optimistic [!] t-values:</span></span>
 <span><span class="co">#&gt;         Avg    SDS    VIF   Regr1   tval1</span></span>
-<span><span class="co">#&gt; A1     4.85 9.4989 1.6967 -0.0605 -0.9172</span></span>
-<span><span class="co">#&gt; Moist  2.90 7.8613 1.7658  0.3250  4.8293</span></span>
-<span><span class="co">#&gt; Use    1.90 3.4351 1.7825  0.0219  0.3239</span></span>
-<span><span class="co">#&gt; Manure 1.75 6.4614 9.3847 -0.1444 -0.9306</span></span>
-<span><span class="co">#&gt; MagBF  0.15 1.5969 4.5016 -0.0475 -0.4421</span></span>
-<span><span class="co">#&gt; MagHF  0.25 1.9365 2.6715 -0.0156 -0.1890</span></span>
-<span><span class="co">#&gt; MagNM  0.30 2.0494 9.5666  0.1622  1.0352</span></span>
+<span><span class="co">#&gt; A1     4.85 2.1240 1.6967 -0.0605 -0.9172</span></span>
+<span><span class="co">#&gt; Moist  2.90 1.7578 1.7658  0.3250  4.8293</span></span>
+<span><span class="co">#&gt; Use    1.90 0.7681 1.7825  0.0219  0.3239</span></span>
+<span><span class="co">#&gt; Manure 1.75 1.4448 9.3847 -0.1444 -0.9306</span></span>
+<span><span class="co">#&gt; MagBF  0.15 0.3571 4.5016 -0.0475 -0.4421</span></span>
+<span><span class="co">#&gt; MagHF  0.25 0.4330 2.6715 -0.0156 -0.1890</span></span>
+<span><span class="co">#&gt; MagNM  0.30 0.4583 9.5666  0.1622  1.0352</span></span>
 <span><span class="co">#&gt;                        Avg     SDS    VIF   Regr1   tval1</span></span>
 <span><span class="co">#&gt; SLA                24.6468  6.3438 1.1888 -0.8196 -3.6933</span></span>
 <span><span class="co">#&gt; Height             25.1272 15.6848 1.3033 -0.1598 -0.6877</span></span>
@@ -260,12 +260,14 @@ first variable (<code>Sites</code>) must therefore be deleted.</p>
 <span><span class="co">#&gt;                weighted variance</span></span>
 <span><span class="co">#&gt; total                      2.349</span></span>
 <span><span class="co">#&gt; traits_explain             0.678</span></span>
+<span><span class="co">#&gt; env_explain                1.323</span></span>
 <span><span class="co">#&gt; constraintsTE              0.445</span></span>
 <span><span class="co">#&gt; attr(,"meaning")</span></span>
-<span><span class="co">#&gt;                meaning                                                              </span></span>
-<span><span class="co">#&gt; total          "total inertia"                                                      </span></span>
-<span><span class="co">#&gt; traits_explain "trait-constrained inertia"                                          </span></span>
-<span><span class="co">#&gt; constraintsTE  "trait-constrained inertia explained by the predictors in formulaEnv"</span></span></code></pre></div>
+<span><span class="co">#&gt;                meaning                                                                </span></span>
+<span><span class="co">#&gt; total          "total inertia (= weighted variation)"                                 </span></span>
+<span><span class="co">#&gt; traits_explain "trait-constrained variation"                                          </span></span>
+<span><span class="co">#&gt; env_explain    "environment-constrained variation"                                    </span></span>
+<span><span class="co">#&gt; constraintsTE  "trait-constrained variation explained by the predictors in formulaEnv"</span></span></code></pre></div>
 <p>In <code>douconca</code>, dc-CA is calculated in two steps that
 provide useful information each. Step 1 of the dc-CA algorithm
 summarizes the canonical correspondence analysis (CCA) of the transposed
@@ -334,7 +336,7 @@ per dc-CA axis, obtained by</p>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $max</span></span>
+<span><span class="co">#&gt; $maxP</span></span>
 <span><span class="co">#&gt; Max test combining the community- and species- level tests </span></span>
 <span><span class="co">#&gt; Model: dc_CA(formulaEnv = ~A1 + Moist + Use + Manure + Mag, formulaTraits = ~SLA + Height + LDMC + Seedmass + Lifespan, response = Y, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits) </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -404,7 +406,7 @@ traits.</p>
 <span>                dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">traits</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Step 1: the CCA ordination of the transposed matrix with trait constraints,</span></span>
 <span><span class="co">#&gt;         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span></span>
-<span><span class="co">#&gt; Call: cca(formula = tY ~ F + R + N + L, data = dataTraits)</span></span>
+<span><span class="co">#&gt; Call: cca(formula = tY ~ F + R + N + L, data = out0$data$dataTraits)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; -- Model Summary --</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -452,13 +454,13 @@ traits.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; mean, sd, VIF and canonical coefficients with their optimistic [!] t-values:</span></span>
 <span><span class="co">#&gt;         Avg    SDS    VIF   Regr1   tval1</span></span>
-<span><span class="co">#&gt; A1     4.85 9.4989 1.6967  0.1527  1.3122</span></span>
-<span><span class="co">#&gt; Moist  2.90 7.8613 1.7658  0.4584  3.8618</span></span>
-<span><span class="co">#&gt; Manure 1.75 6.4614 9.3847  0.0243  0.0888</span></span>
-<span><span class="co">#&gt; Use    1.90 3.4351 1.7825  0.0886  0.7432</span></span>
-<span><span class="co">#&gt; MagBF  0.15 1.5969 4.5016 -0.0086 -0.0452</span></span>
-<span><span class="co">#&gt; MagHF  0.25 1.9365 2.6715  0.0136  0.0930</span></span>
-<span><span class="co">#&gt; MagNM  0.30 2.0494 9.5666  0.1136  0.4110</span></span>
+<span><span class="co">#&gt; A1     4.85 2.1240 1.6967  0.1527  1.3122</span></span>
+<span><span class="co">#&gt; Moist  2.90 1.7578 1.7658  0.4584  3.8618</span></span>
+<span><span class="co">#&gt; Manure 1.75 1.4448 9.3847  0.0243  0.0888</span></span>
+<span><span class="co">#&gt; Use    1.90 0.7681 1.7825  0.0886  0.7432</span></span>
+<span><span class="co">#&gt; MagBF  0.15 0.3571 4.5016 -0.0086 -0.0452</span></span>
+<span><span class="co">#&gt; MagHF  0.25 0.4330 2.6715  0.0136  0.0930</span></span>
+<span><span class="co">#&gt; MagNM  0.30 0.4583 9.5666  0.1136  0.4110</span></span>
 <span><span class="co">#&gt;      Avg    SDS    VIF   Regr1   tval1</span></span>
 <span><span class="co">#&gt; F 6.1126 1.6685 1.1323  0.8158  6.0720</span></span>
 <span><span class="co">#&gt; R 5.8061 1.1894 1.7564 -0.1812 -1.0830</span></span>
@@ -468,12 +470,14 @@ traits.</p>
 <span><span class="co">#&gt;                weighted variance</span></span>
 <span><span class="co">#&gt; total                      2.349</span></span>
 <span><span class="co">#&gt; traits_explain             0.870</span></span>
+<span><span class="co">#&gt; env_explain                1.323</span></span>
 <span><span class="co">#&gt; constraintsTE              0.633</span></span>
 <span><span class="co">#&gt; attr(,"meaning")</span></span>
-<span><span class="co">#&gt;                meaning                                                              </span></span>
-<span><span class="co">#&gt; total          "total inertia"                                                      </span></span>
-<span><span class="co">#&gt; traits_explain "trait-constrained inertia"                                          </span></span>
-<span><span class="co">#&gt; constraintsTE  "trait-constrained inertia explained by the predictors in formulaEnv"</span></span></code></pre></div>
+<span><span class="co">#&gt;                meaning                                                                </span></span>
+<span><span class="co">#&gt; total          "total inertia (= weighted variation)"                                 </span></span>
+<span><span class="co">#&gt; traits_explain "trait-constrained variation"                                          </span></span>
+<span><span class="co">#&gt; env_explain    "environment-constrained variation"                                    </span></span>
+<span><span class="co">#&gt; constraintsTE  "trait-constrained variation explained by the predictors in formulaEnv"</span></span></code></pre></div>
 <p>The entry <code>traits_explain</code> is 0.87, which is the variance
 in the abundance data that is explained by the traits. It can directly
 be compared to the corresponding entry in the previous model, which is
@@ -489,9 +493,7 @@ the first two dc-CA axes are significant as can be seen from an
 <span><span class="co">#&gt; Max test combining the community- and species- level tests </span></span>
 <span><span class="co">#&gt; Model: dc_CA(formulaEnv = ~A1 + Moist + Manure + Use + Mag, formulaTraits = ~F + R + N + L, response = Y, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits) </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Taken from the community-level test:</span></span>
-<span><span class="co">#&gt; Residualized response permutation using vegan::rda</span></span>
-<span><span class="co">#&gt; which performs well in this equi-weight case.</span></span>
+<span><span class="co">#&gt; Taken from the community-level test.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;          Df ChiSquare      R2       F Pr(&gt;F)   </span></span>
 <span><span class="co">#&gt; dcCA1     1   0.36835 0.42337 23.3220  0.002 **</span></span>
@@ -597,7 +599,7 @@ variables<a class="anchor" aria-label="anchor" href="#testing-the-relationship-b
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; $max</span></span>
+<span><span class="co">#&gt; $maxP</span></span>
 <span><span class="co">#&gt; Max test combining the community- and species- level tests </span></span>
 <span><span class="co">#&gt; Model: dc_CA(formulaEnv = ~A1 + Moist + Manure + Use + Mag, formulaTraits = ~LDMC, response = Y, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$trait, verbose = FALSE) </span></span>
 <span><span class="co">#&gt; </span></span>
@@ -661,19 +663,19 @@ coefficients from <code>dc_CA</code> by the standard deviation of each
 environmental variable.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">regr_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod_LDMC</span>, display <span class="op">=</span> <span class="st">"reg"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;         Avg      SDS      VIF       dcCA1</span></span>
-<span><span class="co">#&gt; A1     4.85 9.498947 1.696694 -0.16636060</span></span>
-<span><span class="co">#&gt; Moist  2.90 7.861298 1.765817 -0.02346540</span></span>
-<span><span class="co">#&gt; Manure 1.75 6.461424 9.384723  0.78784718</span></span>
-<span><span class="co">#&gt; Use    1.90 3.435113 1.782458 -0.33963301</span></span>
-<span><span class="co">#&gt; MagBF  0.15 1.596872 4.501582  0.25168168</span></span>
-<span><span class="co">#&gt; MagHF  0.25 1.936492 2.671474  0.09905591</span></span>
-<span><span class="co">#&gt; MagNM  0.30 2.049390 9.566575  0.71778929</span></span>
+<span><span class="co">#&gt;         Avg       SDS      VIF       dcCA1</span></span>
+<span><span class="co">#&gt; A1     4.85 2.1240292 1.696694 -0.16636060</span></span>
+<span><span class="co">#&gt; Moist  2.90 1.7578396 1.765817 -0.02346540</span></span>
+<span><span class="co">#&gt; Manure 1.75 1.4448183 9.384723  0.78784718</span></span>
+<span><span class="co">#&gt; Use    1.90 0.7681146 1.782458 -0.33963301</span></span>
+<span><span class="co">#&gt; MagBF  0.15 0.3570714 4.501582  0.25168168</span></span>
+<span><span class="co">#&gt; MagHF  0.25 0.4330127 2.671474  0.09905591</span></span>
+<span><span class="co">#&gt; MagNM  0.30 0.4582576 9.566575  0.71778929</span></span>
 <span><span class="co">#&gt; attr(,"meaning")</span></span>
 <span><span class="co">#&gt; [1] "mean, sd, VIF, standardized regression coefficients."</span></span>
 <span><span class="va">coefs_LDMC_dcCA</span> <span class="op">&lt;-</span> <span class="va">regr_table</span><span class="op">[</span>, <span class="st">"dcCA1"</span><span class="op">]</span> <span class="op">/</span> <span class="va">regr_table</span><span class="op">[</span>, <span class="st">"SDS"</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef</a></span><span class="op">(</span><span class="va">lmLDMC</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="op">/</span> <span class="va">coefs_LDMC_dcCA</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 154.4359 154.4359</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 34.53293 34.53293</span></span></code></pre></div>
 <p>The result shows that the two sets of coefficients are equal up to a
 constant of proportionality, here 154.4359. The t-values are also
 equal:</p>
