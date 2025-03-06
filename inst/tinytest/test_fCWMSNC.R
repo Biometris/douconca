@@ -25,8 +25,7 @@ CWMSNCa <- fCWM_SNC(formulaEnv = dcca_mod_DivF$formulaEnv,
                     response = Y,  # must delete "Sites"
                     dataEnv = envir,
                     dataTraits = traits,
-                    divideBySiteTotals = divide,
-                    verbose = FALSE)
+                    divideBySiteTotals = divide)
 
 expect_inherits(CWMSNCa, "list")
 expect_equal(names(CWMSNCa), 
@@ -37,20 +36,6 @@ dcca_mod_DivF0$data$Y <-NULL
 expect_equal(dcca_mod_DivF0[c("weights" ,"data")], 
              CWMSNCa[c( "weights","data")])
 
-CWMSNCb <- fCWM_SNC(formulaEnv = dcca_mod_DivF$formulaEnv,
-                    formulaTraits = dcca_mod_DivF$formulaTraits,
-                    response = Y,  # must delete "Sites"
-                    dataEnv = envir,
-                    dataTraits = traits,
-                    divideBySiteTotals = divide,
-                    minimal_output = FALSE,
-                    verbose = FALSE)
-
-expect_inherits(CWMSNCb, "list")
-expect_equal(names(CWMSNCb), 
-             c("CWM", "SNC","formulaEnv", "formulaTraits", "inertia",
-               "weights", "call", "data", "CWMs_orthonormal_traits", 
-			   "SNCs_orthonormal_env", "trans2ortho", "T_ortho", "E_ortho"))													
 
 dcca_mod_DivF2 <- dc_CA(formulaEnv = dcca_mod_DivF$formulaEnv,
                         response = CWMSNCa,  
@@ -80,7 +65,7 @@ expect_equal(sapply(X = scores(dcca_mod_DivF)[names(XT3)], FUN = abs),
              sapply(X = XT3, FUN = abs))
 
 # example 1 of no weights specified
-CWMSNCd <- CWMSNCb
+CWMSNCd <- CWMSNCa
 CWMSNCd$weights$rows <- NULL
 
 expect_warning(dcca_mod_DivF4 <- dc_CA(formulaEnv = dcca_mod_DivF$formulaEnv,
@@ -95,7 +80,7 @@ expect_warning(scores(dcca_mod_DivF4),
                "The eigenvalues of the CWM and SNC analyses differ")
 
 # example 2 of no weights specified
-CWMSNCd <- CWMSNCb
+CWMSNCd <- CWMSNCa
 CWMSNCd$weights <- NULL
 expect_warning(dcca_mod_DivF4 <- dc_CA(formulaEnv = dcca_mod_DivF$formulaEnv,
                                        response = CWMSNCd, 
@@ -157,7 +142,8 @@ expect_warning(dcca_mod_DivF7 <- dc_CA(response = CWMSNCf,
 newEnv <- dune_trait_env$envir[1:10, c("A1", "Mag", "Manure", "X_lot")]
 newEnv[2, "A1"] <- 3.0
 rownames(newEnv) <- paste0("NewSite", 1:10)
-pred.traits <- predict(dcca_mod_DivF, type = "traitsFromEnv", newdata = newEnv)
+expect_warning(pred.traits <- predict(dcca_mod_DivF, type = "traitsFromEnv", newdata = newEnv), 
+               "newdata does not contain the predictor variables")
 
 # Eight 'new' species with a subset of traits that are included in the model 
 # Variable "L" will be ignored as it is not in the model 
@@ -166,11 +152,16 @@ newTraits[3, "SLA"]<- 18
 rownames(newTraits) <- paste("Species", LETTERS[1:8])
 pred.env <- predict(dcca_mod_DivF, type = "envFromTraits", newdata = newTraits)
 
-pred.resp <- predict(dcca_mod_DivF, type = "response", 
+expect_warning(pred.resp <- predict(dcca_mod_DivF, type = "response", 
                      newdata = list(newTraits, newEnv),
-                     weights = list(species = rep(1:2, 4), sites = rep(1, 10)))
+                     weights = list(species = rep(1:2, 4), sites = rep(1, 10))),
+               "newdata does not contain the predictor variables")
 
-pred.traits2 <- predict(dcca_mod_DivF2, type = "traitsFromEnv", newdata = newEnv)
+expect_warning(pred.traits2 <- predict(dcca_mod_DivF2, type = "traitsFromEnv", 
+                                       newdata = newEnv),
+               "newdata does not contain the predictor variables")
+               
+               
 
 # Eight 'new' species with a subset of traits that are included in the model 
 # Variable "L" will be ignored as it is not in the model 
@@ -179,9 +170,10 @@ newTraits[3, "SLA"] <- 18
 rownames(newTraits) <- paste("Species",LETTERS[1:8])
 pred.env2 <- predict(dcca_mod_DivF2, type = "envFromTraits", newdata = newTraits)
 
-pred.resp2 <- predict(dcca_mod_DivF2, type = "response", 
-                      newdata = list(newTraits, newEnv),
-                      weights = list(species = rep(1:2, 4), sites = rep(1, 10))) 
+expect_warning(pred.resp2 <- predict(dcca_mod_DivF2, type = "response", 
+                      newdata = list(newTraits,newEnv),
+                      weights= list(species = rep(1:2, 4), sites = rep(1, 10))),
+               "newdata does not contain the predictor variables")
 
 expect_equal(pred.env, pred.env2)
 expect_equal(pred.traits, pred.traits2)

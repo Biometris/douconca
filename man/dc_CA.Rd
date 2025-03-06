@@ -12,6 +12,8 @@ dc_CA(
   dataTraits = NULL,
   divideBySiteTotals = TRUE,
   dc_CA_object = NULL,
+  env_explain = TRUE,
+  use_vegan_cca = FALSE,
   verbose = TRUE
 )
 }
@@ -51,7 +53,15 @@ data by dividing the rows in the \code{response} by their total.}
 Useful if the same formula for the columns (\code{formulaTraits}), 
 \code{dataTraits} and \code{response} are used with a new formula for the 
 rows. If set, the data of the previous run is used and the result of its 
-first step is taken for the new analysis.}
+first step is taken for the new analysis and \code{env_explain} is set 
+to \code{FALSE}.}
+
+\item{env_explain}{logical (default \code{TRUE})
+for calculation of the inertia explained 
+by the environmental variable (based on a CCA of abundance 
+(with \code{divideBySiteTotals}, if true) on the environmental formula).}
+
+\item{use_vegan_cca}{default \code{TRUE}.}
 
 \item{verbose}{logical for printing a simple summary (default: TRUE)}
 }
@@ -267,7 +277,7 @@ environmental gradients: which multivariate methods?
 Journal of Vegetation Science, 23, 805-821.
 \doi{10.1111/j.1654-1103.2012.01402.x}
 
-ter Braak, CJF, Šmilauer P, and Dray S. 2018. Algorithms and biplots for
+ter Braak, CJF, Šmilauer P, and Dray S. (2018). Algorithms and biplots for
 double constrained correspondence analysis.
 Environmental and Ecological Statistics, 25(2), 171-197.
 \doi{10.1007/s10651-017-0395-x}
@@ -276,7 +286,7 @@ ter Braak C.J.F. and  P. Šmilauer  (2018). Canoco reference manual
 and user's guide: software for ordination (version 5.1x).
 Microcomputer Power, Ithaca, USA, 536 pp.
 
-Oksanen, J., et al. (2024)
+Oksanen, J., et al. (2024).
 vegan: Community Ecology Package. R package version 2.6-6.1.
 \url{https://CRAN.R-project.org/package=vegan}.
 }

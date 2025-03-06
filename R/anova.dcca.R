@@ -9,6 +9,8 @@
 #
 #' @param object an object from \code{\link{dc_CA}}.
 #' @param ... unused.
+#' @param rpp Logical indicating residual predictor permutation (default \code{TRUE}).
+#' When \code{FALSE}, residual response permutation is used.
 #' @param permutations a list of control values for the permutations for 
 #' species and sites (species first, sites second, for traits and environment) 
 #' as returned by the function \code{\link[permute]{how}}, or the number of 
@@ -28,6 +30,8 @@
 #' explained by the environmental predictors (without covariates). The 
 #' default (\code{NULL}) is computationally quicker as it avoids computation 
 #' of an svd of permuted data sets.
+#' 
+#' @inheritParams anova_species
 #' 
 #' @details
 #' In the general case of varying site abundance totals 
@@ -68,8 +72,10 @@
 #' @export
 anova.dcca <- function(object, 
                        ...,
+                       rpp = TRUE,								  
                        permutations = 999, 
-                       by = c("omnibus", "axis")) {
+                       by = c("omnibus", "axis"),
+                       n_axes = "all") {
   # object dcca object; permat  a matrix of permutations. 
   # If set overrules permuations.
   if (!inherits(object, "dcca")) {
@@ -84,12 +90,13 @@ anova.dcca <- function(object,
          "and site permutations.\n")
   }
   for (k in 1:2) {
-    if (!inherits(permutations[[k]], c("numeric", "how"))) {
+    if (!inherits(permutations[[k]], c("numeric", "how", "matrix"))) {
       stop("permutations must be an integer or a list of 2 elements ",
            "(numbers or of class how).\n")
     }
   }
-  f_species0 <- anova_species(object, by = by, permutations = permutations[[1]]) 
+  f_species0 <- anova_species(object, by = by, n_axes = n_axes,
+                              permutations = permutations[[1]])																		  
   object1 <- paste("Model:", c(object$call), "\n")
   if (!is.null(f_species0$table)){
     tab <- f_species0$table
@@ -108,18 +115,19 @@ anova.dcca <- function(object,
     f_species <- NULL
   }
   if (by == "axis") by1 <- by else by1 <-NULL
-  if (inherits(object, "dccav")){
+  if (inherits(object, "dccav") && is.character(n_axes)){
     f_sites <- anova(object$RDAonEnv, by = by1, permutations = permutations[[2]])
     rownames(f_sites) <- c(paste0("dcCA", seq_len(nrow(f_sites) - 1)), "Residual")
     attr(f_sites, "heading") <- 
       paste0("Community-level equi-weighted permutation test using vegan::rda\n",
              object1, howHead(attr(f_sites, "control")))
     names(f_sites)[2]<- "ChiSquare"
-	f_sites$R2 <- f_sites$ChiSquare / sum(f_sites$ChiSquare)
+    f_sites$R2 <- f_sites$ChiSquare / sum(f_sites$ChiSquare)
     f_sites$R2[nrow(f_sites)] <- NA
     f_sites <- f_sites[, c(1, 2, 5, 3, 4)]
   } else {
-    f_sites0 <- anova_sites(object, by = by1, permutations = permutations[[2]])
+    f_sites0 <- anova_sites(object, by = by1, n_axes = n_axes,
+                            rpp = rpp, permutations = permutations[[2]])
     tab <- f_sites0$table
     heading <- paste0("sites-level permutation test using dc-CA\n",
                       object1,

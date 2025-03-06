@@ -3,7 +3,7 @@ Type: Package
 Title: Double Constrained Correspondence Analysis for Trait-Environment 
     Analysis in Ecology
 Version: 1.2.2.9000
-Date: 2024-12-02
+Date: 2025-03-06
 Authors@R: c(person(given = "Cajo J.F", 
                     family = "ter Braak", 
                     email = "cajo.terbraak@wur.nl",
@@ -32,6 +32,8 @@ Description: Double constrained correspondence analysis (dc-CA) analyzes
    vegan::rda() if the site weights are equal. This version has a predict() 
    function. For details see ter Braak et al. 2018 
    <doi:10.1007/s10651-017-0395-x>.
+   and ter Braak & van Rossum 2024/2025 <doi:10.2139/ssrn.5014854>
+   and <doi:10.6084/m9.figshare.28146386>.
 Depends: R (>= 3.6.0)
 License: GPL-3
 Encoding: UTF-8
