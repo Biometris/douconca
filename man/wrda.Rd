@@ -32,10 +32,9 @@ corresponding to those in \code{response} (dimension \emph{n} x \emph{p}).}
 \item{cca_object}{a vegan-type cca-object of \emph{transposed} \code{response}, 
 from which chisq_residuals and row and column weights can be obtained.}
 
-\item{object4QRw}{a vegan-type cca-object
-with weighted QR's for \code{formula},
-i.e. \code{qr(Z)} and \code{qr(XZ)} obtainable 
-via \code{get_QR(object4QR, model = "pCCA")} and
+\item{object4QR}{a vegan-type cca-object with weighted QR's for 
+\code{formula}, i.e. \code{qr(Z)} and \code{qr(XZ)} obtainable 
+via \code{get_QR(object4QR, model = "pCCA")} and 
 \code{get_QR(object4QR, model = "CCA")}, respectively.}
 }
 \value{

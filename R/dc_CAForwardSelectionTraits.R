@@ -1,24 +1,24 @@
 #' Forward selection of traits using dc-CA  with a fixed environmental formula
 #' 
-#' @inheritParams dc_CAForwardSelectionEnv
+#' @inheritParams dc_CAForwardSelectionEnv 
 #' 
-#' @param mod initial dA-CAmodel with at least on one trait, and an
+#' @param mod initial dA-CAmodel with at least on one trait, and an 
 #' environmental formula to be used throughout the selection.
-#' @param consider character vector of names in \code{mod$data$dataTraits} to
-#' consider of addition. Default \code{NULL} for all variables in 
+#' @param consider character vector of names in \code{mod$data$dataTraits}
+#' to consider of addition. Default \code{NULL} for all variables in 
 #' \code{mod$data$dataTraits}.
-#' @param initial_env_model character specifying what should be inside 
+#' @param initial_trait_model character specifying what should be inside 
 #' Condition(). Default = "1" (nothing)
 #' 
 #' @details 
 #' The selection is on the basis of the additional fit (inertia) of a variable 
-#' given the variables already in the model. 
+#' given the variables already in the model.
 #' 
-#' @returns list with three elements: \code{final...} with selected variables
-#' and \code{model_final} and \code{process} with account of the selection 
-#' process 
+#' @returns list with three elements: \code{final...} with selected variables,
+#' \code{model_final}, and \code{process} with account of the selection process 
 #' 
 #' @example demo/dune_forward_slct.R
+#' 
 #' @export
 dc_CAForwardSelectionTraits <- function(mod,  
                                         consider = NULL, 

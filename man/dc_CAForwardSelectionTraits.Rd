@@ -18,11 +18,11 @@ dc_CAForwardSelectionTraits(
 )
 }
 \arguments{
-\item{mod}{initial dA-CAmodel with at least on one trait, and an
+\item{mod}{initial dA-CAmodel with at least on one trait, and an 
 environmental formula to be used throughout the selection.}
 
-\item{consider}{character vector of names in \code{mod$data$dataTraits} to
-consider of addition. Default \code{NULL} for all variables in 
+\item{consider}{character vector of names in \code{mod$data$dataTraits}
+to consider of addition. Default \code{NULL} for all variables in 
 \code{mod$data$dataTraits}.}
 
 \item{permutations}{a list of control values for the permutations as 
@@ -41,6 +41,9 @@ Default \code{"full"} for selection without dimension reduction to
 If \code{n_axes =1}, selection is on the first eigenvalue of the dc-CA 
 for selection of variables that form an optimal one-dimensional model.}
 
+\item{initial_trait_model}{character specifying what should be inside 
+Condition(). Default = "1" (nothing)}
+
 \item{test}{integer value for statistical testing; default: \code{2}. 
 For \code{test = 0,1,2}, no test, site-based permutation test and site- 
 & species-based permutation tests, respectively.
@@ -56,14 +59,10 @@ is an improved version Bonferroni.}
 \item{max_step}{maximal number of variables selected.}
 
 \item{verbose}{show progress, default: \code{TRUE}.}
-
-\item{initial_env_model}{character specifying what should be inside 
-Condition(). Default = "1" (nothing)}
 }
 \value{
-list with three elements: \code{final...} with selected variables
-and \code{model_final} and \code{process} with account of the selection 
-process
+list with three elements: \code{final...} with selected variables,
+\code{model_final}, and \code{process} with account of the selection process
 }
 \description{
 Forward selection of traits using dc-CA  with a fixed environmental formula

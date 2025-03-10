@@ -28,13 +28,13 @@ response (expected abundance) and constrained scores for sites.}
 
 \item{newdata}{Data in which to look for variables with which to predict.}
 
-\item{weights}{list of weights of species and of sites in \code{newdata} when
-\code{type = "response"}, else ignored (default NULL
+\item{weights}{list of weights of species and of sites in \code{newdata} 
+when \code{type = "response"}, else ignored (default NULL
 yielding equal species and site weights, both summing to 1). 
-Example: weights = list(species = c(100, 1, 1), sites = c(1, 1, 1, 1)), in that
-order, with traits of three new species in newdata[[1]] and 
-environmental values (and levels of factors) of four new sites in newdata[[2]]. 
-Species weights are scaled to a sum of one.}
+Example: weights = list(species = c(100, 1, 1), sites = c(1, 1, 1, 1)), in 
+that order, with traits of three new species in newdata[[1]] and 
+environmental values (and levels of factors) of four new sites in 
+newdata[[2]]. Species weights are scaled to a sum of one.}
 
 \item{scaling}{numeric (1,2 or 3) or character \code{"sites", "species" or
 "symmetric"}. Default: "symmetric". Either site- (1) or species- (2) related
@@ -60,4 +60,31 @@ factor).
 
 For \code{type = "response"}, many of the predicted values may be negative, 
 indicating expected absences (0) or small expected response values.
+}
+\examples{
+data("dune_trait_env")
+
+# rownames are carried forward in results
+rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
+response <- dune_trait_env$comm[, -1]  # must delete "Sites"
+
+mod <- cca0(formula = ~ A1 + Moist + Mag + Use + Manure,
+            response = response,
+            data = dune_trait_env$envir)
+
+mod # Proportions equal to those Canoco 5.15
+
+scores(mod, which_cor = c("A1", "X_lot"), display = "cor")
+
+set.seed(123)
+anova(mod)
+anova(mod, by = "axis")
+
+mod2 <- vegan::cca(response ~ A1 + Moist + Mag + Use + Manure,
+                   data = dune_trait_env$envir)
+anova(mod2, by = "axis")
+
+dat <- dune_trait_env$envir
+dat$Mag <- "SF"
+predict(mod, type = "lc", newdata = dat)
 }

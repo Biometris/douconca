@@ -45,7 +45,7 @@ anova.wrda <- function(object,
                        ...,
                        permutations = 999, 
                        by = c("omnibus", "axis"),
-					   n_axes = "all") {
+                       n_axes = "all") {
   # permat  a matrix of permutations. 
   # If set overrules permuations.
   by <- match.arg(by)

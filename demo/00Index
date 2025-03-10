@@ -10,7 +10,6 @@ dune_wrda	  Demo of weighted redundancy analysis
 dune_cca0	  Demo of canonical correspondence analysis via cca0 
 dune_fCWMSNC      Demo of dc-CA obtained from communitiy weighted means and, optionally, species-niche centroids
 dune_dcCA_predict Demo of prediction in dc-CA
-dune_wrda_predict Demo of prediction in wrda and cca0
 dune_dcCA_fitted  Demo of fits (CWM, SNC, abundance) in dc-CA
 dune_dcCA_coef    Demo of coefficients (incl. fourth-corner) in dc-CA
 dune_ipf2N2     Demo of transformation of an abundance matrix to one with Hill N2-marginals

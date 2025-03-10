@@ -28,10 +28,15 @@ through. BEWARE: all rows and columns should have positive sums!}
 \item{data}{matrix or data frame of the row predictors, with rows 
 corresponding to those in \code{response} (dimension \emph{n} x \emph{p}).}
 
+\item{traceonly}{logical, default \code{FALSE}. If \code{TRUE}, only 
+the explained variance of the predictors and the \code{Condition()}
+are returned, \emph{i.e} without performing a singular value
+decompostion.}
+
 \item{cca_object}{a vegan-type cca-object of \emph{transposed} \code{response}, 
 from which chisq_residuals and row and column weights can be obtained.}
 
-\item{object4QRw}{a vegan-type cca-object
+\item{object4QR}{a vegan-type cca-object
 with weighted QR's for \code{formula},
 i.e. \code{qr(Z)} and \code{qr(XZ)} obtainable 
 via \code{get_QR(object4QR, model = "pCCA")} and
@@ -61,6 +66,33 @@ which method \code{\link[vegan]{anova.cca}} implements. See
 
 Compared to  \code{\link[vegan]{cca}}, \code{cca0} does not have residual 
 axes, \emph{i.e.} no CA of the residuals is performed.
+}
+\examples{
+data("dune_trait_env")
+
+# rownames are carried forward in results
+rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
+response <- dune_trait_env$comm[, -1]  # must delete "Sites"
+
+mod <- cca0(formula = ~ A1 + Moist + Mag + Use + Manure,
+            response = response,
+            data = dune_trait_env$envir)
+
+mod # Proportions equal to those Canoco 5.15
+
+scores(mod, which_cor = c("A1", "X_lot"), display = "cor")
+
+set.seed(123)
+anova(mod)
+anova(mod, by = "axis")
+
+mod2 <- vegan::cca(response ~ A1 + Moist + Mag + Use + Manure,
+                   data = dune_trait_env$envir)
+anova(mod2, by = "axis")
+
+dat <- dune_trait_env$envir
+dat$Mag <- "SF"
+predict(mod, type = "lc", newdata = dat)
 }
 \references{
 ter Braak C.J.F. and  P. Šmilauer  (2018). Canoco reference manual

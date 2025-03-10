@@ -17,12 +17,16 @@
 #' corresponding to those in \code{response} (dimension \emph{n} x \emph{p}).
 #' @param cca_object a vegan-type cca-object of \emph{transposed} \code{response}, 
 #' from which chisq_residuals and row and column weights can be obtained.
-#' @param object4QRw a vegan-type cca-object
+#' @param object4QR a vegan-type cca-object
 #' with weighted QR's for \code{formula},
 #' i.e. \code{qr(Z)} and \code{qr(XZ)} obtainable 
 #' via \code{get_QR(object4QR, model = "pCCA")} and
 #' \code{get_QR(object4QR, model = "CCA")}, respectively. 
-#
+#' @param traceonly logical, default \code{FALSE}. If \code{TRUE}, only 
+#' the explained variance of the predictors and the \code{Condition()}
+#' are returned, \emph{i.e} without performing a singular value
+#' decompostion.
+#' 
 #' @details
 #' The algorithm is a wrda on the abundance data
 #' after transformation to chi-square residuals. 
@@ -87,10 +91,10 @@ cca0 <- function(formula,
     sWn <- sqrt(R)
     K <- colSums(Yn)
     if (any(R == 0)) {
-      stop(" Some sites do not have species.\n", names(R)[which(R==0)], "\n")
+      stop("Some sites do not have species.\n", names(R)[which(R==0)], "\n")
     }
     if (any(K == 0)) {
-      stop(" Some species are absent in every site.\n", 
+      stop("Some species are absent in every site.\n", 
            names(K)[which(K==0)], "\n")
     }
     sWn <- sqrt(R)
