@@ -2,24 +2,14 @@
 #'
 #' @description
 #' \code{wrda} is formula-based implementation of weighted redundancy analysis.
+#' 
+#' @inheritParams cca0
 #'
-#' @param formula one or two-sided formula for the rows (samples) with row 
-#' predictors in \code{data}. The left hand side of the formula is ignored as
-#' it is specified in the next argument (\code{response}). Specify row 
-#' covariates (if any ) by adding \code{+ Condition(covariate-formula)} to 
-#' \code{formula} as in \code{\link[vegan]{rda}}. The \code{covariate-formula}
-#' should not contain a \code{~} (tilde). 
 #' @param response matrix or data frame of the abundance data (dimension 
 #' \emph{n} x \emph{m}). Rownames of \code{response}, if any, are carried 
 #' through.
-#' @param data matrix or data frame of the row predictors, with rows 
-#' corresponding to those in \code{response} (dimension \emph{n} x \emph{p}).
-#' @param cca_object a vegan-type cca-object of \emph{transposed} \code{response}, 
-#' from which chisq_residuals and row and column weights can be obtained.
-#' @param object4QR a vegan-type cca-object with weighted QR's for 
-#' \code{formula}, i.e. \code{qr(Z)} and \code{qr(XZ)} obtainable 
-#' via \code{get_QR(object4QR, model = "pCCA")} and 
-#' \code{get_QR(object4QR, model = "CCA")}, respectively.
+#' @param weights row weights (a vector). If not specified unit weights are 
+#' used.
 #
 #' @details
 #' The algorithm is a modified version of published R-code for weighted 

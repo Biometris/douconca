@@ -15,12 +15,12 @@
 #' through. BEWARE: all rows and columns should have positive sums!
 #' @param data matrix or data frame of the row predictors, with rows 
 #' corresponding to those in \code{response} (dimension \emph{n} x \emph{p}).
-#' @param cca_object a vegan-type cca-object of \emph{transposed} \code{response}, 
-#' from which chisq_residuals and row and column weights can be obtained.
-#' @param object4QR a vegan-type cca-object
-#' with weighted QR's for \code{formula},
-#' i.e. \code{qr(Z)} and \code{qr(XZ)} obtainable 
-#' via \code{get_QR(object4QR, model = "pCCA")} and
+#' @param cca_object a vegan-type cca-object of \emph{transposed} 
+#' \code{response}, from which chisq_residuals and row and column weights can 
+#' be obtained.
+#' @param object4QR a vegan-type cca-object with weighted QR's for 
+#' \code{formula}, i.e. \code{qr(Z)} and \code{qr(XZ)} obtainable via 
+#' \code{get_QR(object4QR, model = "pCCA")} and
 #' \code{get_QR(object4QR, model = "CCA")}, respectively. 
 #' @param traceonly logical, default \code{FALSE}. If \code{TRUE}, only 
 #' the explained variance of the predictors and the \code{Condition()}
@@ -33,9 +33,8 @@
 #' 
 #' It is much slower than \code{\link[vegan]{cca}}. The only reason to use
 #' it, is that \code{\link{anova.cca0}} does residualized predictor permutation.
-#' It is unknown to the authors of \code{douconca} 
-#' which method \code{\link[vegan]{anova.cca}} implements. See 
-#' \code{\link{anova.cca0}}. 
+#' It is unknown to the authors of \code{douconca} which method
+#' \code{\link[vegan]{anova.cca}} implements. See \code{\link{anova.cca0}}.
 #'
 #' Compared to  \code{\link[vegan]{cca}}, \code{cca0} does not have residual 
 #' axes, \emph{i.e.} no CA of the residuals is performed.

@@ -29,12 +29,21 @@ through.}
 \item{data}{matrix or data frame of the row predictors, with rows 
 corresponding to those in \code{response} (dimension \emph{n} x \emph{p}).}
 
-\item{cca_object}{a vegan-type cca-object of \emph{transposed} \code{response}, 
-from which chisq_residuals and row and column weights can be obtained.}
+\item{weights}{row weights (a vector). If not specified unit weights are 
+used.}
+
+\item{traceonly}{logical, default \code{FALSE}. If \code{TRUE}, only 
+the explained variance of the predictors and the \code{Condition()}
+are returned, \emph{i.e} without performing a singular value
+decompostion.}
+
+\item{cca_object}{a vegan-type cca-object of \emph{transposed} 
+\code{response}, from which chisq_residuals and row and column weights can 
+be obtained.}
 
 \item{object4QR}{a vegan-type cca-object with weighted QR's for 
-\code{formula}, i.e. \code{qr(Z)} and \code{qr(XZ)} obtainable 
-via \code{get_QR(object4QR, model = "pCCA")} and 
+\code{formula}, i.e. \code{qr(Z)} and \code{qr(XZ)} obtainable via 
+\code{get_QR(object4QR, model = "pCCA")} and
 \code{get_QR(object4QR, model = "CCA")}, respectively.}
 }
 \value{
