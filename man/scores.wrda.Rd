@@ -2,7 +2,8 @@
 % Please edit documentation in R/scores.wrda.R
 \name{scores.wrda}
 \alias{scores.wrda}
-\title{Extract results of a weighted redundancy analysis (wrda)}
+\title{Extract results of a weighted redundancy analysis (wrda) or a
+cca0 object.}
 \usage{
 \method{scores}{wrda}(
   x,
@@ -17,7 +18,7 @@
 }
 \arguments{
 \item{x}{object of class \code{"wrda"}, \emph{i.e.} result of 
-\code{\link{wrda}}.}
+\code{\link{wrda}} or \code{\link{cca0}}.}
 
 \item{...}{Other arguments passed to the function (currently ignored).}
 

@@ -14,7 +14,9 @@ ipf2N2(
 )
 }
 \arguments{
-\item{Y}{abundance table (matrix or dataframe-like).}
+\item{Y}{abundance table (matrix or dataframe-like), ideally, 
+with names for rows and columns. 
+BEWARE: all rows and columns should have positive sums!}
 
 \item{max_iter}{maximum number of iterative proportional fitting (ipf) 
 iterations.}
@@ -41,7 +43,8 @@ informative species}
 \item{crit}{stopping criterion.}
 }
 \value{
-matrix obtained after ipf to N2-marginals.
+a matrix of the same order as the input \code{Y},
+obtained after ipf to N2-marginals.
 }
 \description{
 Function for preprocessing/transforming an abundance table

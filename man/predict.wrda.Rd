@@ -2,7 +2,7 @@
 % Please edit documentation in R/predict.wrda.R
 \name{predict.wrda}
 \alias{predict.wrda}
-\title{Prediction for cca0 and wrda}
+\title{Prediction from cca0 and wrda models}
 \usage{
 \method{predict}{wrda}(
   object,
@@ -15,7 +15,7 @@
 )
 }
 \arguments{
-\item{object}{return value of \code{\link{dc_CA}}.}
+\item{object}{return value of \code{\link{cca0}} or \code{\link{wrda}}.}
 
 \item{...}{Other arguments passed to the function (currently ignored).}
 
@@ -48,8 +48,8 @@ a matrix with the predictions. The exact content of the matrix
 depends on the \code{type} of predictions that are being made.
 }
 \description{
-Prediction of  response and lc scores
-from environment data.
+Prediction of response and lc scores from environment data
+using \code{\link{cca0}} and \code{\link{wrda}} models.
 }
 \details{
 Variables that are in the model but not in \code{newdata} are set to their 
@@ -58,7 +58,8 @@ mean of the quantitative variables not included. Predictions with
 not-included factors are at the reference level (the first level of the 
 factor).
 
-For \code{type = "response"}, many of the predicted values may be negative, 
+In a \code{\link{cca0}} model with \code{type = "response"},
+many of the predicted values may be negative,
 indicating expected absences (0) or small expected response values.
 }
 \examples{

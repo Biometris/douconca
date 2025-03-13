@@ -1,12 +1,12 @@
-#' @title Prediction for cca0 and wrda
+#' @title Prediction from cca0 and wrda models
 #'
 #' @description
-#' Prediction of  response and lc scores
-#' from environment data.
+#' Prediction of response and lc scores from environment data
+#' using \code{\link{cca0}} and \code{\link{wrda}} models.
 #' 
 #' @inheritParams scores.dcca
 #'
-#' @param object return value of \code{\link{dc_CA}}.
+#' @param object return value of \code{\link{cca0}} or \code{\link{wrda}}.
 #' @param ...  Other arguments passed to the function (currently ignored).
 #' @param type type of prediction, \code{c(
 #' "response", "lc")} for 
@@ -29,7 +29,8 @@
 #' not-included factors are at the reference level (the first level of the 
 #' factor).
 #'
-#' For \code{type = "response"}, many of the predicted values may be negative, 
+#' In a \code{\link{cca0}} model with \code{type = "response"},
+#' many of the predicted values may be negative,
 #' indicating expected absences (0) or small expected response values.
 #' 
 #' @returns a matrix with the predictions. The exact content of the matrix 

@@ -3,7 +3,7 @@
 #'
 #' @description
 #' \code{anova.dcca} performs the community- and species-level permutation tests
-#' of dc-CA and combines these with the 'max test', which takes the maximum of
+#' of dc-CA and combines these in the 'max test', which takes the maximum of
 #' the \emph{P}-values. The function arguments are similar to (but more 
 #' restrictive than) those of \code{\link[vegan]{anova.cca}}.
 #
@@ -50,6 +50,8 @@
 #' The function \code{\link[vegan]{anova.cca}} is implemented in C and therefore
 #' a factor of 20 or so quicker than the native R-code used in 
 #' \code{\link{anova_sites}}.
+#' 
+#' The \code{n_axes} argument is new, and can be considered experimental.
 #' 
 #' @returns
 #' A list of 3 of structures as from \code{\link[vegan]{anova.cca}}. The 

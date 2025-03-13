@@ -42,7 +42,10 @@ If \code{n_axes =1}, selection is on the first eigenvalue of the dc-CA
 for selection of variables that form an optimal one-dimensional model.}
 
 \item{initial_trait_model}{character specifying what should be inside 
-Condition(). Default = "1" (nothing)}
+\code{Condition()}. Default: \code{"1"} (nothing, the intercept only).
+Examples: \code{"region"} for a within-region analysis or
+\code{"A*B"} for a within analysis specified by the interaction 
+of factors \code{A} and \code{B}, with \code{region, A, B} in the data.}
 
 \item{test}{integer value for statistical testing; default: \code{2}. 
 For \code{test = 0,1,2}, no test, site-based permutation test and site- 
@@ -70,6 +73,8 @@ Forward selection of traits using dc-CA  with a fixed environmental formula
 \details{
 The selection is on the basis of the additional fit (inertia) of a variable 
 given the variables already in the model.
+
+The \code{n_axes} argument is considered experimental.
 }
 \examples{
 data("dune_trait_env")

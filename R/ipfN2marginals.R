@@ -9,7 +9,9 @@
 #' inversely proportional to N2 (ter Braak 2019), 
 #' and therefore of interest in \code{\link{dc_CA}}.
 #'  
-#' @param Y abundance table (matrix or dataframe-like).
+#' @param Y abundance table (matrix or dataframe-like), ideally, 
+#' with names for rows and columns. 
+#' BEWARE: all rows and columns should have positive sums!
 #' @param updateN2 logical, default \code{TRUE}.
 #' If \code{FALSE} the marginal sums are proportional to 
 #' the N2-marginals of the initial table, but the N2-marginals of the returned 
@@ -29,7 +31,9 @@
 #' @param max_iter maximum number of iterative proportional fitting (ipf) 
 #' iterations.
 #' @param crit stopping criterion.
-#' @return matrix obtained after ipf to N2-marginals.
+#' 
+#' @return a matrix of the same order as the input \code{Y},
+#' obtained after ipf to N2-marginals.
 #' 
 #' @details
 #' Applying \code{ipf2N2} with \code{N2N_N2_species=FALSE} 
@@ -41,7 +45,7 @@
 #' in more than halve the number of sites are downweighted, so that
 #' the row sum no longer equal to the richness of the site (the number of species),
 #' but proportional to the number of informative species. 
-#'
+#' 
 #' @example demo/dune_ipf2N2.R
 #' 
 #' @export
@@ -66,6 +70,15 @@ ipf2N2 <- function(Y,
   Y <- as.matrix(Y)
   rownams <- rownames(Y)
   colnams <- colnames(Y)
+  R <- rowSums(Y)
+  K <- colSums(Y)
+  if (any(R == 0)) {
+    stop("Some sites do not have species.\n", names(R)[which(R==0)], "\n")
+  }
+  if (any(K == 0)) {
+    stop("Some species are absent in every site.\n", 
+         names(K)[which(K==0)], "\n")
+  }
   N2spp <- fN2N_N2(Y, 2, N2N_N2 = N2N_N2_species)
   N2sites<- fN2N_N2(Y, 1, N2N_N2 = N2N_N2_sites)
   R <- rowSums(Y)

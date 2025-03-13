@@ -8,11 +8,16 @@
 #' to consider of addition. Default \code{NULL} for all variables in 
 #' \code{mod$data$dataTraits}.
 #' @param initial_trait_model character specifying what should be inside 
-#' Condition(). Default = "1" (nothing)
+#' \code{Condition()}. Default: \code{"1"} (nothing, the intercept only).
+#' Examples: \code{"region"} for a within-region analysis or
+#' \code{"A*B"} for a within analysis specified by the interaction 
+#' of factors \code{A} and \code{B}, with \code{region, A, B} in the data.
 #' 
 #' @details 
 #' The selection is on the basis of the additional fit (inertia) of a variable 
 #' given the variables already in the model.
+#' 
+#' The \code{n_axes} argument is considered experimental.
 #' 
 #' @returns list with three elements: \code{final...} with selected variables,
 #' \code{model_final}, and \code{process} with account of the selection process 

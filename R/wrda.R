@@ -8,6 +8,9 @@
 #' @param response matrix or data frame of the abundance data (dimension 
 #' \emph{n} x \emph{m}). Rownames of \code{response}, if any, are carried 
 #' through.
+#' @param cca_object a vegan-type cca-object of \emph{transposed} 
+#' \code{response}, from which centred abundance values
+#'  and row and column weights can be obtained.
 #' @param weights row weights (a vector). If not specified unit weights are 
 #' used.
 #

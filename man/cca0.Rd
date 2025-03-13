@@ -60,9 +60,8 @@ after transformation to chi-square residuals.
 
 It is much slower than \code{\link[vegan]{cca}}. The only reason to use
 it, is that \code{\link{anova.cca0}} does residualized predictor permutation.
-It is unknown to the authors of \code{douconca} 
-which method \code{\link[vegan]{anova.cca}} implements. See 
-\code{\link{anova.cca0}}. 
+It is unknown to the authors of \code{douconca} which method
+\code{\link[vegan]{anova.cca}} implements. See \code{\link{anova.cca0}}.
 
 Compared to  \code{\link[vegan]{cca}}, \code{cca0} does not have residual 
 axes, \emph{i.e.} no CA of the residuals is performed.

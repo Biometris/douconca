@@ -38,8 +38,8 @@ are returned, \emph{i.e} without performing a singular value
 decompostion.}
 
 \item{cca_object}{a vegan-type cca-object of \emph{transposed} 
-\code{response}, from which chisq_residuals and row and column weights can 
-be obtained.}
+\code{response}, from which centred abundance values
+ and row and column weights can be obtained.}
 
 \item{object4QR}{a vegan-type cca-object with weighted QR's for 
 \code{formula}, i.e. \code{qr(Z)} and \code{qr(XZ)} obtainable via 

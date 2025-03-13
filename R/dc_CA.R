@@ -9,7 +9,7 @@
 #' data of a site by the site total, giving equal site weights. This division 
 #' has the advantage that the multivariate analysis corresponds with an 
 #' unweighted (multi-trait) community-level analysis, instead of being weighted
-#' (Kleyer et al. 2012).
+#' (Kleyer et al. 2012, ter Braak and van Rossum, 2025).
 #'
 #' @param formulaEnv formula or one-sided formula for the rows (samples) with 
 #' row predictors in \code{dataEnv}. When two-sided, the left hand side of 
@@ -201,7 +201,13 @@
 #' ter Braak C.J.F. and  P. Šmilauer  (2018). Canoco reference manual
 #' and user's guide: software for ordination (version 5.1x).
 #' Microcomputer Power, Ithaca, USA, 536 pp.
-#'
+#' ter Braak C.J.F. and B. van Rossum (2025).
+#' 
+#' Linking multivariate trait variation to the environment:
+#' the advantages of double constrained correspondence analysis
+#' with the R package douconca.
+#' \doi{10.6084/m9.figshare.28146386}
+#' 
 #' Oksanen, J., et al. (2024).
 #' vegan: Community Ecology Package. R package version 2.6-6.1.
 #' \url{https://CRAN.R-project.org/package=vegan}.

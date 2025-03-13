@@ -47,9 +47,9 @@ in \code{dataTraits} are predictor traits.}
 data by dividing the rows in the \code{response} by their total.}
 }
 \value{
-The default returns a list of CWM, SNC, weights, \code{formulaTraits} and
+The default returns a list of CWM, SNC, weights, \code{formulaTraits},
 inertia (weighted variance explained by the traits and by the environmental
-variables) a list of data with elements \code{dataEnv} and \code{dataTraits}.
+variables) and a list of data with elements \code{dataEnv} and \code{dataTraits}.
 }
 \description{
 Double constrained correspondence analysis (dc-CA) can be calculated directly 
