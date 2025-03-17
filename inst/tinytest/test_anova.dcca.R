@@ -24,7 +24,7 @@ modDivF1a <- dc_CA(formulaEnv = ~ A1 + Moist + Mag + Use + Manure,
 set.seed(123)
 modDivF1a_an <- anova(modDivF1a)
 
-expect_equivalent_to_reference(modDivF1a_an, "modDivF1a_an")
+expect_equal_to_reference(modDivF1a_an, "modDivF1a_an")
 
 set.seed(123)
 expect_equivalent(anova_species(modDivF1a)$table, modDivF1a_an$species)
@@ -43,7 +43,7 @@ modDivFq11<- dc_CA(formulaEnv = ~Manure,
 set.seed(123)
 
 modDivFq11_an <- anova(modDivFq11)
-expect_equivalent_to_reference(modDivFq11_an, "modDivFq11_an")
+expect_equal_to_reference(modDivFq11_an, "modDivFq11_an")
 
 set.seed(123)
 # test of the by axis of 1 single predictor. 
@@ -91,7 +91,7 @@ modDivF_dcca_near_singular_species <-
 
 set.seed(37)
 anova_dccaDivF <- anova(modDivF_dccaA11)
-expect_equivalent_to_reference (anova_dccaDivF, "anova_dccaDivF")
+expect_equal_to_reference(anova_dccaDivF, "anova_dccaDivF")
 
 set.seed(159)
 an_env <- anova_sites(modDivF_dcca_near_singular_species)
