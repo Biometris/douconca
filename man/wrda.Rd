@@ -6,7 +6,7 @@
 \usage{
 wrda(
   formula,
-  response,
+  response = NULL,
   data,
   weights = rep(1/nrow(data), nrow(data)),
   traceonly = FALSE,
@@ -16,7 +16,7 @@ wrda(
 }
 \arguments{
 \item{formula}{one or two-sided formula for the rows (samples) with row 
-predictors in \code{data}. The left hand side of the formula is ignored as
+predictors in \code{data}. The left hand side of the formula is ignored if
 it is specified in the next argument (\code{response}). Specify row 
 covariates (if any ) by adding \code{+ Condition(covariate-formula)} to 
 \code{formula} as in \code{\link[vegan]{rda}}. The \code{covariate-formula}
@@ -24,7 +24,8 @@ should not contain a \code{~} (tilde).}
 
 \item{response}{matrix or data frame of the abundance data (dimension 
 \emph{n} x \emph{m}). Rownames of \code{response}, if any, are carried 
-through.}
+through. Can be \code{NULL} if \code{cca_object} is supplied or 
+if the response is \code{formula} is two-sided.}
 
 \item{data}{matrix or data frame of the row predictors, with rows 
 corresponding to those in \code{response} (dimension \emph{n} x \emph{p}).}
@@ -71,8 +72,7 @@ w <- rep(1, 20)
 w[1:10] <- 8 
 w[17:20] <- 0.5
 
-object <- wrda(formula = ~ A1 + Moist + Mag + Use + Condition(Manure),
-               response = response, 
+object <- wrda(formula = response ~ A1 + Moist + Mag + Use + Condition(Manure),
                data = dune_trait_env$envir, 
                weights = w)
 object # Proportions equal to those Canoco 5.15

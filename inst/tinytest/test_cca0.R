@@ -2,18 +2,21 @@ data("dune_trait_env")
 
 # rownames are carried forward in results
 rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
-response <- dune_trait_env$comm[, -1]  
+Y <- dune_trait_env$comm[, -1]  # must delete "Sites"  
 
+mod_cca00 <- cca0(formula = Y ~ A1 + Moist + Mag + Use + Condition(Manure),
+                  data = dune_trait_env$envir)
 
-
+expect_error(cca0(formula = response ~ A1 + Moist + Mag + Use + Condition(Manure),
+                  data = dune_trait_env$envir), "object 'response' not found")
 
 mod_cca0 <- cca0(formula = ~ A1 + Moist + Mag + Use + Condition(Manure),
-                    response = response, 
+                    response = Y, 
                     data = dune_trait_env$envir)
 
 
 # compare with vegan::cca
-mod_vegan <- vegan::cca(formula = response ~ A1 + Moist + Mag + Use + Condition(Manure), 
+mod_vegan <- vegan::cca(formula = Y ~ A1 + Moist + Mag + Use + Condition(Manure), 
                         data = dune_trait_env$envir)
 
 expect_equivalent(mod_cca0$CCA$eig, mod_vegan$CCA$eig)
@@ -23,6 +26,8 @@ expect_equal(mod_cca0$CCA$tot.chi, mod_vegan$CCA$tot.chi)
 expect_equivalent(abs(scores(mod_cca0,display = "species",scaling="sym")),
                   abs(scores(mod_vegan,display = "species",scaling="sym")))
 
+expect_equivalent(abs(scores(mod_cca00, display = "species", scaling = "sym")),
+                  abs(scores(mod_vegan, display = "species", scaling = "sym")))
 expect_stdout(cca0_print <- print(mod_cca0))
 expect_equal(names(cca0_print), 
              c("call", "method", "tot.chi", "formula", "site_axes", 

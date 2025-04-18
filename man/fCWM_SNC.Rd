@@ -17,7 +17,9 @@ fCWM_SNC(
 \arguments{
 \item{response}{matrix, data frame of the abundance data 
 (dimension \emph{n} x \emph{m}) or list with community weighted means (CWMs)
-from \code{\link{fCWM_SNC}}. See Details for analyses starting from community
+from \code{\link{fCWM_SNC}}, NULL. If \code{NULL}, the response should be
+at the left-hand side of \code{formulaEnv}. 
+See Details for analyses starting from community
 weighted means. Rownames of \code{response}, if any, are carried through.}
 
 \item{dataEnv}{matrix or data frame of the row predictors, with rows 
@@ -27,9 +29,9 @@ corresponding to those in \code{response}. (dimension \emph{n} x \emph{p}).}
 corresponding to the columns in \code{response}.
 (dimension \emph{m} x \emph{q}).}
 
-\item{formulaEnv}{formula or one-sided formula for the rows (samples) with 
-row predictors in \code{dataEnv}. When two-sided, the left hand side of 
-the formula is not used. Specify row covariates (if any ) by 
+\item{formulaEnv}{two-sided or one-sided formula for the rows (samples) with 
+row predictors in \code{dataEnv}. The left hand side of the formula is ignored if
+it is specified in the \code{response} argument. Specify row covariates (if any) by
 adding \code{+ Condition(covariate-formula)} to \code{formulaEnv} as 
 in \code{\link[vegan]{rda}}. The \code{covariate-formula} should not contain 
 a \code{~} (tilde). Default: \code{NULL} for \code{~.}, i.e. all variables 

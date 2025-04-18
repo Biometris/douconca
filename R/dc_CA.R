@@ -11,9 +11,9 @@
 #' unweighted (multi-trait) community-level analysis, instead of being weighted
 #' (Kleyer et al. 2012, ter Braak and van Rossum, 2025).
 #'
-#' @param formulaEnv formula or one-sided formula for the rows (samples) with 
-#' row predictors in \code{dataEnv}. When two-sided, the left hand side of 
-#' the formula is not used. Specify row covariates (if any ) by 
+#' @param formulaEnv two-sided or one-sided formula for the rows (samples) with 
+#' row predictors in \code{dataEnv}. The left hand side of the formula is ignored if
+#' it is specified in the \code{response} argument. Specify row covariates (if any) by
 #' adding \code{+ Condition(covariate-formula)} to \code{formulaEnv} as 
 #' in \code{\link[vegan]{rda}}. The \code{covariate-formula} should not contain 
 #' a \code{~} (tilde). Default: \code{NULL} for \code{~.}, i.e. all variables 
@@ -27,7 +27,9 @@
 #' in \code{dataTraits} are predictor traits.
 #' @param response matrix, data frame of the abundance data 
 #' (dimension \emph{n} x \emph{m}) or list with community weighted means (CWMs)
-#' from \code{\link{fCWM_SNC}}. See Details for analyses starting from community
+#' from \code{\link{fCWM_SNC}}, NULL. If \code{NULL}, the response should be
+#' at the left-hand side of \code{formulaEnv}. 
+#' See Details for analyses starting from community
 #' weighted means. Rownames of \code{response}, if any, are carried through.
 #' @param dataEnv matrix or data frame of the row predictors, with rows 
 #' corresponding to those in \code{response}. (dimension \emph{n} x \emph{p}).
@@ -224,7 +226,7 @@ dc_CA <- function(formulaEnv = NULL,
                   dataTraits = NULL,
                   divideBySiteTotals = TRUE,
                   dc_CA_object = NULL,
-				  env_explain = TRUE,
+                  env_explain = TRUE,
                   use_vegan_cca = FALSE,
                   verbose = TRUE) {
   # response matrix or data frame, dataEnv and dataTraits data frames 
@@ -237,7 +239,9 @@ dc_CA <- function(formulaEnv = NULL,
   # If set, formulaTraits, response, dataEnv, dataTraits are not used at all 
   # and have no efffect on the result
   call <- match.call()																					 
-  if (!is.null(response)) {
+  if (is.null(response) && is.null(dc_CA_object)) {
+    response <- get_response(formulaEnv)
+  } else {
     if (is.list(response) && inherits(response[[1]], c("matrix", "data.frame"))) {
       # response is a list of CWMs_orthonormal_traits and a weights list
       if (any(is.na(response[[1]]))) {
@@ -254,13 +258,13 @@ dc_CA <- function(formulaEnv = NULL,
     formulaTraits <- change_reponse(out0$formulaTraits, "tY", out0$data$dataTraits)
     environment(formulaTraits) <- environment()
     step1 <- if (use_vegan_cca) vegan::cca(formulaTraits, data = out0$data$dataTraits) else
-               cca0(formulaTraits, response = tY, data = out0$data$dataTraits)
+      cca0(formulaTraits, response = tY, data = out0$data$dataTraits)
     if (is.null(vegan::eigenvals(step1, model = "constrained"))) {
       message("Trait constraints or CWMs are constant,", 
               "no dc-CA analysis possible.\n",
               "Inspect return value$CWM for issues.\n")
       ms <- f_wmean(out0$formulaTraits, tY = out0$data$Y, out0$data$dataTraits,
-         	        weights=out0$weights, name = "CWM", SNConly = TRUE)
+                    weights=out0$weights, name = "CWM", SNConly = TRUE)
       out0$CWM <- ms
       out0$CCAonTraits <- step1
       return(out0)
@@ -270,8 +274,8 @@ dc_CA <- function(formulaEnv = NULL,
       scores(step1, display = "species", scaling = "species",
              choices = seq_len(rank_mod(step1))) * sqrt((n - 1) / n)
     rownames(CWMs_orthonormal_traits) <- 
-  	  if (is.null(rownames(out0$data$Y))) paste0("Sam", seq_len((n))) else 
-	    rownames(out0$data$Y)
+      if (is.null(rownames(out0$data$Y))) paste0("Sam", seq_len((n))) else 
+        rownames(out0$data$Y)
     if (rownames(CWMs_orthonormal_traits)[1] == "col1") {
       rownames(CWMs_orthonormal_traits) <- paste0("Sam", seq_len((n)))
     }
@@ -307,7 +311,7 @@ dc_CA <- function(formulaEnv = NULL,
     eigenvalues <- vegan::eigenvals(step2, model = "constrained")
   } else {
     step2 <- try(wrda(formulaEnv, response = out1$CWMs_orthonormal_traits, 
-	                  weights = out1$weights$rows, data = out1$data$dataEnv))
+                      weights = out1$weights$rows, data = out1$data$dataEnv))
     eigenvalues <- if (!inherits(step2, "try-error")) step2$CCA$eig else NULL
   }
   if (is.null(eigenvalues)) {
@@ -315,7 +319,7 @@ dc_CA <- function(formulaEnv = NULL,
             "no dc-CA analysis possible.\n",
             "Inspect return value$SNC for issues.\n")
     mt <- f_wmean(formulaEnv = out1$formulaEnv, tY = t(out1$data$Y), out1$data$dataEnv,
-	              weights = out1$weights, name = "SNC", SNConly = TRUE)
+                  weights = out1$weights, name = "SNC", SNConly = TRUE)
     out0$SNC <- mt
     out0$CCAonTraits <- step1
     out0$RDAonEnv <- step2
@@ -344,4 +348,17 @@ dc_CA <- function(formulaEnv = NULL,
     out <- print(out)
   }
   return(out)
+}
+
+#' @noRd
+#' @keywords internal
+get_response <- function(formula) {
+  trms <- terms(formula, specials = "Condition", keep.order = TRUE) 
+  response_nam <- rownames(attr(trms,"factors"))[attr(trms,"response")] # Y
+  if (length(response_nam)) {
+    response <- eval(parse(text = response_nam)) 
+  } else {
+    stop("Specify the response.\n")
+  }
+  return(response)
 }

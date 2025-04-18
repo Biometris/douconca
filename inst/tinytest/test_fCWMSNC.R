@@ -5,16 +5,16 @@ rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
 # use vegan::rda in step 2
 divide <- FALSE # divide by site.totals if TRUE
 
-Y <-dune_trait_env$comm[, -1]  # must delete "Sites"
+Y <- dune_trait_env$comm[, -1]  # must delete "Sites"
 # delete "Species", "Species_abbr" from traits and
 # use all remaining variables due to formulaTraits = ~. (the default)
 traits <- dune_trait_env$traits
 envir <- dune_trait_env$envir
 
 dcca_mod_DivF <- 
-  dc_CA(formulaEnv = ~ A1 + Moist + Manure + Use + Condition(Mag),
+  dc_CA(formulaEnv = Y ~ A1 + Moist + Manure + Use + Condition(Mag),
         formulaTraits = ~ SLA + Height + LDMC + Condition(Seedmass) + Lifespan,
-        response = Y,  # must delete "Sites"
+        response = Y,
         dataEnv = envir,
         dataTraits = traits,
         divideBySiteTotals = divide,
@@ -22,7 +22,6 @@ dcca_mod_DivF <-
 
 CWMSNCa <- fCWM_SNC(formulaEnv = dcca_mod_DivF$formulaEnv,
                     formulaTraits = dcca_mod_DivF$formulaTraits,
-                    response = Y,  # must delete "Sites"
                     dataEnv = envir,
                     dataTraits = traits,
                     divideBySiteTotals = divide)

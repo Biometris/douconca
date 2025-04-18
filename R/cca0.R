@@ -5,7 +5,7 @@
 #' analysis.
 #'
 #' @param formula one or two-sided formula for the rows (samples) with row 
-#' predictors in \code{data}. The left hand side of the formula is ignored as
+#' predictors in \code{data}. The left hand side of the formula is ignored if
 #' it is specified in the next argument (\code{response}). Specify row 
 #' covariates (if any ) by adding \code{+ Condition(covariate-formula)} to 
 #' \code{formula} as in \code{\link[vegan]{rda}}. The \code{covariate-formula}
@@ -13,6 +13,8 @@
 #' @param response matrix or data frame of the abundance data (dimension 
 #' \emph{n} x \emph{m}). Rownames of \code{response}, if any, are carried 
 #' through. BEWARE: all rows and columns should have positive sums!
+#' Can be \code{NULL} if \code{cca_object} is supplied or 
+#' if the response is \code{formula} is two-sided.
 #' @param data matrix or data frame of the row predictors, with rows 
 #' corresponding to those in \code{response} (dimension \emph{n} x \emph{p}).
 #' @param cca_object a vegan-type cca-object of \emph{transposed} 
@@ -63,27 +65,24 @@
 #' 
 #' @export
 cca0 <- function(formula, 
-                 response, 
+                 response = NULL, 
                  data, 
                  traceonly = FALSE,
                  cca_object = NULL,
                  object4QR = NULL) {
   call <- match.call()
-  if (!is.null(cca_object)){
+  if (!is.null(cca_object)) {
     Yw <- if (inherits(cca_object, "cca0")) cca_object$Ybar else
       # check whether eY works with and without trait covariates 
       vegan::ordiYbar(cca_object, model = "CA")
-    transp <- if (all(dim(Yw) == dim(response))) FALSE else 
-      if (all(dim(Yw) == rev(dim(response))))  TRUE else FALSE
-    if (nrow(Yw) == ncol(Yw)) {
-      if (rownames(Yw)[1] == colnames(response)[1]) transp <-TRUE else
-        if (rownames(Yw)[1] == rownames(response)[1]) transp <- FALSE else {
-          warning("cca_object not usable.\n")
-          cca_object <- NULL
-        }
+    transp <- f_transpose(Yw, data, response)
+    if (is.na(transp)) {
+      warning("cca_object not usable.\n")
+      cca_object <- NULL
     }
-  }
+  }  
   if (is.null(cca_object)) {
+    if (is.null(response)) response <- get_response(formula)														
     sumY <- sum(response)
     Yn <- as.matrix(response) / sumY
     R <- rowSums(Yn)
@@ -106,12 +105,16 @@ cca0 <- function(formula,
   } else { # use cca_object
     if (transp) {
       Yw <- t(Yw) 
-      cca_object$weights <- if (inherits(cca_object, "cca0"))
+      weights <- if (inherits(cca_object, "cca0"))
         rev(cca_object$weights) else
           list(columns= cca_object$rowsum, rows = cca_object$colsum)
+    } else {
+      weights <- if (inherits(cca_object, "cca0"))
+        cca_object$weights else
+          list(columns = cca_object$colsum, rows = cca_object$rowsum)
     }
-    K <- cca_object$weights[[1]]
-    R <- cca_object$weights[[2]]
+    K <- weights[[1]]
+    R <- weights[[2]]
     sWn <-sqrt(R)
     sumY <- cca_object$sumY
     total_variance <- cca_object$tot.chi
@@ -123,7 +126,10 @@ cca0 <- function(formula,
   ssY_gZ <- sum(eY ^ 2) 
   ssY_XgZ <- sum(Yfit_X ^ 2) 
   if (traceonly) {
-    return(c(Condition_inertia = total_variance-ssY_gZ, Fit_inertia = ssY_XgZ))
+    inert <- c(Condition_inertia = total_variance - ssY_gZ, Fit_inertia = ssY_XgZ)
+    attr(inert, which = "rank") <-
+      c(Cond = msqr$qrZ$rank - 1, Fit = msqr$qrXZ$rank - msqr$qrZ$rank+1)
+    return(inert)		 
   }
   svd_Yfit_X <- SVDfull(Yfit_X)
   biplot <- NULL
@@ -134,7 +140,7 @@ cca0 <- function(formula,
                                tot.chi = ssY_XgZ, QR = msqr$qrXZ, 
                                biplot = biplot, envcentre = NULL, 
                                centroids = NULL))
-  rank_CA <- min(dim(response)) - 1
+  rank_CA <- min(dim(Yw)) - 1
   eig_CA <- rep(NA, rank_CA)
   names(eig_CA) <- paste("CA", seq_len(rank_CA), sep = "")
   if (ncol(msqr$Zw) == 1) {

@@ -6,7 +6,7 @@
 \usage{
 cca0(
   formula,
-  response,
+  response = NULL,
   data,
   traceonly = FALSE,
   cca_object = NULL,
@@ -15,7 +15,7 @@ cca0(
 }
 \arguments{
 \item{formula}{one or two-sided formula for the rows (samples) with row 
-predictors in \code{data}. The left hand side of the formula is ignored as
+predictors in \code{data}. The left hand side of the formula is ignored if
 it is specified in the next argument (\code{response}). Specify row 
 covariates (if any ) by adding \code{+ Condition(covariate-formula)} to 
 \code{formula} as in \code{\link[vegan]{rda}}. The \code{covariate-formula}
@@ -23,7 +23,9 @@ should not contain a \code{~} (tilde).}
 
 \item{response}{matrix or data frame of the abundance data (dimension 
 \emph{n} x \emph{m}). Rownames of \code{response}, if any, are carried 
-through. BEWARE: all rows and columns should have positive sums!}
+through. BEWARE: all rows and columns should have positive sums!
+Can be \code{NULL} if \code{cca_object} is supplied or 
+if the response is \code{formula} is two-sided.}
 
 \item{data}{matrix or data frame of the row predictors, with rows 
 corresponding to those in \code{response} (dimension \emph{n} x \emph{p}).}
@@ -71,10 +73,9 @@ data("dune_trait_env")
 
 # rownames are carried forward in results
 rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
-response <- dune_trait_env$comm[, -1]  # must delete "Sites"
+abun <- dune_trait_env$comm[, -1]  # must delete "Sites"
 
-mod <- cca0(formula = ~ A1 + Moist + Mag + Use + Manure,
-            response = response,
+mod <- cca0(formula = abun ~ A1 + Moist + Mag + Use + Manure,
             data = dune_trait_env$envir)
 
 mod # Proportions equal to those Canoco 5.15
@@ -85,7 +86,7 @@ set.seed(123)
 anova(mod)
 anova(mod, by = "axis")
 
-mod2 <- vegan::cca(response ~ A1 + Moist + Mag + Use + Manure,
+mod2 <- vegan::cca(abun ~ A1 + Moist + Mag + Use + Manure,
                    data = dune_trait_env$envir)
 anova(mod2, by = "axis")
 

@@ -80,6 +80,9 @@ fCWM_SNC <- function(response = NULL,
   # If set, formulaTraits, response, dataEnv, dataTraits are not used at all 
   # and have no efffect on the result
   call <- match.call()
+  if (is.null(response)){
+    response <- get_response(formulaEnv)
+  }
   out <- check_data_dc_CA(formulaEnv, formulaTraits, response, dataEnv, 
                           dataTraits, divideBySiteTotals, call)
   # CWM and CWM ortho

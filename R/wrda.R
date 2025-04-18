@@ -7,7 +7,8 @@
 #'
 #' @param response matrix or data frame of the abundance data (dimension 
 #' \emph{n} x \emph{m}). Rownames of \code{response}, if any, are carried 
-#' through.
+#' through. Can be \code{NULL} if \code{cca_object} is supplied or 
+#' if the response is \code{formula} is two-sided.							  
 #' @param cca_object a vegan-type cca-object of \emph{transposed} 
 #' \code{response}, from which centred abundance values
 #'  and row and column weights can be obtained.
@@ -41,7 +42,7 @@
 #' 
 #' @export
 wrda <- function(formula, 
-                 response, 
+                 response = NULL, 
                  data, 
                  weights = rep(1 / nrow(data), nrow(data)),
                  traceonly = FALSE,
@@ -51,17 +52,16 @@ wrda <- function(formula,
   if (!is.null(cca_object)) {
     # check whether eY works with and without trait covariates
     Yw <- cca_object$Ybar
-    transp <- all(dim(Yw) !=dim(response))
-    if (nrow(Yw) == ncol(Yw)) {
-      if (rownames(Yw)[1] == colnames(response)[1]) transp <- TRUE else
-        if (rownames(Yw)[1] == rownames(response)[1]) transp <- FALSE else {
-          warning("cca_object not usable.\n")
-          cca_object <- NULL
-        }
+    transp <- f_transpose(Yw, data, response)
+    if (is.na(transp)) {
+      warning("cca_object not usable.\n")
+      cca_object <- NULL
     }
   }
   if (is.null(cca_object)) {
+    if (is.null(response)) response <- get_response(formula)														
     Yn <- as.matrix(response) 
+    K <- rep(1 / ncol(Yn), ncol(Yn))
     Wn <- weights / sum(weights)
     sWn <- sqrt(Wn)
     # transform to the unweighted case
@@ -72,10 +72,12 @@ wrda <- function(formula,
   } else {  # use cca_object
     if (transp) {
       Yw <- t(Yw) 
-      cca_object$weights <- rev(cca_object$weights)
+      weights <- rev(cca_object$weights)
+    } else {
+      weights <- cca_object$weights
     }
-    K <- cca_object$weights[[1]]
-    Wn <- cca_object$weights[[2]]
+    K <- weights[[1]]
+    Wn <- weights[[2]]
     sWn <-sqrt(Wn)
     sumY <- cca_object$sumY
     total_variance <- cca_object$tot.chi
@@ -87,7 +89,10 @@ wrda <- function(formula,
   ssY_gZ <- sum(eY ^ 2) 
   ssY_XgZ <- sum(Yfit_X ^ 2)
   if (traceonly) {
-    return(c(Condition_inertia =total_variance-ssY_gZ, Fit_inertia = ssY_XgZ))
+    inert <- c(Condition_inertia = total_variance - ssY_gZ, Fit_inertia = ssY_XgZ)
+    attr(inert, which = "rank") <-
+      c(Cond = msqr$qrZ$rank - 1, Fit = msqr$qrXZ$rank - msqr$qrZ$rank + 1)
+    return(inert)
   }
   svd_Yfit_X <- SVDfull(Yfit_X)
   biplot <- NULL
@@ -98,7 +103,7 @@ wrda <- function(formula,
                                tot.chi = ssY_XgZ, QR = msqr$qrXZ, 
                                biplot = biplot, envcentre = NULL, 
                                centroids = NULL))
-  rank_CA <- min(nrow(response)-1, ncol(response)) 
+  rank_CA <- min(nrow(Yw)-1, ncol(Yw)) 
   eig_CA <- rep(NA, rank_CA)
   names(eig_CA) <- paste0("wPCA", seq_len(rank_CA))
   if (ncol(msqr$Zw) == 1) {
@@ -125,7 +130,7 @@ wrda <- function(formula,
   object <- list(call = call, method = "wrda", tot.chi = total_variance,
                  formula = formula, site_axes = site_axes, 
                  species_axes = species_axes, Nobs = nrow(Yw), eigenvalues = eig,
-                 weights = list(columns = rep(1 / ncol(eY), ncol(eY)), rows = Wn),
+                 weights = list(columns = K, rows = Wn),
                  data = data, Ybar = Yw, pCCA = pCCA, CCA = CCA, 
                  CA = list(tot.chi = ssY_gZ - ssY_XgZ, rank = rank_CA, eig = eig_CA),
                  inertia = "weighted variance"
@@ -133,3 +138,17 @@ wrda <- function(formula,
   class(object) <- "wrda"
   return(object)
 }
+
+#' @noRd
+#' @keywords internal
+f_transpose <- function(Yw, 
+                        data,
+                        response) {
+  transpose <- if (nrow(data) == ncol(Yw)) TRUE else 
+    if (nrow(data) == nrow(Yw)) FALSE else NA
+  if (nrow(Yw) == ncol(Yw) && !is.null(response)) {
+    transpose <- if (rownames(Yw)[1] == colnames(response)[1]) TRUE else
+      if (rownames(Yw)[1] == rownames(response)[1]) FALSE else NA
+  }
+  return(transpose)
+}		

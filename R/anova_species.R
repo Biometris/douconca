@@ -95,17 +95,7 @@ anova_species <- function(object,
          "or specified by permute::how().\n")
   }
   if (is.null(object$SNCs_orthonormal_env)) {
-    formulaEnv <- change_reponse(object$formulaEnv, "object$data$Y", 
-                                 object$data$dataEnv)
-    environment(formulaEnv) <- environment()
-    step1_sp <- vegan::cca(formulaEnv, data = object$data$dataEnv)
-    SNCs_orthonormal_env <- scores(step1_sp, display = "species", 
-                                   scaling = "species", 
-                                   choices = 1:rank_mod(step1_sp))
-    if (rownames(SNCs_orthonormal_env)[1]=="col1") {
-      rownames(SNCs_orthonormal_env) <- 
-        paste0("Species", seq_len(nrow(object$data$dataTraits)))
-    }
+    SNCs_orthonormal_env <- fSNC_ortho(object)
   } else {
     SNCs_orthonormal_env <- object$SNCs_orthonormal_env
   }
@@ -570,4 +560,22 @@ fanovatable <- function(out_tes,
                        n_axes = n_axes,				   
                        class = c("anova.cca", "anova", "data.frame"))
   return(f_sites)
+}
+
+#' @noRd
+#' @keywords internal
+fSNC_ortho <- function(object) {
+  step1_sp <- cca0(formula = object$formulaEnv,
+                   response = object$data$Y,
+                   data = object$data$dataEnv, 
+                   cca_object = object$CCAonTraits,
+                   object4QR = object$RDAonEnv)
+  SNCs_orthonormal_env <- scores(step1_sp, display = "species", 
+                                 scaling = "species", 
+                                 choices = 1:rank_mod(step1_sp))
+  if (rownames(SNCs_orthonormal_env)[1]=="col1") {
+    rownames(SNCs_orthonormal_env) <- 
+      paste0("Species", seq_len(nrow(object$data$dataTraits)))
+  }
+  return(SNCs_orthonormal_env)
 }
