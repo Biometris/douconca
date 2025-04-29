@@ -88,7 +88,7 @@ Forward selection of traits or environmental variables using dc-CA.
 The selection is on the basis of the additional fit (inertia) of a variable 
 given the variables already in the model.
 
-The function \code{FS} does implement the max test and may thus 
+The function \code{FS} does not implement the max test and may thus 
 be liberal. It is recommended to test the final model (element
 \code{model_ final} of the returned object) by \code{anova}.
 }

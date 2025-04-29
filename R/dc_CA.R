@@ -354,9 +354,9 @@ dc_CA <- function(formulaEnv = NULL,
 #' @keywords internal
 get_response <- function(formula) {
   trms <- terms(formula, specials = "Condition", keep.order = TRUE) 
-  response_nam <- rownames(attr(trms,"factors"))[attr(trms,"response")] # Y
+  response_nam <- rownames(attr(trms, "factors"))[attr(trms, "response")]
   if (length(response_nam)) {
-    response <- eval(parse(text = response_nam)) 
+    response <- eval(parse(text = response_nam), envir = environment(formula))
   } else {
     stop("Specify the response.\n")
   }

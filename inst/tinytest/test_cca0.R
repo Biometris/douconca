@@ -11,8 +11,8 @@ expect_error(cca0(formula = response ~ A1 + Moist + Mag + Use + Condition(Manure
                   data = dune_trait_env$envir), "object 'response' not found")
 
 mod_cca0 <- cca0(formula = ~ A1 + Moist + Mag + Use + Condition(Manure),
-                    response = Y, 
-                    data = dune_trait_env$envir)
+                 response = Y, 
+                 data = dune_trait_env$envir)
 
 
 # compare with vegan::cca
@@ -48,3 +48,4 @@ mod_cca1 <- cca0(formula = ~ A1 + Moist + Mag + Use + Condition(Manure),
                  cca_object = mod_cca0, object4QR = mod_cca0)
 
 expect_equivalent(mod_cca1[-1],mod_cca0[-1])
+
