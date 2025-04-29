@@ -260,9 +260,16 @@ make_formula <- function(n_axes,
 
 #' Default forward selection function.
 #' 
-#' @noRd
+#' @param mod A fitted model.
+#' @param ... Further arguments passed to other methods.
+#' 
+#' @return The results from applying forward selection on the fitted model. 
+#' 
 #' @export
-FS <- function(mod, ...) UseMethod("FS")
+FS <- function(mod, 
+               ...) {
+  UseMethod("FS")
+}
 
 #' @noRd
 #' @keywords internal
