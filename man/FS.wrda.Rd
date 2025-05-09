@@ -2,7 +2,7 @@
 % Please edit documentation in R/FS.wrda.R
 \name{FS.wrda}
 \alias{FS.wrda}
-\title{Forward selection of predictor variables using wrda}
+\title{Forward selection of predictor variables using wrda or cca0}
 \usage{
 \method{FS}{wrda}(
   mod,
@@ -20,13 +20,12 @@
 )
 }
 \arguments{
-\item{mod}{initial wrda model with at least on predictor variable,}
+\item{mod}{initial wrda or cca0 model with at least on predictor variable,}
 
 \item{...}{unused.}
 
 \item{consider}{character vector of names in \code{mod$data}
-to consider of addition; default \code{NULL} for all variables in 
-\code{mod$data}.}
+to consider for addition.}
 
 \item{permutations}{a list of control values for the permutations as
 returned by the function \code{\link[permute]{how}}, or the number of 
@@ -73,7 +72,7 @@ list with three elements: \code{final...} with selected variables
  (all variables so far included).
 }
 \description{
-Forward selection of predictor variables using wrda
+Forward selection of predictor variables using wrda or cca0
 }
 \details{
 The selection is on the basis of the additional fit (inertia) of a variable 
@@ -90,30 +89,50 @@ data("dune_trait_env")
 
 # rownames are carried forward in results
 rownames(dune_trait_env$comm) <- dune_trait_env$comm$Sites
+abun <- dune_trait_env$comm[, -1] # must delete "Sites"
 
-mod <- dc_CA(formulaEnv = ~ A1,
+mod <- dc_CA(formulaEnv = abun ~ Moist + Mag,
              formulaTraits = ~ F + R + N + L,
-             response = dune_trait_env$comm[, -1],  # must delete "Sites"
-             dataEnv = dune_trait_env$envir[, -c(1, 7:10)], # without Sites, X, Y etc.
+             dataEnv = dune_trait_env$envir,
              dataTraits = dune_trait_env$traits,
              verbose = FALSE)
 
-out1 <- dc_CAForwardSelectionEnv(mod, verbose = FALSE) 
+# selection of traits with environmental model of mod (~ Moist+Mag)
+out1 <- FS(mod, consider = c("F", "R", "N", "L"), 
+           select = "traits", verbose = FALSE) 
+
 names(out1)
-out1$process
 out1$finalWithOneExtra
 out1$model_final
 
-mod2 <- dc_CA(formulaEnv = ~ Moist + Mag,
-              formulaTraits = ~ F,
-              response = dune_trait_env$comm[, -1],  # must delete "Sites"
-              dataEnv = dune_trait_env$envir,
-              dataTraits = dune_trait_env$traits[, -c(1, 2)],
-              verbose = FALSE)
+# selection of environmental variables with trait model of mod (~ F + R + N + L)
+out2 <- FS(mod, consider =  c("A1", "Moist", "Mag", "Use", "Manure"), 
+           select= "env", verbose = FALSE) 
 
-out2 <- dc_CAForwardSelectionTraits(mod2, verbose = FALSE) 
 names(out2)
-out2$process
 out2$finalWithOneExtra
 out2$model_final
+
+# selection of environmental variables without a trait model 
+# i.e. with a single constraint
+mod3 <- cca0(mod$data$Y ~ Moist, data = mod$data$dataEnv)
+out3 <- FS(mod3, consider = c("A1", "Moist", "Mag", "Use", "Manure"), 
+           threshold_P = 0.05)
+
+out3$finalWithOneExtra
+out3$model_final
+
+# selection of traits without an environmental model 
+#                         i.e. with a single constraint
+tY <- t(mod$data$Y)
+
+mod4 <- cca0(tY ~ L, data = mod$data$dataTraits)
+
+names(mod$data$dataTraits)
+out4 <- FS(mod4, 
+           consider =  c("SLA", "Height", "LDMC", "Seedmass", "Lifespan", 
+                         "F", "R", "N", "L"))
+
+out4$finalWithOneExtra
+out4$model_final
 }

@@ -30,8 +30,8 @@ downloads](https://cranlogs.r-pkg.org/badges/douconca)](https://www.r-pkg.org/pk
 <!-- badges: end -->
 
 R library `douconca` analyzes multi-trait multi-environment ecological
-data by double constrained correspondence analysis (ter Braak et al.
-2018) using `vegan` and native R code. It has a `formula` interface for
+data by double constrained correspondence analysis (ter Braak & van Rossum,
+2025) using `vegan` and native R code. It has a `formula` interface for
 the trait- (column-) and environment- (row-) models, which allows to
 assess, for example, the importance of trait interactions in shaping
 ecological communities. Throughout the two step algorithm of ter Braak
@@ -58,11 +58,17 @@ unweighted (multi-trait) community-level analysis, instead of being
 weighted, which may give a puzzling difference between common univariate
 and this multivariate analysis.
 
-Reference: ter Braak, CJF, Šmilauer P, and Dray S. 2018. Algorithms and
+References:	
+ter Braak, CJF, Šmilauer P, and Dray S. 2018. Algorithms and
 biplots for double constrained correspondence analysis. Environmental
 and Ecological Statistics, 25(2), 171-197.
 <https://doi.org/10.1007/s10651-017-0395-x>
 
+ter  Braak, C.J.F. and van Rossum, B. (2025).
+Linking Multivariate Trait Variation to the Environment: 
+Advantages of Double Constrained Correspondence Analysis 
+with the R Package Douconca. Ecological Informatics, 88.
+<https://doi.org/10.1016/j.ecoinf.2025.103143>
 ## Installation
 
 You can install the CRAN version of `douconca` by:
@@ -75,5 +81,5 @@ You can install the development version of `douconca` by:
 
 ``` r
 install.packages("remotes")
-remotes::install_github("CajoterBraak/douconca")
+remotes::install_github("Biometris/douconca", ref = "develop", dependencies = TRUE)
 ```

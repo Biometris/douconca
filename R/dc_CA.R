@@ -38,6 +38,12 @@
 #' (dimension \emph{m} x \emph{q}).
 #' @param divideBySiteTotals logical; default \code{TRUE} for closing the 
 #' data by dividing the rows in the \code{response} by their total.
+#' However, the default is \code{FALSE}, when the species totals are 
+#' proportional to \code{N2*(N-N2)} with  
+#' \code{N2} the Hill numbers of order 2 of the species 
+#' and \code{N} the number of sites,
+#' as indicator that the response data have been pre-processed to
+#' \code{N2}-based marginals using \code{\link{ipf2N2}}.												
 #' @param dc_CA_object  optional object from an earlier run of this function. 
 #' Useful if the same formula for the columns (\code{formulaTraits}), 
 #' \code{dataTraits} and \code{response} are used with a new formula for the 
@@ -203,12 +209,12 @@
 #' ter Braak C.J.F. and  P. Šmilauer  (2018). Canoco reference manual
 #' and user's guide: software for ordination (version 5.1x).
 #' Microcomputer Power, Ithaca, USA, 536 pp.
-#' ter Braak C.J.F. and B. van Rossum (2025).
 #' 
-#' Linking multivariate trait variation to the environment:
-#' the advantages of double constrained correspondence analysis
-#' with the R package douconca.
-#' \doi{10.6084/m9.figshare.28146386}
+#' ter  Braak, C.J.F. and van Rossum, B. (2025).
+#' Linking Multivariate Trait Variation to the Environment: 
+#' Advantages of Double Constrained Correspondence Analysis 
+#' with the R Package Douconca. Ecological Informatics, 88.
+#' \doi{10.1016/j.ecoinf.2025.103143}
 #' 
 #' Oksanen, J., et al. (2024).
 #' vegan: Community Ecology Package. R package version 2.6-6.1.
@@ -224,7 +230,7 @@ dc_CA <- function(formulaEnv = NULL,
                   response = NULL, 
                   dataEnv = NULL,
                   dataTraits = NULL,
-                  divideBySiteTotals = TRUE,
+                  divideBySiteTotals = NULL,
                   dc_CA_object = NULL,
                   env_explain = TRUE,
                   use_vegan_cca = FALSE,

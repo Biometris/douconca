@@ -74,7 +74,7 @@ fCWM_SNC <- function(response = NULL,
                      dataTraits = NULL,
                      formulaEnv = NULL,
                      formulaTraits = NULL,
-                     divideBySiteTotals = TRUE) {
+                     divideBySiteTotals = NULL) {
   # response matrix or data frame, dataEnv and dataTraits data frames in which 
   # formualaE and formulaT are evaluated
   # If set, formulaTraits, response, dataEnv, dataTraits are not used at all 
@@ -467,6 +467,17 @@ check_data_dc_CA <- function(formulaEnv,
   rownames(dataEnv) <- rownames(response)
   rownames(dataTraits) <- colnames(response)
   # end of check
+  if (is.null(divideBySiteTotals)) {
+    N2spp <- fN2N_N2(response, 2, N2N_N2 = TRUE)
+    if (diff(range(N2spp / colSums(response))) < 1.0e-6){ # N2(N-N2) margins
+      divideBySiteTotals <- FALSE
+      message("Argument divideBySiteTotals set to FALSE, ",
+              "as species totals are proportional to N2(N-N2).\n",
+              "You can overrule this by specifying divideBySiteTotals explicitly.\n")
+    } else {
+      divideBySiteTotals <- TRUE
+    }
+  }
   TotR <- rowSums(response)
   if (divideBySiteTotals) {
     response <- response / (TotR %*% t(rep(1, ncol(response))))

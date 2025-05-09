@@ -1,9 +1,9 @@
-#' Forward selection of predictor variables using wrda
+#' Forward selection of predictor variables using wrda or cca0
 #' 
-#' @param mod initial wrda model with at least on predictor variable, 
+#' @param mod initial wrda or cca0 model with at least on predictor variable, 
 #' @param consider character vector of names in \code{mod$data}
-#' to consider of addition; default \code{NULL} for all variables in 
-#' \code{mod$data}.
+#' to consider for addition.
+#' 
 #' @inheritParams anova.wrda
 #' @param n_axes number of eigenvalues to select upon.
 #' The sum of \code{n_axes} eigenvalues is taken as criterion.
@@ -61,6 +61,9 @@ FS.wrda <- function(mod,
                     PvalAdjustMethod = "holm",
                     max_step = 10,
                     verbose = FALSE) {
+  if (is.null(consider)) {
+    stop("Argument consider must contain variable names.\n")
+  }	
   if (any(consider %in% names(mod$data))) {
     if (factor2categories && 
         length(intersect(names(mod$data)[sapply(mod$data, is.factor)], consider)) && 

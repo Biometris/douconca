@@ -11,7 +11,7 @@ fCWM_SNC(
   dataTraits = NULL,
   formulaEnv = NULL,
   formulaTraits = NULL,
-  divideBySiteTotals = TRUE
+  divideBySiteTotals = NULL
 )
 }
 \arguments{
@@ -46,7 +46,13 @@ a \code{~} (tilde). Default: \code{NULL} for \code{~.}, i.e. all variables
 in \code{dataTraits} are predictor traits.}
 
 \item{divideBySiteTotals}{logical; default \code{TRUE} for closing the 
-data by dividing the rows in the \code{response} by their total.}
+data by dividing the rows in the \code{response} by their total.
+However, the default is \code{FALSE}, when the species totals are 
+proportional to \code{N2*(N-N2)} with  
+\code{N2} the Hill numbers of order 2 of the species 
+and \code{N} the number of sites,
+as indicator that the response data have been pre-processed to
+\code{N2}-based marginals using \code{\link{ipf2N2}}.}
 }
 \value{
 The default returns a list of CWM, SNC, weights, \code{formulaTraits},
