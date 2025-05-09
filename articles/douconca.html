@@ -75,15 +75,12 @@ three-tables method. RLQ is available in the R-package <code>ade4</code>
 2018</a>)</span>. The <code>douconca</code> package provides an
 alternative method, termed double-constrained correspondence analysis
 (dc-CA), which is a natural extension of the commonly used method of
-community-weighted means (CWMs) regression <span class="citation">(<a href="#ref-Braak2018dcCA">Ter Braak, Šmilauer, and Dray 2018</a>; <a href="#ref-kleyer2012assessing">Kleyer et al. 2012</a>)</span>. As dc-CA
-is based on both regression analysis and ordination (factorial
+community-weighted means (CWMs) regression <span class="citation">(<a href="#ref-BraakRossum2025">ter Braak and van Rossum 2025</a>; <a href="#ref-Braak2018dcCA">Ter Braak, Šmilauer, and Dray 2018</a>; <a href="#ref-kleyer2012assessing">Kleyer et al. 2012</a>)</span>.<br>
+As dc-CA is based on both regression analysis and ordination (factorial
 analysis), it allows for the usual forms of testing, model building, and
-of biplots of resulting scores. There are a number of recent
-applications that also contain discussion on the value of dc-CA compared
-to RLQ <span class="citation">(<a href="#ref-peng2021double">Peng et al.
-2021</a>; <a href="#ref-gobbi2022hay">Gobbi et al. 2022</a>; <a href="#ref-pinho2021functional">Pinho et al. 2021</a>)</span>,
-summarized in this document on <a href="https://www.researchgate.net/publication/379731819_dc-CA_RLQ" class="external-link">ResearchGate</a>.
-More examples and comparisons with other methods can be found on <a href="https://doi.org/10.6084/m9.figshare.28146386" class="external-link">figshare</a>.</p>
+of biplots of resulting scores.</p>
+<p>The value of dc-CA compared to RLQ, GLMM3 and CWM-regression is
+discussed, with examples, in ter Braak and van Rossum (2025).</p>
 <p>The <code>douconca</code> package has a
 <code>formula</code>-interface to specify the dc-CA model, and
 <code>scores</code>, <code>anova</code>, <code>plot</code> and
@@ -135,10 +132,9 @@ exists and is available in the Canoco software <span class="citation">(<a href="
 lacks ecological realism, ease of interpretation and the link to
 methods, such as CWM-regression and fourth-corner correlation analysis,
 which have proven to be useful in trait-based ecology.</p>
-</div>
-<div class="section level2">
-<h2 id="example-data-and-questions">Example data and questions<a class="anchor" aria-label="anchor" href="#example-data-and-questions"></a>
-</h2>
+<p>A full-length treatment of dc-CA, with examples, is given in ter
+Braak and van Rossum (2025).<br>
+# Example data and questions</p>
 <p>We use the <code>dune_trait_env</code> data in the package to
 illustrate dc-CA. It consists of the abundances of 28 plant species in
 20 meadows (plots, here called sites), trait data for these plant
@@ -756,30 +752,22 @@ Oksanen, Jari, Gavin L. Simpson, F. Guillaume Blanchet, Roeland Kindt,
 Pierre Legendre, Peter R. Minchin, R. B. O’Hara, Peter Solymos, et al.
 2024. <em>Vegan: Community Ecology Package</em>. <a href="https://CRAN.R-project.org/package=vegan" class="external-link">https://CRAN.R-project.org/package=vegan</a>.
 </div>
-<div id="ref-peng2021double" class="csl-entry">
-Peng, Feng-Jiao, Cajo JF Ter Braak, Andreu Rico, and Paul J Van den
-Brink. 2021. <span>“Double Constrained Ordination for Assessing
-Biological Trait Responses to Multiple Stressors: A Case Study with
-Benthic Macroinvertebrate Communities.”</span> <em>Science of the Total
-Environment</em> 754: 142171.
-</div>
 <div id="ref-peres2017linking" class="csl-entry">
 Peres-Neto, Pedro R, Stéphane Dray, and Cajo JF Ter Braak. 2017.
 <span>“Linking Trait Variation to the Environment: Critical Issues with
 Community-Weighted Mean Correlation Resolved by the Fourth-Corner
 Approach.”</span> <em>Ecography</em> 40 (7): 806–16.
 </div>
-<div id="ref-pinho2021functional" class="csl-entry">
-Pinho, Bruno X, Marcelo Tabarelli, Cajo JF ter Braak, S Joseph Wright,
-Vı́ctor Arroyo-Rodrı́guez, Maı́ra Benchimol, Bettina MJ Engelbrecht, et al.
-2021. <span>“Functional Biogeography of Neotropical Moist Forests:
-Trait–Climate Relationships and Assembly Patterns of Tree
-Communities.”</span> <em>Global Ecology and Biogeography</em> 30 (7):
-1430–46.
-</div>
 <div id="ref-permute2022" class="csl-entry">
 Simpson, Gavin L. 2022. <em>Permute: Functions for Generating Restricted
 Permutations of Data</em>. <a href="https://CRAN.R-project.org/package=permute" class="external-link">https://CRAN.R-project.org/package=permute</a>.
+</div>
+<div id="ref-BraakRossum2025" class="csl-entry">
+ter Braak, Cajo J. F., and Bart-Jan van Rossum. 2025. <span>“Linking
+Multivariate Trait Variation to the Environment: The Advantages of
+Double Constrained Correspondence Analysis with the r Package
+Douconca.”</span> <em>Ecological Informatics</em> 88: 103143.
+https://doi.org/<a href="https://doi.org/10.1016/j.ecoinf.2025.103143" class="external-link">https://doi.org/10.1016/j.ecoinf.2025.103143</a>.
 </div>
 <div id="ref-Braak2019MEE" class="csl-entry">
 Ter Braak, Cajo JF. 2019. <span>“New Robust Weighted Averaging-and
