@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,8 +69,9 @@
 unravel trait-environment relationships from an abundance data table
 with associated multi-trait and multi-environment data tables. A popular
 method to such aim is RLQ <span class="citation">(<a href="#ref-doledec1996RLQ">Dolédec et al. 1996</a>; <a href="#ref-dray2014RLQ">Dray et al. 2014</a>)</span>, which also a
-three-tables method. RLQ is available in the R-package
-<code>ade4</code><span class="citation">(<a href="#ref-dray2007ade4">Dray and Dufour 2007</a>; <a href="#ref-thioulouse2018multivariate">Thioulouse et al.
+three-tables method. RLQ is available in the R-package <code>ade4</code>
+<span class="citation">(<a href="#ref-dray2007ade4">Dray and Dufour
+2007</a>; <a href="#ref-thioulouse2018multivariate">Thioulouse et al.
 2018</a>)</span>. The <code>douconca</code> package provides an
 alternative method, termed double-constrained correspondence analysis
 (dc-CA), which is a natural extension of the commonly used method of
@@ -81,7 +82,8 @@ of biplots of resulting scores. There are a number of recent
 applications that also contain discussion on the value of dc-CA compared
 to RLQ <span class="citation">(<a href="#ref-peng2021double">Peng et al.
 2021</a>; <a href="#ref-gobbi2022hay">Gobbi et al. 2022</a>; <a href="#ref-pinho2021functional">Pinho et al. 2021</a>)</span>,
-summarized in this document on <a href="https://www.researchgate.net/publication/379731819_dc-CA_RLQ" class="external-link">ResearchGate</a>.</p>
+summarized in this document on <a href="https://www.researchgate.net/publication/379731819_dc-CA_RLQ" class="external-link">ResearchGate</a>.
+More examples and comparisons with other methods can be found on <a href="https://doi.org/10.6084/m9.figshare.28146386" class="external-link">figshare</a>.</p>
 <p>The <code>douconca</code> package has a
 <code>formula</code>-interface to specify the dc-CA model, and
 <code>scores</code>, <code>anova</code>, <code>plot</code> and
@@ -119,8 +121,8 @@ permutations are specified via the <code>permute</code> package <span class="cit
 so as to allow for analysis of hierarchical and nested data designs
 <span class="citation">(<a href="#ref-gobbi2022hay">Gobbi et al.
 2022</a>)</span>.</p>
-<p>In <code>douconca</code>, a dc-CA models is specified by two
-formulas: a <code>formula</code> for the sites (rows) with environmental
+<p>In <code>douconca</code>, a dc-CA model is specified by two formulas:
+a <code>formula</code> for the sites (rows) with environmental
 predictors and a <code>formula</code> for the species (columns) with
 trait predictors, which both may contain factors, quantitative variables
 and transformations thereof, and interactions, like in any (generalized)
@@ -161,7 +163,7 @@ species and environmental data of these sites.</p>
 <span><span class="co">#&gt;  [9] "X_lot"  "Y_lot"</span></span></code></pre></div>
 <p>There are five morphological traits (from the <code>LEDA</code> trait
 database) and four ecological traits (Ellenberg indicator values for
-moisture, acidity, nutrients and light).</p>
+moisture (F), acidity (R), nutrients (N) and light (L)).</p>
 <p>There are five environmental variables and two sets of two spatial
 coordinates, which are approximately equal. The <code>X</code> and
 <code>Y</code> are the coordinates of the plot. The lot-variables are
@@ -194,7 +196,7 @@ first variable (<code>Sites</code>) must therefore be deleted.</p>
 <span>             dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">traits</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Step 1: the CCA ordination of the transposed matrix with trait constraints,</span></span>
 <span><span class="co">#&gt;         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span></span>
-<span><span class="co">#&gt; Call: cca(formula = tY ~ SLA + Height + LDMC + Seedmass + Lifespan, data =</span></span>
+<span><span class="co">#&gt; Call: cca0(formula = formulaTraits, response = tY, data =</span></span>
 <span><span class="co">#&gt; out0$data$dataTraits)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; -- Model Summary --</span></span>
@@ -213,9 +215,17 @@ first variable (<code>Sites</code>) must therefore be deleted.</p>
 <span><span class="co">#&gt; 0.26839 0.19597 0.12356 0.07003 0.01967 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Eigenvalues for unconstrained axes:</span></span>
-<span><span class="co">#&gt;    CA1    CA2    CA3    CA4    CA5    CA6    CA7    CA8 </span></span>
-<span><span class="co">#&gt; 0.4386 0.2396 0.1938 0.1750 0.1429 0.1112 0.0854 0.0601 </span></span>
+<span><span class="co">#&gt; CA1 CA2 CA3 CA4 CA5 CA6 CA7 CA8 </span></span>
+<span><span class="co">#&gt;  NA  NA  NA  NA  NA  NA  NA  NA </span></span>
 <span><span class="co">#&gt; (Showing 8 of 19 unconstrained eigenvalues)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; mean, sd, VIF and canonical coefficients with their optimistic [!] t-values:</span></span>
+<span><span class="co">#&gt;                        Avg     SDS    VIF   Regr1   tval1</span></span>
+<span><span class="co">#&gt; SLA                24.6468  6.3438 1.1888  0.4401  4.1794</span></span>
+<span><span class="co">#&gt; Height             25.1272 15.6848 1.3033  0.1283  1.1640</span></span>
+<span><span class="co">#&gt; LDMC              244.5084 70.9729 1.1791  0.0278  0.2647</span></span>
+<span><span class="co">#&gt; Seedmass            0.6543  0.6688 1.0784  0.3708  3.6980</span></span>
+<span><span class="co">#&gt; Lifespanperennial   0.9607  0.1944 1.0964 -0.0578 -0.5718</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Step 2: the RDA ordination of CWMs of the orthonormalized traits </span></span>
 <span><span class="co">#&gt;         of step 1 with environmental constraints:</span></span>
@@ -297,7 +307,7 @@ this axis in the print of the model. The default <code>plot</code> shows
 the intra-set correlations of the variables with the axis, but t-values
 can be visualized with</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mod</span>,gradient_description <span class="op">=</span> <span class="st">"t"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mod</span>, gradient_description <span class="op">=</span> <span class="st">"t"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="douconca_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 </div>
 <div class="section level3">
@@ -384,10 +394,12 @@ data):</p>
 </li>
 </ul>
 <p>The fitted traits per site are simply fitted community-weighted means
-and the fitted environmental values are fitted species-niche centroids.
-Note that 10% of the fitted abundance values is negative in our example.
-Negative values indicate likely absences or low abundance values of
-species with the specified traits and environmental values.</p>
+and the fitted environmental values are fitted species-niche centroids,
+as is clearer from the statements <code>fitted(mod, type = "CWM")</code>
+and <code>fitted(mod, type = "SNC")</code>, respectively. Note that 10%
+of the fitted abundance values is negative in our example. Negative
+values indicate likely absences or low abundance values of species with
+the specified traits and environmental values.</p>
 </div>
 </div>
 <div class="section level2">
@@ -406,7 +418,8 @@ traits.</p>
 <span>                dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">traits</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Step 1: the CCA ordination of the transposed matrix with trait constraints,</span></span>
 <span><span class="co">#&gt;         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span></span>
-<span><span class="co">#&gt; Call: cca(formula = tY ~ F + R + N + L, data = out0$data$dataTraits)</span></span>
+<span><span class="co">#&gt; Call: cca0(formula = formulaTraits, response = tY, data =</span></span>
+<span><span class="co">#&gt; out0$data$dataTraits)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; -- Model Summary --</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -424,9 +437,16 @@ traits.</p>
 <span><span class="co">#&gt; 0.4771 0.3122 0.0580 0.0228 </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Eigenvalues for unconstrained axes:</span></span>
-<span><span class="co">#&gt;     CA1     CA2     CA3     CA4     CA5     CA6     CA7     CA8 </span></span>
-<span><span class="co">#&gt; 0.27842 0.24457 0.18230 0.16241 0.14740 0.09916 0.09167 0.06649 </span></span>
+<span><span class="co">#&gt; CA1 CA2 CA3 CA4 CA5 CA6 CA7 CA8 </span></span>
+<span><span class="co">#&gt;  NA  NA  NA  NA  NA  NA  NA  NA </span></span>
 <span><span class="co">#&gt; (Showing 8 of 19 unconstrained eigenvalues)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; mean, sd, VIF and canonical coefficients with their optimistic [!] t-values:</span></span>
+<span><span class="co">#&gt;      Avg    SDS    VIF   Regr1   tval1</span></span>
+<span><span class="co">#&gt; F 6.1126 1.6685 1.1323  0.6048  8.2493</span></span>
+<span><span class="co">#&gt; R 5.8061 1.1894 1.7564  0.0170  0.1865</span></span>
+<span><span class="co">#&gt; N 5.1674 1.6303 1.7822 -0.1358 -1.4764</span></span>
+<span><span class="co">#&gt; L 7.3839 0.8774 1.1378  0.1424  1.9382</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Step 2: the RDA ordination of CWMs of the orthonormalized traits </span></span>
 <span><span class="co">#&gt;         of step 1 with environmental constraints:</span></span>
@@ -527,8 +547,8 @@ as <code>Condition</code> in the trait formula and perform an
 <code>anova</code> of the resulting model.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod_mGe</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/dc_CA.html">dc_CA</a></span><span class="op">(</span>formulaEnv <span class="op">=</span> <span class="op">~</span> <span class="va">A1</span> <span class="op">+</span> <span class="va">Moist</span> <span class="op">+</span> <span class="va">Manure</span> <span class="op">+</span> <span class="va">Use</span> <span class="op">+</span> <span class="va">Mag</span>,</span>
-<span>                 formulaTraits <span class="op">=</span> </span>
-<span>                   <span class="op">~</span> <span class="va">SLA</span> <span class="op">+</span> <span class="va">Height</span> <span class="op">+</span> <span class="va">LDMC</span> <span class="op">+</span> <span class="va">Seedmass</span> <span class="op">+</span> <span class="va">Lifespan</span> <span class="op">+</span> <span class="fu">Condition</span><span class="op">(</span><span class="cn">F</span><span class="op">+</span><span class="va">R</span><span class="op">+</span><span class="va">N</span><span class="op">+</span><span class="va">L</span><span class="op">)</span>,</span>
+<span>                 formulaTraits <span class="op">=</span> <span class="op">~</span> <span class="va">SLA</span> <span class="op">+</span> <span class="va">Height</span> <span class="op">+</span> <span class="va">LDMC</span> <span class="op">+</span> <span class="va">Seedmass</span> <span class="op">+</span> <span class="va">Lifespan</span> <span class="op">+</span></span>
+<span>                   <span class="fu">Condition</span><span class="op">(</span><span class="cn">F</span> <span class="op">+</span> <span class="va">R</span> <span class="op">+</span> <span class="va">N</span> <span class="op">+</span> <span class="va">L</span><span class="op">)</span>,</span>
 <span>                 response <span class="op">=</span> <span class="va">Y</span>,</span>
 <span>                 dataEnv <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">envir</span>,</span>
 <span>                 dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">traits</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
@@ -548,8 +568,9 @@ as <code>Condition</code> in the trait formula and perform an
 <span><span class="co">#&gt; dcCA4     1   0.00629 0.009115 0.2344  1.000</span></span>
 <span><span class="co">#&gt; dcCA5     1   0.00259 0.003761 0.0967  1.000</span></span>
 <span><span class="co">#&gt; Residual 18   0.48274</span></span></code></pre></div>
-<p>As jugded by the test of significance by axes, the morphological
-traits contribute little.</p>
+<p>As jugded by the test of significance by axes, there is little
+evidence that the morphological traits contribute to the explanation of
+(environmentally structured) abundance of species.</p>
 </div>
 <div class="section level2">
 <h2 id="one-trait-cwm-regression-without-inflated-type-i-error-">One trait: CWM regression without inflated type I error.<a class="anchor" aria-label="anchor" href="#one-trait-cwm-regression-without-inflated-type-i-error-"></a>
@@ -621,10 +642,10 @@ using the function <code>fCWM_SNC</code>, the arguments of which are
 similar to that of the <code>dc_CA</code> function.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CWMSNC_LDMC</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fCWM_SNC.html">fCWM_SNC</a></span><span class="op">(</span>formulaEnv <span class="op">=</span> <span class="op">~</span> <span class="va">A1</span> <span class="op">+</span> <span class="va">Moist</span> <span class="op">+</span> <span class="va">Manure</span> <span class="op">+</span> <span class="va">Use</span> <span class="op">+</span> <span class="va">Mag</span>,</span>
-<span>                      formulaTraits <span class="op">=</span> <span class="op">~</span> <span class="va">LDMC</span>,</span>
-<span>                      response <span class="op">=</span> <span class="va">Y</span>, </span>
-<span>                      dataEnv <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">envir</span>,</span>
-<span>                      dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">trait</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span>                        formulaTraits <span class="op">=</span> <span class="op">~</span> <span class="va">LDMC</span>,</span>
+<span>                        response <span class="op">=</span> <span class="va">Y</span>, </span>
+<span>                        dataEnv <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">envir</span>,</span>
+<span>                        dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">trait</span><span class="op">)</span></span></code></pre></div>
 <p>The result, <code>CWMSNC_LDMC</code>, is a list containing the CWMs
 of LDMC, among other items. We combine the (community-weighted) mean
 LDMC to the environmental data, apply linear regresion and compare the
@@ -690,11 +711,9 @@ equal:</p>
 <span><span class="co">#&gt; MagBF   1.2053943  1.2053943</span></span>
 <span><span class="co">#&gt; MagHF   0.6158360  0.6158360</span></span>
 <span><span class="co">#&gt; MagNM   2.3581903  2.3581903</span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h2>
+<p>Alternatively, we can use
+<code>coef(mod_LDMC,  type = "env2traits",normed = FALSE)</code> which
+give the same values as <code>coef(lmLDMC)[-1]</code>. # References</p>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-doledec1996RLQ" class="csl-entry">
 Dolédec, Sylvain, Daniel Chessel, Cajo JF Ter Braak, and Stéphane
@@ -796,6 +815,7 @@ Siberchicot, Thibaut Jombart, and Sandrine Pavoine. 2018.
 </div>
 </div>
 </div>
+</div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
@@ -807,7 +827,7 @@ Siberchicot, Thibaut Jombart, and Sandrine Pavoine. 2018.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>

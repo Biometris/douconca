@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,10 +73,9 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># rownames are carried forward in results</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">dune_trait_env</span><span class="op">$</span><span class="va">comm</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">comm</span><span class="op">$</span><span class="va">Sites</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="dc_CA.html">dc_CA</a></span><span class="op">(</span>formulaEnv <span class="op">=</span> <span class="op">~</span><span class="va">A1</span> <span class="op">+</span> <span class="va">Moist</span> <span class="op">+</span> <span class="va">Mag</span> <span class="op">+</span> <span class="va">Use</span> <span class="op">+</span> <span class="va">Manure</span>,</span></span>
+<span class="r-in"><span><span class="va">abun</span> <span class="op">&lt;-</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">comm</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>  <span class="co"># must delete "Sites"</span></span></span>
+<span class="r-in"><span><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="dc_CA.html">dc_CA</a></span><span class="op">(</span>formulaEnv <span class="op">=</span> <span class="va">abun</span> <span class="op">~</span> <span class="va">A1</span> <span class="op">+</span> <span class="va">Moist</span> <span class="op">+</span> <span class="va">Mag</span> <span class="op">+</span> <span class="va">Use</span> <span class="op">+</span> <span class="va">Manure</span>,</span></span>
 <span class="r-in"><span>             formulaTraits <span class="op">=</span> <span class="op">~</span> <span class="va">SLA</span> <span class="op">+</span> <span class="va">Height</span> <span class="op">+</span> <span class="va">LDMC</span> <span class="op">+</span> <span class="va">Seedmass</span> <span class="op">+</span> <span class="va">Lifespan</span>,</span></span>
-<span class="r-in"><span>             response <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">comm</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>,  <span class="co"># must delete "Sites"</span></span></span>
 <span class="r-in"><span>             dataEnv <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">envir</span>,</span></span>
 <span class="r-in"><span>             dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">traits</span>,</span></span>
 <span class="r-in"><span>       verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
@@ -84,7 +83,7 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="co"># same output as with verbose = TRUE (the default of verbose).                                     </span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 1: the CCA ordination of the transposed matrix with trait constraints,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Call: cca(formula = tY ~ SLA + Height + LDMC + Seedmass + Lifespan, data =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call: cca0(formula = formulaTraits, response = tY, data =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> out0$data$dataTraits)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
@@ -103,9 +102,17 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.26839 0.19597 0.12356 0.07003 0.01967 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for unconstrained axes:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    CA1    CA2    CA3    CA4    CA5    CA6    CA7    CA8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.4386 0.2396 0.1938 0.1750 0.1429 0.1112 0.0854 0.0601 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CA1 CA2 CA3 CA4 CA5 CA6 CA7 CA8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  NA  NA  NA  NA  NA  NA  NA  NA </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Showing 8 of 19 unconstrained eigenvalues)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean, sd, VIF and canonical coefficients with their optimistic [!] t-values:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        Avg     SDS    VIF   Regr1   tval1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SLA                24.6468  6.3438 1.1888  0.4401  4.1794</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Height             25.1272 15.6848 1.3033  0.1283  1.1640</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LDMC              244.5084 70.9729 1.1791  0.0278  0.2647</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Seedmass            0.6543  0.6688 1.0784  0.3708  3.6980</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Lifespanperennial   0.9607  0.1944 1.0964 -0.0578 -0.5718</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 2: the RDA ordination of CWMs of the orthonormalized traits </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         of step 1 with environmental constraints:</span>
@@ -161,48 +168,40 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">mod</span>, by <span class="op">=</span> <span class="st">"axis"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $species</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Species-level permutation test using dc-CA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Model: dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Manure, formulaTraits = ~SLA + Height + LDMC + Seedmass + Lifespan, response = dune_trait_env$comm[, -1], dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits, verbose = FALSE) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: dc_CA(formulaEnv = abun ~ A1 + Moist + Mag + Use + Manure, formulaTraits = ~SLA + Height + LDMC + Seedmass + Lifespan, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits, verbose = FALSE) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residualized predictor permutation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          df ChiSquare       R2      F Pr(&gt;F)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1   0.23680 0.179002 5.9370  0.091 .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1   0.10903 0.082419 2.7336  0.496  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1   0.05934 0.044853 1.4877  0.771  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1   0.03792 0.028663 0.9507  0.798  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5     1   0.00233 0.001760 0.0584  1.000  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual 22   0.87749                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          df ChiSquare       R2      F Pr(&gt;F)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1   0.23680 0.179002 5.9370  0.118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1   0.10903 0.082419 2.7336  0.488</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1   0.05934 0.044853 1.4877  0.778</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1   0.03792 0.028663 0.9507  0.799</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5     1   0.00233 0.001760 0.0584  0.999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual 22   0.87749                       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sites</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Df ChiSquare      R2       F Pr(&gt;F)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1  0.236804 0.34946 14.2776  0.001 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1  0.109032 0.16090  6.5739  0.099 .  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1  0.059336 0.08757  3.5776  0.389    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1  0.037919 0.05596  2.2863  0.657    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5     1  0.002329 0.00344  0.1404  1.000    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual 14  0.232199                           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          Df ChiSquare      R2       F Pr(&gt;F)   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1  0.236804 0.34946 14.2776  0.002 **</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1  0.109032 0.16090  6.5739  0.101   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1  0.059336 0.08757  3.5776  0.424   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1  0.037919 0.05596  2.2863  0.680   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5     1  0.002329 0.00344  0.1404  1.000   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual 14  0.232199                          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $maxP</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Max test combining the community- and species- level tests </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Model: dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Manure, formulaTraits = ~SLA + Height + LDMC + Seedmass + Lifespan, response = dune_trait_env$comm[, -1], dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits, verbose = FALSE) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: dc_CA(formulaEnv = abun ~ A1 + Moist + Mag + Use + Manure, formulaTraits = ~SLA + Height + LDMC + Seedmass + Lifespan, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits, verbose = FALSE) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Taken from the species-level test:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residualized predictor permutation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Permutation: free</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of permutations: 999</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> a mix the species- (traits) and community- (environment) levels:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          df ChiSquare       R2      F Pr(&gt;F)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1   0.23680 0.179002 5.9370  0.091 .</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1   0.10903 0.082419 2.7336  0.496  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1   0.05934 0.044853 1.4877  0.771  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1   0.03792 0.028663 0.9507  0.798  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5     1   0.00233 0.001760 0.0584  1.000  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual 22   0.87749                         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       df ChiSquare traitP  envP Pr(&gt;F)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1  1  0.236804  0.118 0.002  0.118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2  1  0.109032  0.488 0.101  0.488</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3  1  0.059336  0.778 0.424  0.778</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4  1  0.037919  0.799 0.680  0.799</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5  1  0.002329  0.999 1.000  1.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># For more demo on testing, see demo dune_test.r</span></span></span>
 <span class="r-in"><span></span></span>
@@ -217,13 +216,13 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"head of unconstrained site scores, with meaning\n"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> head of unconstrained site scores, with meaning</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mod_scores</span><span class="op">$</span><span class="va">sites</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        dcCA1       dcCA2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -1.2640026  0.19395232</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.7328822 -0.24929614</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.8250139 -0.44760064</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.4453407 -0.33741144</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.5783587  0.01524487</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -0.5722181  0.24340264</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             dcCA1       dcCA2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Site_1 -1.2640026  0.19395232</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Site_2 -0.7328822 -0.24929614</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Site_3 -0.8250139 -0.44760064</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Site_4 -0.4453407 -0.33741144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Site_5 -0.5783587  0.01524487</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Site_6 -0.5722181  0.24340264</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">mod_scores_tidy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod</span>, tidy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"names of the tidy scores"</span><span class="op">)</span></span></span>
@@ -247,21 +246,20 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nFor illustration: a dc-CA model with a trait covariate\n"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> For illustration: a dc-CA model with a trait covariate</span>
-<span class="r-in"><span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="dc_CA.html">dc_CA</a></span><span class="op">(</span>formulaEnv <span class="op">=</span> <span class="op">~</span> <span class="va">A1</span> <span class="op">+</span> <span class="va">Moist</span> <span class="op">+</span> <span class="va">Mag</span> <span class="op">+</span> <span class="va">Use</span> <span class="op">+</span> <span class="va">Manure</span>,</span></span>
+<span class="r-in"><span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="fu"><a href="dc_CA.html">dc_CA</a></span><span class="op">(</span>formulaEnv <span class="op">=</span> <span class="va">abun</span> <span class="op">~</span> <span class="va">A1</span> <span class="op">+</span> <span class="va">Moist</span> <span class="op">+</span> <span class="va">Mag</span> <span class="op">+</span> <span class="va">Use</span> <span class="op">+</span> <span class="va">Manure</span>,</span></span>
 <span class="r-in"><span>              formulaTraits <span class="op">=</span> <span class="op">~</span> <span class="va">SLA</span> <span class="op">+</span> <span class="va">Height</span> <span class="op">+</span> <span class="va">LDMC</span> <span class="op">+</span> <span class="va">Lifespan</span> <span class="op">+</span> <span class="fu">Condition</span><span class="op">(</span><span class="va">Seedmass</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>              response <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">comm</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>,  <span class="co"># must delete "Sites"</span></span></span>
 <span class="r-in"><span>              dataEnv <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">envir</span>,</span></span>
 <span class="r-in"><span>              dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">traits</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 1: the CCA ordination of the transposed matrix with trait constraints,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Call: cca(formula = tY ~ SLA + Height + LDMC + Lifespan +</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Condition(Seedmass), data = out0$data$dataTraits)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call: cca0(formula = formulaTraits, response = tY, data =</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> out0$data$dataTraits)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total         2.34899    1.00000     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Conditional   0.16671    0.07097    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Conditional   0.16671    0.07097    2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Constrained   0.51091    0.21750    4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained 1.67137    0.71153   19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -274,9 +272,17 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 <span class="r-out co"><span class="r-pr">#&gt;</span> 0.21499 0.18622 0.07354 0.03616 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for unconstrained axes:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    CA1    CA2    CA3    CA4    CA5    CA6    CA7    CA8 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 0.4386 0.2396 0.1938 0.1750 0.1429 0.1112 0.0854 0.0601 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CA1 CA2 CA3 CA4 CA5 CA6 CA7 CA8 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  NA  NA  NA  NA  NA  NA  NA  NA </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> (Showing 8 of 19 unconstrained eigenvalues)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mean, sd, VIF and canonical coefficients with their optimistic [!] t-values:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        Avg     SDS    VIF   Regr1   tval1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Seedmass            0.6543  0.6688 1.0784  0.0223  0.2225</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> SLA                24.6468  6.3438 1.1888  0.4456  4.2398</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Height             25.1272 15.6848 1.3033  0.3532  3.2091</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> LDMC              244.5084 70.9729 1.1791 -0.1043 -0.9967</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Lifespanperennial   0.9607  0.1944 1.0964 -0.0439 -0.4349</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 2: the RDA ordination of CWMs of the orthonormalized traits </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         of step 1 with environmental constraints:</span>
@@ -335,9 +341,8 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"\nFor illustration: a dc-CA model with both environmental and trait covariates\n"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> For illustration: a dc-CA model with both environmental and trait covariates</span>
-<span class="r-in"><span><span class="va">mod3</span> <span class="op">&lt;-</span> <span class="fu"><a href="dc_CA.html">dc_CA</a></span><span class="op">(</span>formulaEnv <span class="op">=</span> <span class="op">~</span><span class="va">A1</span> <span class="op">+</span> <span class="va">Moist</span> <span class="op">+</span> <span class="va">Use</span> <span class="op">+</span> <span class="va">Manure</span> <span class="op">+</span> <span class="fu">Condition</span><span class="op">(</span><span class="va">Mag</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="va">mod3</span> <span class="op">&lt;-</span> <span class="fu"><a href="dc_CA.html">dc_CA</a></span><span class="op">(</span>formulaEnv <span class="op">=</span> <span class="va">abun</span> <span class="op">~</span> <span class="va">A1</span> <span class="op">+</span> <span class="va">Moist</span> <span class="op">+</span> <span class="va">Use</span> <span class="op">+</span> <span class="va">Manure</span> <span class="op">+</span> <span class="fu">Condition</span><span class="op">(</span><span class="va">Mag</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>              formulaTraits <span class="op">=</span> <span class="op">~</span> <span class="va">SLA</span> <span class="op">+</span> <span class="va">Height</span> <span class="op">+</span> <span class="va">LDMC</span> <span class="op">+</span> <span class="va">Lifespan</span> <span class="op">+</span> <span class="fu">Condition</span><span class="op">(</span><span class="va">Seedmass</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>              response <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">comm</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>,  <span class="co"># must delete "Sites"</span></span></span>
 <span class="r-in"><span>              dataEnv <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">envir</span>,</span></span>
 <span class="r-in"><span>              dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">traits</span>, </span></span>
 <span class="r-in"><span>        verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
@@ -346,7 +351,7 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 <span class="r-in"><span>    <span class="st">"as the trait model and data did not change\n"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> For illustration: same model but using dc_CA_object = mod2 for speed,  as the trait model and data did not change</span>
-<span class="r-in"><span><span class="va">mod3B</span> <span class="op">&lt;-</span> <span class="fu"><a href="dc_CA.html">dc_CA</a></span><span class="op">(</span>formulaEnv <span class="op">=</span> <span class="op">~</span><span class="va">A1</span> <span class="op">+</span> <span class="va">Moist</span> <span class="op">+</span> <span class="va">Use</span> <span class="op">+</span> <span class="va">Manure</span> <span class="op">+</span> <span class="fu">Condition</span><span class="op">(</span><span class="va">Mag</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="va">mod3B</span> <span class="op">&lt;-</span> <span class="fu"><a href="dc_CA.html">dc_CA</a></span><span class="op">(</span>formulaEnv <span class="op">=</span> <span class="va">abun</span> <span class="op">~</span> <span class="va">A1</span> <span class="op">+</span> <span class="va">Moist</span> <span class="op">+</span> <span class="va">Use</span> <span class="op">+</span> <span class="va">Manure</span> <span class="op">+</span> <span class="fu">Condition</span><span class="op">(</span><span class="va">Mag</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>               dataEnv <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">envir</span>,</span></span>
 <span class="r-in"><span>               dc_CA_object <span class="op">=</span> <span class="va">mod2</span>, </span></span>
 <span class="r-in"><span>         verbose<span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
@@ -356,10 +361,23 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 <span class="r-out co"><span class="r-pr">#&gt;</span> check on equality of mod3 (from data) and mod3B (from a dc_CA_object)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  the expected difference is in the component 'call'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  </span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">mod3</span>, <span class="va">mod3B</span><span class="op">)</span><span class="op">)</span> <span class="co">#  only the component call differs</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Component “call”: target, current do not match when deparsed"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html" class="external-link">all.equal</a></span><span class="op">(</span><span class="va">mod3</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">12</span><span class="op">)</span><span class="op">]</span>, <span class="va">mod3B</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">12</span><span class="op">)</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="co">#  only the component call differs</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod3</span><span class="op">$</span><span class="va">inertia</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span>,<span class="op">]</span><span class="op">/</span><span class="va">mod3B</span><span class="op">$</span><span class="va">inertia</span><span class="op">)</span> <span class="co">#        and mod3 has two more inertia items</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                weighted variance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> total                          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> conditionT                     1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> traits_explain                 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> conditionTE                    1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> constraintsTE                  1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"meaning")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                meaning                                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> total          "total inertia (= weighted variation)"                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> conditionT     "variation fitted by the trait condition"                              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> traits_explain "trait-constrained variation"                                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> conditionTE    "trait-constrained variation explained by the condition in formulaEnv" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> constraintsTE  "trait-constrained variation explained by the predictors in formulaEnv"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -371,7 +389,7 @@ just <code>print(x)</code> if <code><a href="dc_CA.html">dc_CA</a></code> is cal
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer></div>

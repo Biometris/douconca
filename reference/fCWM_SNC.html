@@ -27,7 +27,7 @@ data as response, at least up to sign changes of the axes."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,10 +76,7 @@ data as <code>response</code>, at least up to sign changes of the axes.</p>
 <span>  dataTraits <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  formulaEnv <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  formulaTraits <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  divideBySiteTotals <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  dc_CA_object <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  minimal_output <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  divideBySiteTotals <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -90,7 +87,9 @@ data as <code>response</code>, at least up to sign changes of the axes.</p>
 <dl><dt id="arg-response">response<a class="anchor" aria-label="anchor" href="#arg-response"></a></dt>
 <dd><p>matrix, data frame of the abundance data
 (dimension <em>n</em> x <em>m</em>) or list with community weighted means (CWMs)
-from <code>fCWM_SNC</code>. See Details for analyses starting from community
+from <code>fCWM_SNC</code>, NULL. If <code>NULL</code>, the response should be
+at the left-hand side of <code>formulaEnv</code>.
+See Details for analyses starting from community
 weighted means. Rownames of <code>response</code>, if any, are carried through.</p></dd>
 
 
@@ -106,9 +105,9 @@ corresponding to the columns in <code>response</code>.
 
 
 <dt id="arg-formulaenv">formulaEnv<a class="anchor" aria-label="anchor" href="#arg-formulaenv"></a></dt>
-<dd><p>formula or one-sided formula for the rows (samples) with
-row predictors in <code>dataEnv</code>. When two-sided, the left hand side of
-the formula is not used. Specify row covariates (if any ) by
+<dd><p>two-sided or one-sided formula for the rows (samples) with
+row predictors in <code>dataEnv</code>. The left hand side of the formula is ignored if
+it is specified in the <code>response</code> argument. Specify row covariates (if any) by
 adding <code>+ Condition(covariate-formula)</code> to <code>formulaEnv</code> as
 in <code><a href="https://rdrr.io/pkg/vegan/man/cca.html" class="external-link">rda</a></code>. The <code>covariate-formula</code> should not contain
 a <code>~</code> (tilde). Default: <code>NULL</code> for <code>~.</code>, i.e. all variables
@@ -127,34 +126,20 @@ in <code>dataTraits</code> are predictor traits.</p></dd>
 
 <dt id="arg-dividebysitetotals">divideBySiteTotals<a class="anchor" aria-label="anchor" href="#arg-dividebysitetotals"></a></dt>
 <dd><p>logical; default <code>TRUE</code> for closing the
-data by dividing the rows in the <code>response</code> by their total.</p></dd>
-
-
-<dt id="arg-dc-ca-object">dc_CA_object<a class="anchor" aria-label="anchor" href="#arg-dc-ca-object"></a></dt>
-<dd><p>optional object from an earlier run of this function.
-Useful if the same formula for the columns (<code>formulaTraits</code>),
-<code>dataTraits</code> and <code>response</code> are used with a new formula for the
-rows. If set, the data of the previous run is used and the result of its
-first step is taken for the new analysis.</p></dd>
-
-
-<dt id="arg-minimal-output">minimal_output<a class="anchor" aria-label="anchor" href="#arg-minimal-output"></a></dt>
-<dd><p>logical. Default <code>TRUE</code> for use of the return
-value as <code>response</code> in a call to <code><a href="dc_CA.html">dc_CA</a></code>.</p></dd>
-
-
-<dt id="arg-verbose">verbose<a class="anchor" aria-label="anchor" href="#arg-verbose"></a></dt>
-<dd><p>logical for printing a simple summary (default: TRUE)</p></dd>
+data by dividing the rows in the <code>response</code> by their total.
+However, the default is <code>FALSE</code>, when the species totals are
+proportional to <code>N2*(N-N2)</code> with
+<code>N2</code> the Hill numbers of order 2 of the species
+and <code>N</code> the number of sites,
+as indicator that the response data have been pre-processed to
+<code>N2</code>-based marginals using <code><a href="ipf2N2.html">ipf2N2</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The default returns a list of CWM, SNC, weights, <code>formulaTraits</code> and
+    <p>The default returns a list of CWM, SNC, weights, <code>formulaTraits</code>,
 inertia (weighted variance explained by the traits and by the environmental
-variables) a list of data with elements <code>dataEnv</code> and <code>dataTraits</code>.
-When  <code>minimal_output = FALSE</code>, some more statistics are given that are
-mainly technical or recomputed when the return value is used as
-<code>response</code> in a call to <code><a href="dc_CA.html">dc_CA</a></code>.</p>
+variables) and a list of data with elements <code>dataEnv</code> and <code>dataTraits</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -262,17 +247,17 @@ vegan: Community Ecology Package. R package version 2.6-4.
 <span class="r-out co"><span class="r-pr">#&gt;</span> LDMC              244.5084 70.9729 1.1791 -0.8979 -1.9726</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Lifespanperennial   0.9607  0.1944 1.0964  0.3589  0.8176</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         weighted variance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> traits_explain                      0.511</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> env_explain.env_explain             0.691</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> conditionTE                         0.179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> constraintsTE                       0.138</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                weighted variance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> traits_explain             0.511</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> env_explain                0.691</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> conditionTE                0.179</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> constraintsTE              0.138</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"meaning")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         meaning                                                                </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> traits_explain          "trait-constrained variation"                                          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> env_explain.env_explain NA                                                                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> conditionTE             "trait-constrained variation explained by the condition in formulaEnv" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> constraintsTE           "trait-constrained variation explained by the predictors in formulaEnv"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                meaning                                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> traits_explain "trait-constrained variation"                                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> env_explain    "environment-constrained variation"                                    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> conditionTE    "trait-constrained variation explained by the condition in formulaEnv" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> constraintsTE  "trait-constrained variation explained by the predictors in formulaEnv"</span>
 <span class="r-in"><span><span class="co"># note that output also gives the environment-constrained inertia,</span></span></span>
 <span class="r-in"><span><span class="co"># which is a bonus compare to the usual way to carry out a dcCA.</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html" class="external-link">anova</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
@@ -282,12 +267,12 @@ vegan: Community Ecology Package. R package version 2.6-4.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residualized predictor permutation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          df ChiSquare      R2      F Pr(&gt;F)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA      4   0.13769 0.22615 1.6073  0.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA      4   0.13769 0.22615 1.6073  0.176</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residual 22   0.47115                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sites</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          Df ChiSquare      R2      F Pr(&gt;F)  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     4   0.13769 0.41538 2.1316   0.03 *</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     4   0.13769 0.41538 2.1316  0.034 *</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residual 12   0.19379                        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
@@ -302,7 +287,7 @@ vegan: Community Ecology Package. R package version 2.6-4.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of permutations: 999</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          df ChiSquare      R2      F Pr(&gt;F)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA      4   0.13769 0.22615 1.6073  0.175</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA      4   0.13769 0.22615 1.6073  0.176</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residual 22   0.47115                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
@@ -317,7 +302,7 @@ vegan: Community Ecology Package. R package version 2.6-4.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer></div>
