@@ -1,13 +1,12 @@
 ## Minor release
 
-Minor release containing improvements and fixes found after intial release
+Release containing updates and extension after publishing article about method and package.
 
 ## Test environments
 
-* local Windows 11 install, R 4.4.2
+* local Windows 11 install, R 4.5.0
 * winbuilder (develop)
-* macbuilder (release)
-* Ubuntu (via github actions, devel and release)
+* Ubuntu (via github actions, devel, release, old-release)
 * macOS (via github actions, release)
 
 ## R CMD check results
