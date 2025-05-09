@@ -31,16 +31,13 @@ which also a three-tables method. RLQ is available in the R-package `ade4`
 The `douconca` package provides an alternative method, termed 
 double-constrained correspondence analysis (dc-CA), which is a natural 
 extension of the commonly used method of community-weighted means (CWMs) regression
-[@Braak2018dcCA;@kleyer2012assessing]. 
+[@BraakRossum2025;@Braak2018dcCA;@kleyer2012assessing].  
 As dc-CA is based on both regression analysis and ordination
 (factorial analysis), it allows for the usual forms of testing, model building,
 and of biplots of resulting scores.
-There are a number of recent applications that also contain discussion
-on the value of dc-CA compared to RLQ
-[@peng2021double;@gobbi2022hay;@pinho2021functional], summarized in this document on
-[ResearchGate](https://www.researchgate.net/publication/379731819_dc-CA_RLQ). More
-examples and comparisons with other methods can be found on
-[figshare](https://doi.org/10.6084/m9.figshare.28146386).
+
+The value of dc-CA compared to RLQ, GLMM3 and CWM-regression
+is discussed, with examples, in ter Braak and van Rossum (2025).
 
 The `douconca` package has a `formula`-interface to specify the dc-CA model, 
 and `scores`, `anova`, `plot` and `predict` functions, mostly fairly similar to
@@ -92,7 +89,7 @@ available in the Canoco software [@Braak2018canoco], but has less appeal in ecol
 such as CWM-regression and fourth-corner correlation analysis, which have proven to be 
 useful in trait-based ecology. 
 
-
+A full-length treatment of dc-CA, with examples, is given in ter Braak and van Rossum (2025).																	 
 # Example data and questions
 
 We use the `dune_trait_env` data in the package to illustrate dc-CA. It consists of
