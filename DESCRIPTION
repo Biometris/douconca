@@ -45,7 +45,7 @@ Imports:
     rlang,
     stats,
     vegan (>= 2.6-8)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 NeedsCompilation: no
 Suggests: 
     rmarkdown,
