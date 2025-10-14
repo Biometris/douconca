@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,9 +34,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.2.3" id="douconca-123">douconca 1.2.3<a class="anchor" aria-label="anchor" href="#douconca-123"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.2.4" id="douconca-124">douconca 1.2.4<a class="anchor" aria-label="anchor" href="#douconca-124"></a></h2>
+<ul><li>Update of function ipf2N2 for informative pre-processing of abundance data. The row and column marginals are set equal to Hill N2 or, the column marginals to N2(1-N2/N), the effective number of informative species. For max_iter=0 only the species marginal is adapted to N2 or N2(1-N2/N) without further adjustment to the abundance table. This is useful if the function did not converge or gives a warning indicating very unequal site totals.</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.3" id="douconca-123">douconca 1.2.3<a class="anchor" aria-label="anchor" href="#douconca-123"></a></h2><p class="text-muted">CRAN release: 2025-05-09</p>
 <ul><li>Forward selection of traits and of environmental variables added (function FS()).</li>
-<li>Function ipf2N2 for informative pre-processing of abundance data. The row and column marginals are set equal to Hill N2 or, the column marginals to 2N(N-N2)/2, the effective number of informative species. informative species</li>
+<li>Function ipf2N2 for informative pre-processing of abundance data. The row and column marginals are set equal to Hill N2 or, the column marginals to 2N2(N-N2)/N, the effective number of informative species. informative species</li>
 <li>More efficiency for large data sets by addition of a new cca function (cca0).</li>
 <li>An anova method for cca0 to enable residual predictor permutation.</li>
 <li>Improved stability for ‘exceptional’ data sets.</li>
@@ -84,7 +88,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

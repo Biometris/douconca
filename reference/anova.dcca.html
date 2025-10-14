@@ -13,7 +13,7 @@ restrictive than) those of anova.cca."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@ restrictive than) those of anova.cca."></head><body>
     <p><code>anova.dcca</code> performs the community- and species-level permutation tests
 of dc-CA and combines these in the 'max test', which takes the maximum of
 the <em>P</em>-values. The function arguments are similar to (but more
-restrictive than) those of <code><a href="https://rdrr.io/pkg/vegan/man/anova.cca.html" class="external-link">anova.cca</a></code>.</p>
+restrictive than) those of <code><a href="https://vegandevs.github.io/vegan/reference/anova.cca.html" class="external-link">anova.cca</a></code>.</p>
     </div>
 
     <div class="section level2">
@@ -117,7 +117,7 @@ If <code>by = "axis"</code>, the setting of <code>n_axes</code> is ignored.</p><
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list of 3 of structures as from <code><a href="https://rdrr.io/pkg/vegan/man/anova.cca.html" class="external-link">anova.cca</a></code>. The
+    <p>A list of 3 of structures as from <code><a href="https://vegandevs.github.io/vegan/reference/anova.cca.html" class="external-link">anova.cca</a></code>. The
 elements are <code>c("species", "sites", "maxP")</code></p>
     </div>
     <div class="section level2">
@@ -131,10 +131,10 @@ Beest, 2022). The community-level test uses <code><a href="anova_sites.html">ano
 the species-level test, <code><a href="anova_species.html">anova_species</a></code> is used.</p>
 <p>With equal site weights, obtained with <code>divide.by.site.total = TRUE</code>,
 the community-level test is obtained by applying <code>anova</code> to
-<code>object$RDAonEnv</code> using <code><a href="https://rdrr.io/pkg/vegan/man/anova.cca.html" class="external-link">anova.cca</a></code>.
+<code>object$RDAonEnv</code> using <code><a href="https://vegandevs.github.io/vegan/reference/anova.cca.html" class="external-link">anova.cca</a></code>.
 This performs residualized response permutation which performs about equal
 to residualized predictor permutation in the equi-weight case.
-The function <code><a href="https://rdrr.io/pkg/vegan/man/anova.cca.html" class="external-link">anova.cca</a></code> is implemented in C and therefore
+The function <code><a href="https://vegandevs.github.io/vegan/reference/anova.cca.html" class="external-link">anova.cca</a></code> is implemented in C and therefore
 a factor of 20 or so quicker than the native R-code used in
 <code><a href="anova_sites.html">anova_sites</a></code>.</p>
 <p>The <code>n_axes</code> argument is new, and can be considered experimental.</p>
@@ -259,7 +259,7 @@ Journal of statistical computation and simulation, 92, 2041-2059.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

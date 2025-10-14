@@ -83,7 +83,7 @@ anova.dcca."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,9 +129,9 @@ dc-CA, an environmental gradient, <em>i.e.</em> the dc-CA ordination axis.
 Computationally, dc-CA can be carried out by a single singular value
 decomposition (ter Braak et al. 2018), but it is here computed in two steps.</p>
 <p>The first step uses canonical correspondence analysis
-(<code><a href="https://rdrr.io/pkg/vegan/man/cca.html" class="external-link">cca</a></code>) to regress the (transposed) abundance data on to
+(<code><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">cca</a></code>) to regress the (transposed) abundance data on to
 the traits and the second step uses weighed redundancy analysis
-(<code><a href="wrda.html">wrda</a></code> or, with equal site weights, <code><a href="https://rdrr.io/pkg/vegan/man/cca.html" class="external-link">rda</a></code>)
+(<code><a href="wrda.html">wrda</a></code> or, with equal site weights, <code><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">rda</a></code>)
 to regress the CWMs of the orthonormalized traits,
 obtained from the first step, on to the environmental predictors.
 The second step is thus a community-level analysis.</p>
@@ -144,7 +144,7 @@ all dc-CA axes) corresponds with a series of unweighted community-level
 analyses, instead of the analyses being weighted.</p>
 <p>Warning: The <code>dcCA</code> package was built from <code>vegan</code> version 2.6-4
 and uses some of the internal structure of the <code>vegan</code>
-<code><a href="https://rdrr.io/pkg/vegan/man/cca.object.html" class="external-link">cca.object</a></code> in the not-exported functions
+<code><a href="https://vegandevs.github.io/vegan/reference/cca.object.html" class="external-link">cca.object</a></code> in the not-exported functions
 <code>f_inertia</code> and <code>get_QR</code> in the source code file
 <code>functions_using_cca_object_internals.r</code>.</p>
 <p>The main user-functions are <code><a href="dc_CA.html">dc_CA</a></code>, <code><a href="plot.dcca.html">plot.dcca</a></code>,
@@ -165,7 +165,7 @@ vegan: Community Ecology Package. R package version 2.6-4.
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/vegan/man/cca.html" class="external-link">cca</a></code> and <code><a href="https://rdrr.io/pkg/vegan/man/cca.html" class="external-link">rda</a></code></p></div>
+    <div class="dont-index"><p><code><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">cca</a></code> and <code><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">rda</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="author">Author<a class="anchor" aria-label="anchor" href="#author"></a></h2>
@@ -182,7 +182,7 @@ vegan: Community Ecology Package. R package version 2.6-4.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

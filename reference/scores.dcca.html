@@ -27,7 +27,7 @@ constrained species scores) also replace the usual
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,8 +56,8 @@ constrained species scores) also replace the usual
 
     <div class="ref-description section level2">
     <p>This function works very much like the <code>vegan</code>
-<code><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></code> function, in particular
-<code><a href="https://rdrr.io/pkg/vegan/man/plot.cca.html" class="external-link">scores.cca</a></code>, with the additional results such as
+<code><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></code> function, in particular
+<code><a href="https://vegandevs.github.io/vegan/reference/plot.cca.html" class="external-link">scores.cca</a></code>, with the additional results such as
 regression coefficients and linear combinations of traits
 <code>('reg_traits', 'lc_traits')</code>. All scores from CA obey the so called
 transition formulas and so do the scores of CCA and dc-CA. The differences
@@ -71,7 +71,7 @@ site scores, and for dc-CA, that the linear combinations of traits (the
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'dcca'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  choices <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,</span>
@@ -106,7 +106,7 @@ axes.</p></dd>
 "sites", "sp", "wa", "lc", "bp", "cor", "ic", "reg", "tval", "cn",
 "lc_traits", "reg_traits", "tval_traits", "cor_traits", "ic_traits",
 "bp_traits", "cn_traits")</code>. The most items are as in
-<code><a href="https://rdrr.io/pkg/vegan/man/plot.cca.html" class="external-link">scores.cca</a></code>, except <code>"cor"</code> and <code>"ic"</code>, for
+<code><a href="https://vegandevs.github.io/vegan/reference/plot.cca.html" class="external-link">scores.cca</a></code>, except <code>"cor"</code> and <code>"ic"</code>, for
 inter-set and intra-set correlations, respectively, and <code>"tval"</code> for
 the (over-optimistic) t-values of the regression coefficients. The remaining
 scores are analogous scores for species and traits.</p></dd>
@@ -139,7 +139,7 @@ regression coefficients and (unstandardized) biplot scores.</p></dd>
 scores are in a single data.frame, score type is identified by factor
 variable <code>score</code>, the names by variable <code>label</code>, and species
 weights (in <code><a href="dc_CA.html">dc_CA</a></code> are in variable <code>weight</code>. See
-<code><a href="https://rdrr.io/pkg/vegan/man/plot.cca.html" class="external-link">scores.cca</a></code>.</p></dd>
+<code><a href="https://vegandevs.github.io/vegan/reference/plot.cca.html" class="external-link">scores.cca</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -235,7 +235,7 @@ chosen axes.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The function is modeled after <code><a href="https://rdrr.io/pkg/vegan/man/plot.cca.html" class="external-link">scores.cca</a></code>.</p>
+    <p>The function is modeled after <code><a href="https://vegandevs.github.io/vegan/reference/plot.cca.html" class="external-link">scores.cca</a></code>.</p>
 <p>The t-ratios are taken from a multiple regression of the unconstrained
 species (or site) scores on to the traits (or environmental variables).</p>
 <p>An example of <code>which_cor</code> is: <code>which_cor = list(traits = "SLA",
@@ -258,10 +258,9 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> <span class="co"># same output as with verbose = TRUE (the default of verbose).                                     </span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 1: the CCA ordination of the transposed matrix with trait constraints,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: cca0(formula = formulaTraits, response = tY, data =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> out0$data$dataTraits)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total          2.3490     1.0000     </span>
@@ -269,8 +268,6 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained  1.6714     0.7115   19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is scaled Chi-square</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    CCA1    CCA2    CCA3    CCA4    CCA5 </span>
@@ -291,10 +288,9 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 2: the RDA ordination of CWMs of the orthonormalized traits </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         of step 1 with environmental constraints:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: rda(formula = out1$CWMs_orthonormal_traits ~ A1 + Moist + Mag + Use +</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Manure, data = out1$data$dataEnv)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total          0.6776     1.0000     </span>
@@ -302,8 +298,6 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained  0.2322     0.3427    5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is variance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    RDA1    RDA2    RDA3    RDA4    RDA5 </span>
@@ -347,7 +341,7 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residualized predictor permutation</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          df ChiSquare       R2      F Pr(&gt;F)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1   0.23680 0.179002 5.9370  0.104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1   0.23680 0.179002 5.9370  0.105</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1   0.10903 0.082419 2.7336  0.474</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1   0.05934 0.044853 1.4877  0.762</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1   0.03792 0.028663 0.9507  0.791</span>
@@ -356,11 +350,11 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sites</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          Df ChiSquare      R2       F Pr(&gt;F)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1  0.236804 0.34946 14.2776  0.001 ***</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1  0.109032 0.16090  6.5739  0.093 .  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1  0.059336 0.08757  3.5776  0.407    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1  0.037919 0.05596  2.2863  0.685    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5     1  0.002329 0.00344  0.1404  1.000    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1  0.236804 0.34946 12.2380  0.001 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1  0.109032 0.16090  7.0435  0.005 ** </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1  0.059336 0.08757  4.0887  0.055 .  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1  0.037919 0.05596  2.7762  0.145    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5     1  0.002329 0.00344  0.1805  0.938    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residual 14  0.232199                           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
@@ -375,7 +369,7 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of permutations: 999</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          df ChiSquare       R2      F Pr(&gt;F)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1   0.23680 0.179002 5.9370  0.104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1   0.23680 0.179002 5.9370  0.105</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1   0.10903 0.082419 2.7336  0.474</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1   0.05934 0.044853 1.4877  0.762</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1   0.03792 0.028663 0.9507  0.791</span>
@@ -384,9 +378,9 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># For more demo on testing, see demo dune_test.r</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">mod_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># correlation of axes with a variable that is not in the model</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod</span>, display <span class="op">=</span> <span class="st">"cor"</span>, scaling <span class="op">=</span> <span class="st">"sym"</span>, which_cor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="st">"X_lot"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod</span>, display <span class="op">=</span> <span class="st">"cor"</span>, scaling <span class="op">=</span> <span class="st">"sym"</span>, which_cor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="cn">NULL</span>, <span class="st">"X_lot"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           dcCA1      dcCA2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> X_lot 0.1425494 0.06695038</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"meaning")</span>
@@ -403,7 +397,7 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Site_5 -0.5783587  0.01524487</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Site_6 -0.5722181  0.24340264</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">mod_scores_tidy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod</span>, tidy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod_scores_tidy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod</span>, tidy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="st">"names of the tidy scores"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "names of the tidy scores"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">mod_scores_tidy</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -431,10 +425,9 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-in"><span>              dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">traits</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 1: the CCA ordination of the transposed matrix with trait constraints,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: cca0(formula = formulaTraits, response = tY, data =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> out0$data$dataTraits)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total         2.34899    1.00000     </span>
@@ -443,8 +436,6 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained 1.67137    0.71153   19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is scaled Chi-square</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    CCA1    CCA2    CCA3    CCA4 </span>
@@ -465,10 +456,9 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 2: the RDA ordination of CWMs of the orthonormalized traits </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         of step 1 with environmental constraints:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: rda(formula = out1$CWMs_orthonormal_traits ~ A1 + Moist + Mag + Use +</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Manure, data = out1$data$dataEnv)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total          0.5109     1.0000     </span>
@@ -476,8 +466,6 @@ env = c("acidity", "humidity"))</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained  0.1938     0.3793    4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is variance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    RDA1    RDA2    RDA3    RDA4 </span>
@@ -568,7 +556,7 @@ env = c("acidity", "humidity"))</code>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

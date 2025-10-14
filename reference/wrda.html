@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@
 predictors in <code>data</code>. The left hand side of the formula is ignored if
 it is specified in the next argument (<code>response</code>). Specify row
 covariates (if any ) by adding <code>+ Condition(covariate-formula)</code> to
-<code>formula</code> as in <code><a href="https://rdrr.io/pkg/vegan/man/cca.html" class="external-link">rda</a></code>. The <code>covariate-formula</code>
+<code>formula</code> as in <code><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">rda</a></code>. The <code>covariate-formula</code>
 should not contain a <code>~</code> (tilde).</p></dd>
 
 
@@ -110,7 +110,7 @@ the scaling with <em>Focus on Case distances</em>.</p>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The algorithm is a modified version of published R-code for weighted
 redundancy analysis (ter Braak, 2022).</p>
-<p>Compared to  <code><a href="https://rdrr.io/pkg/vegan/man/cca.html" class="external-link">rda</a></code>, <code>wrda</code> does not have residual
+<p>Compared to  <code><a href="https://vegandevs.github.io/vegan/reference/cca.html" class="external-link">rda</a></code>, <code>wrda</code> does not have residual
 axes, <em>i.e.</em> no SVD or PCA of the residuals is performed.</p>
     </div>
     <div class="section level2">
@@ -144,10 +144,9 @@ vegan: Community Ecology Package. R package version 2.6-4.
 <span class="r-in"><span>               data <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">envir</span>, </span></span>
 <span class="r-in"><span>               weights <span class="op">=</span> <span class="va">w</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">object</span> <span class="co"># Proportions equal to those Canoco 5.15</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: wrda(formula = response ~ A1 + Moist + Mag + Use + Condition(Manure),</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> data = dune_trait_env$envir, weights = w)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total         65.7007     1.0000     </span>
@@ -156,8 +155,6 @@ vegan: Community Ecology Package. R package version 2.6-4.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained 21.8217     0.3321   19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is weighted variance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  wRDA1  wRDA2  wRDA3  wRDA4  wRDA5  wRDA6 </span>
@@ -179,8 +176,8 @@ vegan: Community Ecology Package. R package version 2.6-4.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Use    1.9205 0.7107  2.6787  0.2101  0.2791</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">mod_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">object</span>, display <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">object</span>, which_cor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A1"</span>, <span class="st">"X_lot"</span><span class="op">)</span>, display <span class="op">=</span> <span class="st">"cor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">object</span>, display <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">object</span>, which_cor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A1"</span>, <span class="st">"X_lot"</span><span class="op">)</span>, display <span class="op">=</span> <span class="st">"cor"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            wRDA1      wRDA2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A1    -0.2365172 -0.3510007</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> X_lot -0.4987793  0.4250562</span>
@@ -215,7 +212,7 @@ vegan: Community Ecology Package. R package version 2.6-4.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

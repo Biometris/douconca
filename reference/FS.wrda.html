@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -147,6 +147,11 @@ if <code>consider</code> does not include factors or if <code>factor2categories=
 If <code>consider</code> does include factors, such transformations
 give in a error in the default setting (<code>factor2categories=TRUE</code>).</p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="cca0.html">cca0</a></code>, <code><a href="wrda.html">wrda</a></code> and
+<code><a href="FS.dcca.html">FS.dcca</a></code></p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -177,10 +182,9 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-in"><span><span class="va">out1</span><span class="op">$</span><span class="va">model_final</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 1: the CCA ordination of the transposed matrix with trait constraints,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: cca0(formula = formulaTraits, response = tY, data =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> out0$data$dataTraits)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total          2.3490     1.0000     </span>
@@ -188,8 +192,6 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained  1.5833     0.6740   19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is scaled Chi-square</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   CCA1   CCA2 </span>
@@ -207,10 +209,9 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 2: the RDA ordination of CWMs of the orthonormalized traits </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         of step 1 with environmental constraints:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: rda(formula = out1$CWMs_orthonormal_traits ~ Moist + Mag, data =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> out1$data$dataEnv)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total          0.7657     1.0000     </span>
@@ -218,8 +219,6 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained  0.2370     0.3094    2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is variance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    RDA1    RDA2 </span>
@@ -262,14 +261,13 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-out co"><span class="r-pr">#&gt;</span>        df   variance  pval pvaladj</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Moist   1 0.33061402 0.001   0.008</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Manure  1 0.20050625 0.001   0.007</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A1      1 0.04503044 0.096   0.576</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A1      1 0.04503044 0.085   0.510</span>
 <span class="r-in"><span><span class="va">out2</span><span class="op">$</span><span class="va">model_final</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 1: the CCA ordination of the transposed matrix with trait constraints,</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: cca0(formula = formulaTraits, response = tY, data =</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> out0$data$dataTraits)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total          2.3490     1.0000     </span>
@@ -277,8 +275,6 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained  1.4789     0.6296   19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is scaled Chi-square</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   CCA1   CCA2   CCA3   CCA4 </span>
@@ -298,10 +294,9 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Step 2: the RDA ordination of CWMs of the orthonormalized traits </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         of step 1 with environmental constraints:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: rda(formula = out1$CWMs_orthonormal_traits ~ Moist + Manure +</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Condition(1), data = out1$data$dataEnv)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total          0.8701     1.0000     </span>
@@ -309,8 +304,6 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained  0.3389     0.3896    4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is variance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   RDA1   RDA2 </span>
@@ -351,13 +344,12 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-in"><span><span class="va">out3</span><span class="op">$</span><span class="va">finalWithOneExtra</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       df  variance  pval pvaladj</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Moist  1 0.4672020 0.001   0.008</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> MagNM  1 0.3088722 0.003   0.018</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A1     1 0.1841344 0.024   0.144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> MagNM  1 0.3088722 0.001   0.007</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A1     1 0.1841344 0.037   0.222</span>
 <span class="r-in"><span><span class="va">out3</span><span class="op">$</span><span class="va">model_final</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: FUN(formula = formula2, data = mydata, traceonly = FALSE, cca_object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> = mod)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total          2.3490     1.0000     </span>
@@ -365,8 +357,6 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained  1.5729     0.6696   19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is scaled Chi-square</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   CCA1   CCA2 </span>
@@ -403,10 +393,9 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> N         1 0.3120442 0.001   0.009</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Seedmass  1 0.1060672 0.047   0.376</span>
 <span class="r-in"><span><span class="va">out4</span><span class="op">$</span><span class="va">model_final</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: FUN(formula = formula2, data = mydata, traceonly = FALSE, cca_object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> = mod)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total          2.3490     1.0000     </span>
@@ -414,8 +403,6 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained  1.5833     0.6740   19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is scaled Chi-square</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   CCA1   CCA2 </span>
@@ -442,7 +429,7 @@ give in a error in the default setting (<code>factor2categories=TRUE</code>).</p
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

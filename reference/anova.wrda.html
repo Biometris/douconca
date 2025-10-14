@@ -13,7 +13,7 @@ those of anova.cca, but more restricted."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@ those of anova.cca, but more restricted."></head><body>
     <p><code>anova.wrda</code> performs residual predictor permutation for weighted
 redundancy analysis (wRDA), which is robust against differences in the
 weights (ter Braak, 2022). The arguments of the function are similar to
-those of <code><a href="https://rdrr.io/pkg/vegan/man/anova.cca.html" class="external-link">anova.cca</a></code>, but more restricted.</p>
+those of <code><a href="https://vegandevs.github.io/vegan/reference/anova.cca.html" class="external-link">anova.cca</a></code>, but more restricted.</p>
     </div>
 
     <div class="section level2">
@@ -103,7 +103,7 @@ If <code>by = "axis"</code>, the setting of <code>n_axes</code> is ignored.</p><
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list with two elements with names <code>table</code> and <code>eigenvalues</code>.
-The <code>table</code> is as from <code><a href="https://rdrr.io/pkg/vegan/man/anova.cca.html" class="external-link">anova.cca</a></code> and
+The <code>table</code> is as from <code><a href="https://vegandevs.github.io/vegan/reference/anova.cca.html" class="external-link">anova.cca</a></code> and
 <code>eigenvalues</code> gives the wrda eigenvalues.</p>
     </div>
     <div class="section level2">
@@ -136,10 +136,9 @@ Journal of statistical computation and simulation, 92, 2041-2059.
 <span class="r-in"><span>               data <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">envir</span>, </span></span>
 <span class="r-in"><span>               weights <span class="op">=</span> <span class="va">w</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">object</span> <span class="co"># Proportions equal to those Canoco 5.15</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call: wrda(formula = response ~ A1 + Moist + Mag + Use + Condition(Manure),</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> data = dune_trait_env$envir, weights = w)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Model Summary --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               Inertia Proportion Rank</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Total         65.7007     1.0000     </span>
@@ -148,8 +147,6 @@ Journal of statistical computation and simulation, 92, 2041-2059.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Unconstrained 21.8217     0.3321   19</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Inertia is weighted variance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> -- Eigenvalues --</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Eigenvalues for constrained axes:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  wRDA1  wRDA2  wRDA3  wRDA4  wRDA5  wRDA6 </span>
@@ -171,8 +168,8 @@ Journal of statistical computation and simulation, 92, 2041-2059.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Use    1.9205 0.7107  2.6787  0.2101  0.2791</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">mod_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">object</span>, display <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">object</span>, which_cor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A1"</span>, <span class="st">"X_lot"</span><span class="op">)</span>, display <span class="op">=</span> <span class="st">"cor"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mod_scores</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">object</span>, display <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">object</span>, which_cor <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A1"</span>, <span class="st">"X_lot"</span><span class="op">)</span>, display <span class="op">=</span> <span class="st">"cor"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>            wRDA1      wRDA2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A1    -0.2365172 -0.3510007</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> X_lot -0.4987793  0.4250562</span>
@@ -207,7 +204,7 @@ Journal of statistical computation and simulation, 92, 2041-2059.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -192,10 +192,9 @@ first variable (<code>Sites</code>) must therefore be deleted.</p>
 <span>             dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">traits</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Step 1: the CCA ordination of the transposed matrix with trait constraints,</span></span>
 <span><span class="co">#&gt;         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call: cca0(formula = formulaTraits, response = tY, data =</span></span>
 <span><span class="co">#&gt; out0$data$dataTraits)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; -- Model Summary --</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;               Inertia Proportion Rank</span></span>
 <span><span class="co">#&gt; Total          2.3490     1.0000     </span></span>
@@ -203,8 +202,6 @@ first variable (<code>Sites</code>) must therefore be deleted.</p>
 <span><span class="co">#&gt; Unconstrained  1.6714     0.7115   19</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Inertia is scaled Chi-square</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; -- Eigenvalues --</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Eigenvalues for constrained axes:</span></span>
 <span><span class="co">#&gt;    CCA1    CCA2    CCA3    CCA4    CCA5 </span></span>
@@ -225,10 +222,9 @@ first variable (<code>Sites</code>) must therefore be deleted.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Step 2: the RDA ordination of CWMs of the orthonormalized traits </span></span>
 <span><span class="co">#&gt;         of step 1 with environmental constraints:</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call: rda(formula = out1$CWMs_orthonormal_traits ~ A1 + Moist + Use +</span></span>
 <span><span class="co">#&gt; Manure + Mag, data = out1$data$dataEnv)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; -- Model Summary --</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;               Inertia Proportion Rank</span></span>
 <span><span class="co">#&gt; Total          0.6776     1.0000     </span></span>
@@ -236,8 +232,6 @@ first variable (<code>Sites</code>) must therefore be deleted.</p>
 <span><span class="co">#&gt; Unconstrained  0.2322     0.3427    5</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Inertia is variance</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; -- Eigenvalues --</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Eigenvalues for constrained axes:</span></span>
 <span><span class="co">#&gt;    RDA1    RDA2    RDA3    RDA4    RDA5 </span></span>
@@ -333,11 +327,11 @@ per dc-CA axis, obtained by</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $sites</span></span>
 <span><span class="co">#&gt;          Df ChiSquare      R2       F Pr(&gt;F)    </span></span>
-<span><span class="co">#&gt; dcCA1     1  0.236804 0.34946 14.2776  0.001 ***</span></span>
-<span><span class="co">#&gt; dcCA2     1  0.109032 0.16090  6.5739  0.075 .  </span></span>
-<span><span class="co">#&gt; dcCA3     1  0.059336 0.08757  3.5776  0.409    </span></span>
-<span><span class="co">#&gt; dcCA4     1  0.037919 0.05596  2.2863  0.676    </span></span>
-<span><span class="co">#&gt; dcCA5     1  0.002329 0.00344  0.1404  1.000    </span></span>
+<span><span class="co">#&gt; dcCA1     1  0.236804 0.34946 12.2380  0.001 ***</span></span>
+<span><span class="co">#&gt; dcCA2     1  0.109032 0.16090  7.0435  0.003 ** </span></span>
+<span><span class="co">#&gt; dcCA3     1  0.059336 0.08757  4.0887  0.041 *  </span></span>
+<span><span class="co">#&gt; dcCA4     1  0.037919 0.05596  2.7762  0.132    </span></span>
+<span><span class="co">#&gt; dcCA5     1  0.002329 0.00344  0.1805  0.953    </span></span>
 <span><span class="co">#&gt; Residual 14  0.232199                           </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
@@ -414,10 +408,9 @@ traits.</p>
 <span>                dataTraits <span class="op">=</span> <span class="va">dune_trait_env</span><span class="op">$</span><span class="va">traits</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Step 1: the CCA ordination of the transposed matrix with trait constraints,</span></span>
 <span><span class="co">#&gt;         useful in itself and also yielding CWMs of the orthonormalized traits for step 2.</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call: cca0(formula = formulaTraits, response = tY, data =</span></span>
 <span><span class="co">#&gt; out0$data$dataTraits)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; -- Model Summary --</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;               Inertia Proportion Rank</span></span>
 <span><span class="co">#&gt; Total          2.3490     1.0000     </span></span>
@@ -425,8 +418,6 @@ traits.</p>
 <span><span class="co">#&gt; Unconstrained  1.4789     0.6296   19</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Inertia is scaled Chi-square</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; -- Eigenvalues --</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Eigenvalues for constrained axes:</span></span>
 <span><span class="co">#&gt;   CCA1   CCA2   CCA3   CCA4 </span></span>
@@ -446,10 +437,9 @@ traits.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Step 2: the RDA ordination of CWMs of the orthonormalized traits </span></span>
 <span><span class="co">#&gt;         of step 1 with environmental constraints:</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call: rda(formula = out1$CWMs_orthonormal_traits ~ A1 + Moist + Manure +</span></span>
 <span><span class="co">#&gt; Use + Mag, data = out1$data$dataEnv)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; -- Model Summary --</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;               Inertia Proportion Rank</span></span>
 <span><span class="co">#&gt; Total          0.8701     1.0000     </span></span>
@@ -457,8 +447,6 @@ traits.</p>
 <span><span class="co">#&gt; Unconstrained  0.2369     0.2723    4</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Inertia is variance</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; -- Eigenvalues --</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Eigenvalues for constrained axes:</span></span>
 <span><span class="co">#&gt;   RDA1   RDA2   RDA3   RDA4 </span></span>
@@ -509,14 +497,13 @@ the first two dc-CA axes are significant as can be seen from an
 <span><span class="co">#&gt; Max test combining the community- and species- level tests </span></span>
 <span><span class="co">#&gt; Model: dc_CA(formulaEnv = ~A1 + Moist + Manure + Use + Mag, formulaTraits = ~F + R + N + L, response = Y, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits) </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Taken from the community-level test.</span></span>
+<span><span class="co">#&gt; a mix the species- (traits) and community- (environment) levels:</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;          Df ChiSquare      R2       F Pr(&gt;F)   </span></span>
-<span><span class="co">#&gt; dcCA1     1   0.36835 0.42337 23.3220  0.002 **</span></span>
-<span><span class="co">#&gt; dcCA2     1   0.24525 0.28188 15.5276  0.017 * </span></span>
-<span><span class="co">#&gt; dcCA3     1   0.01413 0.01624  0.8944  0.996   </span></span>
-<span><span class="co">#&gt; dcCA4     1   0.00541 0.00622  0.3427  1.000   </span></span>
-<span><span class="co">#&gt; Residual 15   0.23691                          </span></span>
+<span><span class="co">#&gt;       df ChiSquare traitP  envP Pr(&gt;F)   </span></span>
+<span><span class="co">#&gt; dcCA1  1   0.36835  0.001 0.002  0.002 **</span></span>
+<span><span class="co">#&gt; dcCA2  1   0.24525  0.001 0.002  0.002 **</span></span>
+<span><span class="co">#&gt; dcCA3  1   0.01413  0.984 0.675  0.984   </span></span>
+<span><span class="co">#&gt; dcCA4  1   0.00541  0.993 0.704  0.993   </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 <p>The fourth-corner correlation of the best linear combination of the
@@ -679,7 +666,7 @@ regression coefficients by dividing the standardize regression
 coefficients from <code>dc_CA</code> by the standard deviation of each
 environmental variable.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">regr_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod_LDMC</span>, display <span class="op">=</span> <span class="st">"reg"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">regr_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod_LDMC</span>, display <span class="op">=</span> <span class="st">"reg"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;         Avg       SDS      VIF       dcCA1</span></span>
 <span><span class="co">#&gt; A1     4.85 2.1240292 1.696694 -0.16636060</span></span>
 <span><span class="co">#&gt; Moist  2.90 1.7578396 1.765817 -0.02346540</span></span>
@@ -698,7 +685,7 @@ constant of proportionality, here 154.4359. The t-values are also
 equal:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lmLDMC</span><span class="op">)</span><span class="op">$</span><span class="va">coefficients</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>, <span class="st">"t value"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>,</span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/vegan/man/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod_LDMC</span>, display <span class="op">=</span> <span class="st">"tval"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://vegandevs.github.io/vegan/reference/scores.html" class="external-link">scores</a></span><span class="op">(</span><span class="va">mod_LDMC</span>, display <span class="op">=</span> <span class="st">"tval"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt;           t value      dcCA1</span></span>
 <span><span class="co">#&gt; A1     -1.2978033 -1.2978033</span></span>
 <span><span class="co">#&gt; Moist  -0.1794383 -0.1794383</span></span>
@@ -815,7 +802,7 @@ Siberchicot, Thibaut Jombart, and Sandrine Pavoine. 2018.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
