@@ -3,7 +3,7 @@
 ## douconca 1.2.5
 
 - Minor update with cleaner version of function ipf2N2 or other minor
-  changes
+  changes.
 
 ## douconca 1.2.4
 
