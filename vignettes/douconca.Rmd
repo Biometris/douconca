@@ -369,11 +369,12 @@ Alternatively, we can use
 `coef(mod_LDMC,  type = "env2traits",normed = FALSE)`
 which give the same values as `coef(lmLDMC)[-1]`.
 
-# Restrictions on names of variables and levels of factors
+## Restrictions on names of variables and levels of factors
 
 As said, the `douconca` package has a `formula`-interface to specify the dc-CA
 model. By consequence, there are restriction on the names of traits and
 environmental variables. For example these should not include ":" or "/", as 
 these symbols are special in formulas. The same applies to names of levels of
 factors as factors are transformed to indicator matrices using a formula. 
+
 # References
