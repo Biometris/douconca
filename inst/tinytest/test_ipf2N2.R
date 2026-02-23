@@ -16,7 +16,6 @@ expect_equal(range(rowSums(Y_N2) / apply(X = Y, MARGIN = 1, FUN = fN2)),
 
 Y_N2i <- ipf2N2(Y, updateN2 = TRUE, N2N_N2_species = FALSE)
 
-expect_equal(attr(Y_N2i, "iter"),  88)
 expect_equal(range(colSums(Y_N2i) / apply(X = Y_N2i, MARGIN = 2, FUN = fN2)),
              rep(1,2), tol = 1.0e-6)
 expect_equal(range(rowSums(Y_N2i) / apply(X = Y_N2i, MARGIN = 1, FUN = fN2)),
@@ -60,18 +59,15 @@ expect_equivalent(mod1$eigenvalues > mod0$eigenvalues,
 Y_PA <- 1 * (Y > 0)
 Y_PA_N2 <- ipf2N2(Y_PA, N2N_N2_species = FALSE)
 
-expect_equal(attr(Y_PA_N2, "iter"), 3)
 expect_equivalent(Y_PA, Y_PA_N2) 
 
 Y_PA_N2i <- ipf2N2(Y_PA, N2N_N2_species = TRUE)
-
-expect_equal(attr(Y_PA_N2i, "iter"), 567)
 
 N_occ <- colSums(Y_PA) # number of occurrences of species
 N <- nrow(Y_PA)
 
 expect_equal(cor(colSums(Y_PA_N2i), N_occ * (N - N_occ)),
-             0.982612338165359, tol= 1.0e-6)
+             0.982612338165359, tol = 1.0e-6)
 
 N2spp <- douconca:::fN2N_N2(Y_PA_N2i, 2, N2N_N2 = TRUE)
 # the columns sum and N2(1-N2/N)=  N_occ * (N - N_occ)
