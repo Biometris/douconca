@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,36 +68,40 @@
 <p>The aim of the <code>douconca</code> package is to help ecologists
 unravel trait-environment relationships from an abundance data table
 with associated multi-trait and multi-environment data tables. A popular
-method to such aim is RLQ <span class="citation">(<a href="#ref-doledec1996RLQ">Dolédec et al. 1996</a>; <a href="#ref-dray2014RLQ">Dray et al. 2014</a>)</span>, which also a
+method to such aim is RLQ <span class="citation">(<a href="#ref-doledec1996RLQ">Dolédec et al. 1996</a>; <a href="#ref-dray2014RLQ">Dray et al. 2014</a>)</span>, which is also a
 three-tables method. RLQ is available in the R-package <code>ade4</code>
 <span class="citation">(<a href="#ref-dray2007ade4">Dray and Dufour
 2007</a>; <a href="#ref-thioulouse2018multivariate">Thioulouse et al.
 2018</a>)</span>. The <code>douconca</code> package provides an
 alternative method, termed double-constrained correspondence analysis
 (dc-CA), which is a natural extension of the commonly used method of
-community-weighted means (CWMs) regression <span class="citation">(<a href="#ref-BraakRossum2025">ter Braak and van Rossum 2025</a>; <a href="#ref-Braak2018dcCA">Ter Braak, Šmilauer, and Dray 2018</a>; <a href="#ref-kleyer2012assessing">Kleyer et al. 2012</a>)</span>.<br>
+community-weighted means (CWMs) regression <span class="citation">(<a href="#ref-Braak2026">ter Braak 2026</a>; <a href="#ref-BraakRossum2025">ter Braak and van Rossum 2025</a>; <a href="#ref-Braak2018dcCA">Ter Braak, Šmilauer, and Dray 2018</a>; <a href="#ref-kleyer2012assessing">Kleyer et al. 2012</a>)</span>.<br>
 As dc-CA is based on both regression analysis and ordination (factorial
 analysis), it allows for the usual forms of testing, model building, and
 of biplots of resulting scores.</p>
 <p>The value of dc-CA compared to RLQ, GLMM3 and CWM-regression is
-discussed, with examples, in ter Braak and van Rossum (2025).</p>
+discussed, with examples, in ter Braak and van Rossum (2025) and ter
+Braak (2026).</p>
 <p>The <code>douconca</code> package has a
 <code>formula</code>-interface to specify the dc-CA model, and
 <code>scores</code>, <code>anova</code>, <code>plot</code> and
 <code>predict</code> functions, mostly fairly similar to those in the
 <code>vegan</code> package <span class="citation">(<a href="#ref-oksanen_vegan2024">Oksanen et al. 2024</a>)</span> on to
-which <code>douconca</code> is based.</p>
-</div>
-<div class="section level2">
-<h2 id="double-constained-correspondence-analysis">Double constained correspondence analysis<a class="anchor" aria-label="anchor" href="#double-constained-correspondence-analysis"></a>
-</h2>
+which <code>douconca</code> is based. Because of the
+<code>formula</code>-interface, names of trait and environmental
+variables, and of levels of factors may need to be changed to
+syntactically valid names, e.g. by <code>make.names</code> or
+<code>janitor::clean_names</code>. # Double constained correspondence
+analysis</p>
 <p>As RLQ, dc-CA seeks for an ordination (i.e. a low-dimensional
 representation of) of the multi-trait, multi-environment relationships,
 but dc-CA differs from RLQ in that dc-CA is based on regression with the
 traits and environmental variables as predictors, whereas RLQ is based
 on co-variance. The dc-CA method thus allows for variation-partitioning
 and the type of model-building that is familiar to users of regression
-analysis, whereas RLQ does not.</p>
+analysis, whereas RLQ does not. Moreover, dc-CA is more robust and, with
+N2-based pre-processing, equally powerfull as fourth-corner generalized
+linear latent variable models (GLLVM) <span class="citation">(<a href="#ref-Braak2026">ter Braak 2026</a>)</span>.</p>
 <p>A dc-CA axis consists of two regression models (linear combinations),
 one of traits and the other of environmental predictors, the fitted
 values of which can be thought of as a composite trait and a composite
@@ -298,7 +302,7 @@ the intra-set correlations of the variables with the axis, but t-values
 can be visualized with</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mod</span>, gradient_description <span class="op">=</span> <span class="st">"t"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="douconca_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
+<p><img src="douconca_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="statistical-testing">Statistical testing<a class="anchor" aria-label="anchor" href="#statistical-testing"></a>
@@ -326,13 +330,17 @@ per dc-CA axis, obtained by</p>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $sites</span></span>
-<span><span class="co">#&gt;          Df ChiSquare      R2       F Pr(&gt;F)    </span></span>
-<span><span class="co">#&gt; dcCA1     1  0.236804 0.34946 12.2380  0.001 ***</span></span>
-<span><span class="co">#&gt; dcCA2     1  0.109032 0.16090  7.0435  0.003 ** </span></span>
-<span><span class="co">#&gt; dcCA3     1  0.059336 0.08757  4.0887  0.041 *  </span></span>
-<span><span class="co">#&gt; dcCA4     1  0.037919 0.05596  2.7762  0.132    </span></span>
-<span><span class="co">#&gt; dcCA5     1  0.002329 0.00344  0.1805  0.953    </span></span>
-<span><span class="co">#&gt; Residual 14  0.232199                           </span></span>
+<span><span class="co">#&gt; sites-level permutation test using dc-CA</span></span>
+<span><span class="co">#&gt; Model: dc_CA(formulaEnv = ~A1 + Moist + Use + Manure + Mag, formulaTraits = ~SLA + Height + LDMC + Seedmass + Lifespan, response = Y, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits) </span></span>
+<span><span class="co">#&gt; Residualized predictor permutation</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;          df ChiSquare      R2       F Pr(&gt;F)   </span></span>
+<span><span class="co">#&gt; dcCA1     1  0.236804 0.34946 12.2380  0.002 **</span></span>
+<span><span class="co">#&gt; dcCA2     1  0.109032 0.16090  5.6348  0.142   </span></span>
+<span><span class="co">#&gt; dcCA3     1  0.059336 0.08757  3.0665  0.383   </span></span>
+<span><span class="co">#&gt; dcCA4     1  0.037919 0.05596  1.9597  0.611   </span></span>
+<span><span class="co">#&gt; dcCA5     1  0.002329 0.00344  0.1203  1.000   </span></span>
+<span><span class="co">#&gt; Residual 12  0.232199                          </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -497,13 +505,16 @@ the first two dc-CA axes are significant as can be seen from an
 <span><span class="co">#&gt; Max test combining the community- and species- level tests </span></span>
 <span><span class="co">#&gt; Model: dc_CA(formulaEnv = ~A1 + Moist + Manure + Use + Mag, formulaTraits = ~F + R + N + L, response = Y, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits) </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; a mix the species- (traits) and community- (environment) levels:</span></span>
+<span><span class="co">#&gt; Taken from the community-level test.</span></span>
+<span><span class="co">#&gt; Permutation: free</span></span>
+<span><span class="co">#&gt; Number of permutations: 999</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;       df ChiSquare traitP  envP Pr(&gt;F)   </span></span>
-<span><span class="co">#&gt; dcCA1  1   0.36835  0.001 0.002  0.002 **</span></span>
-<span><span class="co">#&gt; dcCA2  1   0.24525  0.001 0.002  0.002 **</span></span>
-<span><span class="co">#&gt; dcCA3  1   0.01413  0.984 0.675  0.984   </span></span>
-<span><span class="co">#&gt; dcCA4  1   0.00541  0.993 0.704  0.993   </span></span>
+<span><span class="co">#&gt;          df ChiSquare      R2       F Pr(&gt;F)  </span></span>
+<span><span class="co">#&gt; dcCA1     1   0.36835 0.42337 18.6576  0.014 *</span></span>
+<span><span class="co">#&gt; dcCA2     1   0.24525 0.28188 12.4221  0.014 *</span></span>
+<span><span class="co">#&gt; dcCA3     1   0.01413 0.01624  0.7155  0.997  </span></span>
+<span><span class="co">#&gt; dcCA4     1   0.00541 0.00622  0.2741  1.000  </span></span>
+<span><span class="co">#&gt; Residual 12   0.23691                         </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
 <p>The fourth-corner correlation of the best linear combination of the
@@ -545,9 +556,9 @@ as <code>Condition</code> in the trait formula and perform an
 <span><span class="co">#&gt; Number of permutations: 999</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;          df ChiSquare       R2      F Pr(&gt;F)</span></span>
-<span><span class="co">#&gt; dcCA1     1   0.09333 0.135306 3.4800  0.183</span></span>
-<span><span class="co">#&gt; dcCA2     1   0.07101 0.102951 2.6479  0.280</span></span>
-<span><span class="co">#&gt; dcCA3     1   0.03381 0.049017 1.2607  0.837</span></span>
+<span><span class="co">#&gt; dcCA1     1   0.09333 0.135306 3.4800  0.185</span></span>
+<span><span class="co">#&gt; dcCA2     1   0.07101 0.102951 2.6479  0.272</span></span>
+<span><span class="co">#&gt; dcCA3     1   0.03381 0.049017 1.2607  0.838</span></span>
 <span><span class="co">#&gt; dcCA4     1   0.00629 0.009115 0.2344  1.000</span></span>
 <span><span class="co">#&gt; dcCA5     1   0.00259 0.003761 0.0967  1.000</span></span>
 <span><span class="co">#&gt; Residual 18   0.48274</span></span></code></pre></div>
@@ -593,12 +604,16 @@ variables<a class="anchor" aria-label="anchor" href="#testing-the-relationship-b
 <span><span class="co">#&gt; Residualized predictor permutation</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;          df ChiSquare       R2      F Pr(&gt;F)</span></span>
-<span><span class="co">#&gt; dcCA      1   0.05605 0.042368 1.1503  0.396</span></span>
+<span><span class="co">#&gt; dcCA      1   0.05605 0.042368 1.1503  0.402</span></span>
 <span><span class="co">#&gt; Residual 26   1.26686                       </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $sites</span></span>
-<span><span class="co">#&gt;          Df ChiSquare      R2      F Pr(&gt;F)  </span></span>
-<span><span class="co">#&gt; dcCA1     7  0.056048 0.67074 3.4922  0.028 *</span></span>
+<span><span class="co">#&gt; sites-level permutation test using dc-CA</span></span>
+<span><span class="co">#&gt; Model: dc_CA(formulaEnv = ~A1 + Moist + Manure + Use + Mag, formulaTraits = ~LDMC, response = Y, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$trait, verbose = FALSE) </span></span>
+<span><span class="co">#&gt; Residualized predictor permutation</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;          df ChiSquare      R2      F Pr(&gt;F)  </span></span>
+<span><span class="co">#&gt; dcCA      7  0.056048 0.67074 3.4922  0.024 *</span></span>
 <span><span class="co">#&gt; Residual 12  0.027513                        </span></span>
 <span><span class="co">#&gt; ---</span></span>
 <span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
@@ -613,7 +628,7 @@ variables<a class="anchor" aria-label="anchor" href="#testing-the-relationship-b
 <span><span class="co">#&gt; Number of permutations: 999</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;          df ChiSquare       R2      F Pr(&gt;F)</span></span>
-<span><span class="co">#&gt; dcCA      1   0.05605 0.042368 1.1503  0.396</span></span>
+<span><span class="co">#&gt; dcCA      1   0.05605 0.042368 1.1503  0.402</span></span>
 <span><span class="co">#&gt; Residual 26   1.26686</span></span></code></pre></div>
 <p>The P-values of the species-level and site-level permutation tests
 are 0.396 and 0.028, respectively, so that the final P-value is 0.396.
@@ -696,7 +711,23 @@ equal:</p>
 <span><span class="co">#&gt; MagNM   2.3581903  2.3581903</span></span></code></pre></div>
 <p>Alternatively, we can use
 <code>coef(mod_LDMC,  type = "env2traits",normed = FALSE)</code> which
-give the same values as <code>coef(lmLDMC)[-1]</code>. # References</p>
+give the same values as <code>coef(lmLDMC)[-1]</code>.</p>
+</div>
+<div class="section level3">
+<h3 id="restrictions-on-names-of-variables-and-levels-of-factors">Restrictions on names of variables and levels of factors<a class="anchor" aria-label="anchor" href="#restrictions-on-names-of-variables-and-levels-of-factors"></a>
+</h3>
+<p>As said, the <code>douconca</code> package has a
+<code>formula</code>-interface to specify the dc-CA model. By
+consequence, there are restriction on the names of traits and
+environmental variables. For example these should not include “:” or
+“/”, as these symbols are special in formulas. The same applies to names
+of levels of factors as factors are transformed to indicator matrices
+using a formula.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-doledec1996RLQ" class="csl-entry">
 Dolédec, Sylvain, Daniel Chessel, Cajo JF Ter Braak, and Stéphane
@@ -749,12 +780,16 @@ Approach.”</span> <em>Ecography</em> 40 (7): 806–16.
 Simpson, Gavin L. 2022. <em>Permute: Functions for Generating Restricted
 Permutations of Data</em>. <a href="https://CRAN.R-project.org/package=permute" class="external-link">https://CRAN.R-project.org/package=permute</a>.
 </div>
+<div id="ref-Braak2026" class="csl-entry">
+ter Braak, Cajo J. F. 2026. <span>“Fourth-Corner Latent Variable Models
+Overstate Confidence in Trait–Environment Relationships and What to Use
+Instead.”</span> <em>Environmental and Ecological Statistics</em>. <a href="https://doi.org/10.1007/s10651-025-00696-0" class="external-link">https://doi.org/10.1007/s10651-025-00696-0</a>.
+</div>
 <div id="ref-BraakRossum2025" class="csl-entry">
 ter Braak, Cajo J. F., and Bart-Jan van Rossum. 2025. <span>“Linking
 Multivariate Trait Variation to the Environment: The Advantages of
 Double Constrained Correspondence Analysis with the r Package
-Douconca.”</span> <em>Ecological Informatics</em> 88: 103143.
-https://doi.org/<a href="https://doi.org/10.1016/j.ecoinf.2025.103143" class="external-link">https://doi.org/10.1016/j.ecoinf.2025.103143</a>.
+Douconca.”</span> <em>Ecological Informatics</em> 88: 103143. <a href="https://doi.org/10.1016/j.ecoinf.2025.103143" class="external-link">https://doi.org/10.1016/j.ecoinf.2025.103143</a>.
 </div>
 <div id="ref-Braak2019MEE" class="csl-entry">
 Ter Braak, Cajo JF. 2019. <span>“New Robust Weighted Averaging-and
@@ -790,7 +825,6 @@ Siberchicot, Thibaut Jombart, and Sandrine Pavoine. 2018.
 </div>
 </div>
 </div>
-</div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
@@ -802,7 +836,7 @@ Siberchicot, Thibaut Jombart, and Sandrine Pavoine. 2018.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

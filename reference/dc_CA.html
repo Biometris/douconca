@@ -23,7 +23,7 @@ unweighted (multi-trait) community-level analysis, instead of being weighted
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -439,32 +439,31 @@ vegan: Community Ecology Package. R package version 2.6-6.1.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residual 22   0.87749                       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sites</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Df ChiSquare      R2       F Pr(&gt;F)   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1  0.236804 0.34946 12.2380  0.002 **</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1  0.109032 0.16090  7.0435  0.007 **</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1  0.059336 0.08757  4.0887  0.054 . </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1  0.037919 0.05596  2.7762  0.146   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5     1  0.002329 0.00344  0.1805  0.950   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual 14  0.232199                          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sites-level permutation test using dc-CA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: dc_CA(formulaEnv = abun ~ A1 + Moist + Mag + Use + Manure, formulaTraits = ~SLA + Height + LDMC + Seedmass + Lifespan, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits, verbose = FALSE) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residualized predictor permutation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          df ChiSquare      R2       F Pr(&gt;F)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1  0.236804 0.34946 12.2380  0.001 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1  0.109032 0.16090  5.6348  0.136    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1  0.059336 0.08757  3.0665  0.427    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1  0.037919 0.05596  1.9597  0.609    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5     1  0.002329 0.00344  0.1203  1.000    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residual 12  0.232199                           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $maxP</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Max test combining the community- and species- level tests </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model: dc_CA(formulaEnv = abun ~ A1 + Moist + Mag + Use + Manure, formulaTraits = ~SLA + Height + LDMC + Seedmass + Lifespan, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits, verbose = FALSE) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> mixing the species- (traits) and community- (environment) levels:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Taken from the species-level test:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residualized predictor permutation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Permutation: free</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of permutations: 999</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          df ChiSquare       R2      F Pr(&gt;F)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     1   0.23680 0.179002 5.9370  0.118</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2     1   0.10903 0.082419 2.7336  0.488</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3     1   0.05934 0.044853 1.4877  0.778</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4     1   0.03792 0.028663 0.9507  0.799</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5     1   0.00233 0.001760 0.0584  0.999</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Residual 22   0.87749                       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       df ChiSquare traitP  envP Pr(&gt;F)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1  1  0.236804  0.118 0.001  0.118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA2  1  0.109032  0.488 0.136  0.488</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA3  1  0.059336  0.778 0.427  0.778</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA4  1  0.037919  0.799 0.609  0.799</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA5  1  0.002329  0.999 1.000  1.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="co"># For more demo on testing, see demo dune_test.r</span></span></span>
 <span class="r-in"><span></span></span>
@@ -646,7 +645,7 @@ vegan: Community Ecology Package. R package version 2.6-6.1.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

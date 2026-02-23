@@ -13,7 +13,7 @@ those of anova.cca, but more restricted."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,8 @@ those of <code><a href="https://vegandevs.github.io/vegan/reference/anova.cca.ht
 <span>  <span class="va">...</span>,</span>
 <span>  permutations <span class="op">=</span> <span class="fl">999</span>,</span>
 <span>  by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"omnibus"</span>, <span class="st">"axis"</span><span class="op">)</span>,</span>
-<span>  n_axes <span class="op">=</span> <span class="st">"all"</span></span>
+<span>  n_axes <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  max_axis <span class="op">=</span> <span class="fl">10</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -98,6 +99,10 @@ In the default <code>"all"</code>, the test statistic is all eigenvalues of the
 model <code>Y ~ X|Z</code>, <em>i.e.</em> the effects of <code>X</code> after adjustment
 for the effects on <code>Y</code> of <code>Z</code>.
 If <code>by = "axis"</code>, the setting of <code>n_axes</code> is ignored.</p></dd>
+
+
+<dt id="arg-max-axis">max_axis<a class="anchor" aria-label="anchor" href="#arg-max-axis"></a></dt>
+<dd><p>maximum number of axes to test if <code>by = "axis"</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -204,7 +209,7 @@ Journal of statistical computation and simulation, 92, 2041-2059.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

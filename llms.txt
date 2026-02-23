@@ -1,0 +1,143 @@
+# douconca
+
+R library `douconca` analyzes multi-trait multi-environment ecological
+data by double constrained correspondence analysis (ter Braak & van
+Rossum, 2025) using `vegan` and native R code. It has a `formula`
+interface for the trait- (column-) and environment- (row-) models, which
+allows to assess, for example, the importance of trait interactions in
+shaping ecological communities. Throughout the two step algorithm of ter
+Braak et al. (2018) is used. This algorithm combines and extends
+community- (sample-) and species-level analyses, i.e. the usual
+community weighted means (CWM)-based regression analysis and the
+species-level analysis of species-niche centroids (SNC)-based regression
+analysis. The CWM regressions are specified with an environmental
+formula and the SNC regressions are specified with a trait formula. dcCA
+finds the environmental and trait gradients that optimize these
+regressions. The first step uses
+[cca](https://vegandevs.github.io/vegan/reference/cca.html) (Oksanen et
+al. 2022) to regress the transposed abundance data on to the traits and
+(weighted) redundancy analysis to regress the community-weighted means
+(CWMs) of the orthonormalized traits, obtained from the first step, on
+to the environmental predictors. The sample total of the abundance data
+are used as weights. The redundancy analysis is carried out using
+[rda](https://vegandevs.github.io/vegan/reference/rda.html) if sites
+have equal weights (after division of the rows by their total) or, in
+the general weighted case, using `wrda`. Division by the sample total
+has the advantage that the multivariate analysis corresponds with an
+unweighted (multi-trait) community-level analysis, instead of being
+weighted, which may give a puzzling difference between common univariate
+and this multivariate analysis.
+
+References: ter Braak, CJF, Šmilauer P, and Dray S. 2018. Algorithms and
+biplots for double constrained correspondence analysis. Environmental
+and Ecological Statistics, 25(2), 171-197.
+<https://doi.org/10.1007/s10651-017-0395-x>
+
+ter Braak, C.J.F. and van Rossum, B. (2025). Linking Multivariate Trait
+Variation to the Environment: Advantages of Double Constrained
+Correspondence Analysis with the R Package Douconca. Ecological
+Informatics, 88. <https://doi.org/10.1016/j.ecoinf.2025.103143> \##
+Installation
+
+You can install the CRAN version of `douconca` by:
+
+``` r
+install.packages("douconca")
+```
+
+You can install the development version of `douconca` by:
+
+``` r
+install.packages("remotes")
+remotes::install_github("Biometris/douconca", ref = "develop", dependencies = TRUE)
+```
+
+# Package index
+
+## All functions
+
+- [`FS()`](FS.md) : Default forward selection function.
+
+- [`FS(`*`<dcca>`*`)`](FS.dcca.md) : Forward selection of traits or
+  environmental variables using dc-CA.
+
+- [`FS(`*`<wrda>`*`)`](FS.wrda.md) : Forward selection of predictor
+  variables using wrda or cca0
+
+- [`anova(`*`<cca0>`*`)`](anova.cca0.md) : Permutation Test for
+  canonical correspondence analysis
+
+- [`anova(`*`<dcca>`*`)`](anova.dcca.md) : Community- and Species-Level
+  Permutation Test in Double Constrained Correspondence Analysis (dc-CA)
+
+- [`anova(`*`<wrda>`*`)`](anova.wrda.md) : Permutation Test for weighted
+  redundancy analysis
+
+- [`anova_sites()`](anova_sites.md) : Utility function: community-level
+  permutation test in Double Constrained Correspondence Analysis (dc-CA)
+
+- [`anova_species()`](anova_species.md) : Utility function:
+  Species-level Permutation Test in Double Constrained Correspondence
+  Analysis (dc-CA)
+
+- [`cca0()`](cca0.md) : Performs a canonical correspondence analysis
+
+- [`coef(`*`<dcca>`*`)`](coef.dcca.md) : Coefficients of
+  double-constrained correspondence analysis (dc-CA)
+
+- [`dc_CA()`](dc_CA.md) : Performs (weighted) double constrained
+  correspondence analysis (dc-CA)
+
+- [`dune_trait_env`](dune_trait_env.md) : Dune meadow data with plant
+  species traits and environmental variables
+
+- [`fCWM_SNC()`](fCWM_SNC.md) : Calculate community weighted means and
+  species niche centroids for double constrained correspondence analysis
+
+- [`fN2()`](fN2.md) : Hill number of order 2: N2
+
+- [`fitted(`*`<dcca>`*`)`](fitted.dcca.md) : Fitted values of
+  double-constrained correspondence analysis (dc-CA)
+
+- [`getPlotdata()`](getPlotdata.md) :
+
+  Utility function: extracting data from a `dc_CA` object for plotting a
+  single axis by your own code or `plot.dcca`.
+
+- [`ipf2N2()`](ipf2N2.md) : Iterative proportional fitting of an
+  abundance table to Hill-N2 marginals
+
+- [`plot(`*`<dcca>`*`)`](plot.dcca.md) : Plot a single dc-CA axis with
+  CWMs, SNCs, trait and environment scores.
+
+- [`plot_dcCA_CWM_SNC()`](plot_dcCA_CWM_SNC.md) : Plot the CWMs and SNCs
+  of a single dc-CA axis.
+
+- [`plot_species_scores_bk()`](plot_species_scores_bk.md) : Vertical
+  ggplot2 line plot of ordination scores
+
+- [`predict(`*`<dcca>`*`)`](predict.dcca.md) : Prediction for
+  double-constrained correspondence analysis (dc-CA)
+
+- [`predict(`*`<wrda>`*`)`](predict.wrda.md) : Prediction from cca0 and
+  wrda models
+
+- [`print(`*`<dcca>`*`)`](print.dcca.md) : Print a summary of a dc-CA
+  object.
+
+- [`print(`*`<wrda>`*`)`](print.wrda.md) : Print a summary of a wrda or
+  cca0 object
+
+- [`scores(`*`<dcca>`*`)`](scores.dcca.md) : Extract results of a double
+  constrained correspondence analysis (dc-CA)
+
+- [`scores(`*`<wrda>`*`)`](scores.wrda.md) : Extract results of a
+  weighted redundancy analysis (wrda) or a cca0 object.
+
+- [`wrda()`](wrda.md) : Performs a weighted redundancy analysis
+
+# Articles
+
+### All vignettes
+
+- [douconca](douconca.md):

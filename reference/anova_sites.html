@@ -21,7 +21,7 @@ as in dc_CA, anova(object$RDAonEnv) is much faster."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,14 @@ as in <code><a href="dc_CA.html">dc_CA</a></code>, <code>anova(object$RDAonEnv)<
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">anova_sites</span><span class="op">(</span><span class="va">object</span>, permutations <span class="op">=</span> <span class="fl">999</span>, rpp <span class="op">=</span> <span class="cn">TRUE</span>, n_axes <span class="op">=</span> <span class="st">"all"</span>, by <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">anova_sites</span><span class="op">(</span></span>
+<span>  <span class="va">object</span>,</span>
+<span>  permutations <span class="op">=</span> <span class="fl">999</span>,</span>
+<span>  rpp <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  n_axes <span class="op">=</span> <span class="st">"all"</span>,</span>
+<span>  max_axis <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  by <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -96,6 +103,10 @@ In the default <code>"all"</code>, the test statistic is all eigenvalues of the
 model <code>Y ~ X|Z</code>, <em>i.e.</em> the effects of <code>X</code> after adjustment
 for the effects on <code>Y</code> of <code>Z</code>.
 If <code>by = "axis"</code>, the setting of <code>n_axes</code> is ignored.</p></dd>
+
+
+<dt id="arg-max-axis">max_axis<a class="anchor" aria-label="anchor" href="#arg-max-axis"></a></dt>
+<dd><p>maximum number of axes to test if <code>by = "axis"</code>.</p></dd>
 
 
 <dt id="arg-by">by<a class="anchor" aria-label="anchor" href="#arg-by"></a></dt>
@@ -160,8 +171,12 @@ Journal of statistical computation and simulation, 92, 2041-2059.
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sites</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          Df ChiSquare      R2      F Pr(&gt;F)    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA1     7   0.44542 0.65733 3.2885  0.001 ***</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sites-level permutation test using dc-CA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Model: dc_CA(formulaEnv = ~A1 + Moist + Mag + Use + Manure, formulaTraits = ~SLA + Height + LDMC + Seedmass + Lifespan, response = dune_trait_env$comm[, -1], dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits, verbose = FALSE) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Residualized predictor permutation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          df ChiSquare      R2      F Pr(&gt;F)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> dcCA      7   0.44542 0.65733 3.2885  0.001 ***</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Residual 12   0.23220                          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ---</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1</span>
@@ -241,7 +256,7 @@ Journal of statistical computation and simulation, 92, 2041-2059.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
