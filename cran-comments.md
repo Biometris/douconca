@@ -1,10 +1,10 @@
 ## Minor release
 
-Release fixing broken CRAN checks after update of vegan package.
+Minor update, small bug fixes and code improvements.
 
 ## Test environments
 
-* local Windows 11 install, R 4.5.1
+* local Windows 11 install, R 4.5.2
 * winbuilder (develop)
 * Ubuntu (via github actions, devel, release, old-release)
 * macOS (via github actions, release)
