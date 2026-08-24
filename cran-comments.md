@@ -1,10 +1,10 @@
 ## Minor release
 
-Minor update, small bug fixes and code improvements.
+Fix CRAN check errors
 
 ## Test environments
 
-* local Windows 11 install, R 4.5.2
+* local Windows 11 install, R 4.6.1
 * winbuilder (develop)
 * Ubuntu (via github actions, devel, release, old-release)
 * macOS (via github actions, release)
