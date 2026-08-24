@@ -72,5 +72,8 @@ version 2.6-4. <https://CRAN.R-project.org/package=vegan>.
 
 Authors:
 
+- Bart-Jan van Rossum <bart-jan.vanrossum@wur.nl>
+  ([ORCID](https://orcid.org/0000-0002-8673-2514))
+
 - Cajo J.F ter Braak <cajo.terbraak@wur.nl>
   ([ORCID](https://orcid.org/0000-0002-0414-8745))

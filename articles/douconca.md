@@ -1,6 +1,7 @@
 # douconca
 
 ``` r
+
 library(douconca)
 ```
 
@@ -18,7 +19,7 @@ an alternative method, termed double-constrained correspondence analysis
 (dc-CA), which is a natural extension of the commonly used method of
 community-weighted means (CWMs) regression ([ter Braak
 2026](#ref-Braak2026); [ter Braak and van Rossum
-2025](#ref-BraakRossum2025); [Ter Braak, Šmilauer, and Dray
+2025](#ref-BraakRossum2025); [Ter Braak, Šmilauer, et al.
 2018](#ref-Braak2018dcCA); [Kleyer et al.
 2012](#ref-kleyer2012assessing)).  
 As dc-CA is based on both regression analysis and ordination (factorial
@@ -59,9 +60,9 @@ maximizes the fourth-corner correlation between the composite trait and
 composite environmental gradient. The dc-CA eigenvalues are squared
 fourth-corner correlations, but also variances, namely the amounts of
 variation in the abundance data that the consecutive axes explain ([Ter
-Braak, Šmilauer, and Dray 2018](#ref-Braak2018dcCA)).
+Braak, Šmilauer, et al. 2018](#ref-Braak2018dcCA)).
 
-Statistical testing is by the max test ([Ter Braak, Cormont, and Dray
+Statistical testing is by the max test ([Ter Braak et al.
 2012](#ref-Braak2012max_test)), evaluated by extensive simulation ([Ter
 Braak 2019](#ref-Braak2019MEE)). This test combines two permutations
 tests, one permuting sites and the other permuting species, the maximum
@@ -96,6 +97,7 @@ here called sites), trait data for these plant species and environmental
 data of these sites.
 
 ``` r
+
 library(douconca)
 data("dune_trait_env")
 names(dune_trait_env)
@@ -143,6 +145,7 @@ frame must be numerical, with columns representing the species. The
 first variable (`Sites`) must therefore be deleted.
 
 ``` r
+
 Y <- dune_trait_env$comm[, -1] # must delete "Sites"
 mod <- dc_CA(formulaEnv = ~ A1 + Moist + Use + Manure + Mag,
              formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan,
@@ -248,6 +251,7 @@ using `formulaEnv = ~ A1 + Moist + Use + Manure + Mag`. The constrained
 axes of this RDA are also the dc-CA eigenvalues:
 
 ``` r
+
 mod$eigenvalues
 #>      dcCA1      dcCA2      dcCA3      dcCA4      dcCA5 
 #> 0.23680387 0.10903220 0.05933626 0.03791909 0.00232876
@@ -261,6 +265,7 @@ correlations of the variables with the axis, but t-values can be
 visualized with
 
 ``` r
+
 plot(mod, gradient_description = "t")
 ```
 
@@ -273,6 +278,7 @@ There are two-ways to statistically test the model: (1) the omnibus test
 P-value of about 0.02 and (2) a test per dc-CA axis, obtained by
 
 ``` r
+
 set.seed(1)
 anova(mod, by = "axis")
 #> $species
@@ -363,6 +369,7 @@ In this section, we pose the question whether the set of morphological
 the environmental variables than the set of ecological traits.
 
 ``` r
+
 mod_e <-  dc_CA(formulaEnv = ~ A1 + Moist + Manure + Use + Mag,
                 formulaTraits = ~ F + R + N + L,
                 response = Y,
@@ -457,6 +464,7 @@ than the first one of the first model and, indeed, the first two dc-CA
 axes are significant as can be seen from an `anova`:
 
 ``` r
+
 anova(mod_e, by = "axis")$max
 #> Max test combining the community- and species- level tests 
 #> Model: dc_CA(formulaEnv = ~A1 + Moist + Manure + Use + Mag, formulaTraits = ~F + R + N + L, response = Y, dataEnv = dune_trait_env$envir, dataTraits = dune_trait_env$traits) 
@@ -480,6 +488,7 @@ ecological traits with the best linear combination of the environmental
 variables is
 
 ``` r
+
 round(sqrt(mod_e$eigenvalues[1]), 2)
 #> dcCA1 
 #>  0.61
@@ -499,6 +508,7 @@ as `Condition` in the trait formula and perform an `anova` of the
 resulting model.
 
 ``` r
+
 mod_mGe <-  dc_CA(formulaEnv = ~ A1 + Moist + Manure + Use + Mag,
                  formulaTraits = ~ SLA + Height + LDMC + Seedmass + Lifespan +
                    Condition(F + R + N + L),
@@ -532,13 +542,12 @@ that the morphological traits contribute to the explanation of
 ### Introduction
 
 CWM regression is know to suffer from serious type I error inflation in
-statistical testing ([Peres-Neto, Dray, and Ter Braak
-2017](#ref-peres2017linking); [Lepš and De Bello
-2023](#ref-lepvs2023differences)). This section shows how to perform CWM
-regression of a single trait using dc-CA with a `max` test to guard
-against type I error inflation. This test does not suffer from the,
-sometimes extreme, conservativeness of the ZS (Zelený & Schaffers)
-modified test ([Ter Braak, Peres-Neto, and Dray
+statistical testing ([Peres-Neto et al. 2017](#ref-peres2017linking);
+[Lepš and De Bello 2023](#ref-lepvs2023differences)). This section shows
+how to perform CWM regression of a single trait using dc-CA with a `max`
+test to guard against type I error inflation. This test does not suffer
+from the, sometimes extreme, conservativeness of the ZS (Zelený &
+Schaffers) modified test ([Ter Braak, Peres-Neto, et al.
 2018](#ref-Braak2018simple); [Lepš and De Bello
 2023](#ref-lepvs2023differences)).
 
@@ -550,6 +559,7 @@ coefficients. On the way, we give examples of the `scores` and
 ### Testing the relationship between LDMC and the environmental variables
 
 ``` r
+
 mod_LDMC <- dc_CA(formulaEnv = ~ A1 + Moist + Manure + Use + Mag,
                    formulaTraits = ~ LDMC,
                    response = Y, 
@@ -601,6 +611,7 @@ using the function `fCWM_SNC`, the arguments of which are similar to
 that of the `dc_CA` function.
 
 ``` r
+
 CWMSNC_LDMC <- fCWM_SNC(formulaEnv = ~ A1 + Moist + Manure + Use + Mag,
                         formulaTraits = ~ LDMC,
                         response = Y, 
@@ -614,6 +625,7 @@ environmental data, apply linear regresion and compare the model with
 the null model using `anova`.
 
 ``` r
+
 envCWM <- cbind(dune_trait_env$envir, CWMSNC_LDMC$CWM)
 lmLDMC <- lm(LDMC ~ A1 + Moist + Manure + Use + Mag, data = envCWM)
 anova(lmLDMC, lm(LDMC ~ 1, data = envCWM))
@@ -646,6 +658,7 @@ coefficients by dividing the standardize regression coefficients from
 `dc_CA` by the standard deviation of each environmental variable.
 
 ``` r
+
 (regr_table <- scores(mod_LDMC, display = "reg"))
 #>         Avg       SDS      VIF       dcCA1
 #> A1     4.85 2.1240292 1.696694 -0.16636060
@@ -666,6 +679,7 @@ The result shows that the two sets of coefficients are equal up to a
 constant of proportionality, here 154.4359. The t-values are also equal:
 
 ``` r
+
 cbind(summary(lmLDMC)$coefficients[-1, "t value", drop = FALSE],
 scores(mod_LDMC, display = "tval"))
 #>           t value      dcCA1
@@ -698,8 +712,7 @@ Champely. 1996. “Matching Species Traits to Environmental Variables: A
 New Three-Table Ordination Method.” *Environmental and Ecological
 Statistics* 3: 143–66.
 
-Dray, Stéphane, Philippe Choler, Sylvain Dolédec, Pedro R Peres-Neto,
-Wilfried Thuiller, Sandrine Pavoine, and Cajo JF Ter Braak. 2014.
+Dray, Stéphane, Philippe Choler, Sylvain Dolédec, et al. 2014.
 “Combining the Fourth-Corner and the RLQ Methods for Assessing Trait
 Responses to Environmental Variation.” *Ecology* 95 (1): 14–21.
 
@@ -712,8 +725,7 @@ Luca Pedrotti. 2022. “Hay Meadows’ Overriding Effect Shapes Ground
 Beetle Functional Diversity in Mountainous Landscapes.” *Ecosphere* 13
 (8): e4193.
 
-Kleyer, Michael, Stéphane Dray, Francescode Bello, Jan Lepš, Robin J
-Pakeman, Barbara Strauss, Wilfried Thuiller, and Sandra Lavorel. 2012.
+Kleyer, Michael, Stéphane Dray, Francescode Bello, et al. 2012.
 “Assessing Species and Community Functional Responses to Environmental
 Gradients: Which Multivariate Methods?” *Journal of Vegetation Science*
 23 (5): 805–21.
@@ -722,9 +734,8 @@ Lepš, Jan, and Francesco De Bello. 2023. “Differences in
 Trait–Environment Relationships: Implications for Community Weighted
 Means Tests.” *Journal of Ecology* 111 (11): 2328–41.
 
-Oksanen, Jari, Gavin L. Simpson, F. Guillaume Blanchet, Roeland Kindt,
-Pierre Legendre, Peter R. Minchin, R. B. O’Hara, Peter Solymos, et al.
-2024. *Vegan: Community Ecology Package*.
+Oksanen, Jari, Gavin L. Simpson, F. Guillaume Blanchet, et al. 2024.
+*Vegan: Community Ecology Package*.
 <https://CRAN.R-project.org/package=vegan>.
 
 Peres-Neto, Pedro R, Stéphane Dray, and Cajo JF Ter Braak. 2017.
@@ -737,7 +748,7 @@ Permutations of Data*. <https://CRAN.R-project.org/package=permute>.
 
 ter Braak, Cajo J. F. 2026. “Fourth-Corner Latent Variable Models
 Overstate Confidence in Trait–Environment Relationships and What to Use
-Instead.” *Environmental and Ecological Statistics*.
+Instead.” *Environmental and Ecological Statistics*, ahead of print.
 <https://doi.org/10.1007/s10651-025-00696-0>.
 
 ter Braak, Cajo J. F., and Bart-Jan van Rossum. 2025. “Linking
@@ -758,8 +769,8 @@ Ter Braak, Cajo JF, Pedro R Peres-Neto, and Stéphane Dray. 2018. “Simple
 Parametric Tests for Trait–Environment Association.” *Journal of
 Vegetation Science* 29 (5): 801–11.
 
-Ter Braak, Cajo JF, and Petr Šmilauer. 2018. “Canoco Reference Manual
-and User’s Guide: Software for Ordination, Version 5.10.”
+Ter Braak, Cajo JF, and Petr Šmilauer. 2018. *Canoco Reference Manual
+and User’s Guide: Software for Ordination, Version 5.10*.
 
 Ter Braak, Cajo JF, Petr Šmilauer, and Stéphane Dray. 2018. “Algorithms
 and Biplots for Double Constrained Correspondence Analysis.”

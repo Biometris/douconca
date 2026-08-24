@@ -2,6 +2,8 @@
 
 ## douconca 1.2.5
 
+CRAN release: 2026-02-23
+
 - Minor update with cleaner version of function ipf2N2 or other minor
   changes.
 

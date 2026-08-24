@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>douconca • douconca</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="douconca">
 </head>
@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">douconca</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,7 +75,10 @@ three-tables method. RLQ is available in the R-package <code>ade4</code>
 2018</a>)</span>. The <code>douconca</code> package provides an
 alternative method, termed double-constrained correspondence analysis
 (dc-CA), which is a natural extension of the commonly used method of
-community-weighted means (CWMs) regression <span class="citation">(<a href="#ref-Braak2026">ter Braak 2026</a>; <a href="#ref-BraakRossum2025">ter Braak and van Rossum 2025</a>; <a href="#ref-Braak2018dcCA">Ter Braak, Šmilauer, and Dray 2018</a>; <a href="#ref-kleyer2012assessing">Kleyer et al. 2012</a>)</span>.<br>
+community-weighted means (CWMs) regression <span class="citation">(<a href="#ref-Braak2026"><span class="nocase">ter Braak</span> 2026</a>; <a href="#ref-BraakRossum2025"><span class="nocase">ter Braak and van
+Rossum</span> 2025</a>; <a href="#ref-Braak2018dcCA">Ter Braak,
+Šmilauer, et al. 2018</a>; <a href="#ref-kleyer2012assessing">Kleyer et
+al. 2012</a>)</span>.<br>
 As dc-CA is based on both regression analysis and ordination (factorial
 analysis), it allows for the usual forms of testing, model building, and
 of biplots of resulting scores.</p>
@@ -86,9 +89,9 @@ Braak (2026).</p>
 <code>formula</code>-interface to specify the dc-CA model, and
 <code>scores</code>, <code>anova</code>, <code>plot</code> and
 <code>predict</code> functions, mostly fairly similar to those in the
-<code>vegan</code> package <span class="citation">(<a href="#ref-oksanen_vegan2024">Oksanen et al. 2024</a>)</span> on to
-which <code>douconca</code> is based. Because of the
-<code>formula</code>-interface, names of trait and environmental
+<code>vegan</code> package <span class="citation">(<a href="#ref-oksanen_vegan2024"><span class="nocase">Oksanen et al.</span>
+2024</a>)</span> on to which <code>douconca</code> is based. Because of
+the <code>formula</code>-interface, names of trait and environmental
 variables, and of levels of factors may need to be changed to
 syntactically valid names, e.g. by <code>make.names</code> or
 <code>janitor::clean_names</code>. # Double constained correspondence
@@ -101,7 +104,8 @@ on co-variance. The dc-CA method thus allows for variation-partitioning
 and the type of model-building that is familiar to users of regression
 analysis, whereas RLQ does not. Moreover, dc-CA is more robust and, with
 N2-based pre-processing, equally powerfull as fourth-corner generalized
-linear latent variable models (GLLVM) <span class="citation">(<a href="#ref-Braak2026">ter Braak 2026</a>)</span>.</p>
+linear latent variable models (GLLVM) <span class="citation">(<a href="#ref-Braak2026"><span class="nocase">ter Braak</span>
+2026</a>)</span>.</p>
 <p>A dc-CA axis consists of two regression models (linear combinations),
 one of traits and the other of environmental predictors, the fitted
 values of which can be thought of as a composite trait and a composite
@@ -111,16 +115,15 @@ typical for any eigenvalue ordination method. The linear combinations
 maximizes the fourth-corner correlation between the composite trait and
 composite environmental gradient. The dc-CA eigenvalues are squared
 fourth-corner correlations, but also variances, namely the amounts of
-variation in the abundance data that the consecutive axes explain <span class="citation">(<a href="#ref-Braak2018dcCA">Ter Braak, Šmilauer, and
-Dray 2018</a>)</span>.</p>
-<p>Statistical testing is by the max test <span class="citation">(<a href="#ref-Braak2012max_test">Ter Braak, Cormont, and Dray
-2012</a>)</span>, evaluated by extensive simulation <span class="citation">(<a href="#ref-Braak2019MEE">Ter Braak
-2019</a>)</span>. This test combines two permutations tests, one
-permuting sites and the other permuting species, the maximum P-value of
-which is the final P-value. As in the <code>vegan</code> package, the
-permutations are specified via the <code>permute</code> package <span class="citation">(<a href="#ref-permute2022">Simpson 2022</a>)</span>,
-so as to allow for analysis of hierarchical and nested data designs
-<span class="citation">(<a href="#ref-gobbi2022hay">Gobbi et al.
+variation in the abundance data that the consecutive axes explain <span class="citation">(<a href="#ref-Braak2018dcCA">Ter Braak, Šmilauer, et
+al. 2018</a>)</span>.</p>
+<p>Statistical testing is by the max test <span class="citation">(<a href="#ref-Braak2012max_test">Ter Braak et al. 2012</a>)</span>,
+evaluated by extensive simulation <span class="citation">(<a href="#ref-Braak2019MEE">Ter Braak 2019</a>)</span>. This test combines
+two permutations tests, one permuting sites and the other permuting
+species, the maximum P-value of which is the final P-value. As in the
+<code>vegan</code> package, the permutations are specified via the
+<code>permute</code> package <span class="citation">(<a href="#ref-permute2022">Simpson 2022</a>)</span>, so as to allow for
+analysis of hierarchical and nested data designs <span class="citation">(<a href="#ref-gobbi2022hay">Gobbi et al.
 2022</a>)</span>.</p>
 <p>In <code>douconca</code>, a dc-CA model is specified by two formulas:
 a <code>formula</code> for the sites (rows) with environmental
@@ -573,13 +576,12 @@ evidence that the morphological traits contribute to the explanation of
 <h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h3>
 <p>CWM regression is know to suffer from serious type I error inflation
-in statistical testing <span class="citation">(<a href="#ref-peres2017linking">Peres-Neto, Dray, and Ter Braak 2017</a>;
-<a href="#ref-lepvs2023differences">Lepš and De Bello 2023</a>)</span>.
+in statistical testing <span class="citation">(<a href="#ref-peres2017linking">Peres-Neto et al. 2017</a>; <a href="#ref-lepvs2023differences">Lepš and De Bello 2023</a>)</span>.
 This section shows how to perform CWM regression of a single trait using
 dc-CA with a <code>max</code> test to guard against type I error
 inflation. This test does not suffer from the, sometimes extreme,
 conservativeness of the ZS (Zelený &amp; Schaffers) modified test <span class="citation">(<a href="#ref-Braak2018simple">Ter Braak, Peres-Neto,
-and Dray 2018</a>; <a href="#ref-lepvs2023differences">Lepš and De Bello
+et al. 2018</a>; <a href="#ref-lepvs2023differences">Lepš and De Bello
 2023</a>)</span>.</p>
 <p>We also show the equivalence of the site-level test with that of a
 CWM-regression and the equivalence of the dc-CA and CWM regression
@@ -728,7 +730,7 @@ using a formula.</p>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-doledec1996RLQ" class="csl-entry">
 Dolédec, Sylvain, Daniel Chessel, Cajo JF Ter Braak, and Stéphane
 Champely. 1996. <span>“Matching Species Traits to Environmental
@@ -736,8 +738,7 @@ Variables: A New Three-Table Ordination Method.”</span>
 <em>Environmental and Ecological Statistics</em> 3: 143–66.
 </div>
 <div id="ref-dray2014RLQ" class="csl-entry">
-Dray, Stéphane, Philippe Choler, Sylvain Dolédec, Pedro R Peres-Neto,
-Wilfried Thuiller, Sandrine Pavoine, and Cajo JF Ter Braak. 2014.
+Dray, Stéphane, Philippe Choler, Sylvain Dolédec, et al. 2014.
 <span>“Combining the Fourth-Corner and the RLQ Methods for Assessing
 Trait Responses to Environmental Variation.”</span> <em>Ecology</em> 95
 (1): 14–21.
@@ -754,8 +755,7 @@ Beetle Functional Diversity in Mountainous Landscapes.”</span>
 <em>Ecosphere</em> 13 (8): e4193.
 </div>
 <div id="ref-kleyer2012assessing" class="csl-entry">
-Kleyer, Michael, Stéphane Dray, Francescode Bello, Jan Lepš, Robin J
-Pakeman, Barbara Strauss, Wilfried Thuiller, and Sandra Lavorel. 2012.
+Kleyer, Michael, Stéphane Dray, Francescode Bello, et al. 2012.
 <span>“Assessing Species and Community Functional Responses to
 Environmental Gradients: Which Multivariate Methods?”</span> <em>Journal
 of Vegetation Science</em> 23 (5): 805–21.
@@ -766,9 +766,9 @@ Trait–Environment Relationships: Implications for Community Weighted
 Means Tests.”</span> <em>Journal of Ecology</em> 111 (11): 2328–41.
 </div>
 <div id="ref-oksanen_vegan2024" class="csl-entry">
-Oksanen, Jari, Gavin L. Simpson, F. Guillaume Blanchet, Roeland Kindt,
-Pierre Legendre, Peter R. Minchin, R. B. O’Hara, Peter Solymos, et al.
-2024. <em>Vegan: Community Ecology Package</em>. <a href="https://CRAN.R-project.org/package=vegan" class="external-link">https://CRAN.R-project.org/package=vegan</a>.
+<span class="nocase">Oksanen, Jari, Gavin L. Simpson, F. Guillaume
+Blanchet, et al.</span> 2024. <em>Vegan: Community Ecology Package</em>.
+<a href="https://CRAN.R-project.org/package=vegan" class="external-link">https://CRAN.R-project.org/package=vegan</a>.
 </div>
 <div id="ref-peres2017linking" class="csl-entry">
 Peres-Neto, Pedro R, Stéphane Dray, and Cajo JF Ter Braak. 2017.
@@ -781,15 +781,17 @@ Simpson, Gavin L. 2022. <em>Permute: Functions for Generating Restricted
 Permutations of Data</em>. <a href="https://CRAN.R-project.org/package=permute" class="external-link">https://CRAN.R-project.org/package=permute</a>.
 </div>
 <div id="ref-Braak2026" class="csl-entry">
-ter Braak, Cajo J. F. 2026. <span>“Fourth-Corner Latent Variable Models
-Overstate Confidence in Trait–Environment Relationships and What to Use
-Instead.”</span> <em>Environmental and Ecological Statistics</em>. <a href="https://doi.org/10.1007/s10651-025-00696-0" class="external-link">https://doi.org/10.1007/s10651-025-00696-0</a>.
+<span class="nocase">ter Braak, Cajo J. F.</span> 2026.
+<span>“Fourth-Corner Latent Variable Models Overstate Confidence in
+Trait–Environment Relationships and What to Use Instead.”</span>
+<em>Environmental and Ecological Statistics</em>, ahead of print. <a href="https://doi.org/10.1007/s10651-025-00696-0" class="external-link">https://doi.org/10.1007/s10651-025-00696-0</a>.
 </div>
 <div id="ref-BraakRossum2025" class="csl-entry">
-ter Braak, Cajo J. F., and Bart-Jan van Rossum. 2025. <span>“Linking
-Multivariate Trait Variation to the Environment: The Advantages of
-Double Constrained Correspondence Analysis with the r Package
-Douconca.”</span> <em>Ecological Informatics</em> 88: 103143. <a href="https://doi.org/10.1016/j.ecoinf.2025.103143" class="external-link">https://doi.org/10.1016/j.ecoinf.2025.103143</a>.
+<span class="nocase">ter Braak, Cajo J. F., and Bart-Jan van
+Rossum</span>. 2025. <span>“Linking Multivariate Trait Variation to the
+Environment: The Advantages of Double Constrained Correspondence
+Analysis with the r Package Douconca.”</span> <em>Ecological
+Informatics</em> 88: 103143. <a href="https://doi.org/10.1016/j.ecoinf.2025.103143" class="external-link">https://doi.org/10.1016/j.ecoinf.2025.103143</a>.
 </div>
 <div id="ref-Braak2019MEE" class="csl-entry">
 Ter Braak, Cajo JF. 2019. <span>“New Robust Weighted Averaging-and
@@ -809,8 +811,8 @@ Association.”</span> <em>Journal of Vegetation Science</em> 29 (5):
 801–11.
 </div>
 <div id="ref-Braak2018canoco" class="csl-entry">
-Ter Braak, Cajo JF, and Petr Šmilauer. 2018. <span>“Canoco Reference
-Manual and User’s Guide: Software for Ordination, Version 5.10.”</span>
+Ter Braak, Cajo JF, and Petr Šmilauer. 2018. <em>Canoco Reference Manual
+and User’s Guide: Software for Ordination, Version 5.10</em>.
 </div>
 <div id="ref-Braak2018dcCA" class="csl-entry">
 Ter Braak, Cajo JF, Petr Šmilauer, and Stéphane Dray. 2018.
@@ -836,7 +838,7 @@ Siberchicot, Thibaut Jombart, and Sandrine Pavoine. 2018.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

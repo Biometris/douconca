@@ -5,4 +5,4 @@ to see their documentation.
 
 - vegan:
 
-  [`scores`](https://vegandevs.github.io/vegan/reference/scores.html)
+  [`scores()`](https://vegandevs.github.io/vegan/reference/scores.html)
