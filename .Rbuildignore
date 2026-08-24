@@ -13,3 +13,5 @@ testScripts
 .zenodo.json
 article
 deployment
+^\.positai$
+^\.claude$
