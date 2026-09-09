@@ -1,6 +1,12 @@
 # Changelog
 
+## douconca 1.2.6
+
+- No user visible changes.
+
 ## douconca 1.2.5.1
+
+CRAN release: 2026-08-24
 
 - No user visible changes.
 
