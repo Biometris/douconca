@@ -1,6 +1,6 @@
 ## Minor release
 
-Fix CRAN check errors
+Minor changes to tests to accomodate upcoming release of permute
 
 ## Test environments
 
