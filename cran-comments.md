@@ -1,10 +1,10 @@
 ## Minor release
 
-Minor changes to tests to accomodate upcoming release of permute
+Fix CRAN test issues.
 
 ## Test environments
 
-* local Windows 11 install, R 4.6.1
+* local Windows 11 install, R 4.6.2
 * winbuilder (develop)
 * Ubuntu (via github actions, devel, release, old-release)
 * macOS (via github actions, release)
