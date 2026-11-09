@@ -40,7 +40,8 @@ anova(
 
   a list of control values for the permutations for species and sites
   (species first, sites second, for traits and environment) as returned
-  by the function [`how`](https://rdrr.io/pkg/permute/man/how.html), or
+  by the function
+  [`how`](https://gavinsimpson.github.io/permute/reference/how.html), or
   the number of permutations required (default 999, or a two-vector with
   the number for the species-level test first and that for the
   sites-level second), or a list of two permutation matrices (again,
